@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero-slider": {
@@ -43,13 +52,39 @@
         "speed": 7
       }
     },
+    "featured_products_XV9Kpx": {
+      "type": "featured-products",
+      "name": "Featured Products",
+      "settings": {
+        "title": "Our Bestsellers",
+        "description": "",
+        "collection": "bestsellers",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    },
     "featured-products": {
       "type": "featured-products",
       "settings": {
         "title": "Our Bestsellers",
+        "description": "",
         "collection": "bestsellers",
         "products_to_show": 8,
         "show_view_all": true
+      }
+    },
+    "trust-and-stats": {
+      "type": "trust-and-stats",
+      "settings": {
+        "heading": "Why Choose Heart To Soul?",
+        "subtitle": "Crafted with love, backed by our promise.",
+        "note": "Trusted by 10,000+ happy customers across the USA"
+      }
+    },
+    "secure-checkout": {
+      "type": "secure-checkout",
+      "settings": {
+        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
       }
     },
     "our-story": {
@@ -168,90 +203,8 @@
         "description": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship."
       }
     },
-    "trust-and-stats": {
-      "type": "trust-and-stats",
-      "settings": {
-        "note": "Trusted by 10,000+ happy customers across the USA"
-      }
-    },
     "ugc-videos": {
       "type": "ugc-videos",
-      "blocks": {
-        "u1": {
-          "type": "video",
-          "settings": {
-            "credit": "Lina_Gera",
-            "country": "🇺🇸 USA",
-            "caption": "Wrapped in his love with this beautiful gift..."
-          }
-        },
-        "u2": {
-          "type": "video",
-          "settings": {
-            "credit": "EmmaGoes_",
-            "country": "🇬🇧 UK",
-            "caption": "When he surprises me with a gift 🥰"
-          }
-        },
-        "u3": {
-          "type": "video",
-          "settings": {
-            "credit": "BellaBlossoms",
-            "country": "🇨🇦 CAN",
-            "caption": "my heart just melts. #love"
-          }
-        },
-        "u4": {
-          "type": "video",
-          "settings": {
-            "credit": "SophieRose",
-            "country": "🇩🇪 GER",
-            "caption": "LOOK WHAT MY BF GOT ME 😍"
-          }
-        },
-        "u5": {
-          "type": "video",
-          "settings": {
-            "credit": "MiaChenx",
-            "country": "🇦🇺 AUS",
-            "caption": "the most thoughtful gift ever 🌹"
-          }
-        },
-        "u6": {
-          "type": "video",
-          "settings": {
-            "credit": "OliviaJane",
-            "country": "🇮🇹 ITA",
-            "caption": "I literally cried 😭💕"
-          }
-        },
-        "u7": {
-          "type": "video",
-          "settings": {
-            "credit": "SarahW",
-            "country": "🇪🇸 ESP",
-            "caption": "This is everything I wanted and more!"
-          }
-        },
-        "u8": {
-          "type": "video",
-          "settings": {
-            "credit": "JessicaT",
-            "country": "🇳🇿 NZL",
-            "caption": "Can't stop looking at it ❤️"
-          }
-        }
-      },
-      "block_order": [
-        "u1",
-        "u2",
-        "u3",
-        "u4",
-        "u5",
-        "u6",
-        "u7",
-        "u8"
-      ],
       "settings": {
         "heading": "Celebrating 10,000+ Thrilled Girlfriends",
         "subtitle": "Real reactions. Real love. Real moments."
@@ -259,190 +212,10 @@
     },
     "happy-customers": {
       "type": "happy-customers",
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "tag": "Anniversary",
-            "name": "Sarah M.",
-            "country": "🇺🇸 USA",
-            "text": "The Apple Box is absolutely breathtaking. He surprised me with it and the necklace inside is so elegant!"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "tag": "Valentine's Day",
-            "name": "David K.",
-            "country": "🇬🇧 UK",
-            "text": "Got the Eternal Rose gift set for my girlfriend. Seeing her face light up when she opened it was priceless. Fast shipping too."
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "tag": "Birthday",
-            "name": "Emily R.",
-            "country": "🇨🇦 CAN",
-            "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since."
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "tag": "Just Because",
-            "name": "Michael B.",
-            "country": "🇺🇸 USA",
-            "text": "Wanted to get her something special. The Preserved Rose Jewelry Box blew her away. She loves the hidden message inside."
-          }
-        },
-        "r5": {
-          "type": "review",
-          "settings": {
-            "tag": "Christmas",
-            "name": "Jessica T.",
-            "country": "🇦🇺 AUS",
-            "text": "My boyfriend gave me the Heart-Shaped Necklace. It’s the most thoughtful and beautiful gift I've ever owned."
-          }
-        },
-        "r6": {
-          "type": "review",
-          "settings": {
-            "tag": "Mother's Day",
-            "name": "Linda S.",
-            "country": "🇺🇸 USA",
-            "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity."
-          }
-        },
-        "r7": {
-          "type": "review",
-          "settings": {
-            "tag": "Anniversary",
-            "name": "Katie P.",
-            "country": "🇩🇪 GER",
-            "text": "Honestly stunning packaging. The necklace shines beautifully in the light."
-          }
-        },
-        "r8": {
-          "type": "review",
-          "settings": {
-            "tag": "Surprise",
-            "name": "John D.",
-            "country": "🇺🇸 USA",
-            "text": "She cried when she saw it. 10/10 would buy again!"
-          }
-        },
-        "r9": {
-          "type": "review",
-          "settings": {
-            "tag": "Christmas",
-            "name": "Maria C.",
-            "country": "🇪🇸 ESP",
-            "text": "Best gift ever from my husband. The preserved rose looks so real."
-          }
-        },
-        "r10": {
-          "type": "review",
-          "settings": {
-            "tag": "Birthday",
-            "name": "Rachel G.",
-            "country": "🇨🇦 CAN",
-            "text": "So dainty and beautiful. The jewelry box is something I'll cherish forever."
-          }
-        },
-        "r11": {
-          "type": "review",
-          "settings": {
-            "tag": "Anniversary",
-            "name": "Mark L.",
-            "country": "🇳🇿 NZL",
-            "text": "Exceeded expectations. The shipping was fast and the quality is amazing."
-          }
-        },
-        "r12": {
-          "type": "review",
-          "settings": {
-            "tag": "Valentine's Day",
-            "name": "Sophie H.",
-            "country": "🇬🇧 UK",
-            "text": "This beats a regular bouquet of flowers any day of the week!"
-          }
-        },
-        "r13": {
-          "type": "review",
-          "settings": {
-            "tag": "Just Because",
-            "name": "Hannah W.",
-            "country": "🇦🇺 AUS",
-            "text": "So cute to find a little hidden necklace in the rose box."
-          }
-        },
-        "r14": {
-          "type": "review",
-          "settings": {
-            "tag": "Mother's Day",
-            "name": "Eva J.",
-            "country": "🇺🇸 USA",
-            "text": "Gifted this to my mom and she has it displayed proudly in her living room."
-          }
-        },
-        "r15": {
-          "type": "review",
-          "settings": {
-            "tag": "Birthday",
-            "name": "Danielle V.",
-            "country": "🇮🇹 ITA",
-            "text": "The attention to detail on the box is crazy. Such a luxurious feel."
-          }
-        },
-        "r16": {
-          "type": "review",
-          "settings": {
-            "tag": "Anniversary",
-            "name": "Jason F.",
-            "country": "🇨🇦 CAN",
-            "text": "Nailed our 5 year anniversary with this gift. Thanks!"
-          }
-        },
-        "r17": {
-          "type": "review",
-          "settings": {
-            "tag": "Surprise",
-            "name": "Chloe T.",
-            "country": "🇺🇸 USA",
-            "text": "Prettiest thing I own right now. Going to buy one for my best friend."
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6",
-        "r7",
-        "r8",
-        "r9",
-        "r10",
-        "r11",
-        "r12",
-        "r13",
-        "r14",
-        "r15",
-        "r16",
-        "r17"
-      ],
       "settings": {
         "subheading": "REAL STORIES",
         "heading": "Happy Customers",
         "subtitle": "See what our community has to say"
-      }
-    },
-    "secure-checkout": {
-      "type": "secure-checkout",
-      "settings": {
-        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
       }
     },
     "instagram-grid": {
@@ -489,6 +262,7 @@
   },
   "order": [
     "hero-slider",
+    "featured_products_XV9Kpx",
     "featured-products",
     "trust-and-stats",
     "secure-checkout",
