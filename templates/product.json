@@ -20,11 +20,21 @@
     "happy-customers": {
       "type": "happy-customers",
       "settings": {}
+    },
+    "why-choose-us": {
+      "type": "why-choose-us",
+      "settings": {}
+    },
+    "secure-checkout": {
+      "type": "secure-easy-checkout",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "ugc-videos",
-    "happy-customers"
+    "happy-customers",
+    "why-choose-us",
+    "secure-checkout"
   ]
 }
