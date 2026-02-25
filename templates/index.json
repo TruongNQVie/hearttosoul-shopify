@@ -56,7 +56,7 @@
       "type": "featured-products",
       "settings": {
         "title": "Our Bestsellers",
-        "description": "",
+        "description": "Discover our most loved and bestselling items, handpicked for their quality and beauty.",
         "collection": "bestsellers",
         "products_to_show": 8,
         "show_view_all": false
