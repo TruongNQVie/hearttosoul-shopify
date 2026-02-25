@@ -1,5 +1,5 @@
 <section class="instagram-section section-padding">
-  <div class="container">
+  <div class="container container--wide">
     <div class="section-title">
       <h2>{{ section.settings.title }}</h2>
       {%- if section.settings.handle != blank -%}
@@ -10,7 +10,7 @@
       {%- for block in section.blocks -%}
         <div class="instagram-grid__item" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 400 }}" alt="Instagram post" loading="lazy" width="400" height="400">
+            <img src="{{ block.settings.image | image_url: width: 800 }}" alt="Instagram post" loading="lazy" width="800" height="800">
           {%- else -%}
             {%- assign ig_num = forloop.index | modulo: 6 -%}
             {%- if ig_num == 0 -%}{%- assign ig_num = 6 -%}{%- endif -%}
@@ -21,6 +21,35 @@
     </div>
   </div>
 </section>
+
+<style>
+  .instagram-section .container--wide {
+    max-width: 1440px;
+  }
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 750px) {
+    .instagram-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  }
+  .instagram-grid__item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-bg-warm);
+  }
+  .instagram-grid__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .instagram-grid__item:hover img {
+    transform: scale(1.04);
+  }
+</style>
 
 {% schema %}
 {

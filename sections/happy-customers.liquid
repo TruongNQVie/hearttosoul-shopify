@@ -32,8 +32,13 @@
 
             {%- if block.settings.name != blank -%}
               <div class="review-card__author">
-                <span class="review-card__name">{{ block.settings.name }}</span>
-                <span class="review-card__verified">
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <span class="review-card__name">{{ block.settings.name }}</span>
+                  {%- if block.settings.country != blank -%}
+                     <span style="font-size:11px; color:var(--color-text-muted);">{{ block.settings.country }}</span>
+                  {%- endif -%}
+                </div>
+                <span class="review-card__verified" style="margin-left:auto;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                   Verified
                 </span>
@@ -45,10 +50,67 @@
     </div>
 
     <div class="reviews-actions">
-      <a href="#" class="reviews-btn">Read More Reviews</a>
+      <button class="reviews-btn" id="openReviewsModal">Read More Reviews</button>
     </div>
   </div>
 </section>
+
+<!-- Reviews Modal -->
+<div class="reviews-modal" id="reviewsModal">
+  <div class="reviews-modal__overlay" id="reviewsModalOverlay"></div>
+  <div class="reviews-modal__content">
+    <button class="reviews-modal__close" id="closeReviewsModal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="reviews-modal__header">
+      <h3>All Real Stories</h3>
+      <p>Hear from over 10,000 thrilled girlfriends.</p>
+    </div>
+    
+    <div class="reviews-modal__scroll">
+      <div class="reviews-masonry" style="padding: 0 20px;">
+        {%- for block in section.blocks -%}
+          <div class="review-card" {{ block.shopify_attributes }}>
+            <div class="review-card__media">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
+              {%- else -%}
+                {%- assign rev_num = forloop.index | modulo: 6 -%}
+                {%- if rev_num == 0 -%}{%- assign rev_num = 6 -%}{%- endif -%}
+                <img src="{{ 'real-story-' | append: rev_num | append: '.png' | asset_url }}" alt="Customer review" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div class="review-card__info">
+              <div class="review-card__stars-row">
+                <div class="review-card__stars">★★★★★</div>
+                {%- if block.settings.tag != blank -%}
+                  <span class="review-card__tag">{{ block.settings.tag }}</span>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.text != blank -%}
+                <p class="review-card__text">"{{ block.settings.text }}"</p>
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <div class="review-card__author">
+                  <div style="display:flex; flex-direction:column; gap:2px;">
+                    <span class="review-card__name">{{ block.settings.name }}</span>
+                    {%- if block.settings.country != blank -%}
+                      <span style="font-size:11px; color:var(--color-text-muted);">{{ block.settings.country }}</span>
+                    {%- endif -%}
+                  </div>
+                  <span class="review-card__verified" style="margin-left:auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    Verified
+                  </span>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
   .reviews-section__label {
@@ -155,6 +217,83 @@
     box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     transform: translateY(-2px);
   }
+
+  /* Modal */
+  .reviews-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  .reviews-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .reviews-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .reviews-modal__content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+    background: var(--color-bg);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .reviews-modal.is-open .reviews-modal__content {
+    transform: translateY(0);
+  }
+  .reviews-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .reviews-modal__close:hover { background: var(--color-bg-warm); }
+  .reviews-modal__header {
+    padding: 32px 24px 20px;
+    text-align: center;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .reviews-modal__header h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .reviews-modal__header p {
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+  .reviews-modal__scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 0 60px;
+  }
 </style>
 
 {% schema %}
@@ -173,6 +312,7 @@
         { "type": "image_picker", "id": "image", "label": "Photo" },
         { "type": "text", "id": "tag", "default": "Anniversary", "label": "Tag" },
         { "type": "text", "id": "name", "default": "Customer Name", "label": "Author" },
+        { "type": "text", "id": "country", "default": "🇺🇸 USA", "label": "Country" },
         { "type": "textarea", "id": "text", "default": "Review text...", "label": "Review text" }
       ]
     }
@@ -181,14 +321,38 @@
     {
       "name": "Happy Customers",
       "blocks": [
-        { "type": "review", "settings": { "tag": "Anniversary", "name": "Sarah M.", "text": "The Apple Box is absolutely breathtaking. He surprised me with it and the necklace inside is so elegant!" } },
-        { "type": "review", "settings": { "tag": "Valentine's Day", "name": "David K.", "text": "Got the Eternal Rose gift set for my girlfriend. Seeing her face light up when she opened it was priceless. Fast shipping too." } },
-        { "type": "review", "settings": { "tag": "Birthday", "name": "Emily R.", "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since." } },
-        { "type": "review", "settings": { "tag": "Just Because", "name": "Michael B.", "text": "Wanted to get her something special. The Preserved Rose Jewelry Box blew her away. She loves the hidden message inside." } },
-        { "type": "review", "settings": { "tag": "Christmas", "name": "Jessica T.", "text": "My boyfriend gave me the Heart-Shaped Necklace in the red box. It’s the most thoughtful and beautiful gift I've ever owned." } },
-        { "type": "review", "settings": { "tag": "Mother's Day", "name": "Linda S.", "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity." } }
+        { "type": "review", "settings": { "tag": "Anniversary", "name": "Sarah M.", "country": "🇺🇸 USA", "text": "The Apple Box is absolutely breathtaking. He surprised me with it and the necklace inside is so elegant!" } },
+        { "type": "review", "settings": { "tag": "Valentine's Day", "name": "David K.", "country": "🇬🇧 UK", "text": "Got the Eternal Rose gift set for my girlfriend. Seeing her face light up when she opened it was priceless. Fast shipping too." } },
+        { "type": "review", "settings": { "tag": "Birthday", "name": "Emily R.", "country": "🇨🇦 Canada", "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since." } },
+        { "type": "review", "settings": { "tag": "Just Because", "name": "Michael B.", "country": "🇺🇸 USA", "text": "Wanted to get her something special. The Preserved Rose Jewelry Box blew her away. She loves the hidden message inside." } },
+        { "type": "review", "settings": { "tag": "Christmas", "name": "Jessica T.", "country": "🇦🇺 Australia", "text": "My boyfriend gave me the Heart-Shaped Necklace in the red box. It’s the most thoughtful and beautiful gift I've ever owned." } },
+        { "type": "review", "settings": { "tag": "Mother's Day", "name": "Linda S.", "country": "🇺🇸 USA", "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity." } }
       ]
     }
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById('openReviewsModal');
+  const closeBtn = document.getElementById('closeReviewsModal');
+  const overlay = document.getElementById('reviewsModalOverlay');
+  const modal = document.getElementById('reviewsModal');
+
+  function openModal(e) {
+    if(e) e.preventDefault();
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  if(openBtn) openBtn.addEventListener('click', openModal);
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', closeModal);
+});
+</script>
