@@ -599,7 +599,7 @@ h3 {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 4;
     background: var(--color-bg-warm);
 }
 
@@ -670,8 +670,9 @@ h3 {
 }
 
 .product-card__quick-add button:hover {
-    background: var(--color-text);
+    background: var(--color-primary);
     color: var(--color-white);
+    border-color: var(--color-primary);
 }
 
 .product-card__info {

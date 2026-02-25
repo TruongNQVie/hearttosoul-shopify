@@ -7,11 +7,11 @@
 
     {%- if product.featured_image != blank -%}
       <img
-        src="{{ product.featured_image | image_url: width: 600 }}"
+        src="{{ product.featured_image | image_url: width: 800 }}"
         alt="{{ product.featured_image.alt | escape }}"
         loading="lazy"
-        width="600"
-        height="600"
+        width="800"
+        height="800"
       >
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
