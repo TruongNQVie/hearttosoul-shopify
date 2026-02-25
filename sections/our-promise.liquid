@@ -1,4 +1,4 @@
-<section class="our-promise section-padding">
+<section class="our-promise">
   <div class="container">
     <div class="section-title">
       <span class="our-promise__label">{{ section.settings.subheading }}</span>
@@ -32,6 +32,10 @@
 </section>
 
 <style>
+  .our-promise {
+    padding: 60px 0 20px;
+    background: var(--color-bg);
+  }
   .our-promise__label {
     font-size: 11px;
     letter-spacing: 0.2em;
@@ -45,7 +49,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
-    margin-top: 40px;
+    margin-top: 50px;
   }
   @media (min-width: 750px) { .our-promise__grid { grid-template-columns: repeat(4, 1fr); } }
   .our-promise__card { text-align: center; }
@@ -66,6 +70,7 @@
     font-size: 15px;
     font-weight: 700;
     margin-bottom: 8px;
+    color: var(--color-text);
   }
   .our-promise__text {
     font-size: 13px;
