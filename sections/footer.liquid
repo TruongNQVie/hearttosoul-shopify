@@ -1,0 +1,92 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- Brand Column -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" style="height:32px;width:auto;">
+          <span style="font-family:var(--font-heading);font-size:20px;font-weight:600;color:var(--color-white);">Heart <em style="font-weight:400;">to</em> Soul</span>
+        </div>
+        <p class="footer__brand-tagline">Crafting meaningful gifts that celebrate the most divine connection — love.</p>
+        <p class="footer__brand-made">♡ Made with love in the USA</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="footer__heading">Quick Links</h4>
+        <div class="footer__links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'quick_link' -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.label }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if section.blocks.size == 0 -%}
+            <a href="/pages/about-us">About Us</a>
+            <a href="/pages/reviews">Happy Customers</a>
+            <a href="/pages/track-order">Track your Order</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Policies -->
+      <div>
+        <h4 class="footer__heading">Policies</h4>
+        <div class="footer__links">
+          <a href="/policies/refund-policy">Return and Refund Policy</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/terms-of-service">Terms of Service</a>
+          <a href="/policies/shipping-policy">Shipping Policy</a>
+          <a href="/pages/contact">Contact Us</a>
+        </div>
+      </div>
+
+      <!-- Get in Touch -->
+      <div>
+        <h4 class="footer__heading">Get In Touch</h4>
+        <div class="footer__contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href="mailto:hello@hearttosoul.com">hello@hearttosoul.com</a>
+        </div>
+        <div class="footer__contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>United States</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="footer__payment">
+      <p class="footer__payment-title">Secure Payment Methods</p>
+      <div class="footer__payment-icons">
+        {%- assign payment_names = 'Visa,Mastercard,Amex,Discover,PayPal,Apple Pay,Google Pay,Shop Pay,Meta Pay,Diners Club,JCB,UnionPay' | split: ',' -%}
+        {%- for name in payment_names -%}
+          <span class="footer__payment-icon">{{ name }}</span>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+      <span class="footer__bottom-secure">🔒 SSL Encrypted · Safe & Secure Shopping</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "quick_link",
+      "name": "Quick Link",
+      "settings": [
+        { "type": "text", "id": "label", "default": "About Us", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

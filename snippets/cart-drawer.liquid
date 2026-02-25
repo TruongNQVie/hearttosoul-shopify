@@ -1,0 +1,55 @@
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer__overlay" data-cart-close></div>
+  <div class="cart-drawer__panel">
+    <div class="cart-drawer__header">
+      <h3>Your Cart ({{ cart.item_count }})</h3>
+      <button class="cart-drawer__close" data-cart-close aria-label="Close cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__body">
+      {%- if cart == empty -%}
+        <div class="cart-drawer__empty">
+          <p style="font-size:18px;margin-bottom:8px;">Your cart is empty</p>
+          <p>Continue shopping to find your next piece.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary" style="margin-top:20px;">Continue Shopping</a>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="cart-drawer__item">
+            <div class="cart-drawer__item-img">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}">
+              {%- endif -%}
+            </div>
+            <div class="cart-drawer__item-info">
+              <p class="cart-drawer__item-title">{{ item.product.title }}</p>
+              {%- unless item.product.has_only_default_variant -%}
+                <p style="font-size:12px;color:var(--color-text-muted);">{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <p class="cart-drawer__item-price">{{ item.final_line_price | money }}</p>
+              <div class="cart-drawer__item-qty">
+                <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}">
+                  <button>−</button>
+                </a>
+                <span>{{ item.quantity }}</span>
+                <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}">
+                  <button>+</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    {%- unless cart == empty -%}
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__subtotal">
+          <span>Subtotal</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <a href="{{ routes.cart_url }}" class="cart-drawer__checkout">Check Out</a>
+      </div>
+    {%- endunless -%}
+  </div>
+</div>

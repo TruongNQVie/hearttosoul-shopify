@@ -1,0 +1,19 @@
+<section class="our-story section-padding">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <p class="our-story__text">{{ section.settings.text }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Story",
+  "settings": [
+    { "type": "text", "id": "title", "default": "Our Story", "label": "Title" },
+    { "type": "textarea", "id": "text", "default": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents.", "label": "Text" }
+  ],
+  "presets": [{ "name": "Our Story" }]
+}
+{% endschema %}

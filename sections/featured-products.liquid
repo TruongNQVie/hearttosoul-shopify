@@ -1,0 +1,54 @@
+<section class="section-padding" style="background: var(--color-white);">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.description != blank -%}
+        <p>{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.collection != blank -%}
+      <div class="product-grid">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <div style="text-align:center; margin-top:40px;">
+          <a href="{{ section.settings.collection.url }}" class="btn btn--primary" style="border-radius:50px; padding:14px 36px;">
+            VIEW ALL COLLECTIONS →
+          </a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="product-grid">
+        {%- for i in (1..4) -%}
+          <div class="product-card">
+            <div class="product-card__media">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="product-card__info">
+              <h3 class="product-card__title">Sample Product {{ i }}</h3>
+              <p class="product-card__price">$49.99</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Our Bestsellers" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "default": 8, "label": "Products to show" },
+    { "type": "checkbox", "id": "show_view_all", "default": true, "label": "Show 'View All' button" }
+  ],
+  "presets": [{ "name": "Featured Products" }]
+}
+{% endschema %}

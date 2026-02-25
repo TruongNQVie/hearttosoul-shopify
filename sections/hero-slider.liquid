@@ -1,0 +1,98 @@
+<div class="hero-slider" data-hero-slider>
+  <div class="hero-slides" data-speed="{{ section.settings.speed | times: 1000 }}">
+    {%- for block in section.blocks -%}
+      <div class="hero-slide {% if forloop.first %}is-active{% endif %}" data-slide-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img
+            srcset="{%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+              {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+              {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+              {%- if block.settings.image.width >= 2200 -%}{{ block.settings.image | image_url: width: 2200 }} 2200w,{%- endif -%}
+              {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+            sizes="100vw"
+            src="{{ block.settings.image | image_url: width: 1500 }}"
+            alt="{{ block.settings.heading | escape }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+          >
+        {%- else -%}
+          {%- assign fallback_num = forloop.index | modulo: 3 -%}
+          {%- if fallback_num == 0 -%}{%- assign fallback_num = 3 -%}{%- endif -%}
+          <img src="{{ 'hero-' | append: fallback_num | append: '.jpg' | asset_url }}" alt="{{ block.settings.heading | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+        {%- endif -%}
+
+        <div class="hero-slide__overlay"></div>
+
+        <div class="hero-slide__content">
+          <div class="hero-slide__content-inner">
+            {%- if block.settings.subheading != blank -%}
+              <p class="hero-slide__subheading">{{ block.settings.subheading }}</p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h2 class="hero-slide__heading">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="hero-slide__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="hero-slide__btn">{{ block.settings.button_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="hero-slider__dots">
+      {%- for block in section.blocks -%}
+        <button class="hero-slider__dot {% if forloop.first %}is-active{% endif %}" data-dot-index="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Hero Slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 7,
+      "label": "Change slides every"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "NEW COLLECTION" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Gift a unique memory." },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Personalized necklaces made to fill your heart with love." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Slider",
+      "blocks": [
+        { "type": "slide", "settings": { "heading": "Gift a unique memory.", "text": "Personalized necklaces made to fill your heart with love.", "button_label": "Express Your Love" } },
+        { "type": "slide", "settings": { "heading": "Individually made for each customer.", "text": "Every rose box is a masterpiece of love, crafted just for you.", "button_label": "Discover Rose Boxes" } },
+        { "type": "slide", "settings": { "heading": "Celebrate your love story.", "text": "Perfect for Valentine's, anniversaries, and every moment in between.", "button_label": "Celebrate Your Story" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

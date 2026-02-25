@@ -1,0 +1,41 @@
+<div class="announcement-bar" role="region" aria-label="Announcement">
+  <div class="announcement-bar__marquee">
+    {%- for i in (1..8) -%}
+      <span>
+        {%- for block in section.blocks -%}
+          {{ block.settings.text }} ✦ 
+        {%- endfor -%}
+      </span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "FREE SHIPPING IN THE USA",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "blocks": [
+        { "type": "announcement", "settings": { "text": "FREE SHIPPING IN THE USA" } },
+        { "type": "announcement", "settings": { "text": "BUY 1 GET 1 50% OFF" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

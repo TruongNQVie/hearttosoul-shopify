@@ -1,0 +1,61 @@
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__media">
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-card__badge">Sale</span>
+    {%- endif -%}
+
+    {%- if product.featured_image != blank -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        loading="lazy"
+        width="600"
+        height="600"
+      >
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+
+    {%- if product.images[1] != blank -%}
+      <img
+        src="{{ product.images[1] | image_url: width: 600 }}"
+        alt="{{ product.images[1].alt | escape }}"
+        loading="lazy"
+        width="600"
+        height="600"
+        class="product-card__secondary-img"
+      >
+    {%- endif -%}
+
+    {%- unless product.available == false -%}
+      <div class="product-card__quick-add">
+        {%- form 'product', product -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" {% if product.available == false %}disabled{% endif %}>
+            {%- if product.available -%}
+              Add to Cart
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+      </div>
+    {%- endunless -%}
+  </a>
+
+  <div class="product-card__info">
+    <a href="{{ product.url }}">
+      <h3 class="product-card__title">{{ product.title }}</h3>
+    </a>
+    <p class="product-card__price">
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </p>
+    <p class="product-card__shipping">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      Free US Shipping
+    </p>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{
+    "name": "Footer group",
+    "type": "footer",
+    "sections": {
+        "footer": {
+            "type": "footer",
+            "blocks": {
+                "link1": {
+                    "type": "quick_link",
+                    "settings": {
+                        "label": "About Us"
+                    }
+                },
+                "link2": {
+                    "type": "quick_link",
+                    "settings": {
+                        "label": "Happy Customers"
+                    }
+                },
+                "link3": {
+                    "type": "quick_link",
+                    "settings": {
+                        "label": "Track your Order"
+                    }
+                }
+            },
+            "block_order": [
+                "link1",
+                "link2",
+                "link3"
+            ]
+        }
+    },
+    "order": [
+        "footer"
+    ]
+}

@@ -1,0 +1,51 @@
+<section class="instagram-section section-padding">
+  <div class="container">
+    <div class="section-title">
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.handle != blank -%}
+        <p>@{{ section.settings.handle }}</p>
+      {%- endif -%}
+    </div>
+    <div class="instagram-grid">
+      {%- for block in section.blocks -%}
+        <div class="instagram-grid__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 400 }}" alt="Instagram post" loading="lazy" width="400" height="400">
+          {%- else -%}
+            {%- assign ig_num = forloop.index | modulo: 6 -%}
+            {%- if ig_num == 0 -%}{%- assign ig_num = 6 -%}{%- endif -%}
+            <img src="{{ 'ig-' | append: ig_num | append: '.jpg' | asset_url }}" alt="Instagram post" loading="lazy">
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Grid",
+  "settings": [
+    { "type": "text", "id": "title", "default": "As Seen On Instagram", "label": "Title" },
+    { "type": "text", "id": "handle", "default": "BEYOND.LOVE.OFFICIAL", "label": "Instagram handle" }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Grid",
+      "blocks": [
+        { "type": "image" }, { "type": "image" }, { "type": "image" },
+        { "type": "image" }, { "type": "image" }, { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}
