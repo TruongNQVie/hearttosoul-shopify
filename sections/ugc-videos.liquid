@@ -14,7 +14,7 @@
             {%- else -%}
               {%- assign ugc_num = forloop.index | modulo: 6 -%}
               {%- if ugc_num == 0 -%}{%- assign ugc_num = 6 -%}{%- endif -%}
-              <video src="{{ 'ugc-video-' | append: ugc_num | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
+              <video class="lazy-video" data-src="{{ 'ugc-video-' | append: ugc_num | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
             {%- endif -%}
           </div>
           {%- if block.settings.credit != blank or block.settings.caption != blank -%}
@@ -40,7 +40,7 @@
     gap: 16px;
   }
   @media (min-width: 750px) { .ugc-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
-  @media (min-width: 990px) { .ugc-grid { grid-template-columns: repeat(6, 1fr); } }
+  @media (min-width: 990px) { .ugc-grid { grid-template-columns: repeat(4, 1fr); } }
   .ugc-card {
     background: var(--color-white);
     border-radius: 12px;
@@ -126,3 +126,33 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const lazyVideos = document.querySelectorAll('video.lazy-video');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const video = entry.target;
+            if (video.hasAttribute('data-src')) {
+              video.src = video.getAttribute('data-src');
+              video.removeAttribute('data-src');
+            }
+            video.play().catch(e => { console.log('Autoplay prevented', e); });
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, { rootMargin: "0px 0px 200px 0px" });
+      
+      lazyVideos.forEach(v => observer.observe(v));
+    } else {
+      lazyVideos.forEach(v => {
+        if (v.hasAttribute('data-src')) {
+          v.src = v.getAttribute('data-src');
+        }
+      });
+    }
+  });
+</script>

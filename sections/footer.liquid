@@ -45,7 +45,7 @@
         <h4 class="footer__heading">Get In Touch</h4>
         <div class="footer__contact-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          <a href="mailto:hello@hearttosoul.com">hello@hearttosoul.com</a>
+          <a href="mailto:support@hearttosoul.shop">support@hearttosoul.shop</a>
         </div>
         <div class="footer__contact-item">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -58,7 +58,7 @@
     <div class="footer__payment">
       <p class="footer__payment-title">Secure Payment Methods</p>
       <div class="footer__payment-icons">
-        {%- assign payment_names = 'Visa,Mastercard,Amex,Discover,PayPal,Apple Pay,Google Pay,Shop Pay,Meta Pay,Diners Club,JCB,UnionPay' | split: ',' -%}
+        {%- assign payment_names = 'Visa,Mastercard,Amex,Discover,PayPal,Apple Pay,Google Pay,Shop Pay' | split: ',' -%}
         {%- for name in payment_names -%}
           <span class="footer__payment-icon">{{ name }}</span>
         {%- endfor -%}

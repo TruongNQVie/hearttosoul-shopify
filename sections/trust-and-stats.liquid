@@ -1,5 +1,13 @@
 <section class="trust-and-stats section-padding">
   <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-title">
+        <h2>{{ section.settings.heading }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p>{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     <div class="trust-and-stats__grid">
       <div class="trust-badge-card">
         <div class="trust-badge-card__icon">
@@ -142,6 +150,8 @@
 {
   "name": "Trust & Stats",
   "settings": [
+    { "type": "text", "id": "heading", "default": "Why Choose Heart To Soul?", "label": "Heading" },
+    { "type": "text", "id": "subtitle", "default": "Crafted with love, backed by our promise.", "label": "Subtitle" },
     { "type": "text", "id": "note", "default": "Trusted by 10,000+ happy customers across the USA", "label": "Middle note" }
   ],
   "presets": [
