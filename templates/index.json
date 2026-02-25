@@ -59,7 +59,7 @@
         "description": "",
         "collection": "bestsellers",
         "products_to_show": 8,
-        "show_view_all": true
+        "show_view_all": false
       }
     },
     "trust-badges": {
