@@ -1,3 +1,12 @@
+{% comment %}
+  UGC Videos — hardcoded data so Shopify editor cache can never reduce the count.
+  Videos are loaded from assets/ugc-video-1.mp4 … ugc-video-8.mp4.
+{% endcomment %}
+
+{%- assign ugc_credits  = "Lina_Gera,EmmaGoes_,BellaBlossoms,SophieRose,MiaChenx,OliviaJane,SarahW,JessicaT" | split: "," -%}
+{%- assign ugc_countries = "🇺🇸 USA,🇬🇧 UK,🇨🇦 CAN,🇩🇪 GER,🇦🇺 AUS,🇮🇹 ITA,🇪🇸 ESP,🇳🇿 NZL" | split: "," -%}
+{%- assign ugc_captions = "Wrapped in his love with this beautiful gift...|When he surprises me with a gift 🥰|my heart just melts. #love|LOOK WHAT MY BF GOT ME 😍|the most thoughtful gift ever 🌹|I literally cried 😭💕|This is everything I wanted and more!|Can't stop looking at it ❤️" | split: "|" -%}
+
 <section class="ugc-section section-padding">
   <div class="container">
     <div class="section-title">
@@ -6,32 +15,19 @@
     </div>
 
     <div class="ugc-grid">
-      {%- for block in section.blocks -%}
-        <div class="ugc-card" {{ block.shopify_attributes }}>
+      {%- for i in (1..8) -%}
+        <div class="ugc-card">
           <div class="ugc-card__media">
-            {%- if block.settings.video != blank -%}
-              {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
-            {%- else -%}
-              {%- assign ugc_num = forloop.index | modulo: 8 -%}
-              {%- if ugc_num == 0 -%}{%- assign ugc_num = 8 -%}{%- endif -%}
-              <video class="lazy-video" data-src="{{ 'ugc-video-' | append: ugc_num | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
-            {%- endif -%}
+            <video class="lazy-video" data-src="{{ 'ugc-video-' | append: i | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
           </div>
-          {%- if block.settings.credit != blank or block.settings.caption != blank -%}
-            <div class="ugc-card__info">
-              {%- if block.settings.credit != blank -%}
-                <div class="ugc-card__credit-row">
-                  <span class="ugc-card__credit">credit @{{ block.settings.credit }}</span>
-                  {%- if block.settings.country != blank -%}
-                     <span class="country-badge">{{ block.settings.country }}</span>
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
-              {%- if block.settings.caption != blank -%}
-                <p class="ugc-card__caption">{{ block.settings.caption }}</p>
-              {%- endif -%}
+          <div class="ugc-card__info">
+            {%- assign idx = i | minus: 1 -%}
+            <div class="ugc-card__credit-row">
+              <span class="ugc-card__credit">credit @{{ ugc_credits[idx] }}</span>
+              <span class="country-badge">{{ ugc_countries[idx] }}</span>
             </div>
-          {%- endif -%}
+            <p class="ugc-card__caption">{{ ugc_captions[idx] }}</p>
+          </div>
         </div>
       {%- endfor -%}
     </div>
@@ -45,12 +41,11 @@
     overflow-x: auto;
     padding-bottom: 20px;
     scroll-snap-type: x mandatory;
-    /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
   .ugc-grid::-webkit-scrollbar { display: none; }
-  
+
   .ugc-card {
     flex: 0 0 80%;
     scroll-snap-align: start;
@@ -59,17 +54,11 @@
     overflow: hidden;
     border: 1px solid var(--color-border);
   }
-  @media (min-width: 750px) { 
-    .ugc-card { flex: 0 0 calc(33.333% - 14px); } 
+  @media (min-width: 750px) {
+    .ugc-card { flex: 0 0 calc(33.333% - 14px); }
   }
-  @media (min-width: 990px) { 
+  @media (min-width: 990px) {
     .ugc-card { flex: 0 0 calc(25% - 12px); }
-  }
-  .ugc-card {
-    background: var(--color-white);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
   }
   .ugc-card__media {
     position: relative;
@@ -82,22 +71,8 @@
     object-fit: cover;
     transition: transform 0.4s;
   }
-  .ugc-card:hover .ugc-card__media video, .ugc-card:hover .ugc-card__media img { transform: scale(1.05); }
-  .ugc-card__play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(190, 52, 78, 0.85);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-  .ugc-card__play svg { margin-left: 3px; }
+  .ugc-card:hover .ugc-card__media video,
+  .ugc-card:hover .ugc-card__media img { transform: scale(1.05); }
   .ugc-card__info { padding: 10px 12px 12px; }
   .ugc-card__credit-row {
     display: flex;
@@ -138,33 +113,7 @@
     { "type": "text", "id": "heading", "default": "Celebrating 10,000+ Thrilled Girlfriends", "label": "Heading" },
     { "type": "text", "id": "subtitle", "default": "Real reactions. Real love. Real moments.", "label": "Subtitle" }
   ],
-  "blocks": [
-    {
-      "type": "video",
-      "name": "Video",
-      "settings": [
-        { "type": "video", "id": "video", "label": "Shopify Video" },
-        { "type": "text", "id": "credit", "default": "user", "label": "Username" },
-        { "type": "text", "id": "country", "default": "🇺🇸 United States", "label": "Country" },
-        { "type": "text", "id": "caption", "default": "Wrapped in his love with this beautiful gift...", "label": "Caption" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "UGC Videos",
-      "blocks": [
-        { "type": "video", "settings": { "credit": "Lina_Gera", "country": "🇺🇸 USA", "caption": "Wrapped in his love with this beautiful gift..." } },
-        { "type": "video", "settings": { "credit": "EmmaGoes_", "country": "🇬🇧 UK", "caption": "When he surprises me with a gift 🥰" } },
-        { "type": "video", "settings": { "credit": "BellaBlossoms", "country": "🇨🇦 CAN", "caption": "my heart just melts. #love" } },
-        { "type": "video", "settings": { "credit": "SophieRose", "country": "🇩🇪 GER", "caption": "LOOK WHAT MY BF GOT ME 😍" } },
-        { "type": "video", "settings": { "credit": "MiaChenx", "country": "🇦🇺 AUS", "caption": "the most thoughtful gift ever 🌹" } },
-        { "type": "video", "settings": { "credit": "OliviaJane", "country": "🇮🇹 ITA", "caption": "I literally cried 😭💕" } },
-        { "type": "video", "settings": { "credit": "SarahW", "country": "🇪🇸 ESP", "caption": "This is everything I wanted and more!" } },
-        { "type": "video", "settings": { "credit": "JessicaT", "country": "🇳🇿 NZL", "caption": "Can't stop looking at it ❤️" } }
-      ]
-    }
-  ]
+  "presets": [{ "name": "UGC Videos" }]
 }
 {% endschema %}
 
@@ -186,7 +135,7 @@
           }
         });
       }, { rootMargin: "0px 0px 200px 0px" });
-      
+
       lazyVideos.forEach(v => observer.observe(v));
     } else {
       lazyVideos.forEach(v => {
