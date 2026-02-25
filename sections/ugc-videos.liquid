@@ -12,8 +12,8 @@
             {%- if block.settings.video != blank -%}
               {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '400x' }}
             {%- else -%}
-              {%- assign ugc_num = forloop.index | modulo: 6 -%}
-              {%- if ugc_num == 0 -%}{%- assign ugc_num = 6 -%}{%- endif -%}
+              {%- assign ugc_num = forloop.index | modulo: 8 -%}
+              {%- if ugc_num == 0 -%}{%- assign ugc_num = 8 -%}{%- endif -%}
               <video class="lazy-video" data-src="{{ 'ugc-video-' | append: ugc_num | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
             {%- endif -%}
           </div>
