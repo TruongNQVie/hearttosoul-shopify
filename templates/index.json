@@ -52,17 +52,6 @@
         "speed": 7
       }
     },
-    "featured_products_XV9Kpx": {
-      "type": "featured-products",
-      "name": "Featured Products",
-      "settings": {
-        "title": "Our Bestsellers",
-        "description": "",
-        "collection": "bestsellers",
-        "products_to_show": 8,
-        "show_view_all": true
-      }
-    },
     "featured-products": {
       "type": "featured-products",
       "settings": {
@@ -262,7 +251,6 @@
   },
   "order": [
     "hero-slider",
-    "featured_products_XV9Kpx",
     "featured-products",
     "trust-and-stats",
     "secure-checkout",
