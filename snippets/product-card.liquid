@@ -1,5 +1,6 @@
 <div class="product-card">
-  <a href="{{ product.url }}" class="product-card__media">
+  <div class="product-card__media">
+    <a href="{{ product.url }}" style="position:absolute; inset:0; z-index:1;"></a>
     {%- if product.compare_at_price > product.price -%}
       <span class="product-card__badge">Sale</span>
     {%- endif -%}
@@ -28,7 +29,7 @@
     {%- endif -%}
 
     {%- unless product.available == false -%}
-      <div class="product-card__quick-add">
+      <div class="product-card__quick-add" style="z-index:4;">
         {%- form 'product', product -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           <button type="submit" {% if product.available == false %}disabled{% endif %}>
@@ -41,7 +42,7 @@
         {%- endform -%}
       </div>
     {%- endunless -%}
-  </a>
+  </div>
 
   <div class="product-card__info">
     <a href="{{ product.url }}">

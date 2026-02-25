@@ -1,0 +1,169 @@
+<section class="main-product section-padding">
+  <div class="container">
+    <div class="product-layout">
+      
+      <!-- Product Media -->
+      <div class="product-media">
+        <div class="product-media__main">
+          {%- if product.featured_image != blank -%}
+            <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title }}">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-media__thumbnails">
+            {%- for image in product.images -%}
+              <img src="{{ image | image_url: width: 200 }}" alt="{{ product.title }}">
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <p class="product-vendor">{{ product.vendor }}</p>
+        <h1 class="product-title">{{ product.title }}</h1>
+        <div class="product-price">
+          <span class="price-current">{{ product.price | money }}</span>
+          {%- if product.compare_at_price > product.price -%}
+            <span class="price-compare">{{ product.compare_at_price | money }}</span>
+            <span class="price-badge">Sale</span>
+          {%- endif -%}
+        </div>
+        
+        <div class="product-description">
+          {{ product.description }}
+        </div>
+
+        {%- form 'product', product, class: 'product-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="product-form__submit btn btn--primary" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}
+              Add to Cart
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        <div class="product-benefits">
+          <p>✓ Free US Shipping on all orders</p>
+          <p>✓ Lifetime Warranty included</p>
+          <p>✓ Easy 30-Day Returns</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .main-product {
+    background: var(--color-white);
+    padding: 60px 0;
+  }
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  @media (min-width: 900px) {
+    .product-layout { grid-template-columns: 1fr 1fr; gap: 60px; }
+  }
+  .product-media__main {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-bg-warm);
+    margin-bottom: 16px;
+  }
+  .product-media__thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .product-media__thumbnails img {
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+  }
+  .product-vendor {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+  }
+  .product-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .price-compare {
+    color: var(--color-text-light);
+    text-decoration: line-through;
+    font-size: 18px;
+    font-weight: 400;
+  }
+  .price-badge {
+    background: var(--color-badge-sale);
+    color: var(--color-white);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .product-description {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+  .product-form {
+    margin-bottom: 32px;
+  }
+  .product-form__submit {
+    width: 100%;
+    padding: 18px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 50px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .product-form__submit:hover { opacity: 0.9; }
+  .product-form__submit:disabled { background: var(--color-text-light); cursor: not-allowed; }
+  
+  .product-benefits {
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+  .product-benefits p {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}
