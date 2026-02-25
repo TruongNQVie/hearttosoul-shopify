@@ -7,7 +7,7 @@
 {%- assign ugc_captions = "Wrapped in his love with this beautiful gift...|When he surprises me with a gift 🥰|my heart just melts. #love|LOOK WHAT MY BF GOT ME 😍|the most thoughtful gift ever 🌹|I literally cried 😭💕|This is everything I wanted and more!|Can't stop looking at it ❤️" | split: "|" -%}
 
 <section class="ugc-section section-padding">
-  <div class="container">
+  <div class="container--wide" style="max-width:1440px; margin:0 auto; padding:0 20px;">
     <div class="section-title">
       <h2>{{ section.settings.heading }}</h2>
       <p>{{ section.settings.subtitle }}</p>
@@ -109,10 +109,10 @@
     overflow: hidden;
   }
   @media (min-width: 750px) {
-    .ugc-card { flex: 0 0 calc(40% - 14px); }
+    .ugc-card { flex: 0 0 calc(45% - 14px); }
   }
   @media (min-width: 990px) {
-    .ugc-card { flex: 0 0 calc(19% - 12px); }
+    .ugc-card { flex: 0 0 calc(28.5% - 12px); }
   }
 
   /* Media container — full card is the video */
@@ -226,23 +226,32 @@
       rightBtn.addEventListener('click', () => { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
     }
 
-    /* Smooth mouse-wheel → horizontal scroll when hovering over the UGC grid */
+    /* Smooth mouse-wheel → horizontal scroll */
     if (grid) {
-      let scrollTarget = grid.scrollLeft;
-      let isScrolling = false;
+      let targetScroll = grid.scrollLeft;
+      let animating = false;
 
-      function smoothScroll() {
-        const diff = scrollTarget - grid.scrollLeft;
-        if (Math.abs(diff) < 1) { isScrolling = false; return; }
-        grid.scrollLeft += diff * 0.15;
-        requestAnimationFrame(smoothScroll);
+      function animate() {
+        const current = grid.scrollLeft;
+        const diff = targetScroll - current;
+        if (Math.abs(diff) < 0.5) {
+          grid.scrollLeft = targetScroll;
+          animating = false;
+          return;
+        }
+        grid.scrollLeft = current + diff * 0.08;
+        requestAnimationFrame(animate);
       }
 
       grid.addEventListener('wheel', function(e) {
         if (grid.scrollWidth <= grid.clientWidth) return;
         e.preventDefault();
-        scrollTarget = Math.max(0, Math.min(scrollTarget + e.deltaY * 1.5, grid.scrollWidth - grid.clientWidth));
-        if (!isScrolling) { isScrolling = true; requestAnimationFrame(smoothScroll); }
+        const maxScroll = grid.scrollWidth - grid.clientWidth;
+        targetScroll = Math.max(0, Math.min(targetScroll + e.deltaY * 2, maxScroll));
+        if (!animating) {
+          animating = true;
+          requestAnimationFrame(animate);
+        }
       }, { passive: false });
     }
   });
