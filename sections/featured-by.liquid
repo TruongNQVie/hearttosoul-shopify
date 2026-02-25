@@ -1,10 +1,18 @@
 <section class="featured-by">
   <div class="featured-by__inner">
     <p class="featured-by__label">{{ section.settings.title }}</p>
-    <div class="featured-by__logos">
-      {%- for block in section.blocks -%}
-        <span class="featured-by__name" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
-      {%- endfor -%}
+    <div class="featured-by__marquee-wrapper">
+      <div class="featured-by__marquee">
+        {%- for block in section.blocks -%}
+          <span class="featured-by__name" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+          <span class="featured-by__dot">·</span>
+        {%- endfor -%}
+        <!-- Duplicate for seamless loop -->
+        {%- for block in section.blocks -%}
+          <span class="featured-by__name" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+          <span class="featured-by__dot">·</span>
+        {%- endfor -%}
+      </div>
     </div>
   </div>
 </section>
@@ -12,7 +20,7 @@
 <style>
   .featured-by {
     background: var(--color-bg-dark);
-    padding: 40px 20px;
+    padding: 52px 20px;
   }
   .featured-by__inner {
     max-width: var(--container-max);
@@ -20,28 +28,68 @@
     text-align: center;
   }
   .featured-by__label {
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.4);
-    margin-bottom: 20px;
+    margin-bottom: 28px;
     font-weight: 500;
   }
-  .featured-by__logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 24px 40px;
+  /* Marquee wrapper */
+  .featured-by__marquee-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
-  @media (min-width: 750px) { .featured-by__logos { gap: 24px 56px; } }
+  .featured-by__marquee-wrapper::before,
+  .featured-by__marquee-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .featured-by__marquee-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg-dark), transparent);
+  }
+  .featured-by__marquee-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg-dark), transparent);
+  }
+  .featured-by__marquee {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    animation: marqueeScroll 20s linear infinite;
+    white-space: nowrap;
+    will-change: transform;
+  }
+  @keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .featured-by__marquee:hover {
+    animation-play-state: paused;
+  }
+  .featured-by__dot {
+    color: rgba(255,255,255,0.2);
+    font-size: 24px;
+  }
   .featured-by__name {
     font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-size: clamp(1.7rem, 4.5vw, 2.3rem);
     font-style: italic;
     color: rgba(255,255,255,0.7);
     font-weight: 500;
     letter-spacing: 0.02em;
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+  .featured-by__name:hover {
+    color: rgba(255,255,255,1);
   }
 </style>
 
