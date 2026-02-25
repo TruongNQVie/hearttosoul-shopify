@@ -12,9 +12,19 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "ugc-videos": {
+      "type": "ugc-videos",
+      "settings": {}
+    },
+    "happy-customers": {
+      "type": "happy-customers",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "ugc-videos",
+    "happy-customers"
   ]
 }
