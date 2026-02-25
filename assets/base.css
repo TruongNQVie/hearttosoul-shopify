@@ -742,10 +742,11 @@ h3 {
 }
 
 .trust-badge__title {
-    font-family: var(--font-heading);
-    font-size: 16px;
-    font-weight: 600;
-    font-style: italic;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -0.01em;
 }
 
 .trust-badge__text {

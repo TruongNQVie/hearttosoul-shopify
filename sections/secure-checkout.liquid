@@ -1,0 +1,136 @@
+<section class="secure-checkout-section">
+  <div class="container">
+    <div class="secure-checkout-card">
+      <div class="secure-checkout__header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h2>Secure & Easy Checkout</h2>
+      </div>
+      <p class="secure-checkout__subtitle">{{ section.settings.subtitle }}</p>
+
+      <div class="secure-checkout__icons">
+        <div class="payment-icon payment-icon--visa">
+          <span style="color:#1A1F71;font-weight:800;font-style:italic;font-size:18px;">VISA</span>
+        </div>
+        <div class="payment-icon payment-icon--mc">
+          <div style="display:flex;gap:0;"><span style="width:20px;height:20px;background:#EB001B;border-radius:50%;display:block;"></span><span style="width:20px;height:20px;background:#F79E1B;border-radius:50%;display:block;margin-left:-8px;opacity:0.85;"></span></div>
+        </div>
+        <div class="payment-icon payment-icon--amex">
+          <span style="color:#fff;font-weight:800;font-size:13px;background:#006FCF;padding:4px 6px;border-radius:3px;">AMEX</span>
+        </div>
+        <div class="payment-icon">
+          <span style="font-weight:700;font-size:11px;color:var(--color-text);letter-spacing:0.05em;">DISCOVER</span>
+        </div>
+        <div class="payment-icon payment-icon--paypal">
+          <span style="font-weight:700;font-size:13px;"><span style="color:#003087;">Pay</span><span style="color:#009CDE;">Pal</span></span>
+        </div>
+        <div class="payment-icon payment-icon--applepay">
+          <span style="font-weight:600;font-size:13px;color:#000;"> Pay</span>
+        </div>
+        <div class="payment-icon payment-icon--gpay">
+          <span style="font-weight:600;font-size:12px;">G Pay</span>
+        </div>
+        <div class="payment-icon payment-icon--shop">
+          <span style="background:#5A31F4;color:#fff;font-weight:700;font-size:12px;padding:4px 8px;border-radius:4px;">shop</span>
+        </div>
+        <div class="payment-icon">
+          <span style="font-weight:700;font-size:12px;color:#E91E8C;">Klarna</span>
+        </div>
+        <div class="payment-icon">
+          <span style="background:#B2FCE4;color:#000;font-weight:700;font-size:11px;padding:4px 6px;border-radius:4px;">after<br>pay</span>
+        </div>
+        <div class="payment-icon">
+          <span style="background:#0FA0EA;color:#fff;font-weight:700;font-size:12px;padding:4px 8px;border-radius:4px;">affirm</span>
+        </div>
+        <div class="payment-icon">
+          <span style="font-weight:700;font-size:14px;color:#EB001B;">jcb</span>
+        </div>
+        <div class="payment-icon">
+          <span style="background:#0B2E4F;color:#fff;font-size:9px;font-weight:700;padding:4px 6px;border-radius:4px;text-align:center;line-height:1.2;">Diners<br>Club</span>
+        </div>
+        <div class="payment-icon">
+          <span style="background:#EE1C25;color:#fff;font-weight:700;font-size:9px;padding:4px 6px;border-radius:4px;">UnionPay</span>
+        </div>
+        <div class="payment-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+        </div>
+      </div>
+
+      <p class="secure-checkout__notice">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        256-bit SSL Encryption · PCI DSS Compliant
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .secure-checkout-section {
+    padding: 40px 0 60px;
+    background: var(--color-bg);
+  }
+  .secure-checkout-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-bg-warm);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid var(--color-border);
+  }
+  .secure-checkout__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .secure-checkout__header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-style: italic;
+    font-weight: 600;
+    margin: 0;
+  }
+  .secure-checkout__subtitle {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .secure-checkout__icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .payment-icon {
+    width: 60px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .secure-checkout__notice {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Secure Checkout",
+  "settings": [
+    { "type": "textarea", "id": "subtitle", "default": "Pay with confidence using any major payment method — powered by Shopify", "label": "Subtitle" }
+  ],
+  "presets": [{ "name": "Secure Checkout" }]
+}
+{% endschema %}
