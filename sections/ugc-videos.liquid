@@ -23,10 +23,7 @@
           <div class="ugc-card">
             <div class="ugc-card__media">
               <video class="lazy-video" data-src="{{ 'ugc-video-' | append: i | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
-              <!-- Play button overlay -->
-              <div class="ugc-card__play">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
-              </div>
+
               <!-- Info overlay on the video -->
               <div class="ugc-card__overlay">
                 <div class="ugc-card__credit-row">
@@ -97,27 +94,25 @@
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    padding-bottom: 12px;
+    padding-bottom: 4px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) var(--color-border);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  .ugc-grid::-webkit-scrollbar { height: 6px; }
-  .ugc-grid::-webkit-scrollbar-track { background: var(--color-border); border-radius: 3px; }
-  .ugc-grid::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 3px; }
+  .ugc-grid::-webkit-scrollbar { display: none; }
 
   .ugc-card {
-    flex: 0 0 75%;
+    flex: 0 0 85%;
     scroll-snap-align: start;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
   }
   @media (min-width: 750px) {
-    .ugc-card { flex: 0 0 calc(33.333% - 14px); }
+    .ugc-card { flex: 0 0 calc(40% - 14px); }
   }
   @media (min-width: 990px) {
-    .ugc-card { flex: 0 0 calc(22% - 12px); }
+    .ugc-card { flex: 0 0 calc(28% - 12px); }
   }
 
   /* Media container — full card is the video */
@@ -136,25 +131,7 @@
   .ugc-card:hover .ugc-card__media video,
   .ugc-card:hover .ugc-card__media img { transform: scale(1.05); }
 
-  /* Play button */
-  .ugc-card__play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .ugc-card__play svg { margin-left: 3px; }
+
 
   /* Text overlay — bottom of video */
   .ugc-card__overlay {
@@ -213,7 +190,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    /* Lazy video loading */
+    /* Lazy video loading + slow playback */
     const lazyVideos = document.querySelectorAll('video.lazy-video');
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
@@ -224,6 +201,7 @@
               video.src = video.getAttribute('data-src');
               video.removeAttribute('data-src');
             }
+            video.playbackRate = 0.75;
             video.play().catch(e => { console.log('Autoplay prevented', e); });
           } else {
             entry.target.pause();
@@ -234,6 +212,7 @@
     } else {
       lazyVideos.forEach(v => {
         if (v.hasAttribute('data-src')) { v.src = v.getAttribute('data-src'); }
+        v.playbackRate = 0.75;
       });
     }
 
@@ -247,13 +226,23 @@
       rightBtn.addEventListener('click', () => { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
     }
 
-    /* Mouse-wheel → horizontal scroll when hovering over the UGC grid */
+    /* Smooth mouse-wheel → horizontal scroll when hovering over the UGC grid */
     if (grid) {
+      let scrollTarget = grid.scrollLeft;
+      let isScrolling = false;
+
+      function smoothScroll() {
+        const diff = scrollTarget - grid.scrollLeft;
+        if (Math.abs(diff) < 1) { isScrolling = false; return; }
+        grid.scrollLeft += diff * 0.15;
+        requestAnimationFrame(smoothScroll);
+      }
+
       grid.addEventListener('wheel', function(e) {
-        /* Only hijack if there is horizontal overflow */
         if (grid.scrollWidth <= grid.clientWidth) return;
         e.preventDefault();
-        grid.scrollLeft += e.deltaY;
+        scrollTarget = Math.max(0, Math.min(scrollTarget + e.deltaY * 1.5, grid.scrollWidth - grid.clientWidth));
+        if (!isScrolling) { isScrolling = true; requestAnimationFrame(smoothScroll); }
       }, { passive: false });
     }
   });
