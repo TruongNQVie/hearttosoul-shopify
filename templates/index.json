@@ -1,428 +1,451 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "Home page",
-    "sections": {
-        "hero-slider": {
-            "type": "hero-slider",
-            "settings": {
-                "speed": 7
-            },
-            "blocks": {
-                "slide-1": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Gift a unique memory.",
-                        "text": "Personalized necklaces made to fill your heart with love.",
-                        "button_label": "Express Your Love"
-                    }
-                },
-                "slide-2": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Individually made for each customer.",
-                        "text": "Every rose box is a masterpiece of love, crafted just for you.",
-                        "button_label": "Discover Rose Boxes"
-                    }
-                },
-                "slide-3": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Celebrate your love story.",
-                        "text": "Perfect for Valentine's, anniversaries, and every moment in between.",
-                        "button_label": "Celebrate Your Story"
-                    }
-                }
-            },
-            "block_order": [
-                "slide-1",
-                "slide-2",
-                "slide-3"
-            ]
+  "sections": {
+    "hero-slider": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Gift a unique memory.",
+            "text": "Personalized necklaces made to fill your heart with love.",
+            "button_label": "Express Your Love",
+            "button_link": ""
+          }
         },
-        "featured-products": {
-            "type": "featured-products",
-            "settings": {
-                "title": "Our Bestsellers",
-                "products_to_show": 8,
-                "show_view_all": true
-            }
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Individually made for each customer.",
+            "text": "Every rose box is a masterpiece of love, crafted just for you.",
+            "button_label": "Discover Rose Boxes",
+            "button_link": ""
+          }
         },
-        "trust-badges": {
-            "type": "trust-badges",
-            "settings": {
-                "note": "Trusted by 10,000+ happy customers across the USA"
-            },
-            "blocks": {
-                "b1": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "shipping",
-                        "title": "Free Shipping",
-                        "text": "On all USA orders"
-                    }
-                },
-                "b2": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "warranty",
-                        "title": "Lifetime Warranty",
-                        "text": "We stand behind our craft"
-                    }
-                },
-                "b3": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "secure",
-                        "title": "Secure Checkout",
-                        "text": "SSL encrypted payments"
-                    }
-                },
-                "b4": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "support",
-                        "title": "24/7 Support",
-                        "text": "Always here for you"
-                    }
-                }
-            },
-            "block_order": [
-                "b1",
-                "b2",
-                "b3",
-                "b4"
-            ]
-        },
-        "stats-counter": {
-            "type": "stats-counter",
-            "blocks": {
-                "s1": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "gift",
-                        "number": "10,000+",
-                        "label": "GIFTS DELIVERED"
-                    }
-                },
-                "s2": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "users",
-                        "number": "8,500+",
-                        "label": "HAPPY CUSTOMERS"
-                    }
-                },
-                "s3": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "heart",
-                        "number": "50+",
-                        "label": "COUNTRIES REACHED"
-                    }
-                },
-                "s4": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "star",
-                        "number": "4.9★",
-                        "label": "AVERAGE RATING"
-                    }
-                }
-            },
-            "block_order": [
-                "s1",
-                "s2",
-                "s3",
-                "s4"
-            ]
-        },
-        "our-story": {
-            "type": "our-story",
-            "settings": {
-                "subheading": "OUR STORY",
-                "heading": "Heart To Soul",
-                "text_left": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.",
-                "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
-            }
-        },
-        "featured-by": {
-            "type": "featured-by",
-            "settings": {
-                "title": "TRUSTED & FEATURED BY"
-            },
-            "blocks": {
-                "fb1": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Vogue"
-                    }
-                },
-                "fb2": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Elle"
-                    }
-                },
-                "fb3": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Brides"
-                    }
-                },
-                "fb4": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Harper's Bazaar"
-                    }
-                },
-                "fb5": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "InStyle"
-                    }
-                },
-                "fb6": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Cosmopolitan"
-                    }
-                },
-                "fb7": {
-                    "type": "brand",
-                    "settings": {
-                        "name": "Glamour"
-                    }
-                }
-            },
-            "block_order": [
-                "fb1",
-                "fb2",
-                "fb3",
-                "fb4",
-                "fb5",
-                "fb6",
-                "fb7"
-            ]
-        },
-        "our-promise": {
-            "type": "our-promise",
-            "settings": {
-                "subheading": "OUR PROMISE",
-                "heading": "Crafted Responsibly",
-                "description": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship."
-            },
-            "blocks": {
-                "p1": {
-                    "type": "card",
-                    "settings": {
-                        "icon": "eco",
-                        "title": "Eco-Friendly Packaging",
-                        "text": "Our rose boxes use FSC-certified paper and soy-based inks, reducing environmental impact without compromising luxury."
-                    }
-                },
-                "p2": {
-                    "type": "card",
-                    "settings": {
-                        "icon": "sustainable",
-                        "title": "Sustainable Materials",
-                        "text": "We source recycled metals and conflict-free stones, ensuring every piece is as ethical as it is beautiful."
-                    }
-                },
-                "p3": {
-                    "type": "card",
-                    "settings": {
-                        "icon": "care",
-                        "title": "Crafted with Care",
-                        "text": "Each piece is handmade by skilled artisans paid fair wages, supporting communities and traditional craftsmanship."
-                    }
-                },
-                "p4": {
-                    "type": "card",
-                    "settings": {
-                        "icon": "quality",
-                        "title": "Built to Last",
-                        "text": "We design jewelry meant to be treasured for a lifetime — not discarded after a season. Quality over quantity, always."
-                    }
-                }
-            },
-            "block_order": [
-                "p1",
-                "p2",
-                "p3",
-                "p4"
-            ]
-        },
-        "ugc-videos": {
-            "type": "ugc-videos",
-            "settings": {
-                "heading": "Celebrating 10,000+ Thrilled Girlfriends",
-                "subtitle": "Real reactions. Real love. Real moments."
-            },
-            "blocks": {
-                "u1": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "Lina_Gera",
-                        "caption": "Wrapped in his love with this beautiful gift..."
-                    }
-                },
-                "u2": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "EmmaGoes_",
-                        "caption": "When he surprises me with a gift 🥰"
-                    }
-                },
-                "u3": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "BellaBlossoms",
-                        "caption": "my heart just melts. #love"
-                    }
-                },
-                "u4": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "SophieRose",
-                        "caption": "LOOK WHAT MY BF GOT ME 😍"
-                    }
-                },
-                "u5": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "MiaChenx",
-                        "caption": "the most thoughtful gift ever 🌹"
-                    }
-                },
-                "u6": {
-                    "type": "video",
-                    "settings": {
-                        "credit": "OliviaJane",
-                        "caption": "I literally cried 😭💕"
-                    }
-                }
-            },
-            "block_order": [
-                "u1",
-                "u2",
-                "u3",
-                "u4",
-                "u5",
-                "u6"
-            ]
-        },
-        "happy-customers": {
-            "type": "happy-customers",
-            "settings": {
-                "subheading": "REAL STORIES",
-                "heading": "Happy Customers",
-                "subtitle": "See what our community has to say"
-            },
-            "blocks": {
-                "r1": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Anniversary",
-                        "text": "The most beautiful gift I've ever received!"
-                    }
-                },
-                "r2": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Valentine's Day",
-                        "text": "My girlfriend absolutely loved it!"
-                    }
-                },
-                "r3": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Birthday",
-                        "text": "Perfect packaging and stunning necklace"
-                    }
-                },
-                "r4": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Just Because",
-                        "text": "Made her cry happy tears 🥹"
-                    }
-                },
-                "r5": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Christmas",
-                        "text": "Best Christmas gift ever!"
-                    }
-                },
-                "r6": {
-                    "type": "review",
-                    "settings": {
-                        "name": "Mother's Day",
-                        "text": "My mom was so touched by this gift"
-                    }
-                }
-            },
-            "block_order": [
-                "r1",
-                "r2",
-                "r3",
-                "r4",
-                "r5",
-                "r6"
-            ]
-        },
-        "secure-checkout": {
-            "type": "secure-checkout",
-            "settings": {
-                "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
-            }
-        },
-        "instagram-grid": {
-            "type": "instagram-grid",
-            "settings": {
-                "title": "As Seen On Instagram",
-                "handle": "BEYOND.LOVE.OFFICIAL"
-            },
-            "blocks": {
-                "ig1": {
-                    "type": "image"
-                },
-                "ig2": {
-                    "type": "image"
-                },
-                "ig3": {
-                    "type": "image"
-                },
-                "ig4": {
-                    "type": "image"
-                },
-                "ig5": {
-                    "type": "image"
-                },
-                "ig6": {
-                    "type": "image"
-                }
-            },
-            "block_order": [
-                "ig1",
-                "ig2",
-                "ig3",
-                "ig4",
-                "ig5",
-                "ig6"
-            ]
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Celebrate your love story.",
+            "text": "Perfect for Valentine's, anniversaries, and every moment in between.",
+            "button_label": "Celebrate Your Story",
+            "button_link": ""
+          }
         }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ],
+      "settings": {
+        "speed": 7
+      }
     },
-    "order": [
-        "hero-slider",
-        "featured-products",
-        "our-story",
-        "featured-by",
-        "our-promise",
-        "trust-badges",
-        "stats-counter",
-        "ugc-videos",
-        "happy-customers",
-        "secure-checkout",
-        "instagram-grid"
-    ]
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Our Bestsellers",
+        "description": "",
+        "collection": "bestsellers",
+        "products_to_show": 8,
+        "show_view_all": false
+      }
+    },
+    "our-story": {
+      "type": "our-story",
+      "settings": {
+        "subheading": "OUR STORY",
+        "heading": "Heart To Soul",
+        "text_left": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.",
+        "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
+      }
+    },
+    "featured-by": {
+      "type": "featured-by",
+      "blocks": {
+        "fb1": {
+          "type": "brand",
+          "settings": {
+            "name": "Vogue"
+          }
+        },
+        "fb2": {
+          "type": "brand",
+          "settings": {
+            "name": "Elle"
+          }
+        },
+        "fb3": {
+          "type": "brand",
+          "settings": {
+            "name": "Brides"
+          }
+        },
+        "fb4": {
+          "type": "brand",
+          "settings": {
+            "name": "Harper's Bazaar"
+          }
+        },
+        "fb5": {
+          "type": "brand",
+          "settings": {
+            "name": "InStyle"
+          }
+        },
+        "fb6": {
+          "type": "brand",
+          "settings": {
+            "name": "Cosmopolitan"
+          }
+        },
+        "fb7": {
+          "type": "brand",
+          "settings": {
+            "name": "Glamour"
+          }
+        }
+      },
+      "block_order": [
+        "fb1",
+        "fb2",
+        "fb3",
+        "fb4",
+        "fb5",
+        "fb6",
+        "fb7"
+      ],
+      "settings": {
+        "title": "TRUSTED & FEATURED BY"
+      }
+    },
+    "our-promise": {
+      "type": "our-promise",
+      "blocks": {
+        "p1": {
+          "type": "card",
+          "settings": {
+            "icon": "eco",
+            "title": "Eco-Friendly Packaging",
+            "text": "Our rose boxes use FSC-certified paper and soy-based inks, reducing environmental impact without compromising luxury."
+          }
+        },
+        "p2": {
+          "type": "card",
+          "settings": {
+            "icon": "sustainable",
+            "title": "Sustainable Materials",
+            "text": "We source recycled metals and conflict-free stones, ensuring every piece is as ethical as it is beautiful."
+          }
+        },
+        "p3": {
+          "type": "card",
+          "settings": {
+            "icon": "care",
+            "title": "Crafted with Care",
+            "text": "Each piece is handmade by skilled artisans paid fair wages, supporting communities and traditional craftsmanship."
+          }
+        },
+        "p4": {
+          "type": "card",
+          "settings": {
+            "icon": "quality",
+            "title": "Built to Last",
+            "text": "We design jewelry meant to be treasured for a lifetime — not discarded after a season. Quality over quantity, always."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "subheading": "OUR PROMISE",
+        "heading": "Crafted Responsibly",
+        "description": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship."
+      }
+    },
+    "trust-badges": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "text": "On all USA orders"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "icon": "warranty",
+            "title": "Lifetime Warranty",
+            "text": "We stand behind our craft"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "SSL encrypted payments"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "text": "Always here for you"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "note": "Trusted by 10,000+ happy customers across the USA"
+      }
+    },
+    "stats-counter": {
+      "type": "stats-counter",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "icon": "gift",
+            "number": "10,000+",
+            "label": "GIFTS DELIVERED"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "number": "8,500+",
+            "label": "HAPPY CUSTOMERS"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "icon": "heart",
+            "number": "50+",
+            "label": "COUNTRIES REACHED"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "icon": "star",
+            "number": "4.9★",
+            "label": "AVERAGE RATING"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {}
+    },
+    "ugc-videos": {
+      "type": "ugc-videos",
+      "blocks": {
+        "u1": {
+          "type": "video",
+          "settings": {
+            "credit": "Lina_Gera",
+            "caption": "Wrapped in his love with this beautiful gift..."
+          }
+        },
+        "u2": {
+          "type": "video",
+          "settings": {
+            "credit": "EmmaGoes_",
+            "caption": "When he surprises me with a gift 🥰"
+          }
+        },
+        "u3": {
+          "type": "video",
+          "settings": {
+            "credit": "BellaBlossoms",
+            "caption": "my heart just melts. #love"
+          }
+        },
+        "u4": {
+          "type": "video",
+          "settings": {
+            "credit": "SophieRose",
+            "caption": "LOOK WHAT MY BF GOT ME 😍"
+          }
+        },
+        "u5": {
+          "type": "video",
+          "settings": {
+            "credit": "MiaChenx",
+            "caption": "the most thoughtful gift ever 🌹"
+          }
+        },
+        "u6": {
+          "type": "video",
+          "settings": {
+            "credit": "OliviaJane",
+            "caption": "I literally cried 😭💕"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "settings": {
+        "heading": "Celebrating 10,000+ Thrilled Girlfriends",
+        "subtitle": "Real reactions. Real love. Real moments."
+      }
+    },
+    "happy-customers": {
+      "type": "happy-customers",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "name": "Anniversary",
+            "text": "The most beautiful gift I've ever received!"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "name": "Valentine's Day",
+            "text": "My girlfriend absolutely loved it!"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "name": "Birthday",
+            "text": "Perfect packaging and stunning necklace"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "name": "Just Because",
+            "text": "Made her cry happy tears 🥹"
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "name": "Christmas",
+            "text": "Best Christmas gift ever!"
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "name": "Mother's Day",
+            "text": "My mom was so touched by this gift"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "subheading": "REAL STORIES",
+        "heading": "Happy Customers",
+        "subtitle": "See what our community has to say"
+      }
+    },
+    "secure-checkout": {
+      "type": "secure-checkout",
+      "settings": {
+        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
+      }
+    },
+    "instagram-grid": {
+      "type": "instagram-grid",
+      "blocks": {
+        "ig1": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig2": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig3": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig4": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig5": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig6": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "ig1",
+        "ig2",
+        "ig3",
+        "ig4",
+        "ig5",
+        "ig6"
+      ],
+      "settings": {
+        "title": "As Seen On Instagram",
+        "handle": "BEYOND.LOVE.OFFICIAL"
+      }
+    }
+  },
+  "order": [
+    "hero-slider",
+    "featured-products",
+    "our-story",
+    "featured-by",
+    "our-promise",
+    "trust-badges",
+    "stats-counter",
+    "ugc-videos",
+    "happy-customers",
+    "secure-checkout",
+    "instagram-grid"
+  ]
 }
