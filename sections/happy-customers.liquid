@@ -17,64 +17,34 @@
       <p>{{ section.settings.subtitle }}</p>
     </div>
 
-    <!-- Preview grid: 5 reviews only (row 1: 3 cards, row 2: 2 cards) -->
-    <div class="reviews-preview">
-      <div class="reviews-preview__row reviews-preview__row--3">
-        {%- for i in (1..3) -%}
-          {%- assign idx = i | minus: 1 -%}
-          {%- capture rev_num_str -%}{%- if i < 10 -%}0{{ i }}{%- else -%}{{ i }}{%- endif -%}{%- endcapture -%}
-          <div class="review-card">
-            <div class="review-card__media">
-              <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="{{ rev_names[idx] }}" loading="lazy">
+    <!-- Preview: 5 reviews in masonry (free-height columns) -->
+    <div class="reviews-preview-masonry">
+      {%- for i in (1..5) -%}
+        {%- assign idx = i | minus: 1 -%}
+        {%- capture rev_num_str -%}{%- if i < 10 -%}0{{ i }}{%- else -%}{{ i }}{%- endif -%}{%- endcapture -%}
+        <div class="review-card">
+          <div class="review-card__media">
+            <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="{{ rev_names[idx] }}" loading="lazy">
+          </div>
+          <div class="review-card__info">
+            <div class="review-card__stars-row">
+              <div class="review-card__stars">★★★★★</div>
+              <span class="review-card__tag">{{ rev_tags[idx] }}</span>
             </div>
-            <div class="review-card__info">
-              <div class="review-card__stars-row">
-                <div class="review-card__stars">★★★★★</div>
-                <span class="review-card__tag">{{ rev_tags[idx] }}</span>
+            <p class="review-card__text">"{{ rev_texts[idx] }}"</p>
+            <div class="review-card__author">
+              <div class="review-card__author-info">
+                <span class="review-card__name">{{ rev_names[idx] }}</span>
+                <span class="country-badge">{{ rev_countries[idx] }}</span>
               </div>
-              <p class="review-card__text">"{{ rev_texts[idx] }}"</p>
-              <div class="review-card__author">
-                <div class="review-card__author-info">
-                  <span class="review-card__name">{{ rev_names[idx] }}</span>
-                  <span class="country-badge">{{ rev_countries[idx] }}</span>
-                </div>
-                <span class="review-card__verified" style="margin-left:auto;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                  Verified
-                </span>
-              </div>
+              <span class="review-card__verified" style="margin-left:auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                Verified
+              </span>
             </div>
           </div>
-        {%- endfor -%}
-      </div>
-      <div class="reviews-preview__row reviews-preview__row--2">
-        {%- for i in (4..5) -%}
-          {%- assign idx = i | minus: 1 -%}
-          {%- capture rev_num_str -%}{%- if i < 10 -%}0{{ i }}{%- else -%}{{ i }}{%- endif -%}{%- endcapture -%}
-          <div class="review-card">
-            <div class="review-card__media">
-              <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="{{ rev_names[idx] }}" loading="lazy">
-            </div>
-            <div class="review-card__info">
-              <div class="review-card__stars-row">
-                <div class="review-card__stars">★★★★★</div>
-                <span class="review-card__tag">{{ rev_tags[idx] }}</span>
-              </div>
-              <p class="review-card__text">"{{ rev_texts[idx] }}"</p>
-              <div class="review-card__author">
-                <div class="review-card__author-info">
-                  <span class="review-card__name">{{ rev_names[idx] }}</span>
-                  <span class="country-badge">{{ rev_countries[idx] }}</span>
-                </div>
-                <span class="review-card__verified" style="margin-left:auto;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                  Verified
-                </span>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
+        </div>
+      {%- endfor -%}
     </div>
 
     <div class="reviews-actions">
@@ -139,25 +109,13 @@
     margin-bottom: 8px;
   }
 
-  /* Preview grid — 2 rows */
-  .reviews-preview__row {
-    display: grid;
-    gap: 20px;
-    margin-bottom: 20px;
+  /* Preview masonry — free height columns */
+  .reviews-preview-masonry {
+    column-count: 2;
+    column-gap: 20px;
   }
-  .reviews-preview__row--3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .reviews-preview__row--2 {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 66.666%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @media (max-width: 749px) {
-    .reviews-preview__row--3 { grid-template-columns: repeat(2, 1fr); }
-    .reviews-preview__row--3 .review-card:nth-child(3) { display: none; }
-    .reviews-preview__row--2 { grid-template-columns: 1fr; max-width: 100%; }
+  @media (min-width: 750px) {
+    .reviews-preview-masonry { column-count: 3; column-gap: 24px; }
   }
 
   /* Masonry for modal */
