@@ -6,8 +6,8 @@
       <p>{{ section.settings.subtitle }}</p>
     </div>
 
-    <div class="reviews-masonry">
-      {%- for block in section.blocks -%}
+    <div class="reviews-grid">
+      {%- for block in section.blocks limit: 5 -%}
         <div class="review-card" {{ block.shopify_attributes }}>
           <div class="review-card__media">
             {%- if block.settings.image != blank -%}
@@ -69,7 +69,7 @@
     </div>
     
     <div class="reviews-modal__scroll">
-      <div class="reviews-masonry" style="padding: 0 20px;">
+      <div class="reviews-masonry-modal" style="padding: 0 20px;">
         {%- for block in section.blocks -%}
           <div class="review-card" {{ block.shopify_attributes }}>
             <div class="review-card__media">
@@ -124,22 +124,57 @@
     display: block;
     margin-bottom: 8px;
   }
-  .reviews-masonry {
+  /* Front page grid: 5 items (3 top, 2 bottom centered) */
+  .reviews-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+  @media (min-width: 750px) {
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+  @media (min-width: 990px) {
+    .reviews-grid { 
+      grid-template-columns: repeat(6, 1fr); 
+    }
+    .reviews-grid > .review-card:nth-child(1),
+    .reviews-grid > .review-card:nth-child(2),
+    .reviews-grid > .review-card:nth-child(3) {
+      grid-column: span 2;
+    }
+    .reviews-grid > .review-card:nth-child(4) {
+      grid-column: 2 / span 2;
+    }
+    .reviews-grid > .review-card:nth-child(5) {
+      grid-column: 4 / span 2;
+    }
+  }
+
+  /* Modal Masonry */
+  .reviews-masonry-modal {
     column-count: 2;
     column-gap: 16px;
   }
-  @media (min-width: 750px) { .reviews-masonry { column-count: 3; column-gap: 24px; } }
+  @media (min-width: 750px) { .reviews-masonry-modal { column-count: 3; column-gap: 24px; } }
+
   .review-card {
     background: var(--color-white);
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--color-border);
-    margin-bottom: 16px;
     break-inside: avoid;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
-  @media (min-width: 750px) { .review-card { margin-bottom: 24px; } }
+  .reviews-masonry-modal .review-card {
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 750px) { 
+    .reviews-masonry-modal .review-card { margin-bottom: 24px; } 
+  }
   .review-card__media {
     position: relative;
     overflow: hidden;
@@ -244,9 +279,9 @@
   }
   .reviews-modal__content {
     position: relative;
-    width: 90%;
-    max-width: 900px;
-    height: 85vh;
+    width: 95%;
+    max-width: 1100px;
+    height: 90vh;
     background: var(--color-bg);
     border-radius: 16px;
     display: flex;
