@@ -1,0 +1,31 @@
+<section class="main-login section-padding" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="max-width:480px; text-align:center;">
+    <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,2.5rem); margin-bottom:8px;">Welcome Back</h1>
+    <p style="color:var(--color-text-muted); font-size:14px; margin-bottom:32px;">Log in to your account</p>
+
+    {% form 'customer_login' %}
+      {{ form.errors | default_errors }}
+      <div style="margin-bottom:16px;">
+        <input type="email" name="customer[email]" placeholder="Email" autocomplete="email" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
+      </div>
+      <div style="margin-bottom:8px;">
+        <input type="password" name="customer[password]" placeholder="Password" autocomplete="current-password" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
+      </div>
+      <p style="text-align:right; margin-bottom:24px;">
+        <a href="#recover" style="font-size:13px; color:var(--color-primary); text-decoration:none;">Forgot password?</a>
+      </p>
+      <button type="submit" style="width:100%; padding:14px; background:var(--color-primary); color:var(--color-white); border:none; border-radius:50px; font-weight:600; font-size:15px; cursor:pointer; transition:opacity 0.3s;">Sign In</button>
+    {% endform %}
+
+    <p style="margin-top:24px; font-size:14px; color:var(--color-text-muted);">
+      Don't have an account? <a href="/account/register" style="color:var(--color-primary); font-weight:600; text-decoration:none;">Create one</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Login",
+  "settings": []
+}
+{% endschema %}
