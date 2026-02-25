@@ -13,9 +13,10 @@
             {%- if block.settings.image != blank -%}
               <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
             {%- else -%}
-              {%- assign rev_num = forloop.index | modulo: 6 -%}
-              {%- if rev_num == 0 -%}{%- assign rev_num = 6 -%}{%- endif -%}
-              <img src="{{ 'real-story-' | append: rev_num | append: '.png' | asset_url }}" alt="Customer review" loading="lazy">
+              {%- assign rev_num = forloop.index | modulo: 17 -%}
+              {%- if rev_num == 0 -%}{%- assign rev_num = 17 -%}{%- endif -%}
+              {%- capture rev_num_str -%}{%- if rev_num < 10 -%}0{{ rev_num }}{%- else -%}{{ rev_num }}{%- endif -%}{%- endcapture -%}
+              <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="Customer review" loading="lazy">
             {%- endif -%}
           </div>
           <div class="review-card__info">
@@ -32,10 +33,10 @@
 
             {%- if block.settings.name != blank -%}
               <div class="review-card__author">
-                <div style="display:flex; flex-direction:column; gap:2px;">
+                <div class="review-card__author-info">
                   <span class="review-card__name">{{ block.settings.name }}</span>
                   {%- if block.settings.country != blank -%}
-                     <span style="font-size:11px; color:var(--color-text-muted);">{{ block.settings.country }}</span>
+                    <span class="country-badge">{{ block.settings.country }}</span>
                   {%- endif -%}
                 </div>
                 <span class="review-card__verified" style="margin-left:auto;">
@@ -75,9 +76,10 @@
               {%- if block.settings.image != blank -%}
                 <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
               {%- else -%}
-                {%- assign rev_num = forloop.index | modulo: 6 -%}
-                {%- if rev_num == 0 -%}{%- assign rev_num = 6 -%}{%- endif -%}
-                <img src="{{ 'real-story-' | append: rev_num | append: '.png' | asset_url }}" alt="Customer review" loading="lazy">
+                {%- assign rev_num = forloop.index | modulo: 17 -%}
+                {%- if rev_num == 0 -%}{%- assign rev_num = 17 -%}{%- endif -%}
+                {%- capture rev_num_str -%}{%- if rev_num < 10 -%}0{{ rev_num }}{%- else -%}{{ rev_num }}{%- endif -%}{%- endcapture -%}
+                <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="Customer review" loading="lazy">
               {%- endif -%}
             </div>
             <div class="review-card__info">
@@ -92,10 +94,10 @@
               {%- endif -%}
               {%- if block.settings.name != blank -%}
                 <div class="review-card__author">
-                  <div style="display:flex; flex-direction:column; gap:2px;">
+                  <div class="review-card__author-info">
                     <span class="review-card__name">{{ block.settings.name }}</span>
                     {%- if block.settings.country != blank -%}
-                      <span style="font-size:11px; color:var(--color-text-muted);">{{ block.settings.country }}</span>
+                      <span class="country-badge">{{ block.settings.country }}</span>
                     {%- endif -%}
                   </div>
                   <span class="review-card__verified" style="margin-left:auto;">
@@ -294,6 +296,23 @@
     overflow-y: auto;
     padding: 32px 0 60px;
   }
+  .review-card__author-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .country-badge {
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
 </style>
 
 {% schema %}
@@ -323,10 +342,21 @@
       "blocks": [
         { "type": "review", "settings": { "tag": "Anniversary", "name": "Sarah M.", "country": "🇺🇸 USA", "text": "The Apple Box is absolutely breathtaking. He surprised me with it and the necklace inside is so elegant!" } },
         { "type": "review", "settings": { "tag": "Valentine's Day", "name": "David K.", "country": "🇬🇧 UK", "text": "Got the Eternal Rose gift set for my girlfriend. Seeing her face light up when she opened it was priceless. Fast shipping too." } },
-        { "type": "review", "settings": { "tag": "Birthday", "name": "Emily R.", "country": "🇨🇦 Canada", "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since." } },
+        { "type": "review", "settings": { "tag": "Birthday", "name": "Emily R.", "country": "🇨🇦 CAN", "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since." } },
         { "type": "review", "settings": { "tag": "Just Because", "name": "Michael B.", "country": "🇺🇸 USA", "text": "Wanted to get her something special. The Preserved Rose Jewelry Box blew her away. She loves the hidden message inside." } },
-        { "type": "review", "settings": { "tag": "Christmas", "name": "Jessica T.", "country": "🇦🇺 Australia", "text": "My boyfriend gave me the Heart-Shaped Necklace in the red box. It’s the most thoughtful and beautiful gift I've ever owned." } },
-        { "type": "review", "settings": { "tag": "Mother's Day", "name": "Linda S.", "country": "🇺🇸 USA", "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity." } }
+        { "type": "review", "settings": { "tag": "Christmas", "name": "Jessica T.", "country": "🇦🇺 AUS", "text": "My boyfriend gave me the Heart-Shaped Necklace. It’s the most thoughtful and beautiful gift I've ever owned." } },
+        { "type": "review", "settings": { "tag": "Mother's Day", "name": "Linda S.", "country": "🇺🇸 USA", "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity." } },
+        { "type": "review", "settings": { "tag": "Anniversary", "name": "Katie P.", "country": "🇩🇪 GER", "text": "Honestly stunning packaging. The necklace shines beautifully in the light." } },
+        { "type": "review", "settings": { "tag": "Surprise", "name": "John D.", "country": "🇺🇸 USA", "text": "She cried when she saw it. 10/10 would buy again!" } },
+        { "type": "review", "settings": { "tag": "Christmas", "name": "Maria C.", "country": "🇪🇸 ESP", "text": "Best gift ever from my husband. The preserved rose looks so real." } },
+        { "type": "review", "settings": { "tag": "Birthday", "name": "Rachel G.", "country": "🇨🇦 CAN", "text": "So dainty and beautiful. The jewelry box is something I'll cherish forever." } },
+        { "type": "review", "settings": { "tag": "Anniversary", "name": "Mark L.", "country": "🇳🇿 NZL", "text": "Exceeded expectations. The shipping was fast and the quality is amazing." } },
+        { "type": "review", "settings": { "tag": "Valentine's Day", "name": "Sophie H.", "country": "🇬🇧 UK", "text": "This beats a regular bouquet of flowers any day of the week!" } },
+        { "type": "review", "settings": { "tag": "Just Because", "name": "Hannah W.", "country": "🇦🇺 AUS", "text": "So cute to find a little hidden necklace in the rose box." } },
+        { "type": "review", "settings": { "tag": "Mother's Day", "name": "Eva J.", "country": "🇺🇸 USA", "text": "Gifted this to my mom and she has it displayed proudly in her living room." } },
+        { "type": "review", "settings": { "tag": "Birthday", "name": "Danielle V.", "country": "🇮🇹 ITA", "text": "The attention to detail on the box is crazy. Such a luxurious feel." } },
+        { "type": "review", "settings": { "tag": "Anniversary", "name": "Jason F.", "country": "🇨🇦 CAN", "text": "Nailed our 5 year anniversary with this gift. Thanks!" } },
+        { "type": "review", "settings": { "tag": "Surprise", "name": "Chloe T.", "country": "🇺🇸 USA", "text": "Prettiest thing I own right now. Going to buy one for my best friend." } }
       ]
     }
   ]

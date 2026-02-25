@@ -20,11 +20,12 @@
           {%- if block.settings.credit != blank or block.settings.caption != blank -%}
             <div class="ugc-card__info">
               {%- if block.settings.credit != blank -%}
-                <span class="ugc-card__credit">credit @{{ block.settings.credit }}
+                <div class="ugc-card__credit-row">
+                  <span class="ugc-card__credit">credit @{{ block.settings.credit }}</span>
                   {%- if block.settings.country != blank -%}
-                     <span style="font-weight:600; color:var(--color-primary); margin-left:6px;">{{ block.settings.country }}</span>
+                     <span class="country-badge">{{ block.settings.country }}</span>
                   {%- endif -%}
-                </span>
+                </div>
               {%- endif -%}
               {%- if block.settings.caption != blank -%}
                 <p class="ugc-card__caption">{{ block.settings.caption }}</p>
@@ -98,11 +99,25 @@
   }
   .ugc-card__play svg { margin-left: 3px; }
   .ugc-card__info { padding: 10px 12px 12px; }
+  .ugc-card__credit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
   .ugc-card__credit {
     font-size: 11px;
     color: var(--color-text-muted);
-    display: block;
-    margin-bottom: 4px;
+  }
+  .country-badge {
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   .ugc-card__caption {
     font-size: 13px;
@@ -139,10 +154,14 @@
     {
       "name": "UGC Videos",
       "blocks": [
-        { "type": "video", "settings": { "credit": "Lina_Gera", "country": "🇺🇸 United States", "caption": "Wrapped in his love with this beautiful gift..." } },
-        { "type": "video", "settings": { "credit": "EmmaGoes_", "country": "🇬🇧 United Kingdom", "caption": "When he surprises me with a gift 🥰" } },
-        { "type": "video", "settings": { "credit": "BellaBlossoms", "country": "🇨🇦 Canada", "caption": "my heart just melts. #love" } },
-        { "type": "video", "settings": { "credit": "SophieRose", "country": "🇩🇪 Germany", "caption": "LOOK WHAT MY BF GOT ME 😍" } }
+        { "type": "video", "settings": { "credit": "Lina_Gera", "country": "🇺🇸 USA", "caption": "Wrapped in his love with this beautiful gift..." } },
+        { "type": "video", "settings": { "credit": "EmmaGoes_", "country": "🇬🇧 UK", "caption": "When he surprises me with a gift 🥰" } },
+        { "type": "video", "settings": { "credit": "BellaBlossoms", "country": "🇨🇦 CAN", "caption": "my heart just melts. #love" } },
+        { "type": "video", "settings": { "credit": "SophieRose", "country": "🇩🇪 GER", "caption": "LOOK WHAT MY BF GOT ME 😍" } },
+        { "type": "video", "settings": { "credit": "MiaChenx", "country": "🇦🇺 AUS", "caption": "the most thoughtful gift ever 🌹" } },
+        { "type": "video", "settings": { "credit": "OliviaJane", "country": "🇮🇹 ITA", "caption": "I literally cried 😭💕" } },
+        { "type": "video", "settings": { "credit": "SarahW", "country": "🇪🇸 ESP", "caption": "This is everything I wanted and more!" } },
+        { "type": "video", "settings": { "credit": "JessicaT", "country": "🇳🇿 NZL", "caption": "Can't stop looking at it ❤️" } }
       ]
     }
   ]
