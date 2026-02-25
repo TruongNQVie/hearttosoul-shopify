@@ -679,9 +679,19 @@ h3 {
     padding: 12px 4px 0;
 }
 
+.product-card__rating {
+    margin-bottom: 4px;
+}
+
+.product-card__stars {
+    color: #D4A373;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
 .product-card__title {
     font-family: var(--font-body);
-    font-size: 14.5px;
+    font-size: 16.5px;
     font-weight: 600;
     color: var(--color-text);
     line-height: 1.5;
