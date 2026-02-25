@@ -1,196 +1,219 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "Home page",
-    "sections": {
-        "hero-slider": {
-            "type": "hero-slider",
-            "settings": {
-                "speed": 7
-            },
-            "blocks": {
-                "slide-1": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Gift a unique memory.",
-                        "text": "Personalized necklaces made to fill your heart with love.",
-                        "button_label": "Express Your Love"
-                    }
-                },
-                "slide-2": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Individually made for each customer.",
-                        "text": "Every rose box is a masterpiece of love, crafted just for you.",
-                        "button_label": "Discover Rose Boxes"
-                    }
-                },
-                "slide-3": {
-                    "type": "slide",
-                    "settings": {
-                        "heading": "Celebrate your love story.",
-                        "text": "Perfect for Valentine's, anniversaries, and every moment in between.",
-                        "button_label": "Celebrate Your Story"
-                    }
-                }
-            },
-            "block_order": [
-                "slide-1",
-                "slide-2",
-                "slide-3"
-            ]
+  "sections": {
+    "hero-slider": {
+      "type": "hero-slider",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Gift a unique memory.",
+            "text": "Personalized necklaces made to fill your heart with love.",
+            "button_label": "Express Your Love",
+            "button_link": ""
+          }
         },
-        "featured-products": {
-            "type": "featured-products",
-            "settings": {
-                "title": "Our Bestsellers",
-                "products_to_show": 8,
-                "show_view_all": true
-            }
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Individually made for each customer.",
+            "text": "Every rose box is a masterpiece of love, crafted just for you.",
+            "button_label": "Discover Rose Boxes",
+            "button_link": ""
+          }
         },
-        "trust-badges": {
-            "type": "trust-badges",
-            "settings": {
-                "note": "Trusted by 10,000+ happy customers across the USA"
-            },
-            "blocks": {
-                "b1": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "shipping",
-                        "title": "Free Shipping",
-                        "text": "On all USA orders"
-                    }
-                },
-                "b2": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "warranty",
-                        "title": "Lifetime Warranty",
-                        "text": "We stand behind our craft"
-                    }
-                },
-                "b3": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "secure",
-                        "title": "Secure Checkout",
-                        "text": "SSL encrypted payments"
-                    }
-                },
-                "b4": {
-                    "type": "badge",
-                    "settings": {
-                        "icon": "support",
-                        "title": "24/7 Support",
-                        "text": "Always here for you"
-                    }
-                }
-            },
-            "block_order": [
-                "b1",
-                "b2",
-                "b3",
-                "b4"
-            ]
-        },
-        "stats-counter": {
-            "type": "stats-counter",
-            "blocks": {
-                "s1": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "gift",
-                        "number": "10,000+",
-                        "label": "GIFTS DELIVERED"
-                    }
-                },
-                "s2": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "users",
-                        "number": "8,500+",
-                        "label": "HAPPY CUSTOMERS"
-                    }
-                },
-                "s3": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "heart",
-                        "number": "50+",
-                        "label": "COUNTRIES REACHED"
-                    }
-                },
-                "s4": {
-                    "type": "stat",
-                    "settings": {
-                        "icon": "star",
-                        "number": "4.9★",
-                        "label": "AVERAGE RATING"
-                    }
-                }
-            },
-            "block_order": [
-                "s1",
-                "s2",
-                "s3",
-                "s4"
-            ]
-        },
-        "our-story": {
-            "type": "our-story",
-            "settings": {
-                "title": "Our Story",
-                "text": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents."
-            }
-        },
-        "secure-checkout": {
-            "type": "secure-checkout",
-            "settings": {
-                "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
-            }
-        },
-        "instagram-grid": {
-            "type": "instagram-grid",
-            "settings": {
-                "title": "As Seen On Instagram",
-                "handle": "BEYOND.LOVE.OFFICIAL"
-            },
-            "blocks": {
-                "ig1": {
-                    "type": "image"
-                },
-                "ig2": {
-                    "type": "image"
-                },
-                "ig3": {
-                    "type": "image"
-                },
-                "ig4": {
-                    "type": "image"
-                },
-                "ig5": {
-                    "type": "image"
-                },
-                "ig6": {
-                    "type": "image"
-                }
-            },
-            "block_order": [
-                "ig1",
-                "ig2",
-                "ig3",
-                "ig4",
-                "ig5",
-                "ig6"
-            ]
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "Celebrate your love story.",
+            "text": "Perfect for Valentine's, anniversaries, and every moment in between.",
+            "button_label": "Celebrate Your Story",
+            "button_link": ""
+          }
         }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ],
+      "settings": {
+        "speed": 7
+      }
     },
-    "order": [
-        "hero-slider",
-        "featured-products",
-        "trust-badges",
-        "stats-counter",
-        "our-story",
-        "secure-checkout",
-        "instagram-grid"
-    ]
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Our Bestsellers",
+        "description": "",
+        "collection": "bestsellers",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    },
+    "trust-badges": {
+      "type": "trust-badges",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "text": "On all USA orders"
+          }
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {
+            "icon": "warranty",
+            "title": "Lifetime Warranty",
+            "text": "We stand behind our craft"
+          }
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "SSL encrypted payments"
+          }
+        },
+        "b4": {
+          "type": "badge",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "text": "Always here for you"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "note": "Trusted by 10,000+ happy customers across the USA"
+      }
+    },
+    "stats-counter": {
+      "type": "stats-counter",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "icon": "gift",
+            "number": "10,000+",
+            "label": "GIFTS DELIVERED"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "icon": "users",
+            "number": "8,500+",
+            "label": "HAPPY CUSTOMERS"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "icon": "heart",
+            "number": "50+",
+            "label": "COUNTRIES REACHED"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "icon": "star",
+            "number": "4.9★",
+            "label": "AVERAGE RATING"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {}
+    },
+    "our-story": {
+      "type": "our-story",
+      "settings": {
+        "title": "Our Story",
+        "text": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents."
+      }
+    },
+    "secure-checkout": {
+      "type": "secure-checkout",
+      "settings": {
+        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
+      }
+    },
+    "instagram-grid": {
+      "type": "instagram-grid",
+      "blocks": {
+        "ig1": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig2": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig3": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig4": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig5": {
+          "type": "image",
+          "settings": {}
+        },
+        "ig6": {
+          "type": "image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "ig1",
+        "ig2",
+        "ig3",
+        "ig4",
+        "ig5",
+        "ig6"
+      ],
+      "settings": {
+        "title": "As Seen On Instagram",
+        "handle": "BEYOND.LOVE.OFFICIAL"
+      }
+    }
+  },
+  "order": [
+    "hero-slider",
+    "featured-products",
+    "trust-badges",
+    "stats-counter",
+    "our-story",
+    "secure-checkout",
+    "instagram-grid"
+  ]
 }
