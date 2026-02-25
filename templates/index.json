@@ -168,95 +168,11 @@
         "description": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship."
       }
     },
-    "trust-badges": {
-      "type": "trust-badges",
-      "blocks": {
-        "b1": {
-          "type": "badge",
-          "settings": {
-            "icon": "shipping",
-            "title": "Free Shipping",
-            "text": "On all USA orders"
-          }
-        },
-        "b2": {
-          "type": "badge",
-          "settings": {
-            "icon": "warranty",
-            "title": "Lifetime Warranty",
-            "text": "We stand behind our craft"
-          }
-        },
-        "b3": {
-          "type": "badge",
-          "settings": {
-            "icon": "secure",
-            "title": "Secure Checkout",
-            "text": "SSL encrypted payments"
-          }
-        },
-        "b4": {
-          "type": "badge",
-          "settings": {
-            "icon": "support",
-            "title": "24/7 Support",
-            "text": "Always here for you"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ],
+    "trust-and-stats": {
+      "type": "trust-and-stats",
       "settings": {
         "note": "Trusted by 10,000+ happy customers across the USA"
       }
-    },
-    "stats-counter": {
-      "type": "stats-counter",
-      "blocks": {
-        "s1": {
-          "type": "stat",
-          "settings": {
-            "icon": "gift",
-            "number": "10,000+",
-            "label": "GIFTS DELIVERED"
-          }
-        },
-        "s2": {
-          "type": "stat",
-          "settings": {
-            "icon": "users",
-            "number": "8,500+",
-            "label": "HAPPY CUSTOMERS"
-          }
-        },
-        "s3": {
-          "type": "stat",
-          "settings": {
-            "icon": "heart",
-            "number": "50+",
-            "label": "COUNTRIES REACHED"
-          }
-        },
-        "s4": {
-          "type": "stat",
-          "settings": {
-            "icon": "star",
-            "number": "4.9★",
-            "label": "AVERAGE RATING"
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4"
-      ],
-      "settings": {}
     },
     "ugc-videos": {
       "type": "ugc-videos",
@@ -428,8 +344,7 @@
   "order": [
     "hero-slider",
     "featured-products",
-    "trust-badges",
-    "stats-counter",
+    "trust-and-stats",
     "secure-checkout",
     "our-story",
     "featured-by",
