@@ -1,18 +1,95 @@
-<section class="our-story section-padding">
-  <div class="container">
-    <div class="section-title">
-      <h2>{{ section.settings.title }}</h2>
+<section class="our-story-hero">
+  <div class="our-story-hero__bg">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 2000 }}" alt="Our Story" loading="lazy">
+    {%- else -%}
+      <img src="{{ 'artisan.jpg' | asset_url }}" alt="Our Story" loading="lazy">
+    {%- endif -%}
+    <div class="our-story-hero__overlay"></div>
+  </div>
+
+  <div class="our-story-hero__content container">
+    <div class="our-story-hero__text">
+      <span class="our-story-hero__label">{{ section.settings.subheading }}</span>
+      <h2 class="our-story-hero__heading">{{ section.settings.heading }}</h2>
+      <div class="our-story-hero__columns">
+        <p>{{ section.settings.text_left }}</p>
+        <p>{{ section.settings.text_right }}</p>
+      </div>
     </div>
-    <p class="our-story__text">{{ section.settings.text }}</p>
   </div>
 </section>
+
+<style>
+  .our-story-hero {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  @media (min-width: 750px) { .our-story-hero { min-height: 600px; } }
+  .our-story-hero__bg {
+    position: absolute;
+    inset: 0;
+  }
+  .our-story-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .our-story-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 40%, transparent 70%);
+  }
+  .our-story-hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 20px 50px;
+  }
+  @media (min-width: 750px) { .our-story-hero__content { padding: 60px 40px 60px; } }
+  .our-story-hero__label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+    display: block;
+    font-weight: 500;
+  }
+  .our-story-hero__heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 20px;
+  }
+  .our-story-hero__columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 700px;
+  }
+  @media (min-width: 750px) { .our-story-hero__columns { grid-template-columns: 1fr 1fr; gap: 32px; } }
+  .our-story-hero__columns p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+  }
+</style>
 
 {% schema %}
 {
   "name": "Our Story",
   "settings": [
-    { "type": "text", "id": "title", "default": "Our Story", "label": "Title" },
-    { "type": "textarea", "id": "text", "default": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents.", "label": "Text" }
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "subheading", "default": "OUR STORY", "label": "Subheading" },
+    { "type": "text", "id": "heading", "default": "Heart To Soul", "label": "Heading" },
+    { "type": "textarea", "id": "text_left", "default": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.", "label": "Left column text" },
+    { "type": "textarea", "id": "text_right", "default": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion.", "label": "Right column text" }
   ],
   "presets": [{ "name": "Our Story" }]
 }

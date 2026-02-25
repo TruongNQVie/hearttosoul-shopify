@@ -1,0 +1,78 @@
+<section class="featured-by">
+  <div class="featured-by__inner">
+    <p class="featured-by__label">{{ section.settings.title }}</p>
+    <div class="featured-by__logos">
+      {%- for block in section.blocks -%}
+        <span class="featured-by__name" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-by {
+    background: var(--color-bg-dark);
+    padding: 40px 20px;
+  }
+  .featured-by__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .featured-by__label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .featured-by__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px 40px;
+  }
+  @media (min-width: 750px) { .featured-by__logos { gap: 24px 56px; } }
+  .featured-by__name {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured By",
+  "settings": [
+    { "type": "text", "id": "title", "default": "TRUSTED & FEATURED BY", "label": "Title" }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "text", "id": "name", "default": "Vogue", "label": "Brand name" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured By",
+      "blocks": [
+        { "type": "brand", "settings": { "name": "Vogue" } },
+        { "type": "brand", "settings": { "name": "Elle" } },
+        { "type": "brand", "settings": { "name": "Brides" } },
+        { "type": "brand", "settings": { "name": "Harper's Bazaar" } },
+        { "type": "brand", "settings": { "name": "InStyle" } },
+        { "type": "brand", "settings": { "name": "Cosmopolitan" } },
+        { "type": "brand", "settings": { "name": "Glamour" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

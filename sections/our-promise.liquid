@@ -1,0 +1,113 @@
+<section class="our-promise section-padding">
+  <div class="container">
+    <div class="section-title">
+      <span class="our-promise__label">{{ section.settings.subheading }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+    <div class="our-promise__grid">
+      {%- for block in section.blocks -%}
+        <div class="our-promise__card" {{ block.shopify_attributes }}>
+          <div class="our-promise__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'eco' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22c1.25-1.25 2.5-2 4.27-2 3.5 0 4 3 8.46 3C19.25 23 22 20.25 22 15.73 22 11 18 7 12 3c0 0-1 3-1 6.5S13 16 13 16"/><path d="M7 22c-1.5-2-2.5-5-1-8"/></svg>
+              {%- when 'sustainable' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+              {%- when 'care' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              {%- when 'quality' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+              {%- else -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+            {%- endcase -%}
+          </div>
+          <h3 class="our-promise__title">{{ block.settings.title }}</h3>
+          <p class="our-promise__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .our-promise__label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .our-promise__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 40px;
+  }
+  @media (min-width: 750px) { .our-promise__grid { grid-template-columns: repeat(4, 1fr); } }
+  .our-promise__card { text-align: center; }
+  .our-promise__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(190, 52, 78, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: var(--color-primary);
+  }
+  .our-promise__icon svg { width: 24px; height: 24px; }
+  .our-promise__title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .our-promise__text {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Our Promise",
+  "settings": [
+    { "type": "text", "id": "subheading", "default": "OUR PROMISE", "label": "Subheading" },
+    { "type": "text", "id": "heading", "default": "Crafted Responsibly", "label": "Heading" },
+    { "type": "textarea", "id": "description", "default": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship.", "label": "Description" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "select", "id": "icon", "options": [
+          { "value": "eco", "label": "Eco / Leaf" },
+          { "value": "sustainable", "label": "Sustainable" },
+          { "value": "care", "label": "Heart / Care" },
+          { "value": "quality", "label": "Diamond / Quality" }
+        ], "default": "eco", "label": "Icon" },
+        { "type": "text", "id": "title", "default": "Eco-Friendly Packaging", "label": "Title" },
+        { "type": "textarea", "id": "text", "default": "Our rose boxes use FSC-certified paper and soy-based inks, reducing environmental impact without compromising luxury.", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Promise",
+      "blocks": [
+        { "type": "card", "settings": { "icon": "eco", "title": "Eco-Friendly Packaging", "text": "Our rose boxes use FSC-certified paper and soy-based inks, reducing environmental impact without compromising luxury." } },
+        { "type": "card", "settings": { "icon": "sustainable", "title": "Sustainable Materials", "text": "We source recycled metals and conflict-free stones, ensuring every piece is as ethical as it is beautiful." } },
+        { "type": "card", "settings": { "icon": "care", "title": "Crafted with Care", "text": "Each piece is handmade by skilled artisans paid fair wages, supporting communities and traditional craftsmanship." } },
+        { "type": "card", "settings": { "icon": "quality", "title": "Built to Last", "text": "We design jewelry meant to be treasured for a lifetime — not discarded after a season. Quality over quantity, always." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

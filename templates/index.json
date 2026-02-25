@@ -138,9 +138,237 @@
         "our-story": {
             "type": "our-story",
             "settings": {
-                "title": "Our Story",
-                "text": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents."
+                "subheading": "OUR STORY",
+                "heading": "Heart To Soul",
+                "text_left": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.",
+                "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
             }
+        },
+        "featured-by": {
+            "type": "featured-by",
+            "settings": {
+                "title": "TRUSTED & FEATURED BY"
+            },
+            "blocks": {
+                "fb1": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Vogue"
+                    }
+                },
+                "fb2": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Elle"
+                    }
+                },
+                "fb3": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Brides"
+                    }
+                },
+                "fb4": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Harper's Bazaar"
+                    }
+                },
+                "fb5": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "InStyle"
+                    }
+                },
+                "fb6": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Cosmopolitan"
+                    }
+                },
+                "fb7": {
+                    "type": "brand",
+                    "settings": {
+                        "name": "Glamour"
+                    }
+                }
+            },
+            "block_order": [
+                "fb1",
+                "fb2",
+                "fb3",
+                "fb4",
+                "fb5",
+                "fb6",
+                "fb7"
+            ]
+        },
+        "our-promise": {
+            "type": "our-promise",
+            "settings": {
+                "subheading": "OUR PROMISE",
+                "heading": "Crafted Responsibly",
+                "description": "We believe luxury and responsibility go hand in hand. Every piece tells a story of ethical craftsmanship."
+            },
+            "blocks": {
+                "p1": {
+                    "type": "card",
+                    "settings": {
+                        "icon": "eco",
+                        "title": "Eco-Friendly Packaging",
+                        "text": "Our rose boxes use FSC-certified paper and soy-based inks, reducing environmental impact without compromising luxury."
+                    }
+                },
+                "p2": {
+                    "type": "card",
+                    "settings": {
+                        "icon": "sustainable",
+                        "title": "Sustainable Materials",
+                        "text": "We source recycled metals and conflict-free stones, ensuring every piece is as ethical as it is beautiful."
+                    }
+                },
+                "p3": {
+                    "type": "card",
+                    "settings": {
+                        "icon": "care",
+                        "title": "Crafted with Care",
+                        "text": "Each piece is handmade by skilled artisans paid fair wages, supporting communities and traditional craftsmanship."
+                    }
+                },
+                "p4": {
+                    "type": "card",
+                    "settings": {
+                        "icon": "quality",
+                        "title": "Built to Last",
+                        "text": "We design jewelry meant to be treasured for a lifetime — not discarded after a season. Quality over quantity, always."
+                    }
+                }
+            },
+            "block_order": [
+                "p1",
+                "p2",
+                "p3",
+                "p4"
+            ]
+        },
+        "ugc-videos": {
+            "type": "ugc-videos",
+            "settings": {
+                "heading": "Celebrating 10,000+ Thrilled Girlfriends",
+                "subtitle": "Real reactions. Real love. Real moments."
+            },
+            "blocks": {
+                "u1": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "Lina_Gera",
+                        "caption": "Wrapped in his love with this beautiful gift..."
+                    }
+                },
+                "u2": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "EmmaGoes_",
+                        "caption": "When he surprises me with a gift 🥰"
+                    }
+                },
+                "u3": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "BellaBlossoms",
+                        "caption": "my heart just melts. #love"
+                    }
+                },
+                "u4": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "SophieRose",
+                        "caption": "LOOK WHAT MY BF GOT ME 😍"
+                    }
+                },
+                "u5": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "MiaChenx",
+                        "caption": "the most thoughtful gift ever 🌹"
+                    }
+                },
+                "u6": {
+                    "type": "video",
+                    "settings": {
+                        "credit": "OliviaJane",
+                        "caption": "I literally cried 😭💕"
+                    }
+                }
+            },
+            "block_order": [
+                "u1",
+                "u2",
+                "u3",
+                "u4",
+                "u5",
+                "u6"
+            ]
+        },
+        "happy-customers": {
+            "type": "happy-customers",
+            "settings": {
+                "subheading": "REAL STORIES",
+                "heading": "Happy Customers",
+                "subtitle": "See what our community has to say"
+            },
+            "blocks": {
+                "r1": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Anniversary",
+                        "text": "The most beautiful gift I've ever received!"
+                    }
+                },
+                "r2": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Valentine's Day",
+                        "text": "My girlfriend absolutely loved it!"
+                    }
+                },
+                "r3": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Birthday",
+                        "text": "Perfect packaging and stunning necklace"
+                    }
+                },
+                "r4": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Just Because",
+                        "text": "Made her cry happy tears 🥹"
+                    }
+                },
+                "r5": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Christmas",
+                        "text": "Best Christmas gift ever!"
+                    }
+                },
+                "r6": {
+                    "type": "review",
+                    "settings": {
+                        "name": "Mother's Day",
+                        "text": "My mom was so touched by this gift"
+                    }
+                }
+            },
+            "block_order": [
+                "r1",
+                "r2",
+                "r3",
+                "r4",
+                "r5",
+                "r6"
+            ]
         },
         "secure-checkout": {
             "type": "secure-checkout",
@@ -187,9 +415,13 @@
     "order": [
         "hero-slider",
         "featured-products",
+        "our-story",
+        "featured-by",
+        "our-promise",
         "trust-badges",
         "stats-counter",
-        "our-story",
+        "ugc-videos",
+        "happy-customers",
         "secure-checkout",
         "instagram-grid"
     ]

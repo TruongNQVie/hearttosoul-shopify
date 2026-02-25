@@ -1,0 +1,145 @@
+<section class="reviews-section section-padding">
+  <div class="container">
+    <div class="section-title">
+      <span class="reviews-section__label">{{ section.settings.subheading }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="reviews-grid">
+      {%- for block in section.blocks -%}
+        <div class="review-card" {{ block.shopify_attributes }}>
+          <div class="review-card__media">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
+            {%- else -%}
+              {%- assign rev_num = forloop.index -%}
+              <img src="{{ 'review-' | append: rev_num | append: '.jpg' | asset_url }}" alt="Customer review" loading="lazy">
+            {%- endif -%}
+            <button class="review-card__zoom" aria-label="View full image">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            </button>
+          </div>
+          <div class="review-card__info">
+            <div class="review-card__stars">★★★★★</div>
+            {%- if block.settings.name != blank -%}
+              <p class="review-card__name">{{ block.settings.name }}</p>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="review-card__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section__label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 750px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+  .review-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+  .review-card__media {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .review-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .review-card:hover .review-card__media img { transform: scale(1.05); }
+  .review-card__zoom {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .review-card:hover .review-card__zoom { opacity: 1; }
+  .review-card__info { padding: 12px; }
+  .review-card__stars {
+    color: #F59E0B;
+    font-size: 14px;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+  .review-card__name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .review-card__text {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Happy Customers",
+  "settings": [
+    { "type": "text", "id": "subheading", "default": "REAL STORIES", "label": "Subheading" },
+    { "type": "text", "id": "heading", "default": "Happy Customers", "label": "Heading" },
+    { "type": "text", "id": "subtitle", "default": "See what our community has to say", "label": "Subtitle" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "name", "default": "Anniversary", "label": "Tag / Name" },
+        { "type": "textarea", "id": "text", "default": "The most beautiful gift I've ever received!", "label": "Review text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Happy Customers",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Anniversary", "text": "The most beautiful gift I've ever received!" } },
+        { "type": "review", "settings": { "name": "Valentine's Day", "text": "My girlfriend absolutely loved it!" } },
+        { "type": "review", "settings": { "name": "Birthday", "text": "Perfect packaging and stunning necklace" } },
+        { "type": "review", "settings": { "name": "Just Because", "text": "Made her cry happy tears 🥹" } },
+        { "type": "review", "settings": { "name": "Christmas", "text": "Best Christmas gift ever!" } },
+        { "type": "review", "settings": { "name": "Mother's Day", "text": "My mom was so touched by this gift" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
