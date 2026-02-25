@@ -1,6 +1,5 @@
 {% comment %}
-  UGC Videos — hardcoded data so Shopify editor cache can never reduce the count.
-  Videos are loaded from assets/ugc-video-1.mp4 … ugc-video-8.mp4.
+  UGC Videos — hardcoded 8 videos. Info overlaid on video. Wheel-to-horizontal-scroll on hover.
 {% endcomment %}
 
 {%- assign ugc_credits  = "Lina_Gera,EmmaGoes_,BellaBlossoms,SophieRose,MiaChenx,OliviaJane,SarahW,JessicaT" | split: "," -%}
@@ -20,17 +19,22 @@
       </button>
       <div class="ugc-grid" id="ugcGrid">
         {%- for i in (1..8) -%}
+          {%- assign idx = i | minus: 1 -%}
           <div class="ugc-card">
             <div class="ugc-card__media">
               <video class="lazy-video" data-src="{{ 'ugc-video-' | append: i | append: '.mp4' | asset_url }}" autoplay loop muted playsinline></video>
-            </div>
-            <div class="ugc-card__info">
-              {%- assign idx = i | minus: 1 -%}
-              <div class="ugc-card__credit-row">
-                <span class="ugc-card__credit">credit @{{ ugc_credits[idx] }}</span>
-                <span class="country-badge">{{ ugc_countries[idx] }}</span>
+              <!-- Play button overlay -->
+              <div class="ugc-card__play">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
               </div>
-              <p class="ugc-card__caption">{{ ugc_captions[idx] }}</p>
+              <!-- Info overlay on the video -->
+              <div class="ugc-card__overlay">
+                <div class="ugc-card__credit-row">
+                  <span class="ugc-card__credit">credit @{{ ugc_credits[idx] }}</span>
+                  <span class="country-badge">{{ ugc_countries[idx] }}</span>
+                </div>
+                <p class="ugc-card__caption">{{ ugc_captions[idx] }}</p>
+              </div>
             </div>
           </div>
         {%- endfor -%}
@@ -96,7 +100,6 @@
     padding-bottom: 12px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    /* Show a thin styled scrollbar */
     scrollbar-width: thin;
     scrollbar-color: var(--color-primary) var(--color-border);
   }
@@ -107,10 +110,8 @@
   .ugc-card {
     flex: 0 0 75%;
     scroll-snap-align: start;
-    background: var(--color-white);
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--color-border);
   }
   @media (min-width: 750px) {
     .ugc-card { flex: 0 0 calc(33.333% - 14px); }
@@ -118,10 +119,13 @@
   @media (min-width: 990px) {
     .ugc-card { flex: 0 0 calc(22% - 12px); }
   }
+
+  /* Media container — full card is the video */
   .ugc-card__media {
     position: relative;
     aspect-ratio: 9 / 16;
     overflow: hidden;
+    border-radius: 12px;
   }
   .ugc-card__media video, .ugc-card__media img {
     width: 100%;
@@ -131,7 +135,38 @@
   }
   .ugc-card:hover .ugc-card__media video,
   .ugc-card:hover .ugc-card__media img { transform: scale(1.05); }
-  .ugc-card__info { padding: 10px 12px 12px; }
+
+  /* Play button */
+  .ugc-card__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .ugc-card__play svg { margin-left: 3px; }
+
+  /* Text overlay — bottom of video */
+  .ugc-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 12px 14px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    color: #fff;
+    z-index: 2;
+  }
   .ugc-card__credit-row {
     display: flex;
     align-items: center;
@@ -140,7 +175,7 @@
   }
   .ugc-card__credit {
     font-size: 11px;
-    color: var(--color-text-muted);
+    color: rgba(255,255,255,0.85);
   }
   .country-badge {
     background: var(--color-primary);
@@ -155,12 +190,13 @@
   .ugc-card__caption {
     font-size: 13px;
     font-weight: 500;
-    color: var(--color-text);
+    color: #fff;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
 </style>
 
@@ -194,13 +230,10 @@
           }
         });
       }, { rootMargin: "0px 0px 200px 0px" });
-
       lazyVideos.forEach(v => observer.observe(v));
     } else {
       lazyVideos.forEach(v => {
-        if (v.hasAttribute('data-src')) {
-          v.src = v.getAttribute('data-src');
-        }
+        if (v.hasAttribute('data-src')) { v.src = v.getAttribute('data-src'); }
       });
     }
 
@@ -212,6 +245,16 @@
       const scrollAmount = 300;
       leftBtn.addEventListener('click', () => { grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
       rightBtn.addEventListener('click', () => { grid.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
+    }
+
+    /* Mouse-wheel → horizontal scroll when hovering over the UGC grid */
+    if (grid) {
+      grid.addEventListener('wheel', function(e) {
+        /* Only hijack if there is horizontal overflow */
+        if (grid.scrollWidth <= grid.clientWidth) return;
+        e.preventDefault();
+        grid.scrollLeft += e.deltaY;
+      }, { passive: false });
     }
   });
 </script>
