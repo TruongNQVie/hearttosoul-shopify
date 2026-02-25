@@ -438,14 +438,14 @@
   "order": [
     "hero-slider",
     "featured-products",
+    "trust-badges",
+    "stats-counter",
+    "secure-checkout",
     "our-story",
     "featured-by",
     "our-promise",
-    "trust-badges",
-    "stats-counter",
     "ugc-videos",
     "happy-customers",
-    "secure-checkout",
     "instagram-grid"
   ]
 }
