@@ -12,9 +12,9 @@
           <div class="review-card__media">
             {%- if block.settings.image != blank -%}
               <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" loading="lazy">
-            {%- else -%}
-              {%- assign rev_num = forloop.index -%}
-              <img src="{{ 'review-' | append: rev_num | append: '.jpg' | asset_url }}" alt="Customer review" loading="lazy">
+              {%- assign rev_num = forloop.index | modulo: 6 -%}
+              {%- if rev_num == 0 -%}{%- assign rev_num = 6 -%}{%- endif -%}
+              <img src="{{ 'real-story-' | append: rev_num | append: '.png' | asset_url }}" alt="Customer review" loading="lazy">
             {%- endif -%}
             <button class="review-card__zoom" aria-label="View full image">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
@@ -132,12 +132,12 @@
     {
       "name": "Happy Customers",
       "blocks": [
-        { "type": "review", "settings": { "name": "Anniversary", "text": "The most beautiful gift I've ever received!" } },
-        { "type": "review", "settings": { "name": "Valentine's Day", "text": "My girlfriend absolutely loved it!" } },
-        { "type": "review", "settings": { "name": "Birthday", "text": "Perfect packaging and stunning necklace" } },
-        { "type": "review", "settings": { "name": "Just Because", "text": "Made her cry happy tears 🥹" } },
-        { "type": "review", "settings": { "name": "Christmas", "text": "Best Christmas gift ever!" } },
-        { "type": "review", "settings": { "name": "Mother's Day", "text": "My mom was so touched by this gift" } }
+        { "type": "review", "settings": { "name": "Sarah M.", "text": "The Apple Box is absolutely breathtaking. He surprised me with it and the necklace inside is so elegant!" } },
+        { "type": "review", "settings": { "name": "David K.", "text": "Got the Eternal Rose gift set for my girlfriend. Seeing her face light up when she opened it was priceless. Fast shipping too." } },
+        { "type": "review", "settings": { "name": "Emily R.", "text": "I received the Cross Necklace for my birthday. The packaging alone is a work of art. I've been wearing it every day since." } },
+        { "type": "review", "settings": { "name": "Michael B.", "text": "Wanted to get her something special. The Preserved Rose Jewelry Box blew her away. She loves the hidden message inside." } },
+        { "type": "review", "settings": { "name": "Jessica T.", "text": "My boyfriend gave me the Heart-Shaped Necklace in the red box. It’s the most thoughtful and beautiful gift I've ever owned." } },
+        { "type": "review", "settings": { "name": "Linda S.", "text": "I bought the Forever Bloom box for my daughter. It's a gorgeous keepsake that she can keep forever on her vanity." } }
       ]
     }
   ]

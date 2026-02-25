@@ -1,0 +1,153 @@
+<div id="sales-popup" class="sales-popup">
+  <div class="sales-popup__inner">
+    <div class="sales-popup__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+    <div class="sales-popup__content">
+      <p class="sales-popup__text">
+        <strong id="sp-name">Someone</strong> from <span id="sp-location">Somewhere</span> just purchased
+      </p>
+      <p class="sales-popup__product" id="sp-product">A product</p>
+      <p class="sales-popup__time" id="sp-time">Just now</p>
+    </div>
+  </div>
+  <button class="sales-popup__close" aria-label="Close" onclick="closeSalesPopup()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<style>
+  .sales-popup {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9999;
+    background: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 16px;
+    width: 320px;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (max-width: 749px) {
+    .sales-popup {
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      width: auto;
+    }
+  }
+  .sales-popup.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .sales-popup__inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sales-popup__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(190, 52, 78, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sales-popup__content {
+    flex: 1;
+    line-height: 1.4;
+  }
+  .sales-popup__text {
+    font-size: 13px;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .sales-popup__product {
+    font-size: 13px;
+    color: var(--color-primary);
+    font-weight: 500;
+    margin: 2px 0;
+  }
+  .sales-popup__time {
+    font-size: 11px;
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  .sales-popup__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    padding: 4px;
+    color: var(--color-text-light);
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .sales-popup__close:hover {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const FIRST_SHOW_DELAY = 5000;
+  const ROTATE_INTERVAL = 15000;
+  const VISIBLE_DURATION = 6000;
+
+  const names = ["Oliver", "Emma", "Liam", "Ava", "Noah", "Isabella", "William", "Sophia", "James", "Mia", "Benjamin", "Charlotte", "Lucas", "Amelia", "Henry", "Evelyn"];
+  const locations = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "Austin", "San Jose", "Seattle", "Denver"];
+  const products = [
+    "Cross Necklace Gift Set",
+    "Forever Bloom Apple Box",
+    "Eternal Rose & Heart Necklace",
+    "To My Love Necklace Set",
+    "Preserved Rose Jewelry Box",
+    "Heart-Shaped Necklace"
+  ];
+
+  function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function randomTime() {
+    return Math.floor(Math.random() * 59) + 1; // 1 to 59 min
+  }
+
+  function updateSalesPopup() {
+    document.getElementById('sp-name').textContent = randomItem(names);
+    document.getElementById('sp-location').textContent = randomItem(locations);
+    document.getElementById('sp-product').textContent = randomItem(products);
+    document.getElementById('sp-time').textContent = randomTime() + ' min ago';
+  }
+
+  function showSalesPopup() {
+    const popup = document.getElementById('sales-popup');
+    if (!popup) return;
+    
+    updateSalesPopup();
+    popup.classList.add('is-visible');
+    
+    setTimeout(() => {
+      popup.classList.remove('is-visible');
+    }, VISIBLE_DURATION);
+  }
+
+  function closeSalesPopup() {
+    document.getElementById('sales-popup').classList.remove('is-visible');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      showSalesPopup();
+      setInterval(showSalesPopup, ROTATE_INTERVAL);
+    }, FIRST_SHOW_DELAY);
+  });
+</script>
