@@ -39,20 +39,22 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
       </button>
     </div>
+    <p class="ugc-scroll-hint">← Scroll for more videos →</p>
   </div>
 </section>
 
 <style>
   .ugc-scroll-wrapper {
     position: relative;
+    padding: 0 50px;
   }
   .ugc-scroll-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-60%);
+    top: 45%;
+    transform: translateY(-50%);
     z-index: 10;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--color-white);
     border: 1px solid var(--color-border);
@@ -60,30 +62,47 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     transition: all 0.2s;
   }
   .ugc-scroll-btn:hover {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    background: var(--color-bg-warm);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
   }
-  .ugc-scroll-btn--left { left: -16px; }
-  .ugc-scroll-btn--right { right: -16px; }
+  .ugc-scroll-btn:hover svg { stroke: #fff; }
+  .ugc-scroll-btn--left { left: 0; }
+  .ugc-scroll-btn--right { right: 0; }
   @media (max-width: 749px) {
+    .ugc-scroll-wrapper { padding: 0; }
     .ugc-scroll-btn { display: none; }
+  }
+  .ugc-scroll-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+  @media (min-width: 990px) {
+    .ugc-scroll-hint { display: none; }
   }
 
   .ugc-grid {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    padding-bottom: 20px;
+    padding-bottom: 12px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    /* Show a thin styled scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-border);
   }
-  .ugc-grid::-webkit-scrollbar { display: none; }
+  .ugc-grid::-webkit-scrollbar { height: 6px; }
+  .ugc-grid::-webkit-scrollbar-track { background: var(--color-border); border-radius: 3px; }
+  .ugc-grid::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 3px; }
 
   .ugc-card {
     flex: 0 0 75%;
