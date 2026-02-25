@@ -48,19 +48,19 @@
 
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-item__number">10,000+</div>
+        <div class="stat-item__number"><span class="stat-number-animate" data-target="10000" data-suffix="+">0</span></div>
         <div class="stat-item__label">GIFTS DELIVERED</div>
       </div>
       <div class="stat-item">
-        <div class="stat-item__number">8,500+</div>
+        <div class="stat-item__number"><span class="stat-number-animate" data-target="8500" data-suffix="+">0</span></div>
         <div class="stat-item__label">HAPPY CUSTOMERS</div>
       </div>
       <div class="stat-item">
-        <div class="stat-item__number">50+</div>
+        <div class="stat-item__number"><span class="stat-number-animate" data-target="50" data-suffix="+">0</span></div>
         <div class="stat-item__label">COUNTRIES REACHED</div>
       </div>
       <div class="stat-item">
-        <div class="stat-item__number">4.9★</div>
+        <div class="stat-item__number"><span class="stat-number-animate" data-target="4.9" data-suffix="★" data-decimals="1">0.0</span></div>
         <div class="stat-item__label">AVERAGE RATING</div>
       </div>
     </div>
@@ -69,80 +69,123 @@
 
 <style>
   .trust-and-stats {
-    background: var(--color-bg);
+    background: #FFFCFC; /* Ultra soft warm background */
+    position: relative;
+    padding: 80px 0;
   }
+  .trust-and-stats::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(190,52,78,0.1), transparent);
+  }
+  .section-title h2 { margin-bottom: 8px; }
+  .section-title p { color: var(--color-text-muted); font-size: 15px; }
+  
   .trust-and-stats__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 32px 20px;
+    margin-top: 50px;
   }
-  @media (min-width: 750px) { .trust-and-stats__grid { grid-template-columns: repeat(4, 1fr); } }
-  .trust-badge-card { text-align: center; }
+  @media (min-width: 750px) { .trust-and-stats__grid { grid-template-columns: repeat(4, 1fr); gap: 40px; } }
+  
+  .trust-badge-card {
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .trust-badge-card:hover {
+    transform: translateY(-5px);
+  }
   .trust-badge-card__icon {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: rgba(190, 52, 78, 0.08);
+    background: #FDF4F5;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px;
+    margin: 0 auto 20px;
     color: var(--color-primary);
+    box-shadow: 0 4px 14px rgba(190,52,78,0.06);
+    transition: all 0.3s;
   }
-  .trust-badge-card__icon svg { width: 24px; height: 24px; }
+  .trust-badge-card:hover .trust-badge-card__icon {
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 8px 20px rgba(190,52,78,0.15);
+  }
+  .trust-badge-card__icon svg { width: 26px; height: 26px; }
   .trust-badge-card__title {
     font-family: var(--font-body);
     font-size: 15px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--color-text);
   }
   .trust-badge-card__text {
     font-size: 13px;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .trust-and-stats__divider {
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    margin: 40px 0;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    margin: 60px 0;
     padding: 16px 0;
     text-align: center;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.01), transparent);
   }
   .trust-and-stats__note {
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
     color: var(--color-text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     margin: 0;
+    font-weight: 500;
   }
 
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 40px 20px;
     text-align: center;
   }
   @media (min-width: 750px) {
     .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; }
   }
+  .stat-item {
+    padding: 20px 0;
+  }
   .stat-item__number {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
     color: var(--color-text);
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+  .stat-number-animate {
+    background: linear-gradient(135deg, var(--color-primary), #E91E8C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
   }
   .stat-item__label {
     font-size: 11px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-text-muted);
-    font-weight: 500;
+    font-weight: 600;
   }
 </style>
 
@@ -161,3 +204,52 @@
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const stats = document.querySelectorAll('.stat-number-animate');
+  if(!stats.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const endValue = parseFloat(target.getAttribute('data-target'));
+        const isDecimal = target.hasAttribute('data-decimals');
+        const suffix = target.getAttribute('data-suffix') || '';
+        const duration = 2000;
+        const startTime = performance.now();
+        
+        const updateCount = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+          
+          let currentVal = easeProgress * endValue;
+          
+          if(isDecimal) {
+            target.innerText = currentVal.toFixed(1) + suffix;
+          } else {
+            // format with commas
+            target.innerText = Math.floor(currentVal).toLocaleString('en-US') + suffix;
+          }
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            if(isDecimal) {
+              target.innerText = endValue.toFixed(1) + suffix;
+            } else {
+              target.innerText = endValue.toLocaleString('en-US') + suffix;
+            }
+          }
+        };
+        requestAnimationFrame(updateCount);
+        observer.unobserve(target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  stats.forEach(stat => observer.observe(stat));
+});
+</script>
