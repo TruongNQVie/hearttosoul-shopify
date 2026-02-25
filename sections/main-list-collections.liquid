@@ -1,0 +1,36 @@
+<section class="list-collections section-padding">
+  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
+    <div style="text-align:center; margin-bottom:40px;">
+      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,5vw,3.5rem);">All Collections</h1>
+    </div>
+    <div class="product-grid">
+      {%- for collection in collections -%}
+        {%- if collection.products.size > 0 -%}
+          <div class="product-card">
+            <div class="product-card__media">
+              <a href="{{ collection.url }}" style="position:absolute; inset:0; z-index:1;"></a>
+              {%- if collection.image != blank -%}
+                <img src="{{ collection.image | image_url: width: 800 }}" alt="{{ collection.title }}" loading="lazy">
+              {%- elsif collection.products.first.featured_image != blank -%}
+                <img src="{{ collection.products.first.featured_image | image_url: width: 800 }}" alt="{{ collection.title }}" loading="lazy">
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="product-card__info">
+              <h3 class="product-card__title">{{ collection.title }}</h3>
+              <p style="font-size:13px; color:var(--color-text-muted);">{{ collection.products_count }} products</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "List Collections",
+  "settings": []
+}
+{% endschema %}

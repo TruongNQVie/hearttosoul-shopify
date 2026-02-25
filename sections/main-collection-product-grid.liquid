@@ -1,0 +1,36 @@
+<section class="collection-products section-padding">
+  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
+    {%- paginate collection.products by 12 -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div style="text-align:center; margin-top:40px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">← Previous</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" style="padding:10px 16px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">{{ part.title }}</a>
+            {%- else -%}
+              <span style="padding:10px 16px; background:var(--color-primary); color:var(--color-white); border-radius:8px; font-size:14px; font-weight:600;">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">Next →</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Products",
+  "settings": []
+}
+{% endschema %}

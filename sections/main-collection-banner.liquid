@@ -1,0 +1,15 @@
+<section class="collection-banner section-padding" style="padding-bottom:0;">
+  <div class="container" style="text-align:center;">
+    <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,5vw,3.5rem); margin-bottom:8px;">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p style="color:var(--color-text-muted); font-size:15px; max-width:600px; margin:0 auto;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": []
+}
+{% endschema %}

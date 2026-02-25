@@ -1,0 +1,40 @@
+<section class="search-section section-padding" style="min-height:60vh;">
+  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
+    <div style="text-align:center; margin-bottom:40px;">
+      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,3rem); margin-bottom:16px;">
+        {%- if search.performed -%}
+          Search results for "{{ search.terms }}"
+        {%- else -%}
+          Search
+        {%- endif -%}
+      </h1>
+
+      <form action="/search" method="get" style="max-width:500px; margin:0 auto; display:flex; gap:8px;">
+        <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search our store..." style="flex:1; padding:12px 20px; border:1px solid var(--color-border); border-radius:50px; font-size:14px; outline:none;">
+        <button type="submit" style="padding:12px 24px; background:var(--color-primary); color:var(--color-white); border:none; border-radius:50px; font-weight:600; font-size:14px; cursor:pointer;">Search</button>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p style="text-align:center; color:var(--color-text-muted); margin-bottom:32px;">{{ search.results_count }} results found</p>
+        <div class="product-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p style="text-align:center; color:var(--color-text-muted); font-size:16px;">No results found for "{{ search.terms }}". Please try another search term.</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "settings": []
+}
+{% endschema %}
