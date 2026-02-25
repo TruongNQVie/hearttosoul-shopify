@@ -1,43 +1,48 @@
-<section class="main-blog section-padding">
-  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
-    <div style="text-align:center; margin-bottom:40px;">
-      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,5vw,3.5rem);">{{ blog.title }}</h1>
+<div class="blog-page">
+  <h1>{{ blog.title }}</h1>
+  
+  {% if blog.articles.size > 0 %}
+    <div class="articles-grid">
+      {% for article in blog.articles %}
+        <article class="article-card">
+          {% if article.image %}
+            <a href="{{ article.url }}">
+              <img src="{{ article.image | img_url: '600x' }}" alt="{{ article.image.alt | escape }}">
+            </a>
+          {% endif %}
+          
+          <div class="article-content">
+            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p class="article-meta">
+              {{ article.published_at | date: "%B %d, %Y" }} | {{ article.author }}
+            </p>
+            {% if article.excerpt != blank %}
+              <p>{{ article.excerpt }}</p>
+            {% endif %}
+            <a href="{{ article.url }}" class="read-more">Read more</a>
+          </div>
+        </article>
+      {% endfor %}
     </div>
 
-    {%- paginate blog.articles by 9 -%}
-      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:32px;">
-        {%- for article in blog.articles -%}
-          <article style="background:var(--color-white); border-radius:16px; overflow:hidden; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 12px rgba(0,0,0,0.04); transition:transform 0.3s, box-shadow 0.3s;">
-            {%- if article.image -%}
-              <a href="{{ article.url }}">
-                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title }}" style="width:100%; height:220px; object-fit:cover;" loading="lazy">
-              </a>
-            {%- endif -%}
-            <div style="padding:20px;">
-              <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--color-text-muted); margin-bottom:8px;">{{ article.published_at | date: '%B %d, %Y' }}</p>
-              <a href="{{ article.url }}" style="text-decoration:none; color:var(--color-text);">
-                <h2 style="font-size:18px; font-weight:700; line-height:1.4; margin-bottom:8px;">{{ article.title }}</h2>
-              </a>
-              <p style="font-size:14px; color:var(--color-text-muted); line-height:1.6;">{{ article.excerpt_or_content | strip_html | truncatewords: 25 }}</p>
-              <a href="{{ article.url }}" style="display:inline-block; margin-top:12px; font-size:13px; font-weight:600; color:var(--color-primary); text-decoration:none;">Read More →</a>
-            </div>
-          </article>
-        {%- endfor -%}
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {{ paginate | default_pagination }}
       </div>
+    {% endif %}
+  {% else %}
+    <p>No articles found.</p>
+  {% endif %}
+</div>
 
-      {%- if paginate.pages > 1 -%}
-        <div style="text-align:center; margin-top:40px; display:flex; justify-content:center; gap:8px;">
-          {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; text-decoration:none; color:var(--color-text);">← Previous</a>
-          {%- endif -%}
-          {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; text-decoration:none; color:var(--color-text);">Next →</a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endpaginate -%}
-  </div>
-</section>
+<style>
+  .blog-page { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+  .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; margin-top: 40px; }
+  .article-card img { width: 100%; height: auto; }
+  .article-content { padding: 20px 0; }
+  .article-meta { color: #666; font-size: 0.9em; margin: 10px 0; }
+  .read-more { color: #007bff; text-decoration: none; }
+</style>
 
 {% schema %}
 {

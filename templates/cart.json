@@ -3,9 +3,16 @@
         "main": {
             "type": "main-cart",
             "settings": {}
+        },
+        "related": {
+            "type": "featured-products",
+            "settings": {
+                "title": "You may also like"
+            }
         }
     },
     "order": [
-        "main"
+        "main",
+        "related"
     ]
 }

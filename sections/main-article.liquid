@@ -1,51 +1,58 @@
-<section class="main-article section-padding">
-  <div class="container" style="max-width:800px;">
-    <div style="text-align:center; margin-bottom:40px;">
-      <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:var(--color-text-muted); margin-bottom:8px;">{{ article.published_at | date: '%B %d, %Y' }} · {{ article.author }}</p>
-      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,3rem); line-height:1.3;">{{ article.title }}</h1>
+<article class="article-page">
+  <header class="article-header">
+    <h1>{{ article.title }}</h1>
+    <p class="article-meta">
+      {{ article.published_at | date: "%B %d, %Y" }} | By {{ article.author }}
+    </p>
+  </header>
+
+  {% if article.image %}
+    <div class="article-image">
+      <img src="{{ article.image | img_url: '1200x' }}" alt="{{ article.image.alt | escape }}">
     </div>
+  {% endif %}
 
-    {%- if article.image -%}
-      <div style="border-radius:16px; overflow:hidden; margin-bottom:40px;">
-        <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title }}" style="width:100%; height:auto; display:block;">
-      </div>
-    {%- endif -%}
+  <div class="article-content">
+    {{ article.content }}
+  </div>
 
-    <div class="article-content" style="font-size:16px; line-height:1.8; color:var(--color-text);">
-      {{ article.content }}
-    </div>
-
-    {%- if blog.comments_enabled? -%}
-      <div style="margin-top:60px; border-top:1px solid var(--color-border); padding-top:40px;">
-        <h3 style="font-size:20px; font-weight:700; margin-bottom:24px;">Comments ({{ article.comments_count }})</h3>
-
-        {%- for comment in article.comments -%}
-          <div style="padding:16px 0; border-bottom:1px solid var(--color-border);">
-            <p style="font-weight:600; font-size:14px; margin-bottom:4px;">{{ comment.author }}</p>
-            <p style="font-size:11px; color:var(--color-text-muted); margin-bottom:8px;">{{ comment.created_at | date: '%B %d, %Y' }}</p>
-            <p style="font-size:14px; line-height:1.6;">{{ comment.content }}</p>
+  {% if blog.comments_enabled? %}
+    <div class="article-comments">
+      <h3>Comments</h3>
+      {% paginate article.comments by 5 %}
+        {% for comment in article.comments %}
+          <div class="comment">
+            <p><strong>{{ comment.author }}</strong> - {{ comment.created_at | date: "%B %d, %Y" }}</p>
+            <p>{{ comment.content }}</p>
           </div>
-        {%- endfor -%}
+        {% endfor %}
+        {{ paginate | default_pagination }}
+      {% endpaginate %}
 
+      <div class="comment-form">
         {% form 'new_comment', article %}
-          <div style="margin-top:32px;">
-            <h4 style="font-size:16px; font-weight:600; margin-bottom:16px;">Leave a comment</h4>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-              <input type="text" name="comment[author]" placeholder="Name" required style="padding:12px 16px; border:1px solid var(--color-border); border-radius:8px; font-size:14px;">
-              <input type="email" name="comment[email]" placeholder="Email" required style="padding:12px 16px; border:1px solid var(--color-border); border-radius:8px; font-size:14px;">
-            </div>
-            <textarea name="comment[body]" placeholder="Your comment..." rows="4" required style="width:100%; padding:12px 16px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; resize:vertical; margin-bottom:12px;"></textarea>
-            <button type="submit" style="padding:12px 32px; background:var(--color-primary); color:var(--color-white); border:none; border-radius:50px; font-weight:600; cursor:pointer;">Post Comment</button>
-          </div>
+          <h3>Leave a comment</h3>
+          <input type="text" name="comment[author]" placeholder="Name" required>
+          <input type="email" name="comment[email]" placeholder="Email" required>
+          <textarea name="comment[body]" placeholder="Your comment" required></textarea>
+          <button type="submit">Post Comment</button>
         {% endform %}
       </div>
-    {%- endif -%}
-
-    <div style="margin-top:40px; text-align:center;">
-      <a href="{{ blog.url }}" style="color:var(--color-primary); font-weight:600; text-decoration:none;">← Back to {{ blog.title }}</a>
     </div>
-  </div>
-</section>
+  {% endif %}
+</article>
+
+<style>
+  .article-page { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+  .article-header { text-align: center; margin-bottom: 30px; }
+  .article-meta { color: #666; font-size: 0.9em; }
+  .article-image { margin: 30px 0; }
+  .article-image img { width: 100%; height: auto; }
+  .article-content { line-height: 1.8; font-size: 1.1em; }
+  .comment { border-bottom: 1px solid #ddd; padding: 20px 0; }
+  .comment-form input, .comment-form textarea { width: 100%; padding: 10px; margin: 10px 0; }
+  .comment-form button { padding: 12px 30px; }
+</style>
 
 {% schema %}
 {

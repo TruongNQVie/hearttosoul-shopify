@@ -1,0 +1,61 @@
+<div class="order-page">
+  <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+  
+  <p>{{ 'customer.order.date' | t: date: order.created_at | date: "%B %d, %Y" }}</p>
+  
+  <table class="order-items">
+    <thead>
+      <tr>
+        <th>{{ 'customer.order.product' | t }}</th>
+        <th>{{ 'customer.order.sku' | t }}</th>
+        <th>{{ 'customer.order.price' | t }}</th>
+        <th>{{ 'customer.order.quantity' | t }}</th>
+        <th>{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for line_item in order.line_items %}
+        <tr>
+          <td>{{ line_item.title }}</td>
+          <td>{{ line_item.sku }}</td>
+          <td>{{ line_item.price | money }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.line_price | money }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <div class="order-summary">
+    <p>{{ 'customer.order.subtotal' | t }}: {{ order.subtotal_price | money }}</p>
+    {% for discount in order.discounts %}
+      <p>{{ 'customer.order.discount' | t }}: {{ discount.code }} (-{{ discount.savings | money }})</p>
+    {% endfor %}
+    <p>{{ 'customer.order.shipping' | t }}: {{ order.shipping_price | money }}</p>
+    <p>{{ 'customer.order.tax' | t }}: {{ order.tax_price | money }}</p>
+    <p><strong>{{ 'customer.order.total' | t }}: {{ order.total_price | money }}</strong></p>
+  </div>
+  
+  <div class="order-address">
+    <h3>{{ 'customer.order.shipping_address' | t }}</h3>
+    <p>{{ order.shipping_address | format_address }}</p>
+    
+    <h3>{{ 'customer.order.billing_address' | t }}</h3>
+    <p>{{ order.billing_address | format_address }}</p>
+  </div>
+</div>
+
+<style>
+  .order-page { max-width: 1000px; margin: 40px auto; padding: 20px; }
+  .order-items { width: 100%; border-collapse: collapse; margin: 30px 0; }
+  .order-items th, .order-items td { padding: 12px; border-bottom: 1px solid #ddd; }
+  .order-summary { text-align: right; margin: 30px 0; }
+  .order-address { margin-top: 40px; }
+</style>
+
+{% schema %}
+{
+  "name": "Order",
+  "settings": []
+}
+{% endschema %}

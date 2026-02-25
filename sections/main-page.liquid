@@ -1,11 +1,20 @@
-<section class="main-page section-padding">
-  <div class="container" style="max-width:800px;">
-    <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,3rem); text-align:center; margin-bottom:32px;">{{ page.title }}</h1>
-    <div class="page-content" style="font-size:15px; line-height:1.8; color:var(--color-text-muted);">
-      {{ page.content }}
-    </div>
+<div class="page-content">
+  <div class="page-header">
+    <h1>{{ page.title }}</h1>
   </div>
-</section>
+  
+  <div class="page-body">
+    {{ page.content }}
+  </div>
+</div>
+
+<style>
+  .page-content { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+  .page-header { margin-bottom: 30px; }
+  .page-header h1 { font-size: 2.5em; }
+  .page-body { line-height: 1.8; font-size: 1.1em; }
+  .page-body img { max-width: 100%; height: auto; }
+</style>
 
 {% schema %}
 {

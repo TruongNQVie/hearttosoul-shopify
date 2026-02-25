@@ -1,30 +1,40 @@
-<section class="main-register section-padding" style="min-height:60vh; display:flex; align-items:center;">
-  <div class="container" style="max-width:480px; text-align:center;">
-    <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,2.5rem); margin-bottom:8px;">Create Account</h1>
-    <p style="color:var(--color-text-muted); font-size:14px; margin-bottom:32px;">Join us for exclusive offers and updates</p>
+<div class="register-page">
+  <h1>{{ 'customer.register.title' | t }}</h1>
+  
+  {% form 'create_customer' %}
+    {{ form.errors | default_errors }}
+    
+    <div class="form-group">
+      <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+      <input type="text" name="customer[first_name]" id="FirstName" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+      <input type="text" name="customer[last_name]" id="LastName" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="Email">{{ 'customer.register.email' | t }}</label>
+      <input type="email" name="customer[email]" id="Email" autocomplete="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="Password">{{ 'customer.register.password' | t }}</label>
+      <input type="password" name="customer[password]" id="Password" required>
+    </div>
+    
+    <button type="submit">{{ 'customer.register.submit' | t }}</button>
+  {% endform %}
+</div>
 
-    {% form 'create_customer' %}
-      {{ form.errors | default_errors }}
-      <div style="margin-bottom:16px;">
-        <input type="text" name="customer[first_name]" placeholder="First name" autocomplete="given-name" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
-      </div>
-      <div style="margin-bottom:16px;">
-        <input type="text" name="customer[last_name]" placeholder="Last name" autocomplete="family-name" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
-      </div>
-      <div style="margin-bottom:16px;">
-        <input type="email" name="customer[email]" placeholder="Email" autocomplete="email" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
-      </div>
-      <div style="margin-bottom:24px;">
-        <input type="password" name="customer[password]" placeholder="Password" autocomplete="new-password" required style="width:100%; padding:14px 20px; border:1px solid var(--color-border); border-radius:12px; font-size:14px; outline:none;">
-      </div>
-      <button type="submit" style="width:100%; padding:14px; background:var(--color-primary); color:var(--color-white); border:none; border-radius:50px; font-weight:600; font-size:15px; cursor:pointer; transition:opacity 0.3s;">Create Account</button>
-    {% endform %}
-
-    <p style="margin-top:24px; font-size:14px; color:var(--color-text-muted);">
-      Already have an account? <a href="/account/login" style="color:var(--color-primary); font-weight:600; text-decoration:none;">Sign in</a>
-    </p>
-  </div>
-</section>
+<style>
+  .register-page { max-width: 500px; margin: 60px auto; padding: 40px; border: 1px solid #ddd; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; margin-bottom: 5px; }
+  .form-group input { width: 100%; padding: 10px; }
+  button { width: 100%; padding: 12px; margin-top: 10px; }
+</style>
 
 {% schema %}
 {

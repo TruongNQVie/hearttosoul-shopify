@@ -1,39 +1,45 @@
-<section class="main-collection section-padding">
-  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
-    <div style="text-align:center; margin-bottom:40px;">
-      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,5vw,3.5rem); margin-bottom:8px;">{{ collection.title }}</h1>
-      {%- if collection.description != blank -%}
-        <p style="color:var(--color-text-muted); font-size:15px; max-width:600px; margin:0 auto;">{{ collection.description }}</p>
-      {%- endif -%}
+<div class="collection-page">
+  <div class="collection-header">
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="collection-description">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+
+  {% if collection.products.size > 0 %}
+    <div class="product-grid">
+      {% for product in collection.products %}
+        <div class="product-card">
+          <a href="{{ product.url }}">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.featured_image.alt | escape }}">
+            {% endif %}
+            <h3>{{ product.title }}</h3>
+            <p class="price">{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% endfor %}
     </div>
 
-    {%- paginate collection.products by 12 -%}
-      <div class="product-grid">
-        {%- for product in collection.products -%}
-          {% render 'product-card', product: product %}
-        {%- endfor -%}
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {{ paginate | default_pagination }}
       </div>
+    {% endif %}
+  {% else %}
+    <p>{{ 'collections.general.no_products' | t }}</p>
+  {% endif %}
+</div>
 
-      {%- if paginate.pages > 1 -%}
-        <div style="text-align:center; margin-top:40px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
-          {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">← Previous</a>
-          {%- endif -%}
-          {%- for part in paginate.parts -%}
-            {%- if part.is_link -%}
-              <a href="{{ part.url }}" style="padding:10px 16px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">{{ part.title }}</a>
-            {%- else -%}
-              <span style="padding:10px 16px; background:var(--color-primary); color:var(--color-white); border-radius:8px; font-size:14px; font-weight:600;">{{ part.title }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" style="padding:10px 20px; border:1px solid var(--color-border); border-radius:8px; font-size:14px; color:var(--color-text); text-decoration:none;">Next →</a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-    {%- endpaginate -%}
-  </div>
-</section>
+<style>
+  .collection-page { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+  .collection-header { text-align: center; margin-bottom: 40px; }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+  .product-card { text-align: center; }
+  .product-card img { width: 100%; height: auto; }
+  .product-card h3 { margin: 15px 0 10px; }
+  .price { font-weight: bold; color: #333; }
+</style>
 
 {% schema %}
 {

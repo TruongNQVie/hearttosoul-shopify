@@ -1,40 +1,50 @@
-<section class="main-account section-padding">
-  <div class="container" style="max-width:800px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
-      <h1 style="font-family:var(--font-heading); font-size:clamp(2rem,4vw,2.5rem);">My Account</h1>
-      <a href="{{ routes.account_logout_url }}" style="font-size:14px; color:var(--color-primary); text-decoration:none; font-weight:600;">Log Out</a>
-    </div>
-
-    <div style="display:grid; grid-template-columns:1fr; gap:40px;">
-      <div>
-        <h2 style="font-size:18px; font-weight:700; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--color-border);">Account Details</h2>
-        <p style="font-size:15px;">{{ customer.name }}</p>
-        <p style="font-size:15px; color:var(--color-text-muted);">{{ customer.email }}</p>
-        {%- if customer.default_address -%}
-          <p style="font-size:14px; color:var(--color-text-muted); margin-top:8px;">{{ customer.default_address | format_address }}</p>
-        {%- endif -%}
-      </div>
-
-      <div>
-        <h2 style="font-size:18px; font-weight:700; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--color-border);">Order History</h2>
-        {%- if customer.orders.size > 0 -%}
-          {%- for order in customer.orders -%}
-            <div style="padding:16px 0; border-bottom:1px solid rgba(0,0,0,0.06);">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <a href="{{ order.customer_url }}" style="font-weight:600; color:var(--color-primary); text-decoration:none;">{{ order.name }}</a>
-                <span style="font-size:13px; color:var(--color-text-muted);">{{ order.created_at | date: '%B %d, %Y' }}</span>
-              </div>
-              <p style="font-size:14px; margin-top:4px;">{{ order.financial_status_label }} · {{ order.total_price | money }}</p>
-            </div>
-          {%- endfor -%}
-        {%- else -%}
-          <p style="color:var(--color-text-muted);">You haven't placed any orders yet.</p>
-          <a href="/collections" style="display:inline-block; margin-top:16px; padding:12px 28px; background:var(--color-primary); color:var(--color-white); border-radius:50px; font-weight:600; font-size:14px; text-decoration:none;">Start Shopping</a>
-        {%- endif -%}
-      </div>
-    </div>
+<div class="account-page">
+  <h1>{{ 'customer.account.title' | t }}</h1>
+  
+  <div class="account-info">
+    <h2>{{ 'customer.account.details' | t }}</h2>
+    <p>{{ customer.name }}</p>
+    <p>{{ customer.email }}</p>
+    <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }}</a>
   </div>
-</section>
+  
+  <div class="order-history">
+    <h2>{{ 'customer.orders.title' | t }}</h2>
+    {% if customer.orders.size > 0 %}
+      <table>
+        <thead>
+          <tr>
+            <th>{{ 'customer.orders.order_number' | t }}</th>
+            <th>{{ 'customer.orders.date' | t }}</th>
+            <th>{{ 'customer.orders.total' | t }}</th>
+            <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in customer.orders %}
+            <tr>
+              <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+              <td>{{ order.created_at | date: "%B %d, %Y" }}</td>
+              <td>{{ order.total_price | money }}</td>
+              <td>{{ order.fulfillment_status_label }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>{{ 'customer.orders.none' | t }}</p>
+    {% endif %}
+  </div>
+  
+  <a href="{{ routes.account_logout_url }}">{{ 'customer.account.log_out' | t }}</a>
+</div>
+
+<style>
+  .account-page { max-width: 1000px; margin: 40px auto; padding: 20px; }
+  .account-info, .order-history { margin-bottom: 40px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+</style>
 
 {% schema %}
 {
