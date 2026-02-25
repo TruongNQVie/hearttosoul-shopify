@@ -681,8 +681,8 @@ h3 {
 
 .product-card__title {
     font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14.5px;
+    font-weight: 600;
     color: var(--color-text);
     line-height: 1.5;
     margin-bottom: 6px;
