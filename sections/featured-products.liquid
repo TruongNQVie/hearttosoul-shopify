@@ -39,6 +39,52 @@
   </div>
 </section>
 
+<style>
+  /* Inline overrides — bypass CSS file caching */
+  .product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .product-card__info {
+    padding: 14px 8px 4px !important;
+  }
+  .product-card__rating {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+  }
+  .product-card__stars {
+    background: linear-gradient(135deg, #FF8C00, #FFD700) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-size: 20px !important;
+    letter-spacing: 3px !important;
+    filter: drop-shadow(0 2px 4px rgba(255,140,0,0.35));
+  }
+  .product-card__title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    line-height: 1.45 !important;
+    margin-bottom: 8px !important;
+  }
+  .product-card:hover .product-card__title {
+    color: var(--color-primary) !important;
+  }
+  .product-card__price {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+  }
+  .product-card__shipping {
+    color: var(--color-primary) !important;
+    font-weight: 500 !important;
+    margin-top: 6px !important;
+  }
+</style>
+
 {% schema %}
 {
   "name": "Featured Products",
