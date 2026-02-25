@@ -152,17 +152,17 @@
       ],
       "settings": {}
     },
+    "secure-checkout": {
+      "type": "secure-checkout",
+      "settings": {
+        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
+      }
+    },
     "our-story": {
       "type": "our-story",
       "settings": {
         "title": "Our Story",
         "text": "Heart to Soul was born from a simple belief: that every love story is unique and deserves to be celebrated with a gift as meaningful as the connection it represents."
-      }
-    },
-    "secure-checkout": {
-      "type": "secure-checkout",
-      "settings": {
-        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
       }
     },
     "instagram-grid": {
@@ -212,8 +212,8 @@
     "featured-products",
     "trust-badges",
     "stats-counter",
-    "our-story",
     "secure-checkout",
+    "our-story",
     "instagram-grid"
   ]
 }
