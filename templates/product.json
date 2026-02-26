@@ -52,11 +52,11 @@
   },
   "order": [
     "main",
+    "ugc-videos",
+    "happy-customers",
     "product-recommendations",
     "our-story",
     "trust-and-stats",
-    "ugc-videos",
-    "happy-customers",
     "secure-checkout"
   ]
 }

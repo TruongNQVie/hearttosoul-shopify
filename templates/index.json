@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero-slider": {
@@ -206,47 +197,6 @@
         "heading": "Happy Customers",
         "subtitle": "See what our community has to say"
       }
-    },
-    "instagram-grid": {
-      "type": "instagram-grid",
-      "blocks": {
-        "ig1": {
-          "type": "image",
-          "settings": {}
-        },
-        "ig2": {
-          "type": "image",
-          "settings": {}
-        },
-        "ig3": {
-          "type": "image",
-          "settings": {}
-        },
-        "ig4": {
-          "type": "image",
-          "settings": {}
-        },
-        "ig5": {
-          "type": "image",
-          "settings": {}
-        },
-        "ig6": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "ig1",
-        "ig2",
-        "ig3",
-        "ig4",
-        "ig5",
-        "ig6"
-      ],
-      "settings": {
-        "title": "As Seen On Instagram",
-        "handle": "BEYOND.LOVE.OFFICIAL"
-      }
     }
   },
   "order": [
@@ -258,7 +208,6 @@
     "featured-by",
     "our-promise",
     "ugc-videos",
-    "happy-customers",
-    "instagram-grid"
+    "happy-customers"
   ]
 }
