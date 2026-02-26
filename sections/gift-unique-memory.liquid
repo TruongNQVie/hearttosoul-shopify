@@ -1,0 +1,206 @@
+{% comment %}
+  Gift an Unique Memory Section - Image Left, Text Right
+  Targeted towards US Gen Z, focusing on emotional pain points of gifting.
+{% endcomment %}
+
+<section class="gift-memory-section section-padding">
+  <div class="gift-memory-container">
+    <div class="gift-memory-grid">
+      <!-- Media Column -->
+      <div class="gift-memory-media">
+        <div class="gift-memory-image-wrap">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading | escape }}" loading="lazy" class="gift-memory-img">
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg gift-memory-img' }}
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <!-- Content Column -->
+      <div class="gift-memory-content">
+        <div class="gift-memory-content-inner">
+          <h2 class="gift-memory-heading">{{ section.settings.heading }}</h2>
+          
+          <div class="gift-memory-text">
+            {{ section.settings.text }}
+          </div>
+          
+          {%- if section.settings.button_label != blank -%}
+            <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}" class="btn btn--primary gift-memory-btn">
+              {{ section.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gift-memory-section {
+    background-color: var(--color-bg);
+  }
+  
+  .gift-memory-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .gift-memory-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .gift-memory-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+  }
+
+  /* Media Side */
+  .gift-memory-media {
+    width: 100%;
+  }
+  .gift-memory-image-wrap {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Subtle depth */
+    border: 1px solid var(--color-border);
+  }
+  @media (min-width: 900px) {
+    .gift-memory-image-wrap {
+      aspect-ratio: 1 / 1; /* Square on desktop for stronger presence like reference */
+    }
+  }
+  .gift-memory-image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03); /* Inner crispness */
+    z-index: 1;
+    border-radius: var(--radius-lg);
+  }
+  .gift-memory-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .gift-memory-image-wrap:hover .gift-memory-img {
+    transform: scale(1.03);
+  }
+
+  /* Content Side */
+  .gift-memory-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+  }
+  @media (min-width: 900px) {
+    .gift-memory-content {
+      padding: 40px;
+      padding-bottom: 0;
+    }
+  }
+  .gift-memory-content-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .gift-memory-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    color: var(--color-primary); /* Use primary brand color directly for emphasis */
+    margin-bottom: 24px;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  
+  .gift-memory-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 32px;
+  }
+  .gift-memory-text p {
+    margin-bottom: 16px;
+  }
+  .gift-memory-text p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .gift-memory-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 180px;
+    padding: 14px 32px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+  }
+  .gift-memory-btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(190, 52, 78, 0.25);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Gift a Memory",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Section Image",
+      "info": "Upload an emotional, high-quality product image."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Gift a unique memory."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body Text",
+      "default": "<p>Tired of giving the same boring, generic gifts? It’s hard to find something that holds <em>real</em> meaning.</p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel. A memory they can literally wear close to their heart, forever.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift a Memory",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

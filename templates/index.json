@@ -43,6 +43,16 @@
         "speed": 7
       }
     },
+    "gift-memory": {
+      "type": "gift-unique-memory",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/our-story-gift.jpg",
+        "heading": "Gift a unique memory.",
+        "text": "<p>Tired of giving the same generic, boring presents? It’s stressful trying to find something that actually holds real meaning. Surprise them with a handcrafted piece that perfectly captures exactly how you feel.</p><p>Give them a memory they can literally wear close to their heart, forever.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "shopify:\/\/collections\/bestsellers"
+      }
+    },
     "featured-products": {
       "type": "featured-products",
       "settings": {
@@ -201,6 +211,7 @@
   },
   "order": [
     "hero-slider",
+    "gift-memory",
     "featured-products",
     "trust-and-stats",
     "secure-checkout",
