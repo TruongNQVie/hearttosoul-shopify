@@ -227,7 +227,7 @@
                 <label class="upsell-item">
                   <input type="checkbox" class="upsell-checkbox" data-price="6893">
                   <span class="custom-checkbox"></span>
-                  {{ 'product-1' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-1.jpg?v=1708412300" alt="Preserved Rose Jewelry Gift Box" class="upsell-img">
                   <div class="upsell-info">
                     <span class="upsell-name">Preserved Rose Jewelry Gift Box — Eternal Flower with Heart-Shaped Acrylic Cover</span>
                     <span class="upsell-price">$68.93</span>
@@ -236,7 +236,7 @@
                 <label class="upsell-item">
                   <input type="checkbox" class="upsell-checkbox" data-price="7868">
                   <span class="custom-checkbox"></span>
-                  {{ 'product-2' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-2.jpg?v=1708412300" alt="Fashion Jewelry Box Red Apple" class="upsell-img">
                   <div class="upsell-info">
                     <span class="upsell-name">Fashion Jewelry Box Red Apple Christmas Gift Necklace Eternal Rose For Girl Mother...</span>
                     <span class="upsell-price">$78.68</span>
@@ -245,7 +245,7 @@
                 <label class="upsell-item">
                   <input type="checkbox" class="upsell-checkbox" data-price="6383">
                   <span class="custom-checkbox"></span>
-                  {{ 'product-3' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-3.jpg?v=1708412300" alt="Rose Gift Box Jewelry Box" class="upsell-img">
                   <div class="upsell-info">
                     <span class="upsell-name">Rose Gift Box Jewelry Box</span>
                     <span class="upsell-price">$63.83</span>
@@ -295,13 +295,20 @@
               </button>
             {%- endform -%}
 
-            {%- if product.compare_at_price > product.price -%}
-              <p class="product-savings-below">
-                🎉 You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!
-              </p>
-            {%- endif -%}
+            {%- assign current_price = product.price | default: 9468 -%}
+            {%- assign compare_price = product.compare_at_price | default: 18936 -%}
+            {%- assign savings = compare_price | minus: current_price -%}
+            
+            <p class="product-savings-below">
+              🎉 <span style="font-weight: 600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span>
+            </p>
 
-            <p class="product-gift-hint">🎁 <a href="#">Gift Hint for Loved Ones</a></p>
+            <p class="product-gift-hint">
+              <a href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                🎁 Gift Hint for Loved Ones
+              </a>
+            </p>
           </div>
         </div>
       </div>
