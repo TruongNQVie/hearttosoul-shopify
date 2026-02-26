@@ -336,11 +336,15 @@
 <!-- Sticky bottom bar (full-width, shows on scroll) -->
 <div class="product-sticky-bar" id="product-sticky-bar">
   <div class="sticky-bar__inner">
-    <p class="sticky-bar__savings">🎉 <span style="color:var(--color-primary); font-weight:600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span></p>
     <div class="sticky-bar__content">
       <div class="sticky-bar__info">
-        <p class="sticky-bar__title">{{ product.title | truncate: 45 }}</p>
-        <p class="sticky-bar__price">{{ product.price | money }}</p>
+        {%- if product.featured_image != blank -%}
+          <img src="{{ product.featured_image | image_url: width: 80 }}" alt="{{ product.title | escape }}" class="sticky-bar__img">
+        {%- endif -%}
+        <div class="sticky-bar__text">
+          <p class="sticky-bar__title">{{ product.title | truncate: 45 }}</p>
+          <p class="sticky-bar__price">{{ product.price | money }}</p>
+        </div>
       </div>
       <div class="sticky-bar__qty">
         <button class="qty-btn" onclick="changeStickyQty(-1)">−</button>
@@ -348,10 +352,9 @@
         <button class="qty-btn" onclick="changeStickyQty(1)">+</button>
       </div>
       <button class="sticky-bar__buy" onclick="document.querySelector('.product-form__submit').click();">
-        ♡ GIFT YOUR ENDLESS LOVE — <span id="sticky-cta-price">{{ product.price | money }}</span>
+        ♡ ADD TO BAG
       </button>
     </div>
-    <p class="sticky-bar__gift-hint">🎁 <a href="#" style="color:var(--color-primary); text-decoration:none; font-weight:600;">Gift Hint for Loved Ones</a></p>
   </div>
 </div>
 
@@ -672,41 +675,43 @@
   /* ===== STICKY BOTTOM BAR ===== */
   .product-sticky-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(0,0,0,0.08);
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
     z-index: 999; transform: translateY(100%);
-    transition: transform 0.35s ease; box-shadow: 0 -2px 20px rgba(0,0,0,0.06);
+    transition: transform 0.35s ease; box-shadow: 0 -4px 30px rgba(0,0,0,0.06);
   }
   .product-sticky-bar.visible { transform: translateY(0); }
-  .sticky-bar__inner { max-width: 1200px; margin: 0 auto; padding: 6px 20px 8px; }
-  .sticky-bar__savings { text-align: center; font-size: 12px; padding: 2px 0; }
-  .sticky-bar__content { display: flex; align-items: center; gap: 16px; }
-  .sticky-bar__info { flex: 1; min-width: 0; }
-  .sticky-bar__title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sticky-bar__price { font-size: 15px; font-weight: 700; }
+  .sticky-bar__inner { max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
+  .sticky-bar__content { display: flex; align-items: center; gap: 20px; }
+  .sticky-bar__info { flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; }
+  .sticky-bar__img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+  .sticky-bar__text { display: flex; flex-direction: column; justify-content: center; }
+  .sticky-bar__title { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; margin-bottom: 2px; }
+  .sticky-bar__price { font-size: 14px; font-weight: 600; color: var(--color-primary); line-height: 1.2; }
   .sticky-bar__qty {
     display: flex; align-items: center;
     border: 1px solid var(--color-border); border-radius: 8px;
+    height: 44px;
   }
-  .sticky-bar__qty .qty-btn { width: 34px; height: 34px; border: none; background: none; font-size: 16px; cursor: pointer; }
-  .sticky-bar__qty input { width: 34px; text-align: center; border: none; font-size: 13px; font-weight: 600; }
+  .sticky-bar__qty .qty-btn { width: 34px; height: 100%; border: none; background: transparent; font-size: 16px; cursor: pointer; color: var(--color-text); }
+  .sticky-bar__qty input { width: 34px; height: 100%; text-align: center; border: none; font-size: 14px; font-weight: 600; background: transparent; color: var(--color-text); }
   .sticky-bar__buy {
-    padding: 12px 24px; background: var(--color-primary); color: white;
+    height: 44px; padding: 0 32px; background: var(--color-primary); color: var(--color-white);
     border: none; border-radius: var(--radius-full); font-weight: 600; font-size: 13px;
     cursor: pointer; white-space: nowrap; transition: all 0.3s;
     letter-spacing: 1px; text-transform: uppercase;
   }
-  .sticky-bar__buy:hover { background: var(--color-primary-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(183, 110, 121, 0.3); }
-  .sticky-bar__gift-hint { text-align: center; font-size: 11px; padding: 2px 0 0; }
+  .sticky-bar__buy:hover { background: var(--color-primary-dark); box-shadow: 0 4px 16px rgba(183, 110, 121, 0.3); }
 
   /* ===== MOBILE ===== */
   @media (max-width: 899px) {
     .product-gallery { flex-direction: column-reverse; }
     .product-gallery__thumbs { flex-direction: row; width: 100%; max-height: none; overflow-x: auto; }
     .product-gallery__thumb { width: 56px; height: 56px; flex-shrink: 0; }
-    .sticky-bar__content { flex-wrap: wrap; }
+    .sticky-bar__content { flex-wrap: wrap; gap: 12px; }
     .sticky-bar__info { width: 100%; }
     .sticky-bar__buy { flex: 1; }
+    .sticky-bar__img { display: none; } /* Hide thumbnail on small mobile to save space */
     .trust-item { width: 50%; font-size: 11px; }
   }
 </style>
