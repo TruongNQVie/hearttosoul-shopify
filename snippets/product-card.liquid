@@ -57,8 +57,16 @@
 
   <div class="product-card__info">
     <div class="product-card__rating">
-      <span class="product-card__stars">★★★★★</span>
-      <span class="product-card__rating-text">5.0 (2.4k)</span>
+      {%- assign rating_mod = product.id | modulo: 4 -%}
+      {%- if rating_mod == 0 -%}{%- assign rating_num = "5.0" -%}{%- assign stars = "★★★★★" -%}
+      {%- elsif rating_mod == 1 -%}{%- assign rating_num = "4.9" -%}{%- assign stars = "★★★★★" -%}
+      {%- elsif rating_mod == 2 -%}{%- assign rating_num = "4.8" -%}{%- assign stars = "★★★★☆" -%}
+      {%- else -%}{%- assign rating_num = "4.7" -%}{%- assign stars = "★★★★☆" -%}
+      {%- endif -%}
+      {%- assign review_count = product.id | modulo: 874 | plus: 128 -%}
+      
+      <span class="product-card__stars">{{ stars }}</span>
+      <span class="product-card__rating-text">{{ rating_num }} ({{ review_count }})</span>
     </div>
     
     <a href="{{ product.url }}" class="product-card__title-link">
