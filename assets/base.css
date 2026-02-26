@@ -265,7 +265,7 @@ p {
 
 /* ===== Announcement Bar ===== */
 .announcement-bar {
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-primary);
     color: var(--color-white);
     font-size: 12px;
     letter-spacing: 0.12em;
@@ -739,7 +739,7 @@ p {
     flex-direction: column;
     height: 100%;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: #ffffff;
+    background: transparent;
     border-radius: 12px;
 }
 
@@ -1526,6 +1526,7 @@ p {
     font-weight: 500;
     color: var(--color-text);
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .product-qty input::-webkit-outer-spin-button,

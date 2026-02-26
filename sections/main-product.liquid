@@ -461,11 +461,11 @@
   /* Short desc */
   .product-short-desc { color: var(--color-text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
 
-  /* Features - white bg, clear contrast */
+  /* Features - clear contrast without hard white */
   .product-features {
-    background: #ffffff; border: 1px solid rgba(0,0,0,0.08);
+    background: transparent; border: 1px dashed var(--color-border);
     border-radius: 12px; padding: 18px 20px; margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    box-shadow: none;
   }
   .product-feature { display: flex; gap: 12px; margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
   .product-feature:last-child { margin-bottom: 0; }
@@ -512,15 +512,15 @@
 
   /* QTY + Purchase area */
   .product-purchase { 
-    position: sticky; bottom: 0; background: #fff; z-index: 10;
+    position: sticky; bottom: 0; background: var(--color-bg); z-index: 10;
     padding: 15px 0 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 20px;
-    box-shadow: 0 -10px 20px rgba(255,255,255,0.9);
+    box-shadow: 0 -10px 20px var(--color-bg);
   }
   .product-qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .qty-label { font-size: 15px; font-weight: 600; color: #1a1a1a; }
   .product-qty {
-    display: flex; align-items: center; background: #fff;
-    border: 1px solid #e5e5e5; border-radius: 10px; overflow: hidden; height: 38px;
+    display: flex; align-items: center; background: transparent;
+    border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; height: 38px;
   }
   .product-qty .qty-btn {
     width: 36px; height: 100%; border: none; background: none;
@@ -594,19 +594,21 @@
   }
   .upsell-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
   .upsell-tag {
-    background: #fff; border: 1px solid var(--color-primary-light); color: var(--color-text-muted);
+    background: transparent; border: 1px solid var(--color-primary-light); color: var(--color-text-muted);
     font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px;
     transition: all 0.2s;
   }
   .upsell-tag.active-tag {
-    background: var(--color-primary); color: #fff; border-color: var(--color-primary);
+    background: var(--color-primary); color: var(--color-white); border-color: var(--color-primary);
   }
   .upsell-items { display: flex; flex-direction: column; gap: 8px; }
   .upsell-item {
-    display: flex; align-items: center; gap: 14px; cursor: pointer; position: relative;
-    padding: 10px; border-radius: var(--radius-lg); border: 1.5px solid transparent; transition: all 0.2s;
+    display: flex; gap: 16px; padding: 16px; border: 2px solid transparent; border-radius: var(--radius-lg);
+    background: transparent; cursor: pointer; transition: all 0.2s;
+    align-items: center; margin-bottom: 12px;
   }
-  .upsell-item.is-checked { border-color: var(--color-primary); background: #fff; }
+  .upsell-item:hover { background: var(--color-bg-surface); }
+  .upsell-item.is-checked { border-color: var(--color-primary); background: var(--color-bg-surface); }
 
   .upsell-checkbox { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
   .custom-checkbox {
@@ -622,9 +624,9 @@
     content: ''; width: 4px; height: 10px; border: solid white;
     border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px;
   }
-  .upsell-img { width: 68px; height: 68px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: #fff; border: 1px solid var(--color-border); }
-  .upsell-info { display: flex; flex-direction: column; gap: 4px; margin-left: 4px;}
-  .upsell-name { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--color-text); }
+  .upsell-img { width: 68px; height: 68px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: transparent; border: 1px solid var(--color-border); }
+  .upsell-info { display: flex; flex-direction: column; justify-content: center; flex: 1; }
+  .upsell-name { font-size: 14px; font-weight: 600; line-height: 1.4; margin-bottom: 4px; color: var(--color-text); }
   .upsell-price { font-size: 14px; font-weight: 700; color: var(--color-primary); }
 
   /* Bundle Total Area */
@@ -658,13 +660,13 @@
   .story-text { text-align: left; font-size: 15px; line-height: 1.9; color: var(--color-text-muted); margin-bottom: 28px; }
   .story-text p { margin-bottom: 18px; }
   .story-highlight {
-    text-align: left; background: #fff;
-    border: 1px solid rgba(0,0,0,0.06); border-radius: 14px;
+    text-align: left; background: transparent;
+    border: 1px dashed var(--color-border); border-radius: 14px;
     padding: 24px 28px; margin-bottom: 28px;
   }
   .story-highlight h3 { font-size: 17px; margin-bottom: 10px; }
   .story-highlight p { font-size: 14px; line-height: 1.7; color: var(--color-text-muted); }
-  .story-message { padding: 28px; background: #fff; border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.04); }
+  .story-message { padding: 28px; background: transparent; border: 1px solid var(--color-border); border-radius: 14px; box-shadow: none; }
   .message-text { font-family: var(--font-heading); font-size: 16px; line-height: 1.8; color: var(--color-text); }
 
   /* ===== STICKY BOTTOM BAR ===== */
