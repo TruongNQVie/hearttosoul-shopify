@@ -2,7 +2,8 @@
   <div class="cart-drawer__overlay" data-cart-close></div>
   <div class="cart-drawer__panel">
     <div class="cart-drawer__header">
-      <h3>Your Cart ({{ cart.item_count }})</h3>
+      <h3>Shopping Cart</h3>
+      <span class="cart-drawer__count">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>
       <button class="cart-drawer__close" data-cart-close aria-label="Close cart">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -10,9 +11,10 @@
     <div class="cart-drawer__body">
       {%- if cart == empty -%}
         <div class="cart-drawer__empty">
-          <p style="font-size:18px;margin-bottom:8px;">Your cart is empty</p>
-          <p>Continue shopping to find your next piece.</p>
-          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary" style="margin-top:20px;">Continue Shopping</a>
+          <div style="font-size: 48px; margin-bottom: 16px;">🛍️</div>
+          <p style="font-size:18px; margin-bottom:8px; font-family: var(--font-heading);">Your cart is empty</p>
+          <p style="color: var(--color-text-muted); font-size: 14px;">Discover something special for your loved ones.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="cart-drawer__continue-btn" style="margin-top:20px;">CONTINUE SHOPPING</a>
         </div>
       {%- else -%}
         {%- for item in cart.items -%}
@@ -25,19 +27,22 @@
             <div class="cart-drawer__item-info">
               <p class="cart-drawer__item-title">{{ item.product.title }}</p>
               {%- unless item.product.has_only_default_variant -%}
-                <p style="font-size:12px;color:var(--color-text-muted);">{{ item.variant.title }}</p>
+                <p style="font-size:12px; color:var(--color-text-muted);">{{ item.variant.title }}</p>
               {%- endunless -%}
               <p class="cart-drawer__item-price">{{ item.final_line_price | money }}</p>
               <div class="cart-drawer__item-qty">
                 <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}">
-                  <button>−</button>
+                  <button class="cart-qty-btn">−</button>
                 </a>
-                <span>{{ item.quantity }}</span>
+                <span class="cart-qty-num">{{ item.quantity }}</span>
                 <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}">
-                  <button>+</button>
+                  <button class="cart-qty-btn">+</button>
                 </a>
               </div>
             </div>
+            <button class="cart-drawer__item-remove" onclick="location.href='/cart/change?id={{ item.key }}&quantity=0'" aria-label="Remove">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
           </div>
         {%- endfor -%}
       {%- endif -%}
@@ -45,10 +50,14 @@
     {%- unless cart == empty -%}
       <div class="cart-drawer__footer">
         <div class="cart-drawer__subtotal">
-          <span>Subtotal</span>
-          <span>{{ cart.total_price | money }}</span>
+          <span>Total</span>
+          <span class="cart-drawer__total-price">{{ cart.total_price | money }}</span>
         </div>
-        <a href="{{ routes.cart_url }}" class="cart-drawer__checkout">Check Out</a>
+        <a href="/checkout" class="cart-drawer__checkout-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CHECKOUT — {{ cart.total_price | money }}
+        </a>
+        <p class="cart-drawer__secure-note">🔒 Secure checkout powered by Shopify</p>
       </div>
     {%- endunless -%}
   </div>

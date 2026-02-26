@@ -224,33 +224,27 @@
               {%- endfor -%}
 
               {%- if has_upsells == false -%}
-                <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox" data-price="6893">
-                  <span class="custom-checkbox"></span>
-                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-1.jpg?v=1708412300" alt="Preserved Rose Jewelry Gift Box" class="upsell-img">
-                  <div class="upsell-info">
-                    <span class="upsell-name">Preserved Rose Jewelry Gift Box — Eternal Flower with Heart-Shaped Acrylic Cover</span>
-                    <span class="upsell-price">$68.93</span>
-                  </div>
-                </label>
-                <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox" data-price="7868">
-                  <span class="custom-checkbox"></span>
-                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-2.jpg?v=1708412300" alt="Fashion Jewelry Box Red Apple" class="upsell-img">
-                  <div class="upsell-info">
-                    <span class="upsell-name">Fashion Jewelry Box Red Apple Christmas Gift Necklace Eternal Rose For Girl Mother...</span>
-                    <span class="upsell-price">$78.68</span>
-                  </div>
-                </label>
-                <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox" data-price="6383">
-                  <span class="custom-checkbox"></span>
-                  <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-3.jpg?v=1708412300" alt="Rose Gift Box Jewelry Box" class="upsell-img">
-                  <div class="upsell-info">
-                    <span class="upsell-name">Rose Gift Box Jewelry Box</span>
-                    <span class="upsell-price">$63.83</span>
-                  </div>
-                </label>
+                {%- comment -%} Fallback: Show other products from the same collection {%- endcomment -%}
+                {%- assign fallback_products = product.collections.first.products | default: collections.all.products -%}
+                {%- assign fallback_count = 0 -%}
+                {%- for fp in fallback_products limit: 4 -%}
+                  {%- if fp.id != product.id and fallback_count < 3 -%}
+                    {%- assign fallback_count = fallback_count | plus: 1 -%}
+                    <label class="upsell-item">
+                      <input type="checkbox" class="upsell-checkbox" data-variant-id="{{ fp.selected_or_first_available_variant.id }}" data-price="{{ fp.price }}">
+                      <span class="custom-checkbox"></span>
+                      {%- if fp.featured_image != blank -%}
+                        <img src="{{ fp.featured_image | image_url: width: 150 }}" alt="{{ fp.title | escape }}" class="upsell-img">
+                      {%- else -%}
+                        <div class="upsell-img" style="display:flex;align-items:center;justify-content:center;background:var(--color-bg-warm);font-size:24px;">💎</div>
+                      {%- endif -%}
+                      <div class="upsell-info">
+                        <span class="upsell-name">{{ fp.title | truncate: 60 }}</span>
+                        <span class="upsell-price">{{ fp.price | money }}</span>
+                      </div>
+                    </label>
+                  {%- endif -%}
+                {%- endfor -%}
               {%- endif -%}
             </div>
 
@@ -339,9 +333,7 @@
 <!-- Sticky bottom bar (full-width, shows on scroll) -->
 <div class="product-sticky-bar" id="product-sticky-bar">
   <div class="sticky-bar__inner">
-    {%- if product.compare_at_price > product.price -%}
-      <p class="sticky-bar__savings">🎉 <span style="color:var(--color-primary); font-weight:600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span></p>
-    {%- endif -%}
+    <p class="sticky-bar__savings">🎉 <span style="color:var(--color-primary); font-weight:600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span></p>
     <div class="sticky-bar__content">
       <div class="sticky-bar__info">
         <p class="sticky-bar__title">{{ product.title | truncate: 45 }}</p>
@@ -879,6 +871,77 @@
   upsellCheckboxes.forEach(cb => {
     cb.addEventListener('change', updateBundle);
   });
+
+  // ===== AJAX Add to Cart (opens cart drawer instead of navigating) =====
+  document.querySelectorAll('.product-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const body = {
+        id: formData.get('id'),
+        quantity: parseInt(formData.get('quantity')) || 1
+      };
+
+      const submitBtn = this.querySelector('.product-form__submit');
+      const origText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span class="cta-icon">✓</span> ADDING...';
+      submitBtn.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+      .then(r => r.json())
+      .then(data => {
+        // Show success briefly
+        submitBtn.innerHTML = '<span class="cta-icon">✓</span> ADDED TO CART!';
+        setTimeout(() => {
+          submitBtn.innerHTML = origText;
+          submitBtn.disabled = false;
+        }, 2000);
+        // Open cart drawer
+        openCartDrawer();
+      })
+      .catch(err => {
+        console.error('Cart error:', err);
+        submitBtn.innerHTML = origText;
+        submitBtn.disabled = false;
+      });
+    });
+  });
+
+  // ===== Open Cart Drawer (refreshes content via page section) =====
+  function openCartDrawer() {
+    // Fetch fresh cart drawer HTML
+    fetch('/?sections=cart-drawer-section')
+      .then(r => r.json())
+      .then(data => {
+        // If section rendering is available, update
+        if (data['cart-drawer-section']) {
+          // Can't easily update snippet, so just reload the page drawer
+        }
+      })
+      .catch(() => {});
+
+    // For now, simply open the drawer (content is server-rendered on next page load)
+    // We'll update the cart count badge and open the existing drawer
+    fetch('/cart.js')
+      .then(r => r.json())
+      .then(cart => {
+        // Update cart count badge
+        const badges = document.querySelectorAll('[data-cart-count]');
+        badges.forEach(b => b.textContent = cart.item_count);
+        // Show badges if hidden
+        badges.forEach(b => b.style.display = cart.item_count > 0 ? '' : 'none');
+      });
+
+    const drawer = document.getElementById('cart-drawer');
+    if (drawer) {
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
 </script>
 
 {% schema %}

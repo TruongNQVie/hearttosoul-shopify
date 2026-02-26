@@ -1,64 +1,144 @@
 <div class="cart-page">
-  <h1>{{ 'cart.general.title' | t }}</h1>
-  
+  <div class="cart-page__header">
+    <h1>{{ 'cart.general.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <span class="cart-page__count">{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>
+    {%- endif -%}
+  </div>
+
   {% if cart.item_count > 0 %}
-    <form action="{{ routes.cart_url }}" method="post" novalidate>
-      <table class="cart-table">
-        <thead>
-          <tr>
-            <th>{{ 'cart.label.product' | t }}</th>
-            <th>{{ 'cart.label.price' | t }}</th>
-            <th>{{ 'cart.label.quantity' | t }}</th>
-            <th>{{ 'cart.label.total' | t }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in cart.items %}
-            <tr class="cart-item">
-              <td class="cart-item__details">
-                {% if item.image %}
-                  <img src="{{ item.image | img_url: '100x' }}" alt="{{ item.image.alt | escape }}">
-                {% endif %}
-                <div>
-                  <a href="{{ item.url }}">{{ item.product.title }}</a>
-                  {% unless item.variant.title == 'Default Title' %}
-                    <p>{{ item.variant.title }}</p>
-                  {% endunless %}
-                </div>
-              </td>
-              <td>{{ item.price | money }}</td>
-              <td>
-                <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-              </td>
-              <td>{{ item.line_price | money }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      
-      <div class="cart-footer">
-        <div class="cart-subtotal">
-          <p>{{ 'cart.general.subtotal' | t }}: <strong>{{ cart.total_price | money }}</strong></p>
-        </div>
-        <button type="submit" name="update">{{ 'cart.general.update' | t }}</button>
-        <button type="submit" name="checkout">{{ 'cart.general.checkout' | t }}</button>
+    <div class="cart-page__content">
+      <div class="cart-page__items">
+        {% for item in cart.items %}
+          <div class="cart-page__item">
+            <div class="cart-page__item-img">
+              {% if item.image %}
+                <a href="{{ item.url }}">
+                  <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.image.alt | escape }}">
+                </a>
+              {% endif %}
+            </div>
+            <div class="cart-page__item-details">
+              <a href="{{ item.url }}" class="cart-page__item-title">{{ item.product.title }}</a>
+              {% unless item.variant.title == 'Default Title' %}
+                <p class="cart-page__item-variant">{{ item.variant.title }}</p>
+              {% endunless %}
+              <p class="cart-page__item-price">{{ item.price | money }}</p>
+              <div class="cart-page__item-qty">
+                <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}">
+                  <button class="cart-qty-btn">−</button>
+                </a>
+                <span class="cart-qty-num">{{ item.quantity }}</span>
+                <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}">
+                  <button class="cart-qty-btn">+</button>
+                </a>
+              </div>
+            </div>
+            <div class="cart-page__item-total">
+              <span>{{ item.line_price | money }}</span>
+              <a href="/cart/change?id={{ item.key }}&quantity=0" class="cart-page__remove" aria-label="Remove">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-    </form>
+
+      <div class="cart-page__summary">
+        <div class="cart-page__summary-card">
+          <h3>Order Summary</h3>
+          <div class="cart-page__summary-row">
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <div class="cart-page__summary-row cart-page__summary-shipping">
+            <span>Shipping</span>
+            <span style="color: var(--color-success); font-weight: 600;">FREE</span>
+          </div>
+          <div class="cart-page__summary-divider"></div>
+          <div class="cart-page__summary-row cart-page__summary-total">
+            <span>Total</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <a href="/checkout" class="cart-page__checkout-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            PROCEED TO CHECKOUT
+          </a>
+          <p class="cart-page__secure">🔒 Secure checkout powered by Shopify</p>
+          <a href="{{ routes.all_products_collection_url }}" class="cart-page__continue">← Continue Shopping</a>
+        </div>
+      </div>
+    </div>
   {% else %}
-    <p>{{ 'cart.general.empty' | t }}</p>
-    <a href="{{ routes.all_products_collection_url }}">{{ 'cart.general.continue_shopping' | t }}</a>
+    <div class="cart-page__empty">
+      <div style="font-size: 64px; margin-bottom: 16px;">🛍️</div>
+      <p style="font-size: 20px; font-family: var(--font-heading); margin-bottom: 8px;">Your cart is empty</p>
+      <p style="color: var(--color-text-muted); margin-bottom: 24px;">Discover something special for your loved ones.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-page__checkout-btn" style="max-width: 300px; margin: 0 auto;">CONTINUE SHOPPING</a>
+    </div>
   {% endif %}
 </div>
 
 <style>
-  .cart-page { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-  .cart-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-  .cart-table th, .cart-table td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
-  .cart-item__details { display: flex; gap: 15px; align-items: center; }
-  .cart-item__details img { width: 80px; height: 80px; object-fit: cover; }
-  .cart-footer { text-align: right; margin-top: 30px; }
-  .cart-subtotal { font-size: 1.2em; margin-bottom: 20px; }
-  button { padding: 12px 30px; margin-left: 10px; cursor: pointer; }
+  .cart-page { max-width: var(--container-max); margin: 0 auto; padding: var(--space-40) var(--space-24); }
+  .cart-page__header { display: flex; align-items: baseline; gap: var(--space-16); margin-bottom: var(--space-32); }
+  .cart-page__header h1 { font-family: var(--font-heading); font-weight: 400; }
+  .cart-page__count { font-size: 14px; color: var(--color-text-muted); }
+
+  .cart-page__content { display: grid; grid-template-columns: 1fr; gap: var(--space-32); }
+  @media (min-width: 900px) {
+    .cart-page__content { grid-template-columns: 1fr 380px; }
+  }
+
+  .cart-page__item {
+    display: flex; gap: var(--space-16); padding: var(--space-16) 0;
+    border-bottom: 1px solid var(--color-border); position: relative;
+  }
+  .cart-page__item-img { width: 100px; height: 100px; border-radius: var(--radius-lg); overflow: hidden; flex-shrink: 0; background: var(--color-bg-warm); }
+  .cart-page__item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-page__item-details { flex: 1; min-width: 0; }
+  .cart-page__item-title { font-size: 15px; font-weight: 500; display: block; margin-bottom: var(--space-4); line-height: 1.3; }
+  .cart-page__item-title:hover { color: var(--color-primary); }
+  .cart-page__item-variant { font-size: 13px; color: var(--color-text-muted); margin-bottom: var(--space-4); }
+  .cart-page__item-price { font-size: 15px; font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-8); }
+  .cart-page__item-qty {
+    display: flex; align-items: center; gap: 0;
+    border: 1px solid var(--color-border); border-radius: var(--radius-md); width: fit-content;
+  }
+  .cart-page__item-total { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-8); min-width: 80px; }
+  .cart-page__item-total span { font-size: 16px; font-weight: 600; }
+  .cart-page__remove {
+    color: var(--color-text-light); transition: color 0.2s;
+  }
+  .cart-page__remove:hover { color: var(--color-error); }
+
+  /* Summary card */
+  .cart-page__summary-card {
+    background: var(--color-bg-warm); border-radius: var(--radius-xl); padding: var(--space-24);
+    position: sticky; top: 100px;
+  }
+  .cart-page__summary-card h3 { font-family: var(--font-heading); font-weight: 400; font-size: 20px; margin-bottom: var(--space-16); }
+  .cart-page__summary-row { display: flex; justify-content: space-between; margin-bottom: var(--space-8); font-size: 15px; }
+  .cart-page__summary-total { font-size: 18px; margin-top: var(--space-8); }
+  .cart-page__summary-divider { height: 1px; background: var(--color-border); margin: var(--space-12) 0; }
+  .cart-page__checkout-btn {
+    display: flex; width: 100%; padding: var(--space-16); margin-top: var(--space-16);
+    background: var(--color-primary); color: var(--color-white) !important;
+    justify-content: center; align-items: center; gap: var(--space-8);
+    font-weight: 600; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
+    border-radius: var(--radius-full); transition: all 0.3s; text-decoration: none;
+  }
+  .cart-page__checkout-btn:hover {
+    background: var(--color-primary-dark); color: var(--color-white) !important;
+    transform: translateY(-1px); box-shadow: 0 4px 16px rgba(183, 110, 121, 0.3);
+  }
+  .cart-page__secure { text-align: center; font-size: 11px; color: var(--color-text-light); margin-top: var(--space-12); }
+  .cart-page__continue {
+    display: block; text-align: center; margin-top: var(--space-16); font-size: 14px;
+    color: var(--color-primary); font-weight: 500;
+  }
+
+  .cart-page__empty { text-align: center; padding: var(--space-80) var(--space-24); }
 </style>
 
 {% schema %}

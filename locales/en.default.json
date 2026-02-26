@@ -4,19 +4,35 @@
         "skip_to_text": "Skip to content",
         "close": "Close"
     },
+    "cart": {
+        "general": {
+            "title": "Your Cart",
+            "empty": "Your cart is currently empty.",
+            "continue_shopping": "Continue Shopping",
+            "subtotal": "Subtotal",
+            "checkout": "Proceed to Checkout",
+            "update": "Update Cart"
+        },
+        "label": {
+            "product": "Product",
+            "price": "Price",
+            "quantity": "Quantity",
+            "total": "Total"
+        }
+    },
     "sections": {
         "cart": {
-            "title": "Your cart",
+            "title": "Your Cart",
             "empty": "Your cart is currently empty.",
-            "continue_shopping": "Continue shopping",
+            "continue_shopping": "Continue Shopping",
             "subtotal": "Subtotal",
-            "checkout": "Check out"
+            "checkout": "Proceed to Checkout"
         }
     },
     "products": {
         "product": {
-            "add_to_cart": "Add to cart",
-            "sold_out": "Sold out",
+            "add_to_cart": "Add to Cart",
+            "sold_out": "Sold Out",
             "on_sale": "Sale"
         }
     }
