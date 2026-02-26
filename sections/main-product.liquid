@@ -132,37 +132,7 @@
             </div>
           </div>
 
-          <!-- Quantity + Add to Cart (sticky in column) -->
-          <div class="product-purchase" id="product-purchase-area">
-            <div class="product-qty-row">
-              <label class="qty-label">Qty:</label>
-              <div class="product-qty">
-                <button type="button" class="qty-btn" onclick="changeProductQty(-1)">−</button>
-                <input type="number" id="product-qty-input" value="1" min="1" max="10">
-                <button type="button" class="qty-btn" onclick="changeProductQty(1)">+</button>
-              </div>
-            </div>
-
-            {%- form 'product', product, class: 'product-form' -%}
-              <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-              <input type="hidden" name="quantity" id="product-qty-hidden" value="1">
-              <button type="submit" class="product-form__submit" {% unless product.available %}disabled{% endunless %}>
-                {%- if product.available -%}
-                  ♡ GIFT YOUR ENDLESS LOVE — <span id="cta-price">{{ product.price | money }}</span>
-                {%- else -%}
-                  Sold Out
-                {%- endif -%}
-              </button>
-            {%- endform -%}
-
-            {%- if product.compare_at_price > product.price -%}
-              <p class="product-savings-below" style="text-align: center; margin-top: 12px; font-size: 13px; font-weight: 600; color: #12b158;">
-                🎉 You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!
-              </p>
-            {%- endif -%}
-
-            <p class="product-gift-hint">🎁 <a href="#" style="color:var(--color-primary); font-weight:600; text-decoration:none;">Gift Hint for Loved Ones</a></p>
-          </div>
+          <!-- Quantity + Add to Cart will be moved below Upsells for Sticky behavior -->
 
           <!-- Trust badges -->
           <div class="product-trust">
@@ -236,34 +206,85 @@
               <span class="upsell-tag">+2 items &rarr; 15% OFF</span>
             </div>
             <div class="upsell-items">
-              <label class="upsell-item">
-                <input type="checkbox" class="upsell-checkbox">
-                <span class="custom-checkbox"></span>
-                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-1.jpg?v=1708412300" alt="Preserved Rose Jewelry Gift Box" class="upsell-img" onerror="this.src='{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
-                <div class="upsell-info">
-                  <span class="upsell-name">Preserved Rose Jewelry Gift Box — Eternal Flower with Heart-Shaped Acrylic Cover</span>
-                  <span class="upsell-price">$68.93</span>
-                </div>
-              </label>
-              <label class="upsell-item">
-                <input type="checkbox" class="upsell-checkbox">
-                <span class="custom-checkbox"></span>
-                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-2.jpg?v=1708412300" alt="Fashion Jewelry Box Red Apple" class="upsell-img" onerror="this.src='{{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
-                <div class="upsell-info">
-                  <span class="upsell-name">Fashion Jewelry Box Red Apple Christmas Gift Necklace Eternal Rose For Girl Mother...</span>
-                  <span class="upsell-price">$78.68</span>
-                </div>
-              </label>
-              <label class="upsell-item">
-                <input type="checkbox" class="upsell-checkbox">
-                <span class="custom-checkbox"></span>
-                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-3.jpg?v=1708412300" alt="Rose Gift Box Jewelry Box" class="upsell-img" onerror="this.src='{{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
-                <div class="upsell-info">
-                  <span class="upsell-name">Rose Gift Box Jewelry Box</span>
-                  <span class="upsell-price">$63.83</span>
-                </div>
-              </label>
+              {%- assign has_upsells = false -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'upsell' and block.settings.product != blank -%}
+                  {%- assign has_upsells = true -%}
+                  {%- assign upsell_product = block.settings.product -%}
+                  <label class="upsell-item" {{ block.shopify_attributes }}>
+                    <input type="checkbox" class="upsell-checkbox" data-variant-id="{{ upsell_product.selected_or_first_available_variant.id }}">
+                    <span class="custom-checkbox"></span>
+                    <img src="{{ upsell_product.featured_image | image_url: width: 150 }}" alt="{{ upsell_product.title | escape }}" class="upsell-img">
+                    <div class="upsell-info">
+                      <span class="upsell-name">{{ upsell_product.title }}</span>
+                      <span class="upsell-price">{{ upsell_product.price | money }}</span>
+                    </div>
+                  </label>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if has_upsells == false -%}
+                <label class="upsell-item">
+                  <input type="checkbox" class="upsell-checkbox">
+                  <span class="custom-checkbox"></span>
+                  {{ 'product-1' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <div class="upsell-info">
+                    <span class="upsell-name">Preserved Rose Jewelry Gift Box — Eternal Flower with Heart-Shaped Acrylic Cover</span>
+                    <span class="upsell-price">$68.93</span>
+                  </div>
+                </label>
+                <label class="upsell-item">
+                  <input type="checkbox" class="upsell-checkbox">
+                  <span class="custom-checkbox"></span>
+                  {{ 'product-2' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <div class="upsell-info">
+                    <span class="upsell-name">Fashion Jewelry Box Red Apple Christmas Gift Necklace Eternal Rose For Girl Mother...</span>
+                    <span class="upsell-price">$78.68</span>
+                  </div>
+                </label>
+                <label class="upsell-item">
+                  <input type="checkbox" class="upsell-checkbox">
+                  <span class="custom-checkbox"></span>
+                  {{ 'product-3' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
+                  <div class="upsell-info">
+                    <span class="upsell-name">Rose Gift Box Jewelry Box</span>
+                    <span class="upsell-price">$63.83</span>
+                  </div>
+                </label>
+              {%- endif -%}
             </div>
+          </div>
+
+          <!-- Quantity + Add to Cart (Moved to bottom for sticky behavior) -->
+          <div class="product-purchase" id="product-purchase-area">
+            <div class="product-qty-row">
+              <label class="qty-label">Qty:</label>
+              <div class="product-qty">
+                <button type="button" class="qty-btn" onclick="changeProductQty(-1)">−</button>
+                <input type="number" id="product-qty-input" value="1" min="1" max="10">
+                <button type="button" class="qty-btn" onclick="changeProductQty(1)">+</button>
+              </div>
+            </div>
+
+            {%- form 'product', product, class: 'product-form' -%}
+              <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" id="product-qty-hidden" value="1">
+              <button type="submit" class="product-form__submit" {% unless product.available %}disabled{% endunless %}>
+                {%- if product.available -%}
+                  ♡ GIFT YOUR ENDLESS LOVE — <span id="cta-price">{{ product.price | money }}</span>
+                {%- else -%}
+                  Sold Out
+                {%- endif -%}
+              </button>
+            {%- endform -%}
+
+            {%- if product.compare_at_price > product.price -%}
+              <p class="product-savings-below" style="text-align: center; margin-top: 12px; font-size: 13px; font-weight: 600; color: #12b158;">
+                🎉 You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!
+              </p>
+            {%- endif -%}
+
+            <p class="product-gift-hint">🎁 <a href="#" style="color:var(--color-primary); font-weight:600; text-decoration:none;">Gift Hint for Loved Ones</a></p>
           </div>
         </div>
       </div>
@@ -471,7 +492,11 @@
   }
 
   /* QTY + Purchase area */
-  .product-purchase { margin-bottom: 20px; }
+  .product-purchase { 
+    position: sticky; bottom: 0; background: #fff; z-index: 10;
+    padding: 15px 0 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 20px;
+    box-shadow: 0 -10px 20px rgba(255,255,255,0.9);
+  }
   .product-qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .qty-label { font-size: 14px; font-weight: 600; }
   .product-qty {
@@ -741,6 +766,20 @@
 {% schema %}
 {
   "name": "Product Information",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "upsell",
+      "name": "Upsell Product",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
