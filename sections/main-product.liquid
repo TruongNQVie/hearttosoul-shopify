@@ -77,7 +77,7 @@
             {%- assign savings = fake_compare_price | minus: product.price -%}
           {%- endif -%}
           <div class="product-savings-badge">
-            🎉 You save: <strong id="dynamic-savings">{{ savings | money }}</strong> — Buy 1 Get 1 50% OFF!
+            🎉 You save: <strong id="dynamic-savings">{{ savings | money }}</strong>
           </div>
 
           <!-- Installments -->
@@ -314,7 +314,7 @@
             {%- assign savings = compare_price | minus: current_price -%}
             
             <p class="product-savings-below">
-              🎉 <span style="font-weight: 600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span>
+              🎉 <span style="font-weight: 600;">You save: {{ savings | money }}</span>
             </p>
 
             <p class="product-gift-hint">
