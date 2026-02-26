@@ -6,30 +6,30 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "subheading": "NEW COLLECTION",
-            "heading": "Gift a unique memory.",
-            "text": "Personalized necklaces made to fill your heart with love.",
-            "button_label": "Express Your Love",
+            "subheading": "ETHEREAL & SACRED",
+            "heading": "Crafted by Hands, Bound by Soul.",
+            "text": "Every piece tells a story of devotion, designed to be a modern heirloom.",
+            "button_label": "Discover the Collection",
             "button_link": ""
           }
         },
         "slide-2": {
           "type": "slide",
           "settings": {
-            "subheading": "NEW COLLECTION",
-            "heading": "Individually made for each customer.",
-            "text": "Every rose box is a masterpiece of love, crafted just for you.",
-            "button_label": "Discover Rose Boxes",
+            "subheading": "A LABOR OF LOVE",
+            "heading": "The Artisan's Masterpiece.",
+            "text": "Meticulously crafted with sustainable materials and fair-trade practices.",
+            "button_label": "Read Our Story",
             "button_link": ""
           }
         },
         "slide-3": {
           "type": "slide",
           "settings": {
-            "subheading": "NEW COLLECTION",
-            "heading": "Celebrate your love story.",
-            "text": "Perfect for Valentine's, anniversaries, and every moment in between.",
-            "button_label": "Celebrate Your Story",
+            "subheading": "FAMILY HEIRLOOMS",
+            "heading": "Celebrate multi-generational love.",
+            "text": "From thoughtful gifts for partners to sacred bonds with parents.",
+            "button_label": "Explore Gifting",
             "button_link": ""
           }
         }
@@ -46,8 +46,8 @@
     "featured-products": {
       "type": "featured-products",
       "settings": {
-        "title": "Our Bestsellers",
-        "description": "",
+        "title": "Sacred Bonds",
+        "description": "Our most cherished pieces, ready to be gifted.",
         "collection": "bestsellers",
         "products_to_show": 8,
         "show_view_all": true
