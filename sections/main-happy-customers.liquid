@@ -1,0 +1,419 @@
+{% comment %}
+  Happy Customers Page - Full Width Masonry with Interactive Modal
+{% endcomment %}
+
+{%- assign rev_names = "Gabriel W.|Liam S.|Matthew W.|Thomas R.|Mia N.|Robert L.|Alexander L.|Lucas J.|Sophie H.|Hannah W.|Eva J.|Danielle V.|Jason F.|Chloe T.|Sarah P.|David K.|Emily R." | split: "|" -%}
+{%- assign rev_texts = "Bought for my fiancée’s birthday. She was extremely happy with it.|Got this for our anniversary and my wife was amazed by the hidden necklace.|I gave this to my mother just because, and it made her day.|Such a meaningful gift, my mom was genuinely moved.|Best gift ever! The packaging and the necklace are both flawless.|Beautiful craftmanship. Will definitely order again for future occasions.|She cried when she saw it. 10/10 would buy again! Best gift ever.|Stunning presentation and the necklace shines brilliantly.|So dainty and beautiful. This is something I'll cherish forever.|Exceeded expectations. Fast shipping and amazing quality.|This beats a regular bouquet of flowers any day of the week!|So cute and such a lovely surprise. I adore every detail about it.|Gifted this to my mom and she has it displayed proudly. She loved it!|The attention to detail is crazy. Such a luxurious feel.|Nailed our 5 year anniversary with this gift. She absolutely loved it.|Prettiest thing I own right now. Going to buy one for my best friend too.|This gift is absolutely breathtaking. He surprised me with it!" | split: "|" -%}
+
+<div class="hc-page">
+  <div class="hc-page__header">
+    <h1 class="hc-page__title">Happy Customers</h1>
+  </div>
+
+  <div class="hc-grid-container">
+    <div class="hc-masonry">
+      {%- assign all_products = collections.all.products -%}
+      {%- for i in (1..17) -%}
+        {%- assign idx = i | minus: 1 -%}
+        {%- capture rev_num_str -%}{%- if i < 10 -%}0{{ i }}{%- else -%}{{ i }}{%- endif -%}{%- endcapture -%}
+        {%- assign prod_idx = idx | modulo: all_products.size -%}
+        {%- assign rev_product = all_products[prod_idx] -%}
+
+        <!-- Card -->
+        <div class="hc-card" onclick="openHcModal({{ idx }})">
+          <div class="hc-card__img-wrap">
+            <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="Review by {{ rev_names[idx] }}" loading="lazy">
+          </div>
+          <div class="hc-card__body">
+            <div class="hc-card__author-row">
+              <span class="hc-card__name">{{ rev_names[idx] }}</span>
+              <span class="hc-card__verified">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Verified
+              </span>
+            </div>
+            <div class="hc-card__stars">★★★★★</div>
+            <p class="hc-card__text">{{ rev_texts[idx] }}</p>
+            
+            {%- if rev_product -%}
+            <div class="hc-card__divider"></div>
+            <div class="hc-card__product">
+              <img src="{{ rev_product.featured_image | image_url: width: 60 }}" alt="" class="hc-card__product-img">
+              <span class="hc-card__product-title">{{ rev_product.title | truncate: 60 }}</span>
+            </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="hc-modal" id="hcModal">
+  <div class="hc-modal__overlay" onclick="closeHcModal()"></div>
+  <div class="hc-modal__wrap">
+    <button class="hc-modal__close" onclick="closeHcModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <div class="hc-modal__content" id="hcModalContent">
+      <!-- Filled via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- JS Data -->
+<script>
+  window.hcReviewsData = [
+    {%- for i in (1..17) -%}
+      {%- assign idx = i | minus: 1 -%}
+      {%- capture rev_num_str -%}{%- if i < 10 -%}0{{ i }}{%- else -%}{{ i }}{%- endif -%}{%- endcapture -%}
+      {%- assign prod_idx = idx | modulo: all_products.size -%}
+      {%- assign rev_product = all_products[prod_idx] -%}
+      {
+        image: "{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}",
+        name: "{{ rev_names[idx] }}",
+        text: "{{ rev_texts[idx] | replace: '"', '\"' }}",
+        product_title: "{{ rev_product.title | escape | upcase }}",
+        product_url: "{{ rev_product.url }}",
+        product_image: "{{ rev_product.featured_image | image_url: width: 120 }}"
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ];
+
+  function openHcModal(idx) {
+    const data = window.hcReviewsData[idx];
+    if (!data) return;
+
+    const html = `
+      <div class="hc-modal__split">
+        <div class="hc-modal__col-img">
+          <img src="${data.image}" alt="Review Image">
+        </div>
+        <div class="hc-modal__col-text">
+          <div class="hc-modal__author-row">
+            <span class="hc-modal__name">${data.name}</span>
+            <span class="hc-modal__verified">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Verified
+            </span>
+          </div>
+          <div class="hc-modal__stars">★★★★★</div>
+          <p class="hc-modal__review-text">${data.text}</p>
+          
+          <div class="hc-modal__divider"></div>
+          
+          <div class="hc-modal__product-area">
+            <div class="hc-modal__product-info">
+              <img src="${data.product_image}" alt="Product">
+              <span class="hc-modal__product-title">${data.product_title}</span>
+            </div>
+            <a href="${data.product_url}" class="hc-modal__btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              View product
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('hcModalContent').innerHTML = html;
+    document.getElementById('hcModal').classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeHcModal() {
+    document.getElementById('hcModal').classList.remove('is-active');
+    document.body.style.overflow = '';
+    // Small delay to clear content after animation
+    setTimeout(() => {
+      document.getElementById('hcModalContent').innerHTML = '';
+    }, 300);
+  }
+</script>
+
+<style>
+  .hc-page {
+    background: #f8f8f8;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  .hc-page__header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+  }
+  .hc-page__title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    margin: 0;
+    color: #111;
+  }
+
+  .hc-grid-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .hc-masonry {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  @media (min-width: 768px) { .hc-masonry { column-count: 3; } }
+  @media (min-width: 1024px) { .hc-masonry { column-count: 4; column-gap: 24px; } }
+
+  .hc-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    break-inside: avoid;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #f0f0f0;
+  }
+  .hc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+  }
+
+  .hc-card__img-wrap img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .hc-card__body {
+    padding: 16px;
+  }
+
+  .hc-card__author-row, .hc-modal__author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .hc-card__name, .hc-modal__name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #111;
+  }
+  .hc-modal__name { font-size: 16px; }
+
+  .hc-card__verified, .hc-modal__verified {
+    font-size: 12px;
+    color: #111;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hc-card__verified svg, .hc-modal__verified svg {
+    width: 14px; height: 14px;
+  }
+
+  .hc-card__stars, .hc-modal__stars {
+    color: #d4af37;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .hc-card__text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0 0 16px 0;
+  }
+  .hc-modal__review-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 32px 0;
+  }
+
+  .hc-card__divider, .hc-modal__divider {
+    height: 1px;
+    background: #eee;
+    margin: 0 -16px 12px -16px;
+  }
+  .hc-modal__divider {
+    margin: 0 0 24px 0;
+  }
+
+  .hc-card__product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hc-card__product-img {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #eee;
+  }
+  .hc-card__product-title {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #555;
+    flex: 1;
+  }
+
+  /* MODAL */
+  .hc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  .hc-modal.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hc-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+  }
+
+  .hc-modal__wrap {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    transform: scale(0.95) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .hc-modal.is-active .hc-modal__wrap {
+    transform: scale(1) translateY(0);
+  }
+
+  .hc-modal__close {
+    position: absolute;
+    top: 16px;
+    left: 16px; /* Floating on top of the image */
+    width: 36px; height: 36px;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .hc-modal__close:hover {
+    background: rgba(0,0,0,0.7);
+  }
+  .hc-modal__close svg { width: 18px; height: 18px; }
+
+  .hc-modal__content {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .hc-modal__split {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    .hc-modal__split { flex-direction: row; }
+  }
+
+  .hc-modal__col-img {
+    width: 100%;
+    background: #f5f5f5;
+  }
+  @media (min-width: 768px) {
+    .hc-modal__col-img { width: 45%; flex-shrink: 0; }
+  }
+  .hc-modal__col-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    max-height: 50vh;
+  }
+  @media (min-width: 768px) {
+    .hc-modal__col-img img { max-height: 80vh; }
+  }
+
+  .hc-modal__col-text {
+    padding: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    .hc-modal__col-text { width: 55%; padding: 40px; }
+  }
+
+  .hc-modal__product-area {
+    margin-top: auto; /* Push to bottom */
+  }
+
+  .hc-modal__product-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .hc-modal__product-info img {
+    width: 60px; height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #eaeaea;
+  }
+  .hc-modal__product-title {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #111;
+    font-weight: 500;
+  }
+
+  .hc-modal__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px;
+    background: #f4f4f4;
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .hc-modal__btn:hover {
+    background: #e2e2e2;
+  }
+  .hc-modal__btn svg {
+    width: 18px; height: 18px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Happy Customers Page",
+  "settings": []
+}
+{% endschema %}

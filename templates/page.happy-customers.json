@@ -1,0 +1,11 @@
+{
+    "sections": {
+        "main": {
+            "type": "main-happy-customers",
+            "settings": {}
+        }
+    },
+    "order": [
+        "main"
+    ]
+}
