@@ -93,7 +93,7 @@
         "layout": "text_first",
         "image_asset": "individually-made.png",
         "heading": "Individually made for each customer",
-        "text": "<p>Your loved ones will enjoy this great gift for years to come! Our necklaces are unique therefore customized and handmade for each order.</p><p>You won't find this level of personalization in any department store. Show them they're truly one of a kind.</p>",
+        "text": "<p>Your loved ones will enjoy this great gift for years to come! Every necklace is <strong>uniquely customized</strong> and handcrafted specifically for your order.</p><p>You won't find this level of true personalization in any standard store.</p><p><em>Show them they're truly one of a kind.</em></p>",
         "button_label": "SHOP NOW",
         "button_link": "shopify:\/\/collections\/bestsellers"
       }
