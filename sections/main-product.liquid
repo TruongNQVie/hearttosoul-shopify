@@ -156,52 +156,40 @@
 
           <!-- Accordions -->
           <div class="product-accordions">
-            <details class="product-accordion" open>
-              <summary>The Artisan's Journey</summary>
-              <div class="accordion-content">
-                <p>• Hand-finished by master jewelers with decades of experience</p>
-                <p>• Crafted using sustainably sourced, conflict-free materials</p>
-                <p>• Every piece is polished to perfection to symbolize eternal devotion</p>
-                <p>• Arrives in our signature, eco-friendly luxury packaging</p>
-              </div>
-            </details>
-            <details class="product-accordion">
-              <summary>Materials & Care</summary>
-              <div class="accordion-content">
-                <p>• Premium scented soap rose — lasts indefinitely with gentle care</p>
-                <p>• 14K gold/white gold plated necklace — tarnish-resistant</p>
-                <p>• Luxury apple-shaped jewelry box — handcrafted with love</p>
-                <p>• Keep away from water and direct sunlight for lasting beauty</p>
-              </div>
-            </details>
-            <details class="product-accordion">
-              <summary>Shipping & Returns</summary>
-              <div class="accordion-content">
-                <p>• Free standard shipping across the USA (5-10 business days)</p>
-                <p>• Express shipping available at checkout</p>
-                <p>• Easy 30-day return policy — no questions asked</p>
-                <p>• Items must be in original packaging</p>
-              </div>
-            </details>
-            <details class="product-accordion">
-              <summary>Current Shipping Times</summary>
-              <div class="accordion-content">
-                <p>• <strong>USA:</strong> 5–10 business days (Free)</p>
-                <p>• <strong>Canada:</strong> 7–14 business days</p>
-                <p>• <strong>UK/Europe:</strong> 10–18 business days</p>
-                <p>• <strong>Australia:</strong> 10–20 business days</p>
-                <p>• Orders placed before 2PM ET ship same day</p>
-              </div>
-            </details>
-            <details class="product-accordion">
-              <summary>Product Information</summary>
-              <div class="accordion-content">
-                <p>• <strong>Package includes:</strong> 1× Apple jewelry box, 1× Eternal Rose, 1× Necklace, 1× Message card</p>
-                <p>• <strong>Box dimensions:</strong> Approx. 3.5" × 3.5" × 3.5"</p>
-                <p>• <strong>Chain length:</strong> 18" adjustable clavicle chain</p>
-                <p>• <strong>Material:</strong> 14K gold/white gold plated alloy</p>
-              </div>
-            </details>
+            {%- assign has_accordions = false -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'accordion' -%}
+                {%- assign has_accordions = true -%}
+                <details class="product-accordion" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+                  <summary>{{ block.settings.heading }}</summary>
+                  <div class="accordion-content">
+                    {{ block.settings.content }}
+                  </div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if has_accordions == false -%}
+              {%- comment -%} Fallback if no blocks are added {%- endcomment -%}
+              <details class="product-accordion" open>
+                <summary>The Artisan's Journey</summary>
+                <div class="accordion-content">
+                  <p>• Hand-finished by master jewelers with decades of experience</p>
+                  <p>• Crafted using sustainably sourced, conflict-free materials</p>
+                  <p>• Every piece is polished to perfection to symbolize eternal devotion</p>
+                  <p>• Arrives in our signature, eco-friendly luxury packaging</p>
+                </div>
+              </details>
+              <details class="product-accordion">
+                <summary>Materials & Care</summary>
+                <div class="accordion-content">
+                  <p>• Premium scented soap rose — lasts indefinitely with gentle care</p>
+                  <p>• 14K gold/white gold plated necklace — tarnish-resistant</p>
+                  <p>• Luxury apple-shaped jewelry box — handcrafted with love</p>
+                  <p>• Keep away from water and direct sunlight for lasting beauty</p>
+                </div>
+              </details>
+            {%- endif -%}
           </div>
 
           <!-- Upsell Section -->
@@ -948,6 +936,24 @@
           "type": "product",
           "id": "product",
           "label": "Select Product"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion Details",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Materials & Care"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add detailed information here.</p>"
         }
       ]
     }

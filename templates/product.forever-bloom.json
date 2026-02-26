@@ -1,0 +1,90 @@
+{
+    "sections": {
+        "main": {
+            "type": "main-product",
+            "blocks": {
+                "acc_1": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "The Artisan's Journey",
+                        "content": "<p>Forged by hands and bound by soul. Our master jewelers spent hours meticulously polishing the 14K gold-plated alloy, ensuring that every facet of the necklace catches the light of your shared memories. The eternal rose is hand-selected and preserved at the peak of its beauty to signify a love that blooms forever.</p>"
+                    }
+                },
+                "acc_2": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "The Meaning",
+                        "content": "<p>The apple is a historical symbol of profound devotion and romance. Inside, the eternal rose represents purity and longevity, while the necklace rests close to the heart—a constant reminder of a sacred bond. This bundle is designed as a modern heirloom, perfect for partners, mothers, or grandmothers to celebrate multi-generational love.</p>"
+                    }
+                },
+                "acc_3": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "Materials & Care",
+                        "content": "<p>Includes a 14K gold/white gold plated clavicle chain (18\" adjustable) designed to resist tarnishing. The eternal rose is a premium scented soap flower that lasts indefinitely. Keep away from direct sunlight and moisture to preserve its ethereal beauty.</p>"
+                    }
+                }
+            },
+            "block_order": [
+                "acc_1",
+                "acc_2",
+                "acc_3"
+            ],
+            "settings": {}
+        },
+        "ugc-videos": {
+            "type": "ugc-videos",
+            "settings": {
+                "heading": "Celebrating 10,000+ Thrilled Girlfriends",
+                "subtitle": "Real reactions. Real love. Real moments."
+            }
+        },
+        "happy-customers": {
+            "type": "happy-customers",
+            "settings": {
+                "subheading": "REAL STORIES",
+                "heading": "Happy Customers",
+                "subtitle": "See what our community has to say"
+            }
+        },
+        "trust-and-stats": {
+            "type": "trust-and-stats",
+            "settings": {
+                "heading": "Why Choose Heart To Soul?",
+                "subtitle": "Crafted with love, backed by our promise.",
+                "note": "Trusted by 10,000+ happy customers across the USA"
+            }
+        },
+        "secure-checkout": {
+            "type": "secure-checkout",
+            "settings": {
+                "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
+            }
+        },
+        "our-story": {
+            "type": "our-story",
+            "settings": {
+                "subheading": "OUR STORY",
+                "heading": "Heart To Soul",
+                "text_left": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.",
+                "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
+            }
+        },
+        "product-recommendations": {
+            "type": "product-recommendations",
+            "settings": {
+                "subheading": "COMPLETE THE MOMENT",
+                "heading": "You May Also Love"
+            }
+        }
+    },
+    "order": [
+        "main",
+        "ugc-videos",
+        "happy-customers",
+        "product-recommendations",
+        "our-story",
+        "trust-and-stats",
+        "secure-checkout"
+    ]
+}
