@@ -4,41 +4,45 @@
 /* Grid: 8pt spacing system */
 
 :root {
-    /* ── Color Palette ── */
-    --color-primary: #B76E79;
-    /* Rose Gold — Primary CTA, links, accents */
-    --color-primary-light: #E8B4B8;
-    /* Muted Pink — badges, banners, secondary buttons */
-    --color-primary-dark: #9A5B64;
-    /* Darker Rose Gold — hover states */
-    --color-bg: #FFFFFF;
-    /* Primary Background — pure white canvas */
-    --color-bg-warm: #FFF9F2;
-    /* Secondary Background — warm cream for sections */
-    --color-bg-dark: #2C1810;
-    /* Dark Espresso — for dark sections if needed */
-    --color-text: #2C1810;
-    /* Primary Text — Espresso brown (avoids harsh #000) */
-    --color-text-muted: #827B78;
-    /* Secondary Text — warm gray */
-    --color-text-light: #A09A97;
-    /* Tertiary Text — lighter gray */
-    --color-border: #E8E0DA;
-    /* Borders — warm neutral */
-    --color-white: #FFFFFF;
-    /* Pure white */
-    --color-badge-sale: #B76E79;
-    /* Sale badges */
+    /* ── Color Palette (Sacred Love) ── */
+    --color-bg: #F5EAE1;
+    /* Brand Base (Warm Ivory) - replaces old white */
+    --color-bg-warm: #F5EAE1;
+    /* Match base for seamless sections */
+    --color-bg-surface: #D9D8DD;
+    /* Surface (Soft Lilac Grey) */
+
+    --color-primary: #9D5F1B;
+    /* Primary Action (Amber/Rust) */
+    --color-primary-light: #B47834;
+    /* Lighter Amber for hovers */
+    --color-primary-dark: #7A4610;
+    /* Darker Amber */
+
+    --color-accent: #D7C2EE;
+    /* Brand Accent (Poetic Violet) for badges/secondary */
     --color-accent-gold: #E6D17B;
-    /* Golden Hour — stars, dividers, special accents */
+    /* Keeping gold for stars */
+
+    --color-text: #291602;
+    /* Text Primary (Deep Espresso) */
+    --color-text-muted: #6C3C0C;
+    /* Text Secondary (Wood) */
+    --color-text-light: #8A5A2A;
+    /* Tertiary Text */
+
+    --color-border: rgba(108, 60, 12, 0.15);
+    /* Subtly tinted border */
+    --color-white: #FFFFFF;
+    --color-badge-sale: #9D5F1B;
+    /* Sale badges match primary */
+
     --color-error: #D32F2F;
-    /* Error states */
     --color-success: #388E3C;
-    /* Success states */
 
     /* ── Typography ── */
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Poppins', sans-serif;
 
     /* ── Layout ── */
     --container-max: 1440px;
@@ -138,36 +142,50 @@ textarea {
     }
 }
 
-/* ===== Typography Scale (Report-compliant) ===== */
+/* ===== Typography Scale (Sacred Love) ===== */
 h1,
 h2,
 h3,
 h4,
 h5 {
     font-family: var(--font-heading);
-    font-weight: 400;
-    line-height: 1.2;
     color: var(--color-text);
 }
 
-/* H1 — Hero Title: 36px mobile → 48px desktop */
+/* H1 — Hero Title: 32px - 40px mobile → 48px - 56px desktop | Regular | 1.2x */
 h1 {
-    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    font-size: clamp(2rem, 5vw, 3.5rem);
 }
 
-/* H2 — Section Title: 28px mobile → 36px desktop */
+/* H2 — Section Title: 24px - 32px mobile → 32px - 40px desktop | Regular | 1.3x */
 h2 {
-    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-}
-
-/* H3 — Card Title: 20px mobile → 24px desktop */
-h3 {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.3;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-/* Body Small utility */
+/* H3 — Card Title: 20px mobile → 24px desktop | Medium | 1.4x */
+h3 {
+    font-weight: 500;
+    line-height: 1.4;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+/* Body Base: 16px mobile → 18px desktop | Regular | 1.5x */
+.body-base {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+}
+
+p {
+    margin-bottom: var(--space-16);
+    line-height: 1.5;
+}
+
 .text-small {
     font-size: 0.875rem;
     line-height: 1.4;
@@ -189,7 +207,8 @@ h3 {
     color: var(--color-white);
     font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
+    /* As per doc: 500 (Medium) */
     letter-spacing: 1.5px;
     text-transform: uppercase;
     border: none;
@@ -202,7 +221,8 @@ h3 {
     background: var(--color-primary-dark);
     color: var(--color-white);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(183, 110, 121, 0.3);
+    box-shadow: 0 4px 16px rgba(157, 95, 27, 0.3);
+    /* Amber shadow */
 }
 
 .btn-secondary {
@@ -215,7 +235,8 @@ h3 {
     color: var(--color-primary);
     font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
+    /* As per doc: 500 (Medium) */
     letter-spacing: 1px;
     text-transform: uppercase;
     border: 1.5px solid var(--color-primary);
