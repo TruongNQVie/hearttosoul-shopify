@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -41,10 +32,28 @@
       "settings": {
         "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
       }
+    },
+    "our-story": {
+      "type": "our-story",
+      "settings": {
+        "subheading": "OUR STORY",
+        "heading": "Heart To Soul",
+        "text_left": "Every piece is meticulously assembled by skilled artisans. We pour our soul into every detail to ensure your gift is as perfect as the sacred love you share.",
+        "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "subheading": "COMPLETE THE MOMENT",
+        "heading": "You May Also Love"
+      }
     }
   },
   "order": [
     "main",
+    "product-recommendations",
+    "our-story",
     "ugc-videos",
     "happy-customers",
     "trust-and-stats",

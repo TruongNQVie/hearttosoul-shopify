@@ -757,9 +757,14 @@
   // ===== Sticky bar visibility =====
   const stickyBar = document.getElementById('product-sticky-bar');
   const purchaseArea = document.getElementById('product-purchase-area');
-  if (purchaseArea) {
+  if (purchaseArea && stickyBar) {
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => stickyBar.classList.toggle('visible', !e.isIntersecting));
+      entries.forEach(e => {
+        const isVisible = !e.isIntersecting;
+        stickyBar.classList.toggle('visible', isVisible);
+        // Add padding to body so the sticky bar doesn't overlap the footer when scrolled to the bottom
+        document.body.style.paddingBottom = isVisible ? stickyBar.offsetHeight + 'px' : '';
+      });
     }, { threshold: 0 });
     obs.observe(purchaseArea);
   }
