@@ -86,6 +86,17 @@
         "text_right": "From selecting the finest materials to placing each piece in our signature rose box, every step is a labor of love — crafted to be the ultimate symbol of your devotion."
       }
     },
+    "gift-memory-2": {
+      "type": "gift-unique-memory",
+      "settings": {
+        "layout": "text_first",
+        "image": "shopify:\/\/shop_images\/individually-made.jpg",
+        "heading": "Individually made for each customer",
+        "text": "<p>Your loved ones will enjoy this great gift for years to come! Our necklaces are unique therefore customized and handmade for each order.</p><p>You won't find this level of personalization in any department store. Show them they're truly one of a kind.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "shopify:\/\/collections\/bestsellers"
+      }
+    },
     "featured-by": {
       "type": "featured-by",
       "blocks": {
@@ -215,10 +226,11 @@
     "featured-products",
     "trust-and-stats",
     "secure-checkout",
+    "ugc-videos",
     "our-story",
+    "gift-memory-2",
     "featured-by",
     "our-promise",
-    "ugc-videos",
     "happy-customers"
   ]
 }
