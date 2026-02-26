@@ -5,7 +5,7 @@
 
 <section class="gift-memory-section section-padding">
   <div class="gift-memory-container">
-    <div class="gift-memory-grid">
+    <div class="gift-memory-grid{% if section.settings.layout == 'text_first' %} gift-memory-grid--reverse{% endif %}">
       <!-- Media Column -->
       <div class="gift-memory-media">
         <div class="gift-memory-image-wrap">
@@ -58,6 +58,12 @@
     .gift-memory-grid {
       grid-template-columns: 1fr 1fr;
       gap: 60px;
+    }
+    .gift-memory-grid--reverse .gift-memory-media {
+      order: 2;
+    }
+    .gift-memory-grid--reverse .gift-memory-content {
+      order: 1;
     }
   }
 
@@ -119,18 +125,29 @@
   
   .gift-memory-heading {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3vw, 2.5rem);
-    color: var(--color-primary); /* Use primary brand color directly for emphasis */
-    margin-bottom: 24px;
+    font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+    color: var(--color-primary);
+    margin-bottom: 20px;
     line-height: 1.2;
     font-weight: 500;
   }
   
   .gift-memory-text {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--color-text);
-    margin-bottom: 32px;
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--color-text-light);
+    margin-bottom: 36px;
+  }
+  .gift-memory-text strong {
+    color: var(--color-primary-dark);
+    font-weight: 600;
+  }
+  .gift-memory-text em {
+    display: inline-block;
+    margin-top: 12px;
+    font-style: italic;
+    color: var(--color-primary);
+    font-weight: 500;
   }
   .gift-memory-text p {
     margin-bottom: 16px;
@@ -167,6 +184,16 @@
   "name": "Gift a Memory",
   "settings": [
     {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image_first", "label": "Image First" },
+        { "value": "text_first", "label": "Text First" }
+      ],
+      "default": "image_first"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Section Image",
@@ -200,6 +227,16 @@
     {
       "name": "Gift a Memory",
       "category": "Promotional"
+    },
+    {
+      "name": "Individually Made",
+      "category": "Promotional",
+      "settings": {
+        "layout": "text_first",
+        "heading": "Individually made for each customer",
+        "text": "<p>Your loved ones will enjoy this great gift for years to come! Our necklaces are unique therefore customized and handmade for each order.</p>",
+        "button_label": "SHOP NOW"
+      }
     }
   ]
 }

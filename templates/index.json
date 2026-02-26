@@ -46,9 +46,10 @@
     "gift-memory": {
       "type": "gift-unique-memory",
       "settings": {
-        "image": "shopify:\/\/shop_images\/our-story-gift.jpg",
+        "layout": "image_first",
+        "image": "gift-memory-image.jpg",
         "heading": "Gift a unique memory.",
-        "text": "<p>Tired of giving the same generic, boring presents? It’s stressful trying to find something that actually holds real meaning. Surprise them with a handcrafted piece that perfectly captures exactly how you feel.</p><p>Give them a memory they can literally wear close to their heart, forever.</p>",
+        "text": "<p>Tired of giving the same generic, boring presents? It’s stressful trying to find something that actually holds <strong>real meaning.</strong></p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel.</p><p><em>Give them a memory they can literally wear close to their heart, forever.</em></p>",
         "button_label": "SHOP NOW",
         "button_link": "shopify:\/\/collections\/bestsellers"
       }
@@ -222,11 +223,11 @@
   },
   "order": [
     "hero-slider",
-    "gift-memory",
     "featured-products",
     "trust-and-stats",
     "secure-checkout",
     "ugc-videos",
+    "gift-memory",
     "our-story",
     "gift-memory-2",
     "featured-by",
