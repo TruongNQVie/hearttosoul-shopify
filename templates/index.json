@@ -91,7 +91,7 @@
       "type": "gift-unique-memory",
       "settings": {
         "layout": "text_first",
-        "image": "shopify:\/\/shop_images\/individually-made.jpg",
+        "image": "individually-made.png",
         "heading": "Individually made for each customer",
         "text": "<p>Your loved ones will enjoy this great gift for years to come! Our necklaces are unique therefore customized and handmade for each order.</p><p>You won't find this level of personalization in any department store. Show them they're truly one of a kind.</p>",
         "button_label": "SHOP NOW",
@@ -229,9 +229,9 @@
     "ugc-videos",
     "gift-memory",
     "our-story",
-    "gift-memory-2",
     "featured-by",
     "our-promise",
+    "gift-memory-2",
     "happy-customers"
   ]
 }
