@@ -57,7 +57,9 @@
 
   <div class="product-card__info">
     <div class="product-card__rating">
-      {%- assign rating_mod = product.id | modulo: 4 -%}
+      {%- assign h_size = product.handle | size -%}
+      {%- assign id_shift = product.id | divided_by: 7 -%}
+      {%- assign rating_mod = id_shift | plus: h_size | modulo: 4 -%}
       {%- if rating_mod == 0 -%}{%- assign rating_num = "5.0" -%}{%- assign stars = "★★★★★" -%}
       {%- elsif rating_mod == 1 -%}{%- assign rating_num = "4.9" -%}{%- assign stars = "★★★★★" -%}
       {%- elsif rating_mod == 2 -%}{%- assign rating_num = "4.8" -%}{%- assign stars = "★★★★☆" -%}

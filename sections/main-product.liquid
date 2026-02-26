@@ -224,7 +224,9 @@
                     <img src="{{ upsell_product.featured_image | image_url: width: 150 }}" alt="{{ upsell_product.title | escape }}" class="upsell-img">
                     <div class="upsell-info">
                       <span class="upsell-name">{{ upsell_product.title }}</span>
-                      {%- assign upsell_rating_mod = upsell_product.id | modulo: 4 -%}
+                      {%- assign h_size = upsell_product.handle | size -%}
+                      {%- assign id_shift = upsell_product.id | divided_by: 7 -%}
+                      {%- assign upsell_rating_mod = id_shift | plus: h_size | modulo: 4 -%}
                       {%- if upsell_rating_mod == 0 -%}{%- assign u_rating = "5.0" -%}{%- assign u_stars = "★★★★★" -%}
                       {%- elsif upsell_rating_mod == 1 -%}{%- assign u_rating = "4.9" -%}{%- assign u_stars = "★★★★★" -%}
                       {%- elsif upsell_rating_mod == 2 -%}{%- assign u_rating = "4.8" -%}{%- assign u_stars = "★★★★☆" -%}
@@ -264,7 +266,9 @@
                       {%- endif -%}
                       <div class="upsell-info">
                         <span class="upsell-name">{{ fp.title | truncate: 60 }}</span>
-                        {%- assign upsell_rating_mod = fp.id | modulo: 4 -%}
+                        {%- assign h_size = fp.handle | size -%}
+                        {%- assign id_shift = fp.id | divided_by: 7 -%}
+                        {%- assign upsell_rating_mod = id_shift | plus: h_size | modulo: 4 -%}
                         {%- if upsell_rating_mod == 0 -%}{%- assign u_rating = "5.0" -%}{%- assign u_stars = "★★★★★" -%}
                         {%- elsif upsell_rating_mod == 1 -%}{%- assign u_rating = "4.9" -%}{%- assign u_stars = "★★★★★" -%}
                         {%- elsif upsell_rating_mod == 2 -%}{%- assign u_rating = "4.8" -%}{%- assign u_stars = "★★★★☆" -%}
@@ -422,6 +426,10 @@
             <span class="sticky-bar__price">{{ current_price | money }}</span>
             <span class="sticky-bar__compare">{{ compare_price | money }}</span>
             <span class="sticky-bar__savings">🎉 You save: {{ savings | money }}</span>
+          </div>
+          <div class="sticky-warranty">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            LIFETIME WARRANTY INCLUDED
           </div>
         </div>
       </div>
@@ -792,6 +800,11 @@
     border: 1px dashed rgba(190,52,78,0.3); line-height: 1.2;
     margin-left: 6px;
   }
+  .sticky-warranty {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600; color: var(--color-primary);
+    margin-top: 2px;
+  }
 
   .sticky-bar__actions { display: flex; align-items: center; gap: 16px; }
   
@@ -832,6 +845,7 @@
     .sticky-bar__img { display: none; }
     .sticky-bar__title { display: none; } /* Focus on price for mobile */
     .sticky-bar__price-row { justify-content: center; width: 100%; }
+    .sticky-warranty { display: none; } /* Hide text heavy warranty on mobile sticky */
     
     .sticky-bar__actions { width: 100%; gap: 10px; display: grid; grid-template-columns: 1fr 1fr; }
     .sticky-hint-btn { width: 100%; height: 44px; padding: 0; justify-content: center; font-size: 13px; }
