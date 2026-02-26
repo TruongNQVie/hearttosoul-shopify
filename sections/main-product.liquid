@@ -36,8 +36,7 @@
       <!-- RIGHT: Product Info (narrower, sticky) -->
       <div class="product-info" id="product-info-col">
         <div class="scroll-prompt" id="scroll-prompt">
-          <span>Scroll to explore</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
         </div>
         <div class="product-info__scroll" id="product-scroll-area">
           <!-- Social proof bar -->
@@ -236,7 +235,16 @@
                       {%- endif -%}
                       {%- assign u_count = upsell_product.id | modulo: 874 | plus: 128 -%}
                       <div class="upsell-rating"><span class="u-stars">{{ u_stars }}</span> <span class="u-count">{{ u_rating }} ({{ u_count }})</span></div>
-                      <span class="upsell-price">{{ upsell_product.price | money }}</span>
+                      <div class="upsell-price-row">
+                        <span class="upsell-price">{{ upsell_product.price | money }}</span>
+                        {%- if upsell_product.compare_at_price > upsell_product.price -%}
+                          <span class="upsell-compare">{{ upsell_product.compare_at_price | money }}</span>
+                        {%- else -%}
+                          {%- assign u_hash = upsell_product.id | modulo: 100 -%}
+                          {%- assign u_mult = 200 | plus: u_hash -%}
+                          <span class="upsell-compare">{{ upsell_product.price | times: u_mult | divided_by: 100 | money }}</span>
+                        {%- endif -%}
+                      </div>
                     </div>
                   </label>
                 {%- endif -%}
@@ -267,7 +275,16 @@
                         {%- endif -%}
                         {%- assign u_count = fp.id | modulo: 874 | plus: 128 -%}
                         <div class="upsell-rating"><span class="u-stars">{{ u_stars }}</span> <span class="u-count">{{ u_rating }} ({{ u_count }})</span></div>
-                        <span class="upsell-price">{{ fp.price | money }}</span>
+                        <div class="upsell-price-row">
+                          <span class="upsell-price">{{ fp.price | money }}</span>
+                          {%- if fp.compare_at_price > fp.price -%}
+                            <span class="upsell-compare">{{ fp.compare_at_price | money }}</span>
+                          {%- else -%}
+                            {%- assign f_hash = fp.id | modulo: 100 -%}
+                            {%- assign f_mult = 200 | plus: f_hash -%}
+                            <span class="upsell-compare">{{ fp.price | times: f_mult | divided_by: 100 | money }}</span>
+                          {%- endif -%}
+                        </div>
                       </div>
                     </label>
                   {%- endif -%}
@@ -805,16 +822,17 @@
   /* ===== UI Enhancements ===== */
   .upsell-rating { font-size: 11px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
   .upsell-rating .u-stars { color: #f5a623; letter-spacing: 1px; font-size: 12px; }
-  .upsell-rating .u-count { color: var(--color-text-muted); font-weight: 500; }
+  .upsell-price-row { display: flex; align-items: baseline; gap: 6px; }
+  .upsell-compare { font-size: 12px; color: var(--color-text-muted); text-decoration: line-through; opacity: 0.7; }
 
   .scroll-prompt {
-    position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-    color: var(--color-primary); opacity: 0; visibility: hidden; z-index: 20;
-    pointer-events: none; transition: opacity 0.3s;
-    background: radial-gradient(ellipse at center, rgba(248, 245, 240, 0.9) 0%, rgba(248, 245, 240, 0) 70%);
-    padding: 20px 40px; text-align: center;
+    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text-muted); opacity: 0; visibility: hidden; z-index: 20;
+    pointer-events: none; transition: opacity 0.5s ease;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   }
   @media (min-width: 900px) {
     .scroll-prompt.visible { opacity: 1; visibility: visible; }
