@@ -47,7 +47,7 @@
       "type": "gift-unique-memory",
       "settings": {
         "layout": "image_first",
-        "image": "gift-memory-image.jpg",
+        "image_asset": "gift-memory-image.jpg",
         "heading": "Gift a unique memory.",
         "text": "<p>Tired of giving the same generic, boring presents? It’s stressful trying to find something that actually holds <strong>real meaning.</strong></p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel.</p><p><em>Give them a memory they can literally wear close to their heart, forever.</em></p>",
         "button_label": "SHOP NOW",
@@ -91,7 +91,7 @@
       "type": "gift-unique-memory",
       "settings": {
         "layout": "text_first",
-        "image": "individually-made.png",
+        "image_asset": "individually-made.png",
         "heading": "Individually made for each customer",
         "text": "<p>Your loved ones will enjoy this great gift for years to come! Our necklaces are unique therefore customized and handmade for each order.</p><p>You won't find this level of personalization in any department store. Show them they're truly one of a kind.</p>",
         "button_label": "SHOP NOW",

@@ -11,6 +11,8 @@
         <div class="gift-memory-image-wrap">
           {%- if section.settings.image != blank -%}
             <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading | escape }}" loading="lazy" class="gift-memory-img">
+          {%- elsif section.settings.image_asset != blank -%}
+            <img src="{{ section.settings.image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy" class="gift-memory-img">
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'placeholder-svg gift-memory-img' }}
           {%- endif -%}
@@ -198,6 +200,12 @@
       "id": "image",
       "label": "Section Image",
       "info": "Upload an emotional, high-quality product image."
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Or Local Asset Image Name",
+      "info": "E.g., 'gift-memory-image.jpg'. Overrides the picker if used."
     },
     {
       "type": "text",
