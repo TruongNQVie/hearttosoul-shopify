@@ -1,74 +1,68 @@
 <footer class="footer">
   <div class="container">
-    <div class="footer__grid">
-      <!-- Brand Column -->
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" style="height:32px;width:auto;">
-          <span style="font-family:var(--font-heading);font-size:20px;font-weight:600;color:var(--color-text);">Heart <em style="font-weight:400;">to</em> Soul</span>
+    
+    <!-- Top Row: Back to Top & Social Icons -->
+    <div class="footer__top-row">
+      <div class="footer__top-spacer"></div>
+      <a href="#" class="footer__back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+        Back to the top <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </a>
+      <div class="footer__socials">
+        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        <a href="#" aria-label="Pinterest"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.63 7.9 6.44 9.35-.09-.79-.17-2.01.04-2.88.19-.82 1.25-5.29 1.25-5.29s-.31-.62-.31-1.54c0-1.44.83-2.52 1.87-2.52.88 0 1.31.66 1.31 1.45 0 .88-.56 2.2-.85 3.42-.24 1.02.51 1.86 1.51 1.86 1.81 0 3.2-1.91 3.2-4.66 0-2.43-1.75-4.13-4.25-4.13-2.88 0-4.88 2.16-4.88 4.69 0 .88.34 1.83.76 2.34.08.1.09.19.07.29l-.25 1.04c-.03.11-.11.14-.22.09-1.61-.75-2.61-3.11-2.61-5.01 0-4.08 2.96-7.82 8.55-7.82 4.49 0 7.98 3.2 7.98 7.48 0 4.46-2.81 8.04-6.72 8.04-1.31 0-2.54-.68-2.96-1.48l-.8 3.06c-.29 1.11-1.07 2.5-1.59 3.35A9.97 9.97 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"></path></svg></a>
+        <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg></a>
+      </div>
+    </div>
+
+    <!-- Main Footer Grid -->
+    <div class="footer__grid" style="grid-template-columns: 1fr 1fr 1fr 1.2fr; gap: 30px; border-bottom: none; padding-bottom: 20px;">
+      
+      <!-- Column 1: Brand -->
+      <div class="footer__brand-col">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" style="height:36px;width:auto;">
+          <span style="font-family:var(--font-heading);font-size:22px;font-weight:600;color:var(--color-primary);">Heart <em style="font-weight:400;">to</em> Soul</span>
         </div>
-        <p class="footer__brand-tagline">Crafting meaningful gifts that celebrate the most divine connection — love.</p>
-        <p class="footer__brand-made">♡ Made with love in the USA</p>
+        <div class="footer__brand-rating" style="display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--color-text-muted); padding-left: 2px;">
+          4.8 <span style="color: #FFB800; font-size: 13px; letter-spacing: 2px;">★★★★★</span>
+        </div>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Column 2: Links -->
       <div>
-        <h4 class="footer__heading">Quick Links</h4>
         <div class="footer__links">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'quick_link' -%}
-              <a href="{{ block.settings.link }}">{{ block.settings.label }}</a>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if section.blocks.size == 0 -%}
-            <a href="/pages/about-us">About Us</a>
-            <a href="/pages/reviews">Happy Customers</a>
-            <a href="/pages/track-order">Track your Order</a>
-          {%- endif -%}
-        </div>
-      </div>
-
-      <!-- Policies -->
-      <div>
-        <h4 class="footer__heading">Policies</h4>
-        <div class="footer__links">
-          <a href="/policies/refund-policy">Return and Refund Policy</a>
-          <a href="/policies/privacy-policy">Privacy Policy</a>
-          <a href="/policies/terms-of-service">Terms of Service</a>
-          <a href="/policies/shipping-policy">Shipping Policy</a>
+          <a href="/pages/about-us">About Us</a>
           <a href="/pages/contact">Contact Us</a>
+          <a href="/pages/faq">FAQ</a>
+          <a href="/pages/track-order">Track your Order</a>
+          <a href="/policies/terms-of-service">Terms of Service</a>
+          <a href="/policies/refund-policy">Refund Policy</a>
         </div>
       </div>
 
-      <!-- Get in Touch -->
+      <!-- Column 3: Links -->
       <div>
-        <h4 class="footer__heading">Get In Touch</h4>
-        <div class="footer__contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          <a href="mailto:support@hearttosoul.shop">support@hearttosoul.shop</a>
-        </div>
-        <div class="footer__contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>United States</span>
+        <div class="footer__links">
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/policies/refund-policy">Refund & Exchange</a>
+          <a href="/policies/terms-of-service">Terms of Service</a>
+          <a href="/policies/payment-policy">Payment Policy</a>
+          <a href="/policies/cancellation-policy">Cancellation Policy</a>
+          <a href="/policies/shipping-policy">Shipping Policy</a>
         </div>
       </div>
-    </div>
 
-    <!-- Payment Methods -->
-    <div class="footer__payment">
-      <p class="footer__payment-title">Secure Payment Methods</p>
-      <div class="footer__payment-icons">
-        {%- assign payment_names = 'Visa,Mastercard,Amex,Discover,PayPal,Apple Pay,Google Pay,Shop Pay' | split: ',' -%}
-        {%- for name in payment_names -%}
-          <span class="footer__payment-icon">{{ name }}</span>
-        {%- endfor -%}
+      <!-- Column 4: Address -->
+      <div class="footer__address-col">
+        <p style="font-weight: 500; font-size: 14px; color: var(--color-text); line-height: 1.6; margin: 0;">
+          Heart To Soul<br>
+          1500 N Grant St<br>
+          Ste N<br>
+          Denver CO 80203<br>
+          US
+        </p>
       </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="footer__bottom">
-      <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
-      <span class="footer__bottom-secure">🔒 SSL Encrypted · Safe & Secure Shopping</span>
     </div>
   </div>
 </footer>
@@ -77,16 +71,6 @@
 {
   "name": "Footer",
   "settings": [],
-  "blocks": [
-    {
-      "type": "quick_link",
-      "name": "Quick Link",
-      "settings": [
-        { "type": "text", "id": "label", "default": "About Us", "label": "Label" },
-        { "type": "url", "id": "link", "label": "Link" }
-      ]
-    }
-  ],
   "presets": [{ "name": "Footer" }]
 }
 {% endschema %}
