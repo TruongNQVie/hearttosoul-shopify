@@ -23,7 +23,18 @@
               {% unless item.variant.title == 'Default Title' %}
                 <p class="cart-page__item-variant">{{ item.variant.title }}</p>
               {% endunless %}
-              <p class="cart-page__item-price">{{ item.price | money }}</p>
+              <p class="cart-page__item-price">
+                {%- if item.variant.compare_at_price > item.variant.price -%}
+                  <span style="color: var(--color-primary); font-weight: 600;">{{ item.price | money }}</span>
+                  <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ item.variant.compare_at_price | money }}</span>
+                {%- else -%}
+                  {%- assign hash_val = item.product.id | modulo: 100 -%}
+                  {%- assign multiplier = 200 | plus: hash_val -%}
+                  {%- assign fake_compare_price = item.price | times: multiplier | divided_by: 100 -%}
+                  <span style="color: var(--color-primary); font-weight: 600;">{{ item.price | money }}</span>
+                  <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ fake_compare_price | money }}</span>
+                {%- endif -%}
+              </p>
               <div class="cart-page__item-qty">
                 <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}">
                   <button class="cart-qty-btn">−</button>

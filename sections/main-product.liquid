@@ -60,15 +60,25 @@
             <span class="price-current">{{ product.price | money }}</span>
             {%- if product.compare_at_price > product.price -%}
               <span class="price-compare">{{ product.compare_at_price | money }}</span>
+            {%- else -%}
+              {%- assign hash_val = product.id | modulo: 100 -%}
+              {%- assign multiplier = 200 | plus: hash_val -%}
+              {%- assign fake_compare_price = product.price | times: multiplier | divided_by: 100 -%}
+              <span class="price-compare">{{ fake_compare_price | money }}</span>
             {%- endif -%}
           </div>
 
           {%- if product.compare_at_price > product.price -%}
             {%- assign savings = product.compare_at_price | minus: product.price -%}
-            <div class="product-savings-badge">
-              🎉 You save: <strong>{{ savings | money }}</strong> — Buy 1 Get 1 50% OFF!
-            </div>
+          {%- else -%}
+            {%- assign hash_val = product.id | modulo: 100 -%}
+            {%- assign multiplier = 200 | plus: hash_val -%}
+            {%- assign fake_compare_price = product.price | times: multiplier | divided_by: 100 -%}
+            {%- assign savings = fake_compare_price | minus: product.price -%}
           {%- endif -%}
+          <div class="product-savings-badge">
+            🎉 You save: <strong id="dynamic-savings">{{ savings | money }}</strong> — Buy 1 Get 1 50% OFF!
+          </div>
 
           <!-- Installments -->
           <p class="product-installment">Or 4 interest-free payments of <strong>{{ product.price | divided_by: 4 | money }}</strong> with <strong>Klarna</strong> · <strong>Afterpay</strong></p>
@@ -293,7 +303,14 @@
             </button>
 
             {%- assign current_price = product.price | default: 9468 -%}
-            {%- assign compare_price = product.compare_at_price | default: 18936 -%}
+            {%- if product.compare_at_price > product.price -%}
+              {%- assign compare_price = product.compare_at_price -%}
+            {%- else -%}
+              {%- assign hash_val = product.id | modulo: 100 -%}
+              {%- assign multiplier = 200 | plus: hash_val -%}
+              {%- assign fake_compare_price = product.price | times: multiplier | divided_by: 100 -%}
+              {%- assign compare_price = fake_compare_price | default: 18936 -%}
+            {%- endif -%}
             {%- assign savings = compare_price | minus: current_price -%}
             
             <p class="product-savings-below">
@@ -343,7 +360,17 @@
         {%- endif -%}
         <div class="sticky-bar__text">
           <p class="sticky-bar__title">{{ product.title | truncate: 45 }}</p>
-          <p class="sticky-bar__price">{{ product.price | money }}</p>
+          <p class="sticky-bar__price">
+            {{ product.price | money }}
+            {%- if product.compare_at_price > product.price -%}
+              <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ product.compare_at_price | money }}</span>
+            {%- else -%}
+              {%- assign hash_val = product.id | modulo: 100 -%}
+              {%- assign multiplier = 200 | plus: hash_val -%}
+              {%- assign fake_compare_price = product.price | times: multiplier | divided_by: 100 -%}
+              <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ fake_compare_price | money }}</span>
+            {%- endif -%}
+          </p>
         </div>
       </div>
       <div class="sticky-bar__qty">
