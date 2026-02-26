@@ -911,37 +911,7 @@
     });
   });
 
-  // ===== Open Cart Drawer (refreshes content via page section) =====
-  function openCartDrawer() {
-    // Fetch fresh cart drawer HTML
-    fetch('/?sections=cart-drawer-section')
-      .then(r => r.json())
-      .then(data => {
-        // If section rendering is available, update
-        if (data['cart-drawer-section']) {
-          // Can't easily update snippet, so just reload the page drawer
-        }
-      })
-      .catch(() => {});
-
-    // For now, simply open the drawer (content is server-rendered on next page load)
-    // We'll update the cart count badge and open the existing drawer
-    fetch('/cart.js')
-      .then(r => r.json())
-      .then(cart => {
-        // Update cart count badge
-        const badges = document.querySelectorAll('[data-cart-count]');
-        badges.forEach(b => b.textContent = cart.item_count);
-        // Show badges if hidden
-        badges.forEach(b => b.style.display = cart.item_count > 0 ? '' : 'none');
-      });
-
-    const drawer = document.getElementById('cart-drawer');
-    if (drawer) {
-      drawer.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-  }
+  // openCartDrawer() is now defined globally in cart-drawer.liquid
 </script>
 
 {% schema %}

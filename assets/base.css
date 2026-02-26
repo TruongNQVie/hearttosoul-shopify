@@ -1308,6 +1308,12 @@ h3 {
     color: var(--color-primary);
 }
 
+.cart-drawer__item-variant {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 2px;
+}
+
 .cart-drawer__item-qty {
     display: flex;
     align-items: center;
