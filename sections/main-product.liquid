@@ -35,9 +35,6 @@
 
       <!-- RIGHT: Product Info (narrower, sticky) -->
       <div class="product-info" id="product-info-col">
-        <div class="scroll-prompt" id="scroll-prompt">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
         <div class="product-info__scroll" id="product-scroll-area">
           <!-- Social proof bar -->
           <div class="product-social-proof">
@@ -316,6 +313,10 @@
 
           <!-- Quantity + Add to Cart (Moved to bottom for sticky behavior) -->
           <div class="product-purchase" id="product-purchase-area">
+            <div class="scroll-prompt" id="scroll-prompt">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            
             <div class="product-actions-top-row">
               <div class="product-warranty-notice">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -844,20 +845,23 @@
   .upsell-price-row { display: flex; align-items: baseline; gap: 6px; }
   .upsell-compare { font-size: 12px; color: var(--color-text-muted); text-decoration: line-through; opacity: 0.7; }
 
+  .product-purchase { 
+    position: sticky; bottom: 0; background: var(--color-bg); z-index: 10;
+    padding: 15px 0 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 20px;
+    box-shadow: 0 -15px 30px var(--color-bg); /* Increased shadow for better fade effect */
+  }
+
   .scroll-prompt {
-    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
     display: flex; align-items: center; justify-content: center;
-    color: var(--color-text-muted); opacity: 0; visibility: hidden; z-index: 20;
+    color: var(--color-primary); opacity: 0; visibility: hidden; z-index: 20;
     pointer-events: none; transition: opacity 0.5s ease;
-    background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
   }
   @media (min-width: 900px) {
-    .scroll-prompt.visible { opacity: 1; visibility: visible; }
+    .scroll-prompt.visible { opacity: 0.6; visibility: visible; }
   }
   .scroll-prompt svg { animation: bounce 2s infinite; }
-  @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(3px); } 60% { transform: translateY(1px); } }
+  @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(4px); } 60% { transform: translateY(2px); } }
 
   .floating-top-btn {
     position: fixed; bottom: 84px; right: 24px; z-index: 990;
