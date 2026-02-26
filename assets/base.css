@@ -41,8 +41,8 @@
     --color-success: #388E3C;
 
     /* ── Typography ── */
-    --font-heading: 'Cormorant Garamond', serif;
-    --font-body: 'Poppins', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
 
     /* ── Layout ── */
     --container-max: 1440px;
