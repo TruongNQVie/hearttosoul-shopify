@@ -104,32 +104,34 @@
   }
   .our-love-hero__overlay {
     position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(to top, var(--color-bg) 0%, transparent 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
   }
   .our-love-hero__overlay::after {
     content: ''; position: absolute; inset: 0;
-    background: rgba(139, 46, 61, 0.15); mix-blend-mode: overlay;
+    background: rgba(0,0,0,0.3);
   }
   .our-love-hero__content {
     position: relative; z-index: 2; text-align: center;
     padding: 0 20px; max-width: 700px;
   }
   .our-love-hero__badge {
-    display: inline-block; border-bottom: 2px solid var(--color-primary);
+    display: inline-block; border-bottom: 2px solid var(--color-secondary);
     padding-bottom: 4px; margin-bottom: 20px;
-    color: var(--color-primary); text-transform: uppercase;
-    letter-spacing: 0.2em; font-size: 12px; font-weight: 700;
+    color: var(--color-secondary); text-transform: uppercase;
+    letter-spacing: 0.2em; font-size: 13px; font-weight: 700;
   }
   .our-love-hero__title {
     font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 4rem);
-    color: #1a1a1a; line-height: 1.15; margin-bottom: 16px; font-weight: 500;
+    color: var(--color-white); line-height: 1.15; margin-bottom: 16px; font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   .our-love-hero__title em {
-    color: var(--color-primary); font-style: italic;
+    color: var(--color-secondary); font-style: italic;
   }
   .our-love-hero__subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem); color: #4a4a4a;
-    max-width: 520px; margin: 0 auto; font-weight: 300; line-height: 1.7;
+    font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.9);
+    max-width: 520px; margin: 0 auto; font-weight: 400; line-height: 1.7;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
   }
 
   /* Craftsmanship section */
