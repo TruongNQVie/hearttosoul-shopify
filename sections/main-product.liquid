@@ -314,18 +314,22 @@
   .product-gallery__main {
     flex: 1; border-radius: 16px; overflow: hidden;
     background: var(--color-bg-warm); position: relative;
-    /* ensure the background doesn't bleed if the image doesn't fill */
-    display: flex; align-items: stretch;
+    /* Center the image if it doesn't fill the box */
+    display: flex; align-items: center; justify-content: center;
   }
   .product-gallery__zoom-container {
     overflow: hidden; cursor: zoom-in; position: relative;
-    width: 100%; border-radius: 16px;
+    width: 100%; border-radius: 16px; display: flex; align-items: center; justify-content: center;
   }
   .product-gallery__zoom-container img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.4s ease; border-radius: 16px;
+    max-width: 100%; max-height: 100%; object-fit: contain; display: block;
+    transition: transform 0.1s ease-out; border-radius: 16px;
+    transform-origin: center center;
   }
-  .product-gallery__zoom-container:hover img { transform: scale(1.5); }
+  .product-gallery__zoom-container:hover img { 
+    transform: scale(1.5); 
+    transition: transform 0.2s ease-out;
+  }
 
   /* ===== PRODUCT INFO ===== */
   .product-info { position: relative; }
@@ -581,6 +585,25 @@
       }
     });
   });
+
+  // ===== Interactive Hover Zoom (Follow Cursor) =====
+  const zoomContainer = document.querySelector('.product-gallery__zoom-container');
+  const zoomImg = document.getElementById('product-main-image');
+  if (zoomContainer && zoomImg) {
+    zoomContainer.addEventListener('mousemove', function(e) {
+      const rect = zoomContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      // Calculate percentage
+      const xPercent = (x / rect.width) * 100;
+      const yPercent = (y / rect.height) * 100;
+      zoomImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    });
+    zoomContainer.addEventListener('mouseleave', function() {
+      // Reset to center when mouse leaves
+      zoomImg.style.transformOrigin = 'center center';
+    });
+  }
 
   // ===== Sticky bar visibility =====
   const stickyBar = document.getElementById('product-sticky-bar');
