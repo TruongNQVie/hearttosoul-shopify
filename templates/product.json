@@ -15,26 +15,39 @@
     },
     "ugc-videos": {
       "type": "ugc-videos",
-      "settings": {}
+      "settings": {
+        "heading": "Celebrating 10,000+ Thrilled Girlfriends",
+        "subtitle": "Real reactions. Real love. Real moments."
+      }
     },
     "happy-customers": {
       "type": "happy-customers",
-      "settings": {}
+      "settings": {
+        "subheading": "REAL STORIES",
+        "heading": "Happy Customers",
+        "subtitle": "See what our community has to say"
+      }
     },
-    "why-choose-us": {
-      "type": "why-choose-us",
-      "settings": {}
+    "trust-and-stats": {
+      "type": "trust-and-stats",
+      "settings": {
+        "heading": "Why Choose Heart To Soul?",
+        "subtitle": "Crafted with love, backed by our promise.",
+        "note": "Trusted by 10,000+ happy customers across the USA"
+      }
     },
     "secure-checkout": {
-      "type": "secure-easy-checkout",
-      "settings": {}
+      "type": "secure-checkout",
+      "settings": {
+        "subtitle": "Pay with confidence using any major payment method — powered by Shopify"
+      }
     }
   },
   "order": [
     "main",
     "ugc-videos",
     "happy-customers",
-    "why-choose-us",
+    "trust-and-stats",
     "secure-checkout"
   ]
 }
