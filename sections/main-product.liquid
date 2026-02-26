@@ -202,8 +202,8 @@
               <div class="upsell-badge">SAVE UP TO 15%</div>
             </div>
             <div class="upsell-tags">
-              <span class="upsell-tag">+1 item &rarr; 5% OFF</span>
-              <span class="upsell-tag">+2 items &rarr; 15% OFF</span>
+              <span class="upsell-tag" id="upsell-tag-1">+1 item &rarr; 5% OFF</span>
+              <span class="upsell-tag" id="upsell-tag-2">+2 items &rarr; 15% OFF</span>
             </div>
             <div class="upsell-items">
               {%- assign has_upsells = false -%}
@@ -212,7 +212,7 @@
                   {%- assign has_upsells = true -%}
                   {%- assign upsell_product = block.settings.product -%}
                   <label class="upsell-item" {{ block.shopify_attributes }}>
-                    <input type="checkbox" class="upsell-checkbox" data-variant-id="{{ upsell_product.selected_or_first_available_variant.id }}">
+                    <input type="checkbox" class="upsell-checkbox" data-variant-id="{{ upsell_product.selected_or_first_available_variant.id }}" data-price="{{ upsell_product.price }}">
                     <span class="custom-checkbox"></span>
                     <img src="{{ upsell_product.featured_image | image_url: width: 150 }}" alt="{{ upsell_product.title | escape }}" class="upsell-img">
                     <div class="upsell-info">
@@ -225,7 +225,7 @@
 
               {%- if has_upsells == false -%}
                 <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox">
+                  <input type="checkbox" class="upsell-checkbox" data-price="6893">
                   <span class="custom-checkbox"></span>
                   {{ 'product-1' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
                   <div class="upsell-info">
@@ -234,7 +234,7 @@
                   </div>
                 </label>
                 <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox">
+                  <input type="checkbox" class="upsell-checkbox" data-price="7868">
                   <span class="custom-checkbox"></span>
                   {{ 'product-2' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
                   <div class="upsell-info">
@@ -243,7 +243,7 @@
                   </div>
                 </label>
                 <label class="upsell-item">
-                  <input type="checkbox" class="upsell-checkbox">
+                  <input type="checkbox" class="upsell-checkbox" data-price="6383">
                   <span class="custom-checkbox"></span>
                   {{ 'product-3' | placeholder_svg_tag: 'upsell-img placeholder-svg' }}
                   <div class="upsell-info">
@@ -252,6 +252,21 @@
                   </div>
                 </label>
               {%- endif -%}
+            </div>
+
+            <div class="upsell-bundle-container" id="upsell-bundle-container" style="display: none;">
+              <div class="bundle-summary">
+                <div class="bundle-text">Bundle total (<span id="bundle-qty-count">2</span> items)</div>
+                <div class="bundle-price-wrap">
+                  <span class="bundle-price-final" id="bundle-price-final">$155.43</span>
+                  <span class="bundle-price-original" id="bundle-price-original">$163.61</span>
+                </div>
+              </div>
+              <p class="bundle-savings-text">🎉 You save <span id="bundle-savings-percent">5</span>%: <span id="bundle-savings-amount">$8.18</span></p>
+              <button type="button" class="bundle-add-btn" id="bundle-add-btn" onclick="document.querySelector('.product-form__submit').click();">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
+                ADD BUNDLE TO BAG — <span id="bundle-btn-price">$155.43</span>
+              </button>
             </div>
           </div>
 
@@ -556,8 +571,8 @@
 
   /* ===== UPSELL SECTION ===== */
   .product-upsell {
-    background: #faf8f5;
-    border: 1px solid rgba(190,52,78,0.15); border-radius: 12px; padding: 20px;
+    background: #fcf9f9;
+    border: 1px solid #eee1e1; border-radius: 12px; padding: 20px;
     margin-bottom: 24px;
   }
   .upsell-header {
@@ -570,31 +585,57 @@
   }
   .upsell-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
   .upsell-tag {
-    background: transparent; border: 1px solid #e1babb; color: #5a5a5a;
-    font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 20px;
+    background: #fff; border: 1px solid #e1babb; color: #5a5a5a;
+    font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px;
+    transition: all 0.2s;
   }
-  .upsell-items { display: flex; flex-direction: column; gap: 16px; }
+  .upsell-tag.active-tag {
+    background: #bd3b50; color: #fff; border-color: #bd3b50;
+  }
+  .upsell-items { display: flex; flex-direction: column; gap: 8px; }
   .upsell-item {
     display: flex; align-items: center; gap: 14px; cursor: pointer; position: relative;
+    padding: 10px; border-radius: 12px; border: 1.5px solid transparent; transition: all 0.2s;
   }
+  .upsell-item.is-checked { border-color: #000; background: #fff; }
+
   .upsell-checkbox { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
   .custom-checkbox {
-    width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px;
+    width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 6px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     transition: all 0.2s; background: white;
   }
-  .upsell-item:hover .custom-checkbox { border-color: var(--color-primary); }
+  .upsell-item:hover .custom-checkbox { border-color: #bd3b50; }
   .upsell-checkbox:checked ~ .custom-checkbox {
-    background: var(--color-primary); border-color: var(--color-primary);
+    background: #bd3b50; border-color: #bd3b50; border-radius: 50%;
   }
   .upsell-checkbox:checked ~ .custom-checkbox::after {
     content: ''; width: 4px; height: 10px; border: solid white;
     border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px;
   }
-  .upsell-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #fff; border: 1px solid #eee; }
-  .upsell-info { display: flex; flex-direction: column; gap: 2px; }
+  .upsell-img { width: 68px; height: 68px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #fff; border: 1px solid #eee; }
+  .upsell-info { display: flex; flex-direction: column; gap: 4px; margin-left: 4px;}
   .upsell-name { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--color-text); }
-  .upsell-price { font-size: 14px; font-weight: 700; color: #c43b4f; }
+  .upsell-price { font-size: 14px; font-weight: 700; color: #bd3b50; }
+
+  /* Bundle Total Area */
+  .upsell-bundle-container {
+    margin-top: 16px; padding: 20px 16px; background: #faf5f3;
+    border: 1px solid #eee1e1; border-radius: 12px;
+  }
+  .bundle-summary { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .bundle-text { font-size: 14px; color: #5a5a5a; }
+  .bundle-price-wrap { display: flex; align-items: center; gap: 8px; }
+  .bundle-price-final { font-size: 18px; font-weight: 700; color: #000; }
+  .bundle-price-original { font-size: 13px; color: #888; text-decoration: line-through; }
+  .bundle-savings-text { font-size: 13px; font-weight: 600; color: #12b158; margin-bottom: 16px; }
+  .bundle-add-btn {
+    width: 100%; padding: 16px; background: #bd3b50; color: white;
+    font-size: 14px; font-weight: 700; border: none; border-radius: 30px;
+    display: flex; justify-content: center; align-items: center; gap: 8px;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .bundle-add-btn:hover { opacity: 0.9; }
 
   /* ===== STORY SECTION ===== */
   .product-story {
@@ -761,6 +802,68 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
   })();
+
+  // ===== Dynamic Upsell Bundle Calculation =====
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+  const basePrice = {{ product.price | default: 0 }};
+  const upsellCheckboxes = document.querySelectorAll('.upsell-checkbox');
+  const bundleContainer = document.getElementById('upsell-bundle-container');
+  
+  function updateBundle() {
+    let checkedCount = 0;
+    let extraPrice = 0;
+    
+    upsellCheckboxes.forEach(cb => {
+      const item = cb.closest('.upsell-item');
+      if (cb.checked) {
+        checkedCount++;
+        extraPrice += parseInt(cb.dataset.price || 0);
+        item.classList.add('is-checked');
+      } else {
+        item.classList.remove('is-checked');
+      }
+    });
+
+    const tag1 = document.getElementById('upsell-tag-1');
+    const tag2 = document.getElementById('upsell-tag-2');
+    if (tag1 && tag2) {
+      if (checkedCount === 1) {
+        tag1.classList.add('active-tag');
+        tag2.classList.remove('active-tag');
+      } else if (checkedCount >= 2) {
+        tag1.classList.remove('active-tag');
+        tag2.classList.add('active-tag');
+      } else {
+        tag1.classList.remove('active-tag');
+        tag2.classList.remove('active-tag');
+      }
+    }
+
+    if (checkedCount > 0) {
+      bundleContainer.style.display = 'block';
+      const totalItems = checkedCount + 1; // +1 for the main product
+      let discountPercent = (checkedCount >= 2) ? 0.15 : 0.05;
+      
+      const subtotal = basePrice + extraPrice;
+      const discountAmount = subtotal * discountPercent;
+      const finalPrice = subtotal - discountAmount;
+      
+      document.getElementById('bundle-qty-count').textContent = totalItems;
+      document.getElementById('bundle-price-final').textContent = formatMoney(finalPrice);
+      document.getElementById('bundle-price-original').textContent = formatMoney(subtotal);
+      document.getElementById('bundle-savings-percent').textContent = discountPercent * 100;
+      document.getElementById('bundle-savings-amount').textContent = formatMoney(discountAmount);
+      document.getElementById('bundle-btn-price').textContent = formatMoney(finalPrice);
+    } else {
+      bundleContainer.style.display = 'none';
+    }
+  }
+
+  upsellCheckboxes.forEach(cb => {
+    cb.addEventListener('change', updateBundle);
+  });
 </script>
 
 {% schema %}
