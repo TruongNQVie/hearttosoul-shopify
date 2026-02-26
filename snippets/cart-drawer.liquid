@@ -11,7 +11,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
-    <div class="cart-drawer__body" id="cart-drawer-body"></div>
+    <div class="cart-drawer__body" id="cart-drawer-body">
+      <div class="cart-drawer__loading" id="cart-drawer-loading">
+        <div class="cdraw-skeleton"><div class="cdraw-skeleton__img"></div><div class="cdraw-skeleton__lines"><div class="cdraw-skeleton__line" style="width:80%"></div><div class="cdraw-skeleton__line" style="width:50%"></div><div class="cdraw-skeleton__line" style="width:30%"></div></div></div>
+        <div class="cdraw-skeleton"><div class="cdraw-skeleton__img"></div><div class="cdraw-skeleton__lines"><div class="cdraw-skeleton__line" style="width:70%"></div><div class="cdraw-skeleton__line" style="width:40%"></div><div class="cdraw-skeleton__line" style="width:35%"></div></div></div>
+      </div>
+    </div>
     <div class="cart-drawer__footer" id="cart-drawer-footer" style="display: none;">
       <div class="cart-drawer__subtotal">
         <span>Total</span>
@@ -37,6 +42,7 @@
 
   // Local cart state for optimistic updates
   let cartState = null;
+  let isLoading = false;
 
   function formatMoney(cents) {
     return '$' + (cents / 100).toFixed(2);
@@ -100,16 +106,29 @@
 
   // Render from current state
   function renderFromState() {
+    const loadingEl = document.getElementById('cart-drawer-loading');
+    if (loadingEl) loadingEl.style.display = 'none';
     bodyEl.innerHTML = buildDrawerHTML(cartState);
   }
 
-  // Fetch fresh cart data and render
+  // Show loading skeleton
+  function showLoading() {
+    const loadingEl = document.getElementById('cart-drawer-loading');
+    if (loadingEl) {
+      loadingEl.style.display = '';
+      bodyEl.innerHTML = '';
+      bodyEl.appendChild(loadingEl);
+    }
+  }
+
+  // Fetch fresh cart data and render (returns a Promise)
   window.renderCartDrawer = function() {
-    fetch('/cart.js')
+    return fetch('/cart.js')
       .then(r => r.json())
       .then(cart => {
         cartState = cart;
         renderFromState();
+        return cart;
       })
       .catch(err => console.error('Cart fetch error:', err));
   };
@@ -151,11 +170,22 @@
     .catch(err => console.error('Cart update error:', err));
   };
 
-  // Open
+  // Open — fetch data FIRST, then open drawer
   window.openCartDrawer = function() {
-    renderCartDrawer();
-    drawer.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    // If we already have state, show it immediately and refresh in bg
+    if (cartState && cartState.items) {
+      renderFromState();
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      // Still refresh from server to catch discrepancies
+      renderCartDrawer();
+    } else {
+      // No local state yet — show loading, fetch, then reveal
+      showLoading();
+      drawer.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      renderCartDrawer();
+    }
   };
 
   // Close
@@ -175,7 +205,8 @@
     });
   });
 
-  // Initial render on page load
-  renderCartDrawer();
+  // Pre-seed cart state on page load (via Liquid) to avoid flash
+  cartState = {{ cart | json }};
+  renderFromState();
 })();
 </script>
