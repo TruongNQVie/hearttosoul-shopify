@@ -1,16 +1,18 @@
 <div class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related" style="padding: 60px 20px;">
   {%- if recommendations.performed and recommendations.products_count > 0 -%}
-    <div class="section-header text-center" style="margin-bottom: 32px; text-align: center;">
-      <p style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px;">{{ section.settings.subheading }}</p>
-      <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); margin: 0;">{{ section.settings.heading }}</h2>
-    </div>
+    <div style="max-width: 1400px; margin: 0 auto;">
+      <div class="section-header text-center" style="margin-bottom: 32px; text-align: center;">
+        <p style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px;">{{ section.settings.subheading }}</p>
+        <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); margin: 0;">{{ section.settings.heading }}</h2>
+      </div>
 
-    <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
-      {%- for recommendation in recommendations.products -%}
-        <div>
-          {% render 'product-card', product_card_product: recommendation %}
-        </div>
-      {%- endfor -%}
+      <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+        {%- for recommendation in recommendations.products -%}
+          <div>
+            {% render 'product-card', product_card_product: recommendation %}
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
   {%- endif -%}
 </div>
