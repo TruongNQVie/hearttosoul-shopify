@@ -1,0 +1,276 @@
+<section class="our-love-page">
+  <!-- Hero Banner -->
+  <header class="our-love-hero">
+    <div class="our-love-hero__overlay"></div>
+    <img src="{{ '641269185_25674395532243102_6296992574979054200_n.jpg' | asset_url }}" alt="Heart to Soul craftsmanship" class="our-love-hero__img" loading="eager">
+    <div class="our-love-hero__content">
+      <div class="our-love-hero__badge">Production & Quality</div>
+      <h1 class="our-love-hero__title">
+        The Art of <em>Sacred Love</em>
+      </h1>
+      <p class="our-love-hero__subtitle">
+        Where every facet reflects devotion and every curve tells a story of unparalleled craftsmanship.
+      </p>
+    </div>
+  </header>
+
+  <!-- Craftsmanship Section -->
+  <div class="our-love-craft">
+    <div class="our-love-craft__grid">
+      <!-- Left: Image Grid -->
+      <div class="our-love-craft__images">
+        <div class="our-love-craft__col">
+          <div class="our-love-craft__img-wrap our-love-craft__img-wrap--tall">
+            <img src="{{ '641514426_25674395538909768_1310230467511172585_n.jpg' | asset_url }}" alt="Artisan hands working on a gold piece" loading="lazy">
+          </div>
+          <div class="our-love-craft__img-wrap">
+            <img src="{{ '642794387_25674395342243121_291044944555302383_n.jpg' | asset_url }}" alt="Close-up of diamond setting" loading="lazy">
+          </div>
+        </div>
+        <div class="our-love-craft__col">
+          <div class="our-love-craft__img-wrap">
+            <img src="{{ '641688153_25674395675576421_4352181967024263078_n.jpg' | asset_url }}" alt="Precision machinery drawing gold wire" loading="lazy">
+          </div>
+          <div class="our-love-craft__img-wrap our-love-craft__img-wrap--tall">
+            <img src="{{ '641269185_25674395532243102_6296992574979054200_n.jpg' | asset_url }}" alt="Jewelry workbench with tools" loading="lazy">
+          </div>
+        </div>
+        <!-- Decorative blurs -->
+        <div class="our-love-craft__blur our-love-craft__blur--gold"></div>
+        <div class="our-love-craft__blur our-love-craft__blur--rose"></div>
+      </div>
+
+      <!-- Right: Text Content -->
+      <div class="our-love-craft__text">
+        <h2 class="our-love-craft__heading">The Quality Behind Heart to Soul</h2>
+        <div class="our-love-craft__accent"></div>
+        <div class="our-love-craft__body">
+          <p>
+            Today, true handmade artistry is a rare treasure—but at <strong>Heart to Soul</strong>, it is our creed. We attach the utmost importance to high-quality production, ensuring every ring, pendant, and bracelet is crafted with intention.
+          </p>
+          <p>
+            Our master jewelers infuse 100% handmade passion into pieces that are destined to give our customers the greatest pleasure. The fact that each piece of Heart to Soul jewelry tells its own story is a special feature we hold dear.
+          </p>
+          <p>
+            From the initial wire drawing to the final surface finishing, our in-house designer team develops and produces creations that follow a clear language of romance. When something is really high quality, you can feel it. It carries the weight of the artisan's touch and the warmth of their dedication.
+          </p>
+        </div>
+        <div class="our-love-craft__badge-row">
+          <span class="our-love-craft__sparkle">✨</span>
+          <em>100% Handmade with Passion</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="our-love-divider"></div>
+
+  <!-- Founder Quote Section -->
+  <div class="our-love-founder">
+    <div class="our-love-founder__watermark">Love</div>
+    <div class="our-love-founder__inner">
+      <div class="our-love-founder__portrait">
+        <img src="{{ 'unnamed.png' | asset_url }}" alt="Heart to Soul founder" loading="lazy">
+      </div>
+      <div class="our-love-founder__content">
+        <p class="our-love-founder__label">A Note From The Maker</p>
+        <h3 class="our-love-founder__quote-heading">"We thank you for your trust."</h3>
+        <p class="our-love-founder__quote">
+          "Creating jewelry is more than just metal and stone; it's about capturing a fleeting emotion and making it eternal. There are people and designers at work here who love their craft deeply. We look forward to welcoming you not just as a customer, but as part of our story."
+        </p>
+        <div class="our-love-founder__signature">
+          <p class="our-love-founder__from">Jewelry & Co. from:</p>
+          <h4 class="our-love-founder__name">Heart to Soul</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== OUR LOVE PAGE ===== */
+  .our-love-page { background: var(--color-bg); }
+
+  /* Hero */
+  .our-love-hero {
+    position: relative; height: 60vh; width: 100%; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  @media (min-width: 768px) { .our-love-hero { height: 70vh; } }
+  .our-love-hero__img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.85;
+  }
+  .our-love-hero__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, var(--color-bg) 0%, transparent 50%, transparent 100%);
+  }
+  .our-love-hero__overlay::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(139, 46, 61, 0.15); mix-blend-mode: overlay;
+  }
+  .our-love-hero__content {
+    position: relative; z-index: 2; text-align: center;
+    padding: 0 20px; max-width: 700px;
+  }
+  .our-love-hero__badge {
+    display: inline-block; border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 4px; margin-bottom: 20px;
+    color: var(--color-primary); text-transform: uppercase;
+    letter-spacing: 0.2em; font-size: 12px; font-weight: 700;
+  }
+  .our-love-hero__title {
+    font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 4rem);
+    color: #1a1a1a; line-height: 1.15; margin-bottom: 16px; font-weight: 500;
+  }
+  .our-love-hero__title em {
+    color: var(--color-primary); font-style: italic;
+  }
+  .our-love-hero__subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem); color: #4a4a4a;
+    max-width: 520px; margin: 0 auto; font-weight: 300; line-height: 1.7;
+  }
+
+  /* Craftsmanship section */
+  .our-love-craft {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .our-love-craft__grid {
+    display: grid; grid-template-columns: 1fr; gap: 48px;
+  }
+  @media (min-width: 768px) {
+    .our-love-craft__grid { grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  }
+  .our-love-craft__images {
+    position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .our-love-craft__col { display: flex; flex-direction: column; gap: 16px; }
+  .our-love-craft__col:first-child { padding-top: 32px; }
+  .our-love-craft__img-wrap {
+    border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transition: transform 0.5s;
+  }
+  .our-love-craft__img-wrap:hover { transform: scale(1.02); }
+  .our-love-craft__img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .our-love-craft__img-wrap--tall img { min-height: 260px; }
+  .our-love-craft__blur {
+    position: absolute; width: 160px; height: 160px; border-radius: 50%;
+    filter: blur(60px); z-index: -1; pointer-events: none;
+  }
+  .our-love-craft__blur--gold {
+    background: rgba(212, 175, 55, 0.2); left: -40px; top: 80px;
+  }
+  .our-love-craft__blur--rose {
+    background: rgba(139, 46, 61, 0.2); right: -40px; bottom: 80px;
+  }
+
+  .our-love-craft__heading {
+    font-family: var(--font-heading); font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--color-text); margin-bottom: 16px;
+  }
+  .our-love-craft__accent {
+    width: 80px; height: 3px;
+    background: linear-gradient(to right, var(--color-primary), transparent);
+    margin-bottom: 28px;
+  }
+  .our-love-craft__body { font-size: 15px; line-height: 1.9; color: var(--color-text-muted); }
+  .our-love-craft__body p { margin-bottom: 18px; }
+  .our-love-craft__body strong { color: var(--color-primary); font-weight: 500; }
+  .our-love-craft__badge-row {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--color-primary); font-family: var(--font-heading);
+    font-style: italic; font-size: 15px; margin-top: 8px;
+  }
+  .our-love-craft__sparkle { font-style: normal; }
+
+  /* Divider */
+  .our-love-divider {
+    max-width: 1200px; margin: 0 auto; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(190, 52, 78, 0.25), transparent);
+  }
+
+  /* Founder section */
+  .our-love-founder {
+    position: relative; max-width: 1200px; margin: 0 auto;
+    padding: 80px 24px;
+  }
+  .our-love-founder__watermark {
+    position: absolute; top: 20px; right: 40px;
+    font-family: 'Great Vibes', cursive; font-size: 120px;
+    color: var(--color-primary); opacity: 0.06; pointer-events: none;
+    line-height: 1;
+  }
+  .our-love-founder__inner {
+    background: var(--color-bg-warm);
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(190, 52, 78, 0.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 48px 32px; gap: 32px;
+  }
+  @media (min-width: 768px) {
+    .our-love-founder__inner {
+      flex-direction: row; padding: 64px; gap: 64px;
+    }
+  }
+  .our-love-founder__portrait {
+    flex-shrink: 0;
+    width: 200px; height: 200px; border-radius: 50%;
+    overflow: hidden; border: 4px solid white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    outline: 4px solid rgba(190, 52, 78, 0.15);
+  }
+  @media (min-width: 768px) {
+    .our-love-founder__portrait { width: 256px; height: 256px; }
+  }
+  .our-love-founder__portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .our-love-founder__content {
+    text-align: center; max-width: 600px;
+  }
+  @media (min-width: 768px) {
+    .our-love-founder__content { text-align: left; }
+  }
+  .our-love-founder__label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--color-primary); margin-bottom: 8px;
+  }
+  .our-love-founder__quote-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    color: var(--color-text); margin-bottom: 16px;
+  }
+  .our-love-founder__quote {
+    color: var(--color-text-muted); font-style: italic;
+    font-size: 16px; line-height: 1.8; font-weight: 300;
+  }
+  .our-love-founder__signature {
+    margin-top: 24px; display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+  }
+  @media (min-width: 768px) {
+    .our-love-founder__signature { flex-direction: row; align-items: center; }
+  }
+  .our-love-founder__from {
+    font-family: var(--font-heading); font-size: 18px;
+    color: var(--color-text);
+  }
+  .our-love-founder__name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    color: var(--color-primary); transform: rotate(-2deg);
+    line-height: 1;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Our Love",
+  "settings": []
+}
+{% endschema %}
