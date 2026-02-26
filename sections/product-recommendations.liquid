@@ -9,7 +9,7 @@
       <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
         {%- for recommendation in recommendations.products -%}
           <div>
-            {% render 'product-card', product_card_product: recommendation %}
+            {% render 'product-card', product: recommendation %}
           </div>
         {%- endfor -%}
       </div>
