@@ -26,8 +26,7 @@
       </div>
 
       <div class="hc-page__filters">
-        <button class="hc-filter-btn is-active" data-filter="all">All</button>
-        <button class="hc-filter-btn" data-filter="photo">Photos</button>
+        <button class="hc-filter-btn is-active" data-filter="photo">Photos</button>
         <button class="hc-filter-btn" data-filter="video">Videos</button>
       </div>
     </div>
@@ -201,6 +200,10 @@
         });
       });
     });
+
+    // Initialize default filter state (Photos)
+    const activeBtn = document.querySelector('.hc-filter-btn.is-active');
+    if (activeBtn) activeBtn.click();
   });
 </script>
 
