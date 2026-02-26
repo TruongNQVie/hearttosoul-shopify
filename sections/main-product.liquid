@@ -223,15 +223,47 @@
                 <p>• <strong>Material:</strong> 14K gold/white gold plated alloy</p>
               </div>
             </details>
-            <details class="product-accordion">
-              <summary>Special Offers!</summary>
-              <div class="accordion-content">
-                <p>🎉 <strong>Buy 1 Get 1 50% OFF</strong> — automatically applied at checkout</p>
-                <p>🚚 <strong>Free US Shipping</strong> — on all orders, no minimum</p>
-                <p>💝 <strong>Free Gift Wrapping</strong> — beautifully packaged, ready to gift</p>
-                <p>🔒 <strong>Lifetime Warranty</strong> — we stand behind every piece</p>
-              </div>
-            </details>
+          </div>
+
+          <!-- Upsell Section -->
+          <div class="product-upsell">
+            <div class="upsell-header">
+              <div class="upsell-title">🔥 <span>Special Offers!</span></div>
+              <div class="upsell-badge">SAVE UP TO 15%</div>
+            </div>
+            <div class="upsell-tags">
+              <span class="upsell-tag">+1 item &rarr; 5% OFF</span>
+              <span class="upsell-tag">+2 items &rarr; 15% OFF</span>
+            </div>
+            <div class="upsell-items">
+              <label class="upsell-item">
+                <input type="checkbox" class="upsell-checkbox">
+                <span class="custom-checkbox"></span>
+                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-1.jpg?v=1708412300" alt="Preserved Rose Jewelry Gift Box" class="upsell-img" onerror="this.src='{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
+                <div class="upsell-info">
+                  <span class="upsell-name">Preserved Rose Jewelry Gift Box — Eternal Flower with Heart-Shaped Acrylic Cover</span>
+                  <span class="upsell-price">$68.93</span>
+                </div>
+              </label>
+              <label class="upsell-item">
+                <input type="checkbox" class="upsell-checkbox">
+                <span class="custom-checkbox"></span>
+                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-2.jpg?v=1708412300" alt="Fashion Jewelry Box Red Apple" class="upsell-img" onerror="this.src='{{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
+                <div class="upsell-info">
+                  <span class="upsell-name">Fashion Jewelry Box Red Apple Christmas Gift Necklace Eternal Rose For Girl Mother...</span>
+                  <span class="upsell-price">$78.68</span>
+                </div>
+              </label>
+              <label class="upsell-item">
+                <input type="checkbox" class="upsell-checkbox">
+                <span class="custom-checkbox"></span>
+                <img src="https://cdn.shopify.com/s/files/1/0688/1755/1382/files/product-3.jpg?v=1708412300" alt="Rose Gift Box Jewelry Box" class="upsell-img" onerror="this.src='{{ 'product-3' | placeholder_svg_tag: 'placeholder-svg' }}'; this.onerror=null;">
+                <div class="upsell-info">
+                  <span class="upsell-name">Rose Gift Box Jewelry Box</span>
+                  <span class="upsell-price">$63.83</span>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -496,6 +528,48 @@
   .product-accordion[open] summary::after { content: "−"; }
   .accordion-content { padding: 0 0 14px; font-size: 13px; color: var(--color-text-muted); line-height: 1.7; }
   .accordion-content p { margin-bottom: 4px; }
+
+  /* ===== UPSELL SECTION ===== */
+  .product-upsell {
+    background: #faf8f5;
+    border: 1px solid rgba(190,52,78,0.15); border-radius: 12px; padding: 20px;
+    margin-bottom: 24px;
+  }
+  .upsell-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+  }
+  .upsell-title { font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+  .upsell-badge {
+    background: #f4d8dd; color: #b73851; font-size: 11px; font-weight: 700;
+    padding: 6px 12px; border-radius: 20px; text-transform: uppercase;
+  }
+  .upsell-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+  .upsell-tag {
+    background: transparent; border: 1px solid #e1babb; color: #5a5a5a;
+    font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 20px;
+  }
+  .upsell-items { display: flex; flex-direction: column; gap: 16px; }
+  .upsell-item {
+    display: flex; align-items: center; gap: 14px; cursor: pointer; position: relative;
+  }
+  .upsell-checkbox { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+  .custom-checkbox {
+    width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all 0.2s; background: white;
+  }
+  .upsell-item:hover .custom-checkbox { border-color: var(--color-primary); }
+  .upsell-checkbox:checked ~ .custom-checkbox {
+    background: var(--color-primary); border-color: var(--color-primary);
+  }
+  .upsell-checkbox:checked ~ .custom-checkbox::after {
+    content: ''; width: 4px; height: 10px; border: solid white;
+    border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px;
+  }
+  .upsell-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #fff; border: 1px solid #eee; }
+  .upsell-info { display: flex; flex-direction: column; gap: 2px; }
+  .upsell-name { font-size: 13px; font-weight: 600; line-height: 1.4; color: var(--color-text); }
+  .upsell-price { font-size: 14px; font-weight: 700; color: #c43b4f; }
 
   /* ===== STORY SECTION ===== */
   .product-story {
