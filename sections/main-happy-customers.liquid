@@ -7,7 +7,29 @@
 
 <div class="hc-page">
   <div class="hc-page__header">
-    <h1 class="hc-page__title">Happy Customers</h1>
+    <div class="hc-page__header-inner">
+      <h1 class="hc-page__title">Happy Customers</h1>
+      
+      <div class="hc-page__stats">
+        <div class="hc-page__rating-num">4.8</div>
+        <div class="hc-page__rating-info">
+          <div class="hc-page__stars-large">
+            <svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <div class="hc-page__review-count">Based on 10,248 reviews</div>
+        </div>
+      </div>
+
+      <div class="hc-page__filters">
+        <button class="hc-filter-btn is-active" data-filter="all">All</button>
+        <button class="hc-filter-btn" data-filter="photo">Photos</button>
+        <button class="hc-filter-btn" data-filter="video">Videos</button>
+      </div>
+    </div>
   </div>
 
   <div class="hc-grid-container">
@@ -19,10 +41,19 @@
         {%- assign prod_idx = idx | modulo: all_products.size -%}
         {%- assign rev_product = all_products[prod_idx] -%}
 
-        <!-- Card -->
-        <div class="hc-card" onclick="openHcModal({{ idx }})">
+        <!-- Card / 15% chance to be a video placeholder just for layout simulation -->
+        {%- assign is_video = false -%}
+        {%- assign rand_mod = i | modulo: 4 -%}
+        {%- if rand_mod == 0 -%}{%- assign is_video = true -%}{%- endif -%}
+        
+        <div class="hc-card" data-type="{% if is_video %}video{% else %}photo{% endif %}" onclick="openHcModal({{ idx }})">
           <div class="hc-card__img-wrap">
             <img src="{{ 'review-' | append: rev_num_str | append: '.jpg' | asset_url }}" alt="Review by {{ rev_names[idx] }}" loading="lazy">
+            {%- if is_video -%}
+            <div class="hc-card__play-icon">
+              <svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            {%- endif -%}
           </div>
           <div class="hc-card__body">
             <div class="hc-card__author-row">
@@ -130,6 +161,35 @@
       document.getElementById('hcModalContent').innerHTML = '';
     }, 300);
   }
+
+  // Filter Logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterBtns = document.querySelectorAll('.hc-filter-btn');
+    const cards = document.querySelectorAll('.hc-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Active state handling
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const filterVal = btn.getAttribute('data-filter');
+
+        // Filter cards
+        cards.forEach(card => {
+          if (filterVal === 'all') {
+            card.style.display = 'block';
+          } else {
+            if (card.getAttribute('data-type') === filterVal) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  });
 </script>
 
 <style>
@@ -139,17 +199,83 @@
     padding-bottom: 80px;
   }
   .hc-page__header {
-    text-align: center;
-    padding: 60px 20px 40px;
     background: #fff;
     border-bottom: 1px solid #eee;
     margin-bottom: 40px;
+    padding: 60px 20px 0;
+  }
+  .hc-page__header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
   }
   .hc-page__title {
     font-family: var(--font-heading);
-    font-size: 32px;
-    margin: 0;
+    font-size: 38px;
+    margin: 0 0 20px 0;
     color: #111;
+  }
+
+  /* Stats Block */
+  .hc-page__stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: #f9f9f9;
+    padding: 16px 32px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+  }
+  .hc-page__rating-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1;
+  }
+  .hc-page__rating-info {
+    text-align: left;
+  }
+  .hc-page__stars-large {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+  .hc-page__stars-large svg {
+    width: 20px; height: 20px;
+  }
+  .hc-page__review-count {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 0.02em;
+  }
+
+  /* Filters */
+  .hc-page__filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    transform: translateY(50%);
+  }
+  .hc-filter-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  }
+  .hc-filter-btn:hover {
+    border-color: #bbb;
+    color: #111;
+  }
+  .hc-filter-btn.is-active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
   }
 
   .hc-grid-container {
@@ -181,10 +307,30 @@
     box-shadow: 0 12px 25px rgba(0,0,0,0.08);
   }
 
+  .hc-card__img-wrap {
+    position: relative;
+  }
   .hc-card__img-wrap img {
     width: 100%;
     display: block;
     object-fit: cover;
+  }
+  .hc-card__play-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .hc-card__play-icon svg {
+    width: 18px; height: 18px;
+    margin-left: 2px;
   }
 
   .hc-card__body {
