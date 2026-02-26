@@ -156,7 +156,9 @@
             {%- endform -%}
 
             {%- if product.compare_at_price > product.price -%}
-              <p class="product-savings-below">🎉 <span style="color:var(--color-primary); font-weight:600;">You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!</span></p>
+              <p class="product-savings-below" style="text-align: center; margin-top: 12px; font-size: 13px; font-weight: 600; color: #12b158;">
+                🎉 You save: {{ savings | money }} — Buy 1 Get 1 50% OFF!
+              </p>
             {%- endif -%}
 
             <p class="product-gift-hint">🎁 <a href="#" style="color:var(--color-primary); font-weight:600; text-decoration:none;">Gift Hint for Loved Ones</a></p>
