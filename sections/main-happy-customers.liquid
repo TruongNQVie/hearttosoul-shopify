@@ -3,6 +3,7 @@
 {% endcomment %}
 
 {%- assign rev_names = "Gabriel W.|Liam S.|Matthew W.|Thomas R.|Mia N.|Robert L.|Alexander L.|Lucas J.|Sophie H.|Hannah W.|Eva J.|Danielle V.|Jason F.|Chloe T.|Sarah P.|David K.|Emily R." | split: "|" -%}
+{%- assign hc_countries = "🇺🇸 USA|🇬🇧 UK|🇨🇦 CAN|🇩🇪 GER|🇫🇷 FRA|🇺🇸 USA|🇬🇧 UK|🇨🇦 CAN|🇮🇹 ITA|🇺🇸 USA|🇪🇸 ESP|🇺🇸 USA|🇬🇧 UK|🇨🇦 CAN|🇫🇷 FRA|🇩🇪 GER|🇺🇸 USA" | split: "|" -%}
 {%- assign rev_texts = "Bought for my fiancée’s birthday. She was extremely happy with it.|Got this for our anniversary and my wife was amazed by the hidden necklace.|I gave this to my mother just because, and it made her day.|Such a meaningful gift, my mom was genuinely moved.|Best gift ever! The packaging and the necklace are both flawless.|Beautiful craftmanship. Will definitely order again for future occasions.|She cried when she saw it. 10/10 would buy again! Best gift ever.|Stunning presentation and the necklace shines brilliantly.|So dainty and beautiful. This is something I'll cherish forever.|Exceeded expectations. Fast shipping and amazing quality.|This beats a regular bouquet of flowers any day of the week!|So cute and such a lovely surprise. I adore every detail about it.|Gifted this to my mom and she has it displayed proudly. She loved it!|The attention to detail is crazy. Such a luxurious feel.|Nailed our 5 year anniversary with this gift. She absolutely loved it.|Prettiest thing I own right now. Going to buy one for my best friend too.|This gift is absolutely breathtaking. He surprised me with it!" | split: "|" -%}
 
 <div class="hc-page">
@@ -57,7 +58,7 @@
           </div>
           <div class="hc-card__body">
             <div class="hc-card__author-row">
-              <span class="hc-card__name">{{ rev_names[idx] }}</span>
+              <span class="hc-card__name">{{ rev_names[idx] }} <span class="hc-country-badge">{{ hc_countries[idx] }}</span></span>
               <span class="hc-card__verified">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 Verified
@@ -110,6 +111,7 @@
         is_video: {{ is_video }},
         video_url: "{% if is_video %}{{ 'ugc-video-' | append: rand_vid | append: '.mp4' | asset_url }}{% endif %}",
         name: "{{ rev_names[idx] }}",
+        country: "{{ hc_countries[idx] }}",
         text: "{{ rev_texts[idx] | replace: '"', '\"' }}",
         product_title: "{{ rev_product.title | escape | upcase }}",
         product_url: "{{ rev_product.url }}",
@@ -133,7 +135,7 @@
         </div>
         <div class="hc-modal__col-text">
           <div class="hc-modal__author-row">
-            <span class="hc-modal__name">${data.name}</span>
+            <span class="hc-modal__name">${data.name} <span class="hc-country-badge">${data.country}</span></span>
             <span class="hc-modal__verified">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
               Verified
@@ -359,8 +361,21 @@
     font-weight: 700;
     font-size: 14px;
     color: var(--color-text);
+    display: flex;
+    align-items: center;
   }
   .hc-modal__name { font-size: 16px; }
+
+  .hc-country-badge {
+    background: var(--color-bg-warm);
+    color: var(--color-text-muted);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    margin-left: 8px;
+  }
 
   .hc-card__verified, .hc-modal__verified {
     font-size: 12px;
