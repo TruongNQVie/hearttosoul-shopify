@@ -1473,6 +1473,136 @@ p {
     color: var(--color-text);
 }
 
+/* Product Quantity */
+.product-qty-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-16);
+}
+
+.qty-label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.product-qty {
+    display: flex;
+    align-items: center;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--color-text-muted);
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: var(--color-bg-warm);
+    color: var(--color-primary);
+}
+
+.qty-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--color-border);
+}
+
+.product-qty input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text);
+    -moz-appearance: textfield;
+}
+
+.product-qty input::-webkit-outer-spin-button,
+.product-qty input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* Product Form & CTA */
+.product-form {
+    margin-bottom: var(--space-8);
+}
+
+.product-form__submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--space-16);
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 12px rgba(157, 95, 27, 0.2);
+}
+
+.product-form__submit:hover:not([disabled]) {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(157, 95, 27, 0.3);
+}
+
+.product-form__submit[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--color-border);
+    color: var(--color-text-muted);
+    box-shadow: none;
+}
+
+.cta-icon {
+    font-size: 1.1em;
+}
+
+/* Drop a Hint Feature */
+.drop-hint-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--color-text-muted);
+    padding: var(--space-12);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: var(--space-16);
+}
+
+.drop-hint-btn:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: var(--color-bg-warm);
+}
+
 /* Cart Drawer Loading Skeleton */
 .cdraw-skeleton {
     display: flex;
@@ -1488,7 +1618,6 @@ p {
     background: linear-gradient(90deg, var(--color-bg-warm) 25%, #f0ebe5 50%, var(--color-bg-warm) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
-    flex-shrink: 0;
 }
 
 .cdraw-skeleton__lines {

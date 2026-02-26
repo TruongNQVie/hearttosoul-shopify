@@ -156,6 +156,15 @@
 
           <!-- Accordions -->
           <div class="product-accordions">
+            <details class="product-accordion" open>
+              <summary>The Artisan's Journey</summary>
+              <div class="accordion-content">
+                <p>• Hand-finished by master jewelers with decades of experience</p>
+                <p>• Crafted using sustainably sourced, conflict-free materials</p>
+                <p>• Every piece is polished to perfection to symbolize eternal devotion</p>
+                <p>• Arrives in our signature, eco-friendly luxury packaging</p>
+              </div>
+            </details>
             <details class="product-accordion">
               <summary>Materials & Care</summary>
               <div class="accordion-content">
@@ -288,6 +297,12 @@
                 {%- endif -%}
               </button>
             {%- endform -%}
+            
+            <!-- Drop a Hint Feature -->
+            <button type="button" class="drop-hint-btn" onclick="alert('In a real environment, this would open a popup to send an email hint to a partner!');">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Drop a Hint
+            </button>
 
             {%- assign current_price = product.price | default: 9468 -%}
             {%- assign compare_price = product.compare_at_price | default: 18936 -%}
