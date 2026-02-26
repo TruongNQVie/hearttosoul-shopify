@@ -42,6 +42,40 @@
     {% render 'cart-drawer' %}
     {% render 'sales-popup' %}
 
+    <!-- Global Back to Top -->
+    <button class="global-back-to-top" id="global-back-to-top" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+    <style>
+      .global-back-to-top {
+        position: fixed; bottom: 30px; right: 30px;
+        width: 44px; height: 44px; border-radius: 50%;
+        background: var(--color-text); color: white;
+        border: none; cursor: pointer; z-index: 998;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; visibility: hidden;
+        transition: all 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .global-back-to-top.visible { opacity: 0.6; visibility: visible; }
+      .global-back-to-top:hover { opacity: 1; transform: translateY(-3px); }
+      @media (max-width: 768px) {
+        .global-back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const bttBtn = document.getElementById('global-back-to-top');
+        if (bttBtn) {
+          window.addEventListener('scroll', () => {
+            bttBtn.classList.toggle('visible', window.scrollY > 400);
+          });
+          bttBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+      });
+    </script>
+
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>
