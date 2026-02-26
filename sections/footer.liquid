@@ -1,6 +1,26 @@
 <footer class="footer">
   <div class="container">
     
+    <!-- Newsletter Section -->
+    <div class="footer__newsletter" style="text-align: center; padding: 40px 20px 60px; border-bottom: 1px solid var(--color-border); margin-bottom: 30px;">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(2rem, 4.5vw, 2.8rem); color: var(--color-primary-dark); margin-bottom: 12px; font-weight: 500;">There are things we don't tell everyone.</h2>
+      <p style="color: var(--color-text-muted); font-size: 15px; margin-bottom: 24px;">Sign up now and get 20% off your order</p>
+      {%- form 'customer', class: 'footer-newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div style="display: flex; justify-content: center; max-width: 460px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 4px;">
+          <input type="email" name="contact[email]" placeholder="Email address" required 
+            style="flex: 1; min-width: 0; padding: 14px 20px; border: 1px solid var(--color-primary-dark); border-right: none; border-radius: 4px 0 0 4px; font-size: 14px; outline: none; font-family: var(--font-body); background: transparent; color: var(--color-text);">
+          <button type="submit" 
+            style="background: var(--color-primary-dark); color: #fff; border: 1px solid var(--color-primary-dark); padding: 0 28px; font-size: 13px; font-weight: 600; text-transform: uppercase; cursor: pointer; border-radius: 0 4px 4px 0; transition: background 0.3s; letter-spacing: 0.5px;">
+            Subscribe
+          </button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p style="color: green; margin-top: 10px; font-size: 14px;">Thank you for subscribing!</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
     <!-- Top Row: Back to Top & Social Icons -->
     <div class="footer__top-row">
       <div class="footer__top-spacer"></div>
@@ -66,6 +86,27 @@
           <a href="mailto:hearttosoul.shop@gmail.com" style="color: var(--color-text-muted); text-decoration: none; display: block;">hearttosoul.shop@gmail.com</a>
           <a href="tel:+15012838487" style="color: var(--color-text-muted); text-decoration: none; display: block;">+1 501 2838487</a>
         </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer__bottom" style="display: flex; justify-content: space-between; align-items: center; padding-top: 30px; margin-top: 20px; border-top: 1px solid var(--color-border); flex-wrap: wrap; gap: 20px;">
+      <div class="footer__copyright" style="font-size: 13px; color: var(--color-text-muted);">
+        Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}
+      </div>
+      <div class="footer__payment-methods" style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+        {%- for type in shop.enabled_payment_types -%}
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          </span>
+        {%- else -%}
+          <!-- Fallback icons -->
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">{{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">{{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">{{ 'american_express' | payment_type_svg_tag: class: 'payment-icon' }}</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">{{ 'paypal' | payment_type_svg_tag: class: 'payment-icon' }}</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 4px 8px; background: #fff; border: 1px solid #E5E5E5; border-radius: 4px; height: 26px;">{{ 'apple_pay' | payment_type_svg_tag: class: 'payment-icon' }}</span>
+        {%- endfor -%}
       </div>
     </div>
   </div>
