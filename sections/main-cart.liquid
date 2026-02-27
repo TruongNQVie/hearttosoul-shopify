@@ -87,7 +87,13 @@
         <!-- Give Extra Love Upsell (inside items column) -->
         <div class="cart-page__promos" style="margin-top:24px;">
           {%- assign upsell_candidates = "" | split: ',' -%}
-          {%- for p in collections['all'].products limit: 10 -%}
+          {%- assign source_products = collections.all.products -%}
+          {%- if source_products.size == 0 -%}
+            {%- for item in cart.items limit: 1 -%}
+              {%- assign source_products = item.product.collections.first.products -%}
+            {%- endfor -%}
+          {%- endif -%}
+          {%- for p in source_products limit: 20 -%}
             {%- if p.available -%}
               {%- assign upsell_candidates = upsell_candidates | push: p -%}
             {%- endif -%}
