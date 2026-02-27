@@ -42,10 +42,12 @@
         "gift-memory": {
             "type": "gift-unique-memory",
             "settings": {
-                "layout": "text_first",
+                "layout": "image_first",
+                "image_asset": "gift-memory-image.jpg",
                 "heading": "Gift a unique memory.",
-                "text": "<p>Tired of giving the same boring, generic gifts? It’s hard to find something that holds <em>real</em> meaning.</p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel. A memory they can literally wear close to their heart, forever.</p>",
-                "button_label": "SHOP NOW"
+                "text": "<p>Tired of giving the same generic, boring presents? It’s stressful trying to find something that actually holds <strong>real meaning.</strong></p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel.</p><p><em>Give them a memory they can literally wear close to their heart, forever.</em></p>",
+                "button_label": "SHOP NOW",
+                "button_link": "shopify:\/\/collections\/bestsellers"
             }
         },
         "quality-warranty": {
