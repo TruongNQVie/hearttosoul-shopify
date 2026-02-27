@@ -174,7 +174,7 @@
             <div class="cart-express__buttons">
               <!-- Hardcoded visual buttons to mimic dynamic checkout -->
               <button class="cart-express__btn cart-express__btn--shopify" onclick="window.location='/checkout'">
-                <span style="font-family: inherit; font-size: 22px; font-weight: 800; letter-spacing: -1px; text-transform: lowercase; margin-top: 1px;">shop</span>
+                <span style="color:#fff; font-size: 22px; font-weight: 800; letter-spacing: -1px; text-transform: lowercase;">shop</span>
               </button>
               <button class="cart-express__btn cart-express__btn--paypal" onclick="window.location='/checkout'">
                 <strong style="color:#003087; font-style: italic; font-weight: 800; font-size: 20px; margin-right: 1px;">Pay</strong><strong style="color:#009CDE; font-style: italic; font-weight: 800; font-size: 20px;">Pal</strong>
@@ -331,21 +331,22 @@
   .cart-page__item-price { font-size: 15px; font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-8); }
   .cart-page__item-qty {
     display: flex; align-items: center; gap: 0;
-    border: 1px solid var(--color-border); border-radius: var(--radius-full); width: fit-content;
-    height: 38px; overflow: hidden;
+    border: 1.5px solid var(--color-border); border-radius: 999px; width: fit-content;
+    height: 42px; overflow: hidden;
   }
-  .cart-page__item-qty-btn {
-    width: 36px; height: 100%; display: flex; align-items: center; justify-content: center;
-    background: var(--color-bg-warm); border: none; font-size: 18px; cursor: pointer; color: var(--color-text);
+  .cart-page__item-qty a { text-decoration: none; display: flex; height: 100%; }
+  .cart-qty-btn {
+    width: 40px; height: 100%; display: flex; align-items: center; justify-content: center;
+    background: var(--color-bg-warm); border: none; font-size: 20px; font-weight: 500;
+    cursor: pointer; color: var(--color-text); transition: background 0.2s;
   }
-  .cart-page__item-qty-btn:hover { background: rgba(0,0,0,0.05); }
-  .cart-page__item-qty input {
-    width: 40px; height: 100%; text-align: center; border: none;
-    border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border);
-    font-size: 15px; font-weight: 500; -moz-appearance: textfield;
+  .cart-qty-btn:hover { background: rgba(0,0,0,0.08); }
+  .cart-qty-num {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 100%; text-align: center;
+    border-left: 1.5px solid var(--color-border); border-right: 1.5px solid var(--color-border);
+    font-size: 16px; font-weight: 600; background: var(--color-white);
   }
-  .cart-page__item-qty input::-webkit-outer-spin-button,
-  .cart-page__item-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   
   .cart-page__item-total { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-8); min-width: 80px; }
   .cart-page__item-total span { font-size: 16px; font-weight: 600; }
@@ -416,14 +417,15 @@
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   .cart-express__btn {
     flex: 1; display: flex; align-items: center; justify-content: center; gap: 0;
-    height: 48px; border-radius: 6px;
+    height: 48px; border-radius: 8px;
     font-size: 13px; font-weight: 600;
     border: none; cursor: pointer; transition: all 0.2s;
+    color: #ffffff;
   }
-  .cart-express__btn:hover { opacity: 0.85; transform: translateY(-1px); }
-  .cart-express__btn--shopify { background: #5A31F4; }
-  .cart-express__btn--paypal { background: #FFC439; }
-  .cart-express__btn--google { background: #000000; }
+  .cart-express__btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .cart-express__btn--shopify { background: #5A31F4; color: #fff; }
+  .cart-express__btn--paypal { background: #FFC439; color: #003087; }
+  .cart-express__btn--google { background: #000000; color: #fff; }
 
   /* Gift Message */
   .cart-gift-message {
