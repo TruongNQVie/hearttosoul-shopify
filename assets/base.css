@@ -5,10 +5,10 @@
 
 :root {
     /* ── Color Palette (Sacred Love) ── */
-    --color-bg: #F5EAE1;
-    /* Brand Base (Warm Ivory) - replaces old white */
-    --color-bg-warm: #F5EAE1;
-    /* Match base for seamless sections */
+    --color-bg: #F9F8F3;
+    /* Brand Base (Ivory) */
+    --color-bg-warm: #E9DECE;
+    /* Sand accent */
     --color-bg-surface: #D9D8DD;
     /* Surface (Soft Lilac Grey) */
 
