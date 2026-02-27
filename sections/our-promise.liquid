@@ -1,26 +1,27 @@
 <section class="our-promise">
+  <div class="promise-grain-overlay"></div>
   <div class="container">
-    <div class="section-title">
+    <div class="section-title promise-section-title">
       <span class="our-promise__label">{{ section.settings.subheading }}</span>
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.description }}</p>
+      <h2 class="promise-heading">{{ section.settings.heading }}</h2>
+      <p class="promise-subtitle">{{ section.settings.description }}</p>
     </div>
 
     <div class="our-promise__grid">
       {%- for block in section.blocks -%}
-        <div class="our-promise__card" {{ block.shopify_attributes }}>
+        <div class="our-promise__card promise-animate" style="--anim-order:{{ forloop.index0 }}" {{ block.shopify_attributes }}>
           <div class="our-promise__icon">
             {%- case block.settings.icon -%}
               {%- when 'eco' -%}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22c1.25-1.25 2.5-2 4.27-2 3.5 0 4 3 8.46 3C19.25 23 22 20.25 22 15.73 22 11 18 7 12 3c0 0-1 3-1 6.5S13 16 13 16"/><path d="M7 22c-1.5-2-2.5-5-1-8"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22c1.25-1.25 2.5-2 4.27-2 3.5 0 4 3 8.46 3C19.25 23 22 20.25 22 15.73 22 11 18 7 12 3c0 0-1 3-1 6.5S13 16 13 16"/><path d="M7 22c-1.5-2-2.5-5-1-8"/></svg>
               {%- when 'sustainable' -%}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
               {%- when 'care' -%}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               {%- when 'quality' -%}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
               {%- else -%}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
             {%- endcase -%}
           </div>
           <h3 class="our-promise__title">{{ block.settings.title }}</h3>
@@ -33,18 +34,51 @@
 
 <style>
   .our-promise {
-    padding: 60px 0;
-    background: var(--color-bg);
+    padding: 70px 0;
+    background: #E9DECE;
+    position: relative;
+    overflow: hidden;
   }
+
+  /* Grain Texture Overlay */
+  .promise-grain-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  .our-promise .container { position: relative; z-index: 1; }
+
   .our-promise__label {
-    font-size: 14px;
-    letter-spacing: 0.2em;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--color-primary);
+    color: #E6CDA9;
     font-weight: 600;
     display: block;
+    margin-bottom: 10px;
+  }
+  .promise-heading {
+    font-family: 'Cormorant Garamond', serif !important;
+    color: #1D1D1D !important;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     margin-bottom: 8px;
   }
+  .promise-subtitle {
+    font-family: 'Montserrat', sans-serif !important;
+    color: rgba(29,29,29,0.6) !important;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
   .our-promise__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -52,30 +86,58 @@
     margin-top: 50px;
   }
   @media (min-width: 750px) { .our-promise__grid { grid-template-columns: repeat(4, 1fr); } }
-  .our-promise__card { text-align: center; }
+  .our-promise__card {
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .our-promise__card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Minimalist line-art icons */
   .our-promise__icon {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: rgba(190, 52, 78, 0.08);
+    background: transparent;
+    border: 1px solid rgba(230, 205, 169, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 16px;
-    color: var(--color-primary);
+    color: #E6CDA9;
+    transition: all 0.35s ease;
+  }
+  .our-promise__card:hover .our-promise__icon {
+    background: rgba(230, 205, 169, 0.12);
+    border-color: #E6CDA9;
+    transform: scale(1.08);
   }
   .our-promise__icon svg { width: 24px; height: 24px; }
   .our-promise__title {
-    font-family: var(--font-body);
-    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 8px;
-    color: var(--color-text);
+    color: #1D1D1D;
   }
   .our-promise__text {
-    font-size: 13px;
-    color: var(--color-text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: rgba(29, 29, 29, 0.55);
     line-height: 1.6;
+  }
+
+  /* Scroll fade-in animation */
+  .promise-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: calc(var(--anim-order, 0) * 0.12s);
+  }
+  .promise-animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 
@@ -116,3 +178,20 @@
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const promiseItems = document.querySelectorAll('.promise-animate');
+  if (promiseItems.length) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    promiseItems.forEach(item => obs.observe(item));
+  }
+});
+</script>

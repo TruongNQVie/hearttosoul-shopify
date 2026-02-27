@@ -1,9 +1,9 @@
-<section class="section-padding" style="background: var(--color-white);">
-  <div style="max-width:1320px; margin:0 auto; padding:0 20px;">
+<section class="featured-products-section section-padding">
+  <div class="featured-products-container">
     <div class="section-title">
-      <h2>{{ section.settings.title }}</h2>
+      <h2 class="fp-heading">{{ section.settings.title }}</h2>
       {%- if section.settings.description != blank -%}
-        <p>{{ section.settings.description }}</p>
+        <p class="fp-subtitle">{{ section.settings.description }}</p>
       {%- endif -%}
     </div>
 
@@ -45,16 +45,40 @@
 </section>
 
 <style>
-  /* Inline overrides — bypass CSS file caching */
+  .featured-products-section {
+    background: #F9F8F3; /* Trắng Ngà */
+  }
+  .featured-products-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .fp-heading {
+    font-family: 'Cormorant Garamond', serif !important;
+    color: #1D1D1D !important;
+    font-weight: 500;
+  }
+  .fp-subtitle {
+    font-family: 'Montserrat', sans-serif !important;
+    color: rgba(29,29,29,0.55) !important;
+    font-size: 14px;
+  }
+
+  /* Product Card Overrides */
   .product-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(29, 29, 29, 0.1) !important;
+    box-shadow: none !important;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease !important;
   }
   .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    transform: translateY(-4px) !important;
+    box-shadow: none !important;
+    border-color: rgba(29, 29, 29, 0.2) !important;
   }
   .product-card__info {
-    padding: 14px 8px 4px !important;
+    padding: 14px 12px 8px !important;
   }
   .product-card__rating {
     margin-bottom: 6px;
@@ -71,22 +95,98 @@
     filter: drop-shadow(0 2px 4px rgba(255,140,0,0.35));
   }
   .product-card__title {
-    font-size: 17px !important;
-    font-weight: 700 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
     line-height: 1.45 !important;
     margin-bottom: 8px !important;
+    color: #1D1D1D !important;
   }
   .product-card:hover .product-card__title {
-    color: var(--color-primary) !important;
+    color: #7F1B17 !important;
   }
+
+  /* Price colors */
   .product-card__price {
     font-size: 18px !important;
     font-weight: 700 !important;
   }
+  .product-card .price-current {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #7F1B17 !important; /* Đỏ Anh Đào Sậm */
+    font-weight: 700 !important;
+    font-size: 18px !important;
+  }
+  .product-card .price-compare {
+    color: #B4B4B4 !important;
+    text-decoration: line-through !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+  }
   .product-card__shipping {
-    color: var(--color-primary) !important;
+    color: #E6CDA9 !important;
     font-weight: 500 !important;
     margin-top: 6px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+  }
+
+  /* Add to Cart / Quick Add Button */
+  .btn-quick-add {
+    background: #480003 !important;
+    color: #F9F8F3 !important;
+    border: none !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    transition: background 0.3s ease, transform 0.1s ease !important;
+  }
+  .btn-quick-add:hover {
+    background: #7F1B17 !important;
+  }
+  .btn-quick-add:active {
+    transform: scale(0.96) translateY(2px) !important;
+    transition: transform 0.08s ease !important;
+  }
+
+  /* Image hover crossfade (already supported via secondary img) */
+  .product-card__image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card__main-img {
+    transition: opacity 0.5s ease !important;
+  }
+  .product-card__secondary-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease !important;
+  }
+  .product-card:hover .product-card__main-img {
+    opacity: 0 !important;
+  }
+  .product-card:hover .product-card__secondary-img {
+    opacity: 1 !important;
+  }
+
+  .featured-products__view-all {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1D1D1D;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+  }
+  .featured-products__view-all:hover {
+    color: #7F1B17;
   }
 </style>
 
