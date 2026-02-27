@@ -651,6 +651,32 @@
     const stickyBar = document.getElementById('cart-sticky-bar');
     const itemsContainer = document.querySelector('.cart-page__items-container');
     
+    // Express Checkout Button Hack
+    // Shopify injects these dynamically in a 1-column layout sometimes, we force them manually
+    const enforceHorizontalExpress = () => {
+      const expressUl = document.querySelector('.additional-checkout-buttons ul');
+      if (expressUl) {
+         expressUl.style.display = 'flex';
+         expressUl.style.flexDirection = 'row';
+         expressUl.style.flexWrap = 'nowrap';
+         expressUl.style.gap = '8px';
+         
+         const lis = expressUl.querySelectorAll('li');
+         lis.forEach(li => {
+            li.style.flex = '1';
+            li.style.marginTop = '0';
+         });
+      }
+    };
+    
+    // Observe DOM for Shopify dynamic injection
+    const observerEC = new MutationObserver(enforceHorizontalExpress);
+    const expressContainer = document.querySelector('.additional-checkout-buttons');
+    if (expressContainer) {
+       observerEC.observe(expressContainer, { childList: true, subtree: true });
+       enforceHorizontalExpress(); // Run once just in case
+    }
+    
     if (stickyBar && itemsContainer) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
