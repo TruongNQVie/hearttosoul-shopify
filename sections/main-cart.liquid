@@ -88,18 +88,28 @@
         <div class="cart-page__promos" style="margin-top:24px;">
           {%- assign upsell_candidates = "" | split: ',' -%}
           {%- assign upsell_collection = collections['all'] -%}
+          {%- assign debug_total = 0 -%}
+          {%- assign debug_available = 0 -%}
+          {%- assign debug_not_in_cart = 0 -%}
           {%- for p in upsell_collection.products limit: 20 -%}
+            {%- assign debug_total = debug_total | plus: 1 -%}
             {%- assign is_in_cart = false -%}
             {%- for item in cart.items -%}
-              {%- if item.product.id == p.id -%}
+              {%- if item.product_id == p.id -%}
                 {%- assign is_in_cart = true -%}
               {%- endif -%}
             {%- endfor -%}
-            {%- if is_in_cart == false and p.available and upsell_candidates.size < 6 -%}
-              {%- assign upsell_candidates = upsell_candidates | push: p -%}
+            {%- if p.available -%}
+              {%- assign debug_available = debug_available | plus: 1 -%}
             {%- endif -%}
+            {%- unless is_in_cart -%}
+              {%- assign debug_not_in_cart = debug_not_in_cart | plus: 1 -%}
+              {%- if p.available -%}
+                {%- assign upsell_candidates = upsell_candidates | push: p -%}
+              {%- endif -%}
+            {%- endunless -%}
           {%- endfor -%}
-          <!-- DEBUG: collection={{ upsell_collection.title }}, products_count={{ upsell_collection.products_count }}, candidates={{ upsell_candidates.size }} -->
+          <!-- DEBUG2: total={{ debug_total }}, available={{ debug_available }}, not_in_cart={{ debug_not_in_cart }}, candidates={{ upsell_candidates.size }}, cart_items={{ cart.item_count }} -->
 
           {%- if upsell_candidates.size > 0 -%}
             <div class="cart-upsell mt-12 mb-12">
