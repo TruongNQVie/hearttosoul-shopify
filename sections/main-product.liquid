@@ -442,7 +442,7 @@
           <button class="qty-btn" onclick="changeStickyQty(1)">+</button>
         </div>
 
-        <button class="sticky-bar__buy" onclick="document.querySelector('.product-form__submit').click();">
+        <button class="sticky-bar__buy" onclick="document.querySelector('.purchase-submit-btn').click();">
           <span class="sticky-buy__icon">♡</span>
           <span class="sticky-buy__label">ADD TO BAG</span>
           <span class="sticky-buy__price">{{ current_price | money }}</span>
@@ -1146,7 +1146,7 @@
   });
 
   // ===== AJAX Add to Cart (opens cart drawer instead of navigating) =====
-  document.querySelectorAll('.product-form').forEach(form => {
+  document.querySelectorAll('.purchase-form').forEach(form => {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(this);
@@ -1155,7 +1155,7 @@
         quantity: parseInt(formData.get('quantity')) || 1
       };
 
-      const submitBtn = this.querySelector('.product-form__submit');
+      const submitBtn = this.querySelector('.purchase-submit-btn');
       const origText = submitBtn.innerHTML;
       submitBtn.innerHTML = '<span class="cta-icon">✓</span> ADDING...';
       submitBtn.disabled = true;
