@@ -73,7 +73,10 @@
             </div>
             <div class="cart-page__item-total">
               <span>{{ item.line_price | money }}</span>
-              <a href="javascript:void(0)" class="cart-page__remove" aria-label="Remove" onclick="showRemovePopup('/cart/change?id={{ item.key }}&quantity=0', '{{ item.title | escape }}', '{{ item.image | image_url: width: 200 }}')">
+              <a href="javascript:void(0)" class="cart-page__remove" aria-label="Remove"
+                 data-remove-url="/cart/change?id={{ item.key }}&quantity=0"
+                 data-remove-title="{{ item.title | escape }}"
+                 data-remove-img="{{ item.image | image_url: width: 200 }}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
               </a>
             </div>
@@ -559,6 +562,19 @@
   document.getElementById('popup-confirm-remove').addEventListener('click', function() {
     if (pendingRemoveUrl) {
       window.location.href = pendingRemoveUrl;
+    }
+  });
+
+  // Attach remove buttons via event delegation
+  document.addEventListener('click', function(e) {
+    var removeBtn = e.target.closest('.cart-page__remove[data-remove-url]');
+    if (removeBtn) {
+      e.preventDefault();
+      showRemovePopup(
+        removeBtn.getAttribute('data-remove-url'),
+        removeBtn.getAttribute('data-remove-title'),
+        removeBtn.getAttribute('data-remove-img')
+      );
     }
   });
 
