@@ -13,11 +13,9 @@
     {%- if remaining > 0 -%}
       {%- assign progress_pct = cart.total_price | times: 100 | divided_by: free_shipping_threshold -%}
       <div class="cart-shipping-bar">
-        <div class="cart-shipping-bar__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 18H3c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-2"/><path d="M19 18h2c1.1 0 2-.9 2-2v-4l-3-4h-3v10z"/><circle cx="8" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-        </div>
         <div class="cart-shipping-bar__text">
-          Add <strong>{{ remaining | money }}</strong> more for <strong>FREE Shipping!</strong>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B7355" stroke-width="1.5"><path d="M5 18H3c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-2"/><path d="M19 18h2c1.1 0 2-.9 2-2v-4l-3-4h-3v10z"/><circle cx="8" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+          <span>Add <strong>{{ remaining | money }}</strong> more for <strong>complimentary shipping</strong></span>
         </div>
         <div class="cart-shipping-bar__track">
           <div class="cart-shipping-bar__fill" style="width: {{ progress_pct }}%;"></div>
@@ -25,14 +23,8 @@
       </div>
     {%- else -%}
       <div class="cart-shipping-bar cart-shipping-bar--achieved">
-        <div class="cart-shipping-bar__success-content">
-          <div class="cart-shipping__success-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-          <div class="cart-shipping-bar__success-text">
-            Congratulations! You've unlocked <strong>FREE Shipping</strong>
-          </div>
-        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B7355" stroke-width="1.5"><path d="M5 18H3c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-2"/><path d="M19 18h2c1.1 0 2-.9 2-2v-4l-3-4h-3v10z"/><circle cx="8" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        <span>Your keepsake qualifies for <strong>complimentary shipping</strong></span>
       </div>
     {%- endif -%}
 
@@ -54,14 +46,10 @@
               {% endunless %}
               <p class="cart-page__item-price">
                 {%- if item.variant.compare_at_price > item.variant.price -%}
-                  <span style="color: var(--color-primary); font-weight: 600;">{{ item.price | money }}</span>
-                  <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ item.variant.compare_at_price | money }}</span>
+                  <span class="cart-price-sale">{{ item.price | money }}</span>
+                  <span class="cart-price-compare">{{ item.variant.compare_at_price | money }}</span>
                 {%- else -%}
-                  {%- assign hash_val = item.product.id | modulo: 100 -%}
-                  {%- assign multiplier = 200 | plus: hash_val -%}
-                  {%- assign fake_compare_price = item.price | times: multiplier | divided_by: 100 -%}
-                  <span style="color: var(--color-primary); font-weight: 600;">{{ item.price | money }}</span>
-                  <span style="text-decoration: line-through; opacity: 0.6; font-size: 0.85em; margin-left: 6px;">{{ fake_compare_price | money }}</span>
+                  <span class="cart-price-sale">{{ item.price | money }}</span>
                 {%- endif -%}
               </p>
               <div class="cart-page__item-qty">
@@ -87,62 +75,76 @@
           </div>
         {% endfor %}
 
-        <!-- Give Extra Love Upsell (inside items column) -->
-        <div class="cart-page__promos" style="margin-top:40px;">
+        <!-- Love Note Module -->
+        <div class="cart-love-note">
+          <div class="cart-love-note__header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B7355" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <h4>Include a Love Note <span>(Complimentary)</span></h4>
+          </div>
+          <textarea class="cart-love-note__input" id="cart-love-note" name="attributes[love_note]" placeholder="Write your heartfelt message here... We'll hand-print it on premium FSC-certified paper." maxlength="250" rows="3"></textarea>
+          <div class="cart-love-note__counter"><span id="love-note-count">0</span>/250</div>
+        </div>
+
+        <!-- Gift Wrapping Option -->
+        <label class="cart-gift-wrap">
+          <input type="checkbox" name="attributes[gift_wrap]" value="yes" style="display:none;" onchange="this.parentElement.classList.toggle('active', this.checked)">
+          <div class="cart-gift-wrap__check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div class="cart-gift-wrap__text">
+            <span class="cart-gift-wrap__title">Wrap as a sacred gift</span>
+            <span class="cart-gift-wrap__desc">Hand-tied silk ribbon & signature packaging</span>
+          </div>
+          <span class="cart-gift-wrap__badge">Free</span>
+        </label>
+
+        <!-- Complete the Vow - Upsell Carousel -->
+        <div class="cart-page__promos">
           {%- assign upsell_collection = collections['all'] -%}
           {%- assign upsell_shown = 0 -%}
           {%- assign has_upsell = false -%}
-
-          {%- comment -%} First pass: check if we have any candidates {%- endcomment -%}
           {%- for p in upsell_collection.products limit: 20 -%}
             {%- assign is_in_cart = false -%}
             {%- for item in cart.items -%}
-              {%- if item.product_id == p.id -%}
-                {%- assign is_in_cart = true -%}
-              {%- endif -%}
+              {%- if item.product_id == p.id -%}{%- assign is_in_cart = true -%}{%- endif -%}
             {%- endfor -%}
             {%- unless is_in_cart -%}
-              {%- if p.available -%}
-                {%- assign has_upsell = true -%}
-              {%- endif -%}
+              {%- if p.available -%}{%- assign has_upsell = true -%}{%- endif -%}
             {%- endunless -%}
           {%- endfor -%}
 
           {%- if has_upsell -%}
             <div class="cart-upsell">
               <div class="cart-upsell__header">
-                <h3>GIVE EXTRA LOVE</h3>
-                <p>Perfect pairings for a complete gift experience</p>
+                <h3>Complete the Vow</h3>
+                <p>Complementary pieces to elevate your gift</p>
               </div>
-              
-              <div class="cart-upsell__grid">
+              <div class="cart-upsell__carousel">
                 {%- for p in upsell_collection.products limit: 20 -%}
-                  {%- if upsell_shown >= 2 -%}{%- break -%}{%- endif -%}
+                  {%- if upsell_shown >= 4 -%}{%- break -%}{%- endif -%}
                   {%- assign is_in_cart = false -%}
                   {%- for item in cart.items -%}
-                    {%- if item.product_id == p.id -%}
-                      {%- assign is_in_cart = true -%}
-                    {%- endif -%}
+                    {%- if item.product_id == p.id -%}{%- assign is_in_cart = true -%}{%- endif -%}
                   {%- endfor -%}
                   {%- unless is_in_cart -%}
                     {%- if p.available -%}
-                      <div class="cart-upsell__item">
+                      <div class="cart-upsell__slide">
                         <a href="{{ p.url }}" class="cart-upsell__img-wrap">
                           <img src="{{ p.featured_image | image_url: width: 300 }}" alt="{{ p.title | escape }}">
                         </a>
                         <div class="cart-upsell__info">
-                           <a href="{{ p.url }}" class="cart-upsell__title">{{ p.title }}</a>
+                           <a href="{{ p.url }}" class="cart-upsell__title">{{ p.title | truncate: 40 }}</a>
                            <div class="cart-upsell__price">
-                             {{ p.price | money }}
+                             <span class="cart-upsell__price-current">{{ p.price | money }}</span>
                              {%- if p.compare_at_price > p.price -%}
-                               <span style="text-decoration:line-through;opacity:0.5;font-size:12px;margin-left:6px;font-weight:400;">{{ p.compare_at_price | money }}</span>
+                               <span class="cart-upsell__price-compare">{{ p.compare_at_price | money }}</span>
                              {%- endif -%}
                            </div>
                         </div>
                         <form action="/cart/add" method="post" style="margin:0;">
                           <input type="hidden" name="id" value="{{ p.first_available_variant.id }}">
                           <input type="hidden" name="quantity" value="1">
-                          <button type="submit" class="cart-upsell__add">+ ADD TO BAG</button>
+                          <button type="submit" class="cart-upsell__add">+ Add</button>
                         </form>
                       </div>
                       {%- assign upsell_shown = upsell_shown | plus: 1 -%}
@@ -162,9 +164,8 @@
           <!-- Order Protection -->
           <label class="cdraw-protect">
             <div class="cdraw-protect__info">
-              <div class="cdraw-protect__title">PROTECT YOUR ORDER</div>
-              <div class="cdraw-protect__desc">From Loss, Damage & Theft for only <span class="cdraw-protect__price">$4.20</span></div>
-              <div style="font-size:12px; margin-top:6px; font-weight:500;">Yes, protect my order please!</div>
+              <div class="cdraw-protect__title">Protect Your Keepsake</div>
+              <div class="cdraw-protect__desc">Comprehensive coverage for love's journey — <span class="cdraw-protect__price">$4.20</span></div>
             </div>
             <input type="checkbox" style="display:none;" onchange="this.parentElement.classList.toggle('active', this.checked)">
             <div class="cdraw-protect__toggle"></div>
@@ -176,7 +177,7 @@
           </div>
           <div class="cart-page__summary-row cart-page__summary-shipping">
             <span>Shipping</span>
-            <span style="color: var(--color-success); font-weight: 600;">FREE</span>
+            <span class="cart-shipping-free">Complimentary</span>
           </div>
           <div class="cart-page__summary-divider"></div>
           <div class="cart-page__summary-row cart-page__summary-total">
@@ -184,10 +185,10 @@
             <strong>{{ cart.total_price | money }}</strong>
           </div>
 
-          <!-- Checkout Sticky Container -->
+          <!-- Checkout -->
           <div class="cart-page__checkout-container">
             <a href="/checkout" class="cart-page__checkout-btn" name="checkout">
-              CHECKOUT SECURELY
+              Finalize Your Gift
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
@@ -204,32 +205,28 @@
             </div>
           </div>
 
-          <!-- Gift Message Removed -->
-
-          <!-- Payment Icons -->
-
+          <!-- Payment Icons (Monochrome) -->
           <div class="cdraw-payments">
-            <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
-            <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
-            <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
-            <span class="cdraw-payment-icon" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
-            <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
-            <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
+            <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1D1D1D"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
+            <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1D1D1D"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">MC</text></svg></span>
+            <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1D1D1D"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
+            <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1D1D1D"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
+            <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1D1D1D"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
           </div>
 
-          <!-- Trust Badges -->
+          <!-- Trust Badges (Monochrome) -->
           <div class="cdraw-trust">
             <div class="cdraw-trust__item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="cdraw-trust__icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
               <span class="cdraw-trust__text">Secure<br>Checkout</span>
             </div>
             <div class="cdraw-trust__item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="cdraw-trust__icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
               <span class="cdraw-trust__text">Fully Insured<br>Shipping</span>
             </div>
             <div class="cdraw-trust__item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="cdraw-trust__icon"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l-5.63-5.63"/></svg>
-              <span class="cdraw-trust__text">30-Day<br>Returns</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span class="cdraw-trust__text">Lifetime<br>Warranty</span>
             </div>
           </div>
 
@@ -245,41 +242,26 @@
   {% else %}
     <div class="cart-page__empty">
       <div style="font-size: 64px; margin-bottom: 16px;">🛍️</div>
-      <p style="font-size: 20px; font-family: var(--font-heading); margin-bottom: 8px;">Your cart is empty</p>
-      <p style="color: var(--color-text-muted); margin-bottom: 24px;">Discover something special for your loved ones.</p>
-      <a href="{{ routes.all_products_collection_url }}" class="cart-page__checkout-btn" style="max-width: 300px; margin: 0 auto;">CONTINUE SHOPPING</a>
+      <p class="cart-empty-heading">Your cart is empty</p>
+      <p class="cart-empty-text">Discover something special for your loved ones.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-page__checkout-btn" style="max-width: 300px; margin: 0 auto;">Continue Shopping</a>
     </div>
   {% endif %}
 </div>
 
-<!-- Global Sticky Checkout Bar -->
+<!-- Sticky Checkout Bar -->
 <div class="cart-sticky-bar" id="cart-sticky-bar">
   <div class="cart-sticky-bar__inner">
     <div class="cart-sticky-bar__left">
       <div class="cart-sticky-bar__total">Total: <strong>{{ cart.total_price | money }}</strong></div>
-      <div style="color: var(--color-primary); font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+      <div class="cart-sticky-bar__warranty">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        LIFETIME WARRANTY
-      </div>
-    </div>
-    
-    <div class="cart-sticky-bar__center">
-      <div class="cart-sticky-bar__secure" style="justify-content: center; margin-bottom: 6px;">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-        100% SECURE CHECKOUT
-      </div>
-      <div class="cdraw-payments" style="justify-content: center; margin: 0; gap: 8px;">
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
-        <span class="cdraw-payment-icon" style="width:44px;height:28px;" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
+        Lifetime Warranty
       </div>
     </div>
     <div class="cart-sticky-bar__actions">
       <a href="/checkout" class="cart-page__checkout-btn cart-sticky-bar__btn" name="checkout">
-        CHECKOUT SECURELY
+        Finalize Your Gift
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -287,41 +269,47 @@
 </div>
 
 <style>
-  /* Premium Cart Page Styling (Synced with Base.css) */
-  .mt-12 { margin-top: 12px; }
-  .mb-12 { margin-bottom: 12px; }
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap');
 
-  /* Ensure background matches base.css body background to blend with navigation and footer */
-  .cart-page { max-width: var(--container-max); margin: 0 auto; padding: var(--space-40) var(--space-24) var(--space-80); background: var(--color-bg); }
-  @media (min-width: 750px) { .cart-page { padding-left: var(--space-40); padding-right: var(--space-40); } }
+  /* ===== Cart Page: Quiet Luxury ===== */
+  .cart-page {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    background: #F9F8F3;
+  }
+  @media (min-width: 750px) { .cart-page { padding-left: 40px; padding-right: 40px; } }
   
   .cart-page__header { 
-    display: flex; align-items: baseline; gap: var(--space-16); 
-    margin-bottom: var(--space-32); padding-bottom: var(--space-16);
-    border-bottom: 1px solid var(--color-border);
+    display: flex; align-items: baseline; gap: 16px; 
+    margin-bottom: 32px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(29,29,29,0.08);
   }
-  .cart-page__header h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; color: var(--color-text); margin: 0; line-height: 1.2; }
-  .cart-page__count { font-size: 15px; font-weight: 500; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .cart-page__header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400; color: #1D1D1D; margin: 0; line-height: 1.2;
+  }
+  .cart-page__count {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; font-weight: 500; color: rgba(29,29,29,0.45);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
 
-  /* 2-Column Layout */
+  /* ===== 2-Column Layout ===== */
   .cart-page__content { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
-  @media (min-width: 992px) {
-    .cart-page__content { grid-template-columns: 1fr 420px; gap: 40px; }
-  }
+  @media (min-width: 992px) { .cart-page__content { grid-template-columns: 1fr 420px; gap: 40px; } }
 
   .cart-page__items-container {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 32px;
-  }
-  @media (max-width: 768px) {
-    .cart-page__items-container { padding: 0; background: transparent; }
+    background: transparent;
+    border-radius: 16px;
+    padding: 0;
   }
 
-  /* Cart Items */
+  /* ===== Cart Items ===== */
   .cart-page__item {
-    display: flex; gap: var(--space-24); padding: var(--space-24) 0;
-    border-bottom: 1px solid var(--color-border);
+    display: flex; gap: 24px; padding: 24px 0;
+    border-bottom: 1px solid rgba(29,29,29,0.06);
     position: relative;
   }
   .cart-page__item:first-child { padding-top: 0; }
@@ -329,262 +317,383 @@
   
   .cart-page__item-img { 
     width: 130px; height: 130px; 
-    border-radius: var(--radius-lg); overflow: hidden; 
-    flex-shrink: 0; background: var(--color-bg-warm);
-    position: relative;
+    border-radius: 12px; overflow: hidden; 
+    flex-shrink: 0; background: #E9DECE;
   }
-  .cart-page__item-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .cart-page__item-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .cart-page__item-img:hover img { transform: scale(1.05); }
 
-  .cart-page__item-details { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4px; }
+  .cart-page__item-details { flex: 1; min-width: 0; display: flex; flex-direction: column; padding-top: 4px; }
   .cart-page__item-title { 
-    font-family: var(--font-heading); font-size: 19px; 
-    font-weight: 600; color: var(--color-text);
-    margin-bottom: var(--space-8); line-height: 1.3; text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 500; color: #1D1D1D;
+    margin-bottom: 8px; line-height: 1.3; text-decoration: none;
     display: inline-block; transition: color 0.3s ease;
   }
-  .cart-page__item-title:hover { color: var(--color-primary); }
-  .cart-page__item-variant { font-size: 14px; color: var(--color-text-muted); margin-bottom: var(--space-12); letter-spacing: 0.5px;}
+  .cart-page__item-title:hover { color: #7F1B17; }
+  .cart-page__item-variant {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; color: rgba(29,29,29,0.5); margin-bottom: 12px; letter-spacing: 0.5px;
+  }
   
-  .cart-page__item-price { font-size: 16px; font-weight: 700; color: var(--color-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .cart-page__item-price span:last-child { font-weight: 400; }
+  .cart-page__item-price { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .cart-price-sale { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #7F1B17; }
+  .cart-price-compare { font-family: 'Montserrat', sans-serif; font-weight: 400; text-decoration: line-through; color: #B4B4B4; font-size: 0.85em; }
   
   .cart-page__item-qty {
-    display: flex; align-items: center; border: 1px solid var(--color-border); 
-    border-radius: var(--radius-sm); width: fit-content; height: 40px; overflow: hidden;
-    background: var(--color-bg);
+    display: flex; align-items: center; border: 1px solid rgba(29,29,29,0.1); 
+    border-radius: 50px; width: fit-content; height: 40px; overflow: hidden;
+    background: #F9F8F3;
   }
   .cart-page__item-qty a { text-decoration: none; height: 100%; display: flex; align-items: center; justify-content: center; }
   .cart-qty-btn {
     width: 36px; height: 100%; display: flex; align-items: center; justify-content: center;
     background: transparent; border: none; font-size: 18px;
-    cursor: pointer; color: var(--color-text-muted); transition: all 0.2s;
+    cursor: pointer; color: rgba(29,29,29,0.4); transition: all 0.2s;
   }
-  .cart-qty-btn:hover { color: var(--color-text); background: var(--color-bg-warm); }
+  .cart-qty-btn:hover { color: #1D1D1D; background: rgba(29,29,29,0.04); }
   .cart-qty-num {
     display: flex; align-items: center; justify-content: center;
     min-width: 40px; height: 100%; text-align: center;
-    font-size: 14px; font-weight: 600; color: var(--color-text);
-    border-left: 1px solid var(--color-border);
-    border-right: 1px solid var(--color-border);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px; font-weight: 600; color: #1D1D1D;
+    border-left: 1px solid rgba(29,29,29,0.1);
+    border-right: 1px solid rgba(29,29,29,0.1);
   }
   
   .cart-page__item-total { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; min-width: 100px; padding-top: 4px; }
-  .cart-item-line-price { font-size: 18px; font-weight: 600; color: var(--color-text); letter-spacing: 0.5px; }
+  .cart-item-line-price { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 600; color: #1D1D1D; letter-spacing: 0.5px; }
   .cart-page__remove {
-    font-size: 12px; font-weight: 500; letter-spacing: 0.5px;
-    color: var(--color-text-muted); transition: all 0.3s ease; text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
+    color: rgba(29,29,29,0.4); transition: all 0.3s ease; text-decoration: none;
     display: flex; align-items: center; gap: 6px; padding: 4px 0; border-bottom: 1px solid transparent;
   }
   .cart-remove-text { text-transform: uppercase; }
-  .cart-page__remove:hover { color: var(--color-error); border-bottom-color: var(--color-error); }
+  .cart-page__remove:hover { color: #7F1B17; border-bottom-color: #7F1B17; }
 
-  /* Upsell Section inside left column */
+  /* ===== Love Note Module ===== */
+  .cart-love-note {
+    margin-top: 32px; padding-top: 32px;
+    border-top: 1px solid rgba(29,29,29,0.06);
+  }
+  .cart-love-note__header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .cart-love-note__header h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 500; color: #1D1D1D; margin: 0;
+  }
+  .cart-love-note__header h4 span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 400; color: rgba(29,29,29,0.4);
+  }
+  .cart-love-note__input {
+    width: 100%; padding: 16px; border: 1px dashed #776B63; border-radius: 12px;
+    background: transparent; font-family: 'Montserrat', sans-serif;
+    font-size: 13px; color: #1D1D1D; line-height: 1.6; resize: vertical;
+    transition: border-color 0.3s;
+  }
+  .cart-love-note__input::placeholder { color: rgba(29,29,29,0.3); font-style: italic; }
+  .cart-love-note__input:focus { outline: none; border-color: #8B7355; border-style: solid; }
+  .cart-love-note__counter {
+    text-align: right; font-family: 'Montserrat', sans-serif;
+    font-size: 11px; color: rgba(29,29,29,0.3); margin-top: 6px;
+  }
+
+  /* ===== Gift Wrapping ===== */
+  .cart-gift-wrap {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px; margin-top: 16px;
+    border: 1px solid rgba(29,29,29,0.08); border-radius: 12px;
+    cursor: pointer; transition: all 0.3s;
+    background: transparent;
+  }
+  .cart-gift-wrap:hover { border-color: rgba(29,29,29,0.15); }
+  .cart-gift-wrap.active { border-color: #8B7355; background: rgba(139,115,85,0.04); }
+  .cart-gift-wrap__check {
+    width: 22px; height: 22px; border-radius: 6px;
+    border: 1.5px solid rgba(29,29,29,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.2s; color: transparent;
+  }
+  .cart-gift-wrap.active .cart-gift-wrap__check {
+    background: #8B7355; border-color: #8B7355; color: #F9F8F3;
+  }
+  .cart-gift-wrap__text { flex: 1; }
+  .cart-gift-wrap__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; font-weight: 600; color: #1D1D1D; display: block;
+  }
+  .cart-gift-wrap__desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; color: rgba(29,29,29,0.45); display: block; margin-top: 2px;
+  }
+  .cart-gift-wrap__badge {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600; color: #8B7355;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  /* ===== Upsell Carousel ===== */
   .cart-page__promos {
     margin-top: 40px; padding-top: 40px;
-    border-top: 1px solid rgba(0,0,0,0.06);
+    border-top: 1px solid rgba(29,29,29,0.06);
   }
-  .cart-upsell__header { text-align: left; margin-bottom: 24px; }
+  .cart-upsell__header { text-align: left; margin-bottom: 20px; }
   .cart-upsell__header h3 {
-    font-family: var(--font-heading); font-size: 24px; font-weight: 400; color: var(--color-text); margin-bottom: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; color: #1D1D1D; margin-bottom: 4px;
   }
-  .cart-upsell__header p { font-size: 14px; color: var(--color-text-muted); }
+  .cart-upsell__header p { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.5); }
   
-  .cart-upsell__grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 600px) { .cart-upsell__grid { grid-template-columns: 1fr 1fr; } }
+  .cart-upsell__carousel {
+    display: flex; gap: 16px; overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+  .cart-upsell__carousel::-webkit-scrollbar { display: none; }
   
-  .cart-upsell__item {
-    display: flex; flex-direction: column; padding: var(--space-16);
-    background: var(--color-white); border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl); transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  .cart-upsell__slide {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    background: transparent;
+    border: 1px solid rgba(29,29,29,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
   }
-  .cart-upsell__item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-  }
+  .cart-upsell__slide:hover { border-color: rgba(29,29,29,0.12); }
+  
   .cart-upsell__img-wrap {
-    width: 100%; aspect-ratio: 1; border-radius: var(--radius-lg);
-    overflow: hidden; background: var(--color-bg-warm); margin-bottom: var(--space-16); position: relative;
+    width: 100%; aspect-ratio: 1; overflow: hidden;
+    background: #F9F8F3;
   }
-  .cart-upsell__img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-  .cart-upsell__item:hover .cart-upsell__img-wrap img { transform: scale(1.08); }
+  .cart-upsell__img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .cart-upsell__slide:hover .cart-upsell__img-wrap img { transform: scale(1.05); }
   
-  .cart-upsell__info { flex: 1; display: flex; flex-direction: column; text-align: center; margin-bottom: 16px; }
+  .cart-upsell__info { padding: 12px; flex: 1; text-align: center; }
   .cart-upsell__title { 
-    font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--color-text); 
-    margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: none; 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 600; line-height: 1.4; color: #1D1D1D; 
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: none; 
+    margin-bottom: 6px;
   }
-  .cart-upsell__title:hover { color: var(--color-primary); }
-  .cart-upsell__price { font-size: 16px; font-weight: 800; color: var(--color-primary); }
+  .cart-upsell__title:hover { color: #7F1B17; }
+  .cart-upsell__price { display: flex; align-items: baseline; gap: 6px; justify-content: center; }
+  .cart-upsell__price-current { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #7F1B17; }
+  .cart-upsell__price-compare { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #B4B4B4; text-decoration: line-through; }
   
   .cart-upsell__add { 
-    width: 100%; background: var(--color-white); color: var(--color-primary);
-    border: 1.5px solid var(--color-primary); padding: var(--space-12); 
-    border-radius: var(--radius-full); font-size: 12px; font-weight: 600; cursor: pointer; 
-    text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
-    font-family: var(--font-body);
+    width: 100%; background: transparent; color: #1D1D1D;
+    border: none; border-top: 1px solid rgba(29,29,29,0.06);
+    padding: 10px; font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600; cursor: pointer; 
+    text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s;
   }
-  .cart-upsell__add:hover { background: var(--color-primary); color: var(--color-white); }
+  .cart-upsell__add:hover { background: #480003; color: #F9F8F3; }
 
-  /* Order Summary Right Column */
+  /* ===== Order Summary ===== */
   .cart-page__summary-card {
-    background: var(--color-white);
-    border-radius: var(--radius-xl); padding: var(--space-40) var(--space-32);
+    background: #FFFFFF;
+    border-radius: 16px; padding: 36px 28px;
     position: sticky; top: 120px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--color-border);
+    border: 1px solid rgba(29,29,29,0.06);
   }
-  @media (max-width: 768px) {
-    .cart-page__summary-card { padding: 32px 24px; }
-  }
+  @media (max-width: 768px) { .cart-page__summary-card { padding: 28px 20px; } }
   .cart-page__summary-card h3 { 
-    font-family: var(--font-heading); font-size: 24px; font-weight: 400; 
-    margin-bottom: 28px; color: var(--color-text); 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; 
+    margin-bottom: 24px; color: #1D1D1D; 
   }
 
   /* Order Protection */
   .cdraw-protect { 
     display: flex; align-items: flex-start; justify-content: space-between; 
-    padding: var(--space-16); background: var(--color-bg-warm); border-radius: var(--radius-md); 
-    margin-bottom: var(--space-24); border: 1px solid var(--color-border); cursor: pointer; transition: all 0.3s ease;
+    padding: 16px; background: #F9F8F3; border-radius: 12px; 
+    margin-bottom: 24px; border: 1px solid rgba(29,29,29,0.06); cursor: pointer; transition: all 0.3s ease;
   }
-  .cdraw-protect:hover { border-color: var(--color-primary); box-shadow: 0 4px 15px rgba(157, 95, 27, 0.05); }
-  .cdraw-protect__title { font-size: 13px; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .cdraw-protect__desc { font-size: 13px; color: var(--color-text-muted); line-height: 1.4; }
-  .cdraw-protect__price { font-weight: 600; color: var(--color-text); }
-  .cdraw-protect__toggle { position: relative; width: 40px; height: 22px; background: var(--color-bg-surface); border-radius: 20px; transition: background 0.3s; flex-shrink: 0; margin-top: 2px; }
-  .cdraw-protect__toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: var(--color-white); border-radius: 50%; transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .cdraw-protect.active { border-color: var(--color-primary); background: var(--color-white); }
-  .cdraw-protect.active .cdraw-protect__toggle { background: var(--color-success); }
+  .cdraw-protect:hover { border-color: rgba(29,29,29,0.12); }
+  .cdraw-protect__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 600; color: #1D1D1D; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .cdraw-protect__desc { font-family: 'Montserrat', sans-serif; font-size: 12px; color: rgba(29,29,29,0.5); line-height: 1.4; }
+  .cdraw-protect__price { font-weight: 600; color: #1D1D1D; }
+  .cdraw-protect__toggle {
+    position: relative; width: 40px; height: 22px;
+    background: rgba(29,29,29,0.1); border-radius: 20px;
+    transition: background 0.3s; flex-shrink: 0; margin-top: 2px;
+  }
+  .cdraw-protect__toggle::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px; background: #FFFFFF; border-radius: 50%;
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .cdraw-protect.active { border-color: #E6CDA9; background: rgba(230,205,169,0.08); }
+  .cdraw-protect.active .cdraw-protect__toggle { background: #E6CDA9; }
   .cdraw-protect.active .cdraw-protect__toggle::after { left: 20px; }
 
-  /* Subtotal rows */
-  .cart-page__summary-row { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 16px; color: var(--color-text-muted); }
-  .cart-page__summary-row strong { color: var(--color-text); font-weight: 500; }
-  .cart-page__summary-shipping span:last-child { color: var(--color-text); font-weight: 400; text-transform: uppercase; font-size: 14px; letter-spacing: 1px;}
-  .cart-page__summary-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 24px 0; }
-  .cart-page__summary-total { font-size: 20px; font-weight: 400; font-family: var(--font-heading); color: var(--color-text); align-items: center; }
-  .cart-page__summary-total strong { font-size: 26px; font-weight: 400; color: var(--color-text); }
-
-  /* Checkout Button - Uses Base.css .btn-primary variables */
-  .cart-page__checkout-btn {
-    display: flex; width: 100%; padding: var(--space-16) var(--space-24); margin-top: var(--space-32);
-    background: var(--color-primary); color: var(--color-white) !important;
-    justify-content: center; align-items: center; gap: var(--space-12);
-    font-weight: 500; font-family: var(--font-body); font-size: 0.875rem; letter-spacing: 1.5px; text-transform: uppercase;
-    transition: all 0.3s ease; text-decoration: none;
-    border: none; border-radius: var(--radius-full); position: relative; overflow: hidden;
+  /* Summary Rows */
+  .cart-page__summary-row {
+    font-family: 'Montserrat', sans-serif;
+    display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14px; color: rgba(29,29,29,0.6);
   }
-  .cart-page__checkout-btn svg { transition: transform 0.3s ease; stroke: var(--color-white); }
-  .cart-page__checkout-btn:hover { background: var(--color-primary-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(157, 95, 27, 0.3); }
+  .cart-page__summary-row strong { color: #1D1D1D; font-weight: 500; }
+  .cart-shipping-free { font-family: 'Montserrat', sans-serif; font-weight: 500; color: #8B7355; font-size: 13px; letter-spacing: 0.5px; }
+  .cart-page__summary-divider { height: 1px; background: rgba(29,29,29,0.06); margin: 20px 0; }
+  .cart-page__summary-total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400; color: #1D1D1D; align-items: center;
+  }
+  .cart-page__summary-total strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 500; color: #1D1D1D;
+  }
+
+  /* ===== Checkout Button ===== */
+  .cart-page__checkout-btn {
+    display: flex; width: 100%; padding: 16px 24px; margin-top: 28px;
+    background: #480003; color: #F9F8F3 !important;
+    justify-content: center; align-items: center; gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.3s ease; text-decoration: none;
+    border: none; border-radius: 50px; position: relative; overflow: hidden;
+  }
+  .cart-page__checkout-btn svg { transition: transform 0.3s ease; stroke: #F9F8F3; }
+  .cart-page__checkout-btn:hover { background: #7F1B17; }
+  .cart-page__checkout-btn:active { transform: scale(0.96) translateY(2px); transition: transform 0.08s ease; }
   .cart-page__checkout-btn:hover svg { transform: translateX(4px); }
   
   /* Express & Trust */
-  .cart-express { margin-top: 24px; text-align: center; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 24px; }
-  .cart-express__label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-muted); margin-bottom: 16px; font-weight: 600; }
+  .cart-express { margin-top: 24px; text-align: center; border-top: 1px solid rgba(29,29,29,0.06); padding-top: 24px; }
+  .cart-express__label {
+    font-family: 'Montserrat', sans-serif;
+    display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: rgba(29,29,29,0.4); margin-bottom: 16px; font-weight: 600;
+  }
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   
-  /* Express Checkout (Dynamic) - Force horizontal row */
-  .additional-checkout-buttons {
-    display: flex; gap: 10px; flex-wrap: wrap; width: 100%;
-  }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] {
-    flex: 1 1 calc(33.333% - 7px); min-width: 80px;
-  }
-  .additional-checkout-buttons ul {
-    display: flex; gap: 10px; width: 100%; justify-content: space-between;
-  }
-  .additional-checkout-buttons li {
-    flex: 1; list-style: none;
-  }
+  /* Express Checkout (Dynamic) */
+  .additional-checkout-buttons { display: flex; gap: 10px; flex-wrap: wrap; width: 100%; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 calc(33.333% - 7px); min-width: 80px; }
+  .additional-checkout-buttons ul { display: flex; gap: 10px; width: 100%; justify-content: space-between; }
+  .additional-checkout-buttons li { flex: 1; list-style: none; }
   .additional-checkout-buttons [role="button"],
-  .additional-checkout-buttons button {
-    border-radius: 50px !important; overflow: hidden; height: 48px !important;
-    transition: transform 0.2s, opacity 0.2s;
-  }
+  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 48px !important; transition: transform 0.2s, opacity 0.2s; }
   .additional-checkout-buttons [role="button"]:hover,
-  .additional-checkout-buttons button:hover {
-    transform: translateY(-2px); opacity: 0.9;
-  }
-  /* Remove default margins applied by Shopify */
+  .additional-checkout-buttons button:hover { transform: translateY(-2px); opacity: 0.9; }
   .additional-checkout-buttons .dynamic-checkout__content { margin: 0; }
-  
-  .cdraw-payments { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: var(--space-8); margin: var(--space-32) 0 var(--space-24); opacity: 0.8; }
-  .cdraw-payment-icon { width: 38px; height: 24px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-white); }
 
-  .cdraw-trust { display: flex; justify-content: space-between; gap: var(--space-16); margin-top: var(--space-24); border-top: 1px solid var(--color-border); padding-top: var(--space-24); }
-  .cdraw-trust__item { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); color: var(--color-text-muted); text-align: center; flex: 1; }
-  .cdraw-trust__item svg { width: 22px; height: 22px; color: var(--color-primary); stroke-width: 1.5; }
-  .cdraw-trust__text { font-size: 11px; font-weight: 500; line-height: 1.4; letter-spacing: 0.5px; text-transform: uppercase; }
+  /* Monochrome Payment Icons */
+  .cdraw-payments {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+    gap: 8px; margin: 24px 0 20px; opacity: 0.55;
+  }
+  .cdraw-payment-icon { width: 38px; height: 24px; border-radius: 4px; overflow: hidden; display: inline-flex; border: none; }
+  .cdraw-payment-icon svg { width: 100%; height: 100%; }
 
-  .cart-page__continue-wrap { text-align: center; margin-top: 32px; }
+  /* Monochrome Trust Badges */
+  .cdraw-trust {
+    display: flex; justify-content: space-between; gap: 16px;
+    margin-top: 20px; border-top: 1px solid rgba(29,29,29,0.06); padding-top: 20px;
+  }
+  .cdraw-trust__item {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(29,29,29,0.4); text-align: center; flex: 1;
+  }
+  .cdraw-trust__item svg { width: 20px; height: 20px; color: rgba(29,29,29,0.35); stroke-width: 1.5; }
+  .cdraw-trust__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
+  .cart-page__continue-wrap { text-align: center; margin-top: 24px; }
   .cart-page__continue {
-    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-8);
-    font-size: 13px; color: var(--color-text); letter-spacing: 1px; text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 12px; color: rgba(29,29,29,0.5); letter-spacing: 1px; text-transform: uppercase;
     font-weight: 500; text-decoration: none; transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 2px;
   }
-  .cart-page__continue:hover { color: var(--color-primary); border-bottom-color: var(--color-border); }
+  .cart-page__continue:hover { color: #7F1B17; border-bottom-color: rgba(29,29,29,0.1); }
   .cart-page__continue svg { transition: transform 0.3s ease; }
   .cart-page__continue:hover svg { transform: translateX(-4px); }
 
-  /* Shipping Progress Bar Premium */
+  /* ===== Shipping Progress Bar ===== */
   .cart-shipping-bar {
-    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16);
-    padding: var(--space-24) var(--space-32); margin-bottom: var(--space-40); border-radius: var(--radius-lg);
-    background: var(--color-white); border: 1px solid var(--color-border);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 20px 28px; margin-bottom: 32px; border-radius: 12px;
+    background: #F9F8F3; border: 1px solid rgba(29,29,29,0.06);
   }
-  .cart-shipping-bar__icon { font-size: 24px; color: var(--color-primary); display: flex; align-items: center; }
-  .cart-shipping-bar__text { flex: 1; font-size: 15px; color: var(--color-text); letter-spacing: 0.5px; }
-  .cart-shipping-bar__text strong { color: var(--color-text); font-weight: 600; }
-  .cart-shipping-bar__track { width: 100%; height: 4px; background: var(--color-border); border-radius: 2px; overflow: hidden; margin-top: var(--space-8); }
-  .cart-shipping-bar__fill { height: 100%; background: var(--color-primary); transition: width 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+  .cart-shipping-bar__text {
+    font-family: 'Montserrat', sans-serif;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: rgba(29,29,29,0.6); letter-spacing: 0.3px;
+  }
+  .cart-shipping-bar__text strong { color: #1D1D1D; font-weight: 600; }
+  .cart-shipping-bar__track {
+    width: 100%; height: 3px;
+    background: rgba(29,29,29,0.06); border-radius: 2px; overflow: hidden;
+  }
+  .cart-shipping-bar__fill {
+    height: 100%; background: #E6CDA9;
+    transition: width 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 2px;
+  }
   
   .cart-shipping-bar--achieved { 
-    background: var(--color-bg-warm);
-    border: 1px solid var(--color-border);
-    justify-content: center; padding: var(--space-24);
+    background: #F9F8F3;
+    border: 1px solid rgba(29,29,29,0.06);
+    flex-direction: row; align-items: center; gap: 10px;
   }
-  .cart-shipping-bar__success-content { display: flex; align-items: center; gap: var(--space-16); }
-  .cart-shipping__success-icon {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--color-success); color: var(--color-white);
-    display: flex; align-items: center; justify-content: center;
+  .cart-shipping-bar--achieved span { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.6); }
+  .cart-shipping-bar--achieved strong { color: #1D1D1D; }
+
+  /* Empty Cart */
+  .cart-page__empty {
+    text-align: center; padding: 80px 24px;
+    background: transparent; border-radius: 16px;
   }
-  .cart-shipping-bar__success-text { font-size: 15px; color: var(--color-text); font-weight: 500; letter-spacing: 0.5px; }
-  .cart-shipping-bar__success-text strong { font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--color-success);}
+  .cart-empty-heading { font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 8px; color: #1D1D1D; }
+  .cart-empty-text { font-family: 'Montserrat', sans-serif; color: rgba(29,29,29,0.5); margin-bottom: 24px; font-size: 14px; }
 
-  /* Empty Cart State */
-  .cart-page__empty { text-align: center; padding: var(--space-80) var(--space-24); background: var(--color-white); border-radius: var(--radius-xl); box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
-
-  /* Sticky Checkout Bar */
+  /* ===== Sticky Checkout Bar ===== */
   .cart-sticky-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: var(--color-white); z-index: 100;
-    border-top: 1px solid var(--color-border);
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    z-index: 100;
+    border-top: 1px solid rgba(29,29,29,0.06);
     transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding-bottom: env(safe-area-inset-bottom);
   }
   .cart-sticky-bar.visible { transform: translateY(0); }
   .cart-sticky-bar__inner {
     max-width: var(--container-max); margin: 0 auto;
-    padding: var(--space-12) var(--space-24); display: flex; align-items: center; justify-content: space-between; gap: var(--space-24);
+    padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   }
   .cart-sticky-bar__left { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-  .cart-sticky-bar__total { font-size: 14px; color: var(--color-text-muted); }
-  .cart-sticky-bar__total strong { font-size: 20px; color: var(--color-primary); font-weight: 700; margin-left: 4px; }
-  .cart-sticky-bar__secure { display: flex; align-items: center; gap: 4px; color: var(--color-success); font-size: 10px; font-weight: 700; }
+  .cart-sticky-bar__total { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.5); }
+  .cart-sticky-bar__total strong { font-size: 20px; color: #1D1D1D; font-weight: 700; margin-left: 4px; }
+  .cart-sticky-bar__warranty {
+    display: flex; align-items: center; gap: 4px;
+    font-family: 'Montserrat', sans-serif;
+    color: #8B7355; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
   .cart-sticky-bar__actions { flex-shrink: 0; }
   
   .cart-sticky-bar__btn {
-    padding: var(--space-16) var(--space-40); margin: 0; width: auto; font-size: 0.875rem;
-    box-shadow: 0 4px 15px rgba(157, 95, 27, 0.2); 
+    padding: 14px 36px; margin: 0; width: auto; font-size: 13px;
   }
   @media (max-width: 768px) {
     .cart-sticky-bar__inner { padding: 12px 16px; gap: 16px; }
-    .cart-sticky-bar__btn { padding: 14px 24px; font-size: 14px; }
+    .cart-sticky-bar__btn { padding: 12px 24px; font-size: 12px; }
   }
 </style>
 
@@ -597,10 +706,9 @@
     <p class="cart-remove-popup__text">This piece was chosen with love 💕<br>Would you like to keep it in your cart?</p>
     <p id="popup-product-name" class="cart-remove-popup__product-name"></p>
     <div class="cart-remove-popup__actions">
-      <button class="btn-primary" onclick="closeRemovePopup()">Keep This Item</button>
+      <button class="cart-remove-popup__keep" onclick="closeRemovePopup()">Keep This Item</button>
       <button class="cart-remove-popup__remove" id="popup-confirm-remove">Remove Item</button>
     </div>
-    <p class="cart-remove-popup__note">🔒 Your cart is saved & secured</p>
   </div>
 </div>
 
@@ -609,33 +717,48 @@
   .cart-remove-popup.active { display:flex; }
   .cart-remove-popup__overlay { position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); }
   .cart-remove-popup__modal {
-    position:relative; background:var(--color-bg-warm); border-radius:var(--radius-xl); padding:var(--space-40) var(--space-32); max-width:400px; width:90%;
-    text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.2); animation: popupSlideIn 0.3s ease; border: 1px solid var(--color-border);
+    position:relative; background:#F9F8F3; border-radius:16px; padding:36px 28px; max-width:400px; width:90%;
+    text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.15); animation: popupSlideIn 0.3s ease;
+    border: 1px solid rgba(29,29,29,0.06);
   }
-  @keyframes popupSlideIn { from { opacity:0; transform:scale(0.9) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+  @keyframes popupSlideIn { from { opacity:0; transform:scale(0.95) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
   .cart-remove-popup__close {
     position:absolute; top:12px; right:16px; background:none; border:none;
-    color:var(--color-text-muted); cursor:pointer; line-height:1; padding: 4px;
+    color:rgba(29,29,29,0.4); cursor:pointer; line-height:1; padding: 4px;
     transition: color 0.2s;
   }
-  .cart-remove-popup__close:hover { color:var(--color-primary); }
-  .cart-remove-popup__img { width:100px; height:100px; border-radius:var(--radius-lg); object-fit:cover; margin:0 auto var(--space-16); display:block; border:1px solid var(--color-border); }
-  .cart-remove-popup__title { font-family:var(--font-heading); font-size:24px; font-weight:400; margin-bottom:var(--space-8); color:var(--color-text); line-height: 1.2;}
-  .cart-remove-popup__text { font-size:14px; color:var(--color-text-muted); line-height:1.5; margin-bottom:var(--space-12); }
-  .cart-remove-popup__product-name { font-size:13px; font-weight:600; color:var(--color-primary); margin-bottom:var(--space-24); }
+  .cart-remove-popup__close:hover { color:#7F1B17; }
+  .cart-remove-popup__img { width:100px; height:100px; border-radius:12px; object-fit:cover; margin:0 auto 16px; display:block; border:1px solid rgba(29,29,29,0.06); }
+  .cart-remove-popup__title { font-family:'Cormorant Garamond', serif; font-size:22px; font-weight:500; margin-bottom:8px; color:#1D1D1D; }
+  .cart-remove-popup__text { font-family:'Montserrat', sans-serif; font-size:13px; color:rgba(29,29,29,0.5); line-height:1.5; margin-bottom:12px; }
+  .cart-remove-popup__product-name { font-family:'Montserrat', sans-serif; font-size:12px; font-weight:600; color:#8B7355; margin-bottom:24px; }
   .cart-remove-popup__actions { display:flex; flex-direction:column; gap:12px; }
-  
-  .cart-remove-popup__remove {
-    padding:var(--space-12) var(--space-24); border-radius:var(--radius-full); border:1.5px solid var(--color-border);
-    background:transparent; color:var(--color-text-muted); font-size:12px; font-weight:600; text-transform: uppercase; letter-spacing: 1px;
+  .cart-remove-popup__keep {
+    padding:14px 24px; border-radius:50px; border:none;
+    background:#480003; color:#F9F8F3; font-family:'Montserrat', sans-serif;
+    font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px;
     cursor:pointer; transition:all 0.2s;
   }
-  .cart-remove-popup__remove:hover { border-color:var(--color-error); color:var(--color-error); background: rgba(211,47,47,0.05); }
-
-  .cart-remove-popup__note { font-size:11px; color:var(--color-text-light); margin-top:var(--space-16); }
+  .cart-remove-popup__keep:hover { background:#7F1B17; }
+  .cart-remove-popup__remove {
+    padding:12px 24px; border-radius:50px; border:1.5px solid rgba(29,29,29,0.1);
+    background:transparent; color:rgba(29,29,29,0.4); font-family:'Montserrat', sans-serif;
+    font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .cart-remove-popup__remove:hover { border-color:#7F1B17; color:#7F1B17; background:rgba(127,27,23,0.04); }
 </style>
 
 <script>
+  // Love note character counter
+  const loveNote = document.getElementById('cart-love-note');
+  const loveCount = document.getElementById('love-note-count');
+  if (loveNote && loveCount) {
+    loveNote.addEventListener('input', function() {
+      loveCount.textContent = this.value.length;
+    });
+  }
+
   // Remove confirmation popup
   let pendingRemoveUrl = '';
   
@@ -672,16 +795,14 @@
     }
   });
 
-  // Sticky checkout bar - show when Order Summary scrolls out of view
+  // Sticky checkout bar
   document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.getElementById('cart-sticky-bar');
     const summaryCard = document.querySelector('.cart-page__summary-card');
     
     if (stickyBar && summaryCard) {
-      // Use scroll event for reliable detection
       window.addEventListener('scroll', function() {
         const rect = summaryCard.getBoundingClientRect();
-        // Show sticky bar when the bottom of the summary card is above the viewport
         if (rect.bottom < 0) {
           stickyBar.classList.add('visible');
         } else {
