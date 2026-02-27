@@ -99,6 +99,7 @@
               {%- assign upsell_candidates = upsell_candidates | push: p -%}
             {%- endif -%}
           {%- endfor -%}
+          <!-- DEBUG: collection={{ upsell_collection.title }}, products_count={{ upsell_collection.products_count }}, candidates={{ upsell_candidates.size }} -->
 
           {%- if upsell_candidates.size > 0 -%}
             <div class="cart-upsell mt-12 mb-12">
