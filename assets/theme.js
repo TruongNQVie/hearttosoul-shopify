@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --- Quick Add to Cart (AJAX) --- */
-    document.querySelectorAll('.product-card__quick-add form').forEach(form => {
+    document.querySelectorAll('.product-card__quick-add form, .purchase-form').forEach(form => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(form);
