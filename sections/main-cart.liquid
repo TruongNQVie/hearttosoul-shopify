@@ -555,6 +555,9 @@
     .cart-sticky-bar__actions { flex: 1; max-width: 220px; }
     .cart-sticky-bar__btn { padding: 14px 16px; font-size: 14px; margin: 0; width: 100%; border-radius: 50px !important; }
   }
+  @media (min-width: 992px) {
+    .cart-sticky-bar { display: none !important; } /* Never show on desktop as the sidebar is sticky */
+  }
 </style>
 
 <!-- Remove Confirmation Popup -->
