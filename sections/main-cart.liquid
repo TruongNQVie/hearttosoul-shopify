@@ -92,15 +92,14 @@
             {%- assign cart_product_ids = cart_product_ids | push: item.product_id -%}
           {%- endfor -%}
 
-          {%- paginate collections.all.products by 20 -%}
-            {%- for p in collections.all.products -%}
-              {%- unless cart_product_ids contains p.id -%}
-                {%- if p.available and upsell_candidates.size < 6 -%}
-                  {%- assign upsell_candidates = upsell_candidates | push: p -%}
-                {%- endif -%}
-              {%- endunless -%}
-            {%- endfor -%}
-          {%- endpaginate -%}
+          {%- assign upsell_collection = collections['all'] -%}
+          {%- for p in upsell_collection.products limit: 20 -%}
+            {%- unless cart_product_ids contains p.id -%}
+              {%- if p.available and upsell_candidates.size < 6 -%}
+                {%- assign upsell_candidates = upsell_candidates | push: p -%}
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
 
           {%- if upsell_candidates.size > 0 -%}
             <div class="cart-upsell mt-12 mb-12">
