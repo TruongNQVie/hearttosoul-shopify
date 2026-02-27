@@ -461,13 +461,13 @@
   .product-breadcrumbs a:hover { color: var(--color-primary); }
 
   /* ===== HERO: 65/35 split ===== */
-  .product-hero { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 60px; align-items: stretch; }
+  .product-hero { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 60px; }
   @media (min-width: 900px) {
-    .product-hero { grid-template-columns: 1.8fr 1fr; gap: 28px; }
+    .product-hero { grid-template-columns: 1.8fr 1fr; gap: 28px; align-items: start; }
   }
 
   /* ===== GALLERY ===== */
-  .product-gallery { position: relative; display: flex; gap: 12px; height: 100%; }
+  .product-gallery { position: relative; display: flex; gap: 12px; overflow: hidden; border-radius: 16px; }
   .product-gallery__main { margin-left: 84px; width: 100%; height: 100%; }
   .product-gallery__thumbs {
     display: flex; flex-direction: column; gap: 8px;
@@ -1170,6 +1170,22 @@
   });
 
   // openCartDrawer() is now defined globally in cart-drawer.liquid
+
+  // Sync gallery height with info column so image bottom = Add to Cart bottom
+  function syncGalleryHeight() {
+    if (window.innerWidth < 900) return; // Mobile: no sync needed
+    const info = document.getElementById('product-info-col');
+    const gallery = document.querySelector('.product-gallery');
+    if (info && gallery) {
+      gallery.style.maxHeight = info.offsetHeight + 'px';
+    }
+  }
+  window.addEventListener('load', syncGalleryHeight);
+  window.addEventListener('resize', syncGalleryHeight);
+  // Re-sync when accordions toggle
+  document.querySelectorAll('.product-accordion').forEach(acc => {
+    acc.addEventListener('toggle', () => setTimeout(syncGalleryHeight, 50));
+  });
 </script>
 
 {% schema %}
