@@ -469,25 +469,32 @@
   /* Express & Trust */
   .cart-express { margin-top: 24px; text-align: center; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 24px; }
   .cart-express__label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-muted); margin-bottom: 16px; font-weight: 600; }
+  .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   
-  /* OVERRIDE SHOPIFY DYNAMIC CHECKOUT BUTTONS */
-  .additional-checkout-buttons { width: 100%; display: block; }
-  .additional-checkout-buttons .dynamic-checkout__content {
-    display: flex !important; flex-wrap: nowrap !important; gap: 8px !important; align-items: stretch !important; margin: 0 !important;
+  /* Express Checkout (Dynamic) - Force horizontal row */
+  .additional-checkout-buttons {
+    display: flex; gap: 10px; flex-wrap: wrap; width: 100%;
   }
   .additional-checkout-buttons [data-shopify-buttoncontainer] {
-    flex: 1 1 0 !important; min-width: 0 !important; width: auto !important; margin-bottom: 0 !important;
+    flex: 1 1 calc(33.333% - 7px); min-width: 80px;
   }
   .additional-checkout-buttons ul {
-    display: flex !important; flex-wrap: nowrap !important; gap: 8px !important; margin: 0 !important; padding: 0 !important; width: 100% !important;
+    display: flex; gap: 10px; width: 100%; justify-content: space-between;
   }
   .additional-checkout-buttons li {
-    flex: 1 1 0 !important; min-width: 0 !important; margin-top: 0 !important;
+    flex: 1; list-style: none;
   }
-  .additional-checkout-buttons [role="button"], 
-  .additional-checkout-buttons button { 
-    border-radius: 50px !important; height: 44px !important; width: 100% !important; min-width: 0 !important; padding: 0 4px !important;
+  .additional-checkout-buttons [role="button"],
+  .additional-checkout-buttons button {
+    border-radius: 50px !important; overflow: hidden; height: 48px !important;
+    transition: transform 0.2s, opacity 0.2s;
   }
+  .additional-checkout-buttons [role="button"]:hover,
+  .additional-checkout-buttons button:hover {
+    transform: translateY(-2px); opacity: 0.9;
+  }
+  /* Remove default margins applied by Shopify */
+  .additional-checkout-buttons .dynamic-checkout__content { margin: 0; }
   
   .cdraw-payments { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 24px 0 16px; }
   .cdraw-payment-icon { width: 36px; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
@@ -535,28 +542,36 @@
   /* Empty Cart State */
   .cart-page__empty { text-align: center; padding: 80px 20px; background: #fff; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
 
-  /* Sticky Footer on Mobile */
-  .cart-sticky-bar { display: none; }
-  @media (max-width: 991px) {
-    .cart-sticky-bar {
-      display: block; position: fixed; bottom: 0; left: 0; right: 0;
-      background: #ffffff; z-index: 100;
-      border-top: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
-      transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-    .cart-sticky-bar.visible { transform: translateY(0); }
-    .cart-sticky-bar__inner { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .cart-sticky-bar__left { display: flex; flex-direction: column; gap: 2px; }
-    .cart-sticky-bar__total { font-size: 13px; color: var(--color-text-muted); }
-    .cart-sticky-bar__total strong { font-size: 18px; color: var(--color-primary); font-weight: 800; margin-left: 4px; }
-    .cart-sticky-bar__secure { display: flex; align-items: center; gap: 4px; color: var(--color-success); font-size: 10px; font-weight: 700; }
-    .cart-sticky-bar__actions { flex: 1; max-width: 220px; }
-    .cart-sticky-bar__btn { padding: 14px 16px; font-size: 14px; margin: 0; width: 100%; border-radius: 50px !important; }
+  /* Sticky Checkout Bar - ALL screen sizes */
+  .cart-sticky-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #ffffff; z-index: 100;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+    transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-bottom: env(safe-area-inset-bottom);
   }
-  @media (min-width: 992px) {
-    .cart-sticky-bar { display: none !important; } /* Never show on desktop as the sidebar is sticky */
+  .cart-sticky-bar.visible { transform: translateY(0); }
+  .cart-sticky-bar__inner {
+    max-width: 1300px; margin: 0 auto;
+    padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .cart-sticky-bar__left { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+  .cart-sticky-bar__total { font-size: 14px; color: var(--color-text-muted); }
+  .cart-sticky-bar__total strong { font-size: 20px; color: var(--color-primary); font-weight: 800; margin-left: 4px; }
+  .cart-sticky-bar__secure { display: flex; align-items: center; gap: 4px; color: var(--color-success); font-size: 10px; font-weight: 700; }
+  .cart-sticky-bar__actions { flex-shrink: 0; }
+  .cart-sticky-bar__btn {
+    padding: 16px 40px; font-size: 15px; margin: 0; width: auto;
+    border-radius: 50px !important; font-weight: 800; background: #000;
+    color: #fff !important; text-decoration: none; display: inline-flex;
+    align-items: center; gap: 8px; letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s; border: none;
+  }
+  .cart-sticky-bar__btn:hover { background: #222; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+  @media (max-width: 768px) {
+    .cart-sticky-bar__inner { padding: 12px 16px; gap: 16px; }
+    .cart-sticky-bar__btn { padding: 14px 24px; font-size: 14px; }
   }
 </style>
 
@@ -649,56 +664,17 @@
     }
   });
 
-  // Sticky checkout bar
+  // Sticky checkout bar - show when Order Summary scrolls out of view
   document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.getElementById('cart-sticky-bar');
-    const itemsContainer = document.querySelector('.cart-page__items-container');
+    const summaryCard = document.querySelector('.cart-page__summary-card');
     
-    // Express Checkout Button Hack
-    // Shopify injects these dynamically in a 1-column layout sometimes, we force them manually
-    const enforceHorizontalExpress = () => {
-      const expressUl = document.querySelector('.additional-checkout-buttons ul');
-      if (expressUl) {
-         expressUl.style.display = 'flex';
-         expressUl.style.flexDirection = 'row';
-         expressUl.style.flexWrap = 'nowrap';
-         expressUl.style.gap = '8px';
-         
-         const lis = expressUl.querySelectorAll('li');
-         lis.forEach(li => {
-            li.style.flex = '1';
-            li.style.marginTop = '0';
-         });
-      }
-    };
-    
-    // Observe DOM for Shopify dynamic injection
-    const observerEC = new MutationObserver(enforceHorizontalExpress);
-    const expressContainer = document.querySelector('.additional-checkout-buttons');
-    if (expressContainer) {
-       observerEC.observe(expressContainer, { childList: true, subtree: true });
-       enforceHorizontalExpress(); // Run once just in case
-    }
-    
-    if (stickyBar && itemsContainer) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          // Trigger sticky bar more aggressively when the items container starts leaving the viewport
-          if (entry.boundingClientRect.bottom < window.innerHeight + 100) {
-             stickyBar.classList.add('visible');
-          } else {
-             stickyBar.classList.remove('visible');
-          }
-        });
-      }, { rootMargin: "0px", threshold: Array.from({length: 21}, (_, i) => i * 0.05) });
-      
-      observer.observe(itemsContainer);
-      
-      // Fallback scroll event just in case
+    if (stickyBar && summaryCard) {
+      // Use scroll event for reliable detection
       window.addEventListener('scroll', function() {
-        if (!stickyBar || !itemsContainer) return;
-        const rect = itemsContainer.getBoundingClientRect();
-        if (rect.bottom < window.innerHeight + 100) {
+        const rect = summaryCard.getBoundingClientRect();
+        // Show sticky bar when the bottom of the summary card is above the viewport
+        if (rect.bottom < 0) {
           stickyBar.classList.add('visible');
         } else {
           stickyBar.classList.remove('visible');
