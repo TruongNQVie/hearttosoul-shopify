@@ -79,56 +79,56 @@
             </div>
           </div>
         {% endfor %}
-      </div>
 
-      <!-- Main Cart Free Gift & Upsells -->
-      <div class="cart-page__promos" style="margin-top:24px;">
-        {%- assign upsell_candidates = "" | split: ',' -%}
-        {%- for p in collections['all'].products limit: 10 -%}
-          {%- if p.available -%}
-            {%- assign upsell_candidates = upsell_candidates | push: p -%}
-          {%- endif -%}
-        {%- endfor -%}
-
-        {%- assign valid_candidates = "" | split: ',' -%}
-        {%- for c in upsell_candidates -%}
-          {%- assign in_cart = false -%}
-          {%- for item in cart.items -%}
-            {%- if item.variant_id == c.first_available_variant.id -%}
-              {%- assign in_cart = true -%}
+        <!-- Give Extra Love Upsell (inside items column) -->
+        <div class="cart-page__promos" style="margin-top:24px;">
+          {%- assign upsell_candidates = "" | split: ',' -%}
+          {%- for p in collections['all'].products limit: 10 -%}
+            {%- if p.available -%}
+              {%- assign upsell_candidates = upsell_candidates | push: p -%}
             {%- endif -%}
           {%- endfor -%}
-          {%- if in_cart == false -%}
-            {%- assign valid_candidates = valid_candidates | push: c -%}
-          {%- endif -%}
-        {%- endfor -%}
 
-        {%- if valid_candidates.size > 0 -%}
-          {%- assign mod_index = cart.item_count | modulo: valid_candidates.size -%}
-          {%- assign candidate = valid_candidates[mod_index] -%}
-          <div class="cdraw-upsell mt-12 mb-12">
-            <div class="cdraw-upsell__header">GIVE EXTRA LOVE</div>
-            <div class="cdraw-upsell__body">
-              <img src="{{ candidate.featured_image | image_url: width: 100 }}" class="cdraw-upsell__img" alt="{{ candidate.title | escape }}">
-              <div class="cdraw-upsell__info">
-                <div class="cdraw-upsell__text">
-                   <div class="cdraw-upsell__title">{{ candidate.title }}</div>
-                   <div class="cdraw-upsell__price">
-                     {{ candidate.price | money }}
-                     {%- if candidate.compare_at_price > candidate.price -%}
-                       <span style="text-decoration:line-through;color:#999;font-size:11px;font-weight:400;margin-left:4px;">{{ candidate.compare_at_price | money }}</span>
-                     {%- endif -%}
-                   </div>
+          {%- assign valid_candidates = "" | split: ',' -%}
+          {%- for c in upsell_candidates -%}
+            {%- assign in_cart = false -%}
+            {%- for item in cart.items -%}
+              {%- if item.variant_id == c.first_available_variant.id -%}
+                {%- assign in_cart = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if in_cart == false -%}
+              {%- assign valid_candidates = valid_candidates | push: c -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if valid_candidates.size > 0 -%}
+            {%- assign mod_index = cart.item_count | modulo: valid_candidates.size -%}
+            {%- assign candidate = valid_candidates[mod_index] -%}
+            <div class="cdraw-upsell mt-12 mb-12">
+              <div class="cdraw-upsell__header">GIVE EXTRA LOVE</div>
+              <div class="cdraw-upsell__body">
+                <img src="{{ candidate.featured_image | image_url: width: 100 }}" class="cdraw-upsell__img" alt="{{ candidate.title | escape }}">
+                <div class="cdraw-upsell__info">
+                  <div class="cdraw-upsell__text">
+                     <div class="cdraw-upsell__title">{{ candidate.title }}</div>
+                     <div class="cdraw-upsell__price">
+                       {{ candidate.price | money }}
+                       {%- if candidate.compare_at_price > candidate.price -%}
+                         <span style="text-decoration:line-through;color:#999;font-size:11px;font-weight:400;margin-left:4px;">{{ candidate.compare_at_price | money }}</span>
+                       {%- endif -%}
+                     </div>
+                  </div>
+                  <form action="/cart/add" method="post" style="margin:0;">
+                    <input type="hidden" name="id" value="{{ candidate.first_available_variant.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="cdraw-upsell__add">+ ADD</button>
+                  </form>
                 </div>
-                <form action="/cart/add" method="post" style="margin:0;">
-                  <input type="hidden" name="id" value="{{ candidate.first_available_variant.id }}">
-                  <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="cdraw-upsell__add">+ ADD</button>
-                </form>
               </div>
             </div>
-          </div>
-        {%- endif -%}
+          {%- endif -%}
+        </div>
       </div>
 
       <div class="cart-page__summary">

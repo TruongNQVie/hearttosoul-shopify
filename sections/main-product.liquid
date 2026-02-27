@@ -139,7 +139,60 @@
             </div>
           </div>
 
-          <!-- Quantity + Add to Cart will be moved below Upsells for Sticky behavior -->
+          <!-- Product Purchase Area (moved up for above-the-fold visibility) -->
+          <div class="product-purchase" id="product-purchase-area">
+            <div class="scroll-prompt" id="scroll-prompt">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            
+            <div class="purchase-meta-row">
+              <div class="purchase-warranty">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                LIFETIME WARRANTY
+              </div>
+              <button type="button" class="purchase-hint-link" id="copy-hint-btn" onclick="copyProductUrl()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                <span id="copy-hint-text">Gift Hint</span>
+              </button>
+            </div>
+            
+            <div id="copy-success-msg" style="display: none; color: var(--color-success); font-size: 12px; text-align: right; margin-bottom: 8px;">
+              Link secured! 💅
+            </div>
+
+            <div class="purchase-action-row">
+              <div class="purchase-qty-wrapper">
+                <div class="purchase-qty">
+                  <button type="button" class="qty-btn" onclick="changeProductQty(-1)">−</button>
+                  <input type="number" id="product-qty-input" value="1" min="1" max="10">
+                  <button type="button" class="qty-btn" onclick="changeProductQty(1)">+</button>
+                </div>
+              </div>
+
+              {%- form 'product', product, class: 'purchase-form' -%}
+                <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
+                <input type="hidden" name="quantity" id="product-qty-hidden" value="1">
+                <button type="submit" class="purchase-submit-btn" {% unless product.available %}disabled{% endunless %}>
+                  {%- if product.available -%}
+                    ♡ ADD TO BAG — {{ product.price | money }}
+                  {%- else -%}
+                    SOLD OUT
+                  {%- endif -%}
+                </button>
+              {%- endform -%}
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="cdraw-payments" style="margin-top: 12px; margin-bottom: 0;">
+              <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
+              <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
+              <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
+              <span class="cdraw-payment-icon" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
+              <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
+              <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
+              <span class="cdraw-payment-icon" title="Shop Pay"><svg viewBox="0 0 48 32" width="32" height="21"><rect width="48" height="32" rx="4" fill="#5A31F4"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="600" font-family="Arial">Shop Pay</text></svg></span>
+            </div>
+          </div>
 
           <!-- Trust badges -->
           <div class="product-trust">
@@ -178,7 +231,7 @@
 
             {%- if has_accordions == false -%}
               {%- comment -%} Fallback if no blocks are added {%- endcomment -%}
-              <details class="product-accordion" open>
+              <details class="product-accordion">
                 <summary>The Artisan's Journey</summary>
                 <div class="accordion-content">
                   <p>• Hand-finished by master jewelers with decades of experience</p>
@@ -343,61 +396,6 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
                 ADD BUNDLE TO BAG — <span id="bundle-btn-price">$155.43</span>
               </button>
-            </div>
-          </div>
-
-          <!-- Product Purchase Area -->
-          <div class="product-purchase" id="product-purchase-area">
-            <div class="scroll-prompt" id="scroll-prompt">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            
-            <div class="purchase-meta-row">
-              <div class="purchase-warranty">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                LIFETIME WARRANTY
-              </div>
-              <button type="button" class="purchase-hint-link" id="copy-hint-btn" onclick="copyProductUrl()">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                <span id="copy-hint-text">Gift Hint</span>
-              </button>
-            </div>
-            
-            <div id="copy-success-msg" style="display: none; color: var(--color-success); font-size: 12px; text-align: right; margin-bottom: 8px;">
-              Link secured! 💅
-            </div>
-
-            <div class="purchase-action-row">
-              <div class="purchase-qty-wrapper">
-                <div class="purchase-qty">
-                  <button type="button" class="qty-btn" onclick="changeProductQty(-1)">−</button>
-                  <input type="number" id="product-qty-input" value="1" min="1" max="10">
-                  <button type="button" class="qty-btn" onclick="changeProductQty(1)">+</button>
-                </div>
-              </div>
-
-              {%- form 'product', product, class: 'purchase-form' -%}
-                <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
-                <input type="hidden" name="quantity" id="product-qty-hidden" value="1">
-                <button type="submit" class="purchase-submit-btn" {% unless product.available %}disabled{% endunless %}>
-                  {%- if product.available -%}
-                    ♡ ADD TO BAG — {{ product.price | money }}
-                  {%- else -%}
-                    SOLD OUT
-                  {%- endif -%}
-                </button>
-              {%- endform -%}
-            </div>
-
-            <!-- Payment Methods -->
-            <div class="cdraw-payments" style="margin-top: 12px; margin-bottom: 0;">
-              <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
-              <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
-              <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
-              <span class="cdraw-payment-icon" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
-              <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
-              <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
-              <span class="cdraw-payment-icon" title="Shop Pay"><svg viewBox="0 0 48 32" width="32" height="21"><rect width="48" height="32" rx="4" fill="#5A31F4"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="600" font-family="Arial">Shop Pay</text></svg></span>
             </div>
           </div>
         </div>
@@ -850,9 +848,7 @@
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
   }
-  @media (min-width: 900px) {
-    .product-sticky-bar { display: none !important; }
-  }
+
   .product-sticky-bar.visible { transform: translateY(0); }
   .sticky-bar__inner { max-width: 1400px; margin: 0 auto; padding: 12px 24px; }
   .sticky-bar__content { display: flex; flex-direction: column; gap: 10px; }
