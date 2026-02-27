@@ -2,16 +2,8 @@
   <div class="product-card__media">
     <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}"></a>
     
-    <div class="product-card__badges">
-      {%- if product.compare_at_price > product.price -%}
-        <span class="product-card__badge badge-sale">Save {{ product.compare_at_price | minus: product.price | money_without_trailing_zeros }}</span>
-      {%- else -%}
-        {%- assign mod = product.id | modulo: 100 -%}
-        {%- assign multiplier = 200 | plus: mod -%}
-        {%- assign fake_compare_price = product.price | times: multiplier | divided_by: 100 -%}
-        <span class="product-card__badge badge-sale">Save {{ fake_compare_price | minus: product.price | money_without_trailing_zeros }}</span>
-      {%- endif -%}
-    </div>
+
+
 
     {%- if product.featured_image != blank -%}
       <div class="product-card__image-wrapper">
