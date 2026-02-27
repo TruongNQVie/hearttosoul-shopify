@@ -1711,6 +1711,23 @@ p {
     }
 }
 
+/* Alternating Section Backgrounds */
+.section-alt {
+    background-color: var(--color-bg-surface);
+}
+
+.section-white {
+    background-color: var(--color-white);
+}
+
+/* Decorative Section Divider */
+.section-divider {
+    height: 1px;
+    max-width: 200px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
 /* ===== Buttons ===== */
 .btn {
     display: inline-flex;
