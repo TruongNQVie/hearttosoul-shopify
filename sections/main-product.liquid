@@ -407,6 +407,10 @@
         {%- endif -%}
         <div class="sticky-bar__text">
           <p class="sticky-bar__title">{{ product.title | truncate: 45 }}</p>
+          <div class="sticky-warranty">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            LIFETIME WARRANTY
+          </div>
           <div class="sticky-bar__price-row">
             {%- assign current_price = product.price | default: 9468 -%}
             {%- if product.compare_at_price > product.price -%}
@@ -517,19 +521,22 @@
 
   /* Social proof - more prominent */
   .product-social-proof {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px;
     background: rgba(190,52,78,0.06); border: 1px solid rgba(190,52,78,0.12);
-    border-radius: 50px; padding: 10px 18px; margin-bottom: 20px; font-size: 13px;
+    border-radius: 50px; padding: 6px 14px; margin-bottom: 16px; font-size: 13px;
+    max-width: 100%;
   }
-  .proof-avatars { display: flex; }
+  .proof-avatars { display: flex; flex-shrink: 0; }
   .proof-avatar {
-    width: 30px; height: 30px; border-radius: 50%;
+    width: 26px; height: 26px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 12px;
+    color: white; font-weight: 700; font-size: 11px;
     margin-right: -8px; border: 2px solid white;
   }
-  .proof-text { margin-left: 10px; }
-  .proof-highlight { color: var(--color-primary); font-size: 14px; }
+  .proof-text { 
+    margin-left: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .proof-highlight { color: var(--color-primary); font-size: 13px; }
 
   /* Title */
   .product-title {
@@ -676,10 +683,9 @@
   }
   .payment-icons {
     display: flex; align-items: center; justify-content: center;
-    gap: 4px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%);
+    gap: 4px; flex-wrap: wrap; opacity: 1; filter: grayscale(0%);
     transition: all 0.3s;
   }
-  .payment-icons:hover { opacity: 1; filter: grayscale(0%); }
   .payment-icon { display: inline-flex; }
   .payment-icon svg { border-radius: 3px; }
 
@@ -818,6 +824,7 @@
   .sticky-bar__img { width: 48px; height: 48px; border-radius: 10px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--color-border); }
   .sticky-bar__text { display: flex; flex-direction: column; gap: 4px; }
   .sticky-bar__title { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; }
+  .sticky-warranty { font-size: 10px; font-weight: 700; color: var(--color-primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px; }
   
   .sticky-bar__price-row { display: flex; align-items: center; gap: 8px; }
   .sticky-bar__price { font-size: 17px; font-weight: 700; color: var(--color-primary); line-height: 1; }
@@ -923,43 +930,9 @@
   }
   .scroll-prompt svg { animation: bounce 2s infinite; }
   @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(4px); } 60% { transform: translateY(2px); } }
-
-  .floating-top-btn {
-    position: fixed; bottom: 84px; right: 24px; z-index: 990;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--color-white); color: var(--color-primary);
-    border: 1px solid var(--color-border); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s;
-    transform: translateY(20px);
-  }
-  .floating-top-btn.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-  .floating-top-btn:hover { background: var(--color-bg-warm); transform: translateY(-2px) scale(1.05); }
-  @media (max-width: 900px) {
-    .floating-top-btn { bottom: 70px; right: 16px; width: 40px; height: 40px; }
-  }
 </style>
 
-<button id="floating-top-btn" class="floating-top-btn" aria-label="Back to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
-</button>
-
 <script>
-  // ===== Floating Top Button =====
-  const topBtn = document.getElementById('floating-top-btn');
-  if (topBtn) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 600) {
-        topBtn.classList.add('visible');
-      } else {
-        topBtn.classList.remove('visible');
-      }
-    });
-    topBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
   // ===== Scroll Indicator =====
   const scrollArea = document.getElementById('product-scroll-area');
   const scrollPrompt = document.getElementById('scroll-prompt');
