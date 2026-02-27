@@ -87,16 +87,33 @@
         <!-- Give Extra Love Upsell (inside items column) -->
         <div class="cart-page__promos" style="margin-top:24px;">
           {%- assign upsell_candidates = "" | split: ',' -%}
-          {%- assign source_products = collections.all.products -%}
-          {%- if source_products.size == 0 -%}
-            {%- for item in cart.items limit: 1 -%}
-              {%- assign source_products = item.product.collections.first.products -%}
+          {%- assign cart_variant_ids = "" | split: ',' -%}
+          {%- for item in cart.items -%}
+            {%- assign cart_variant_ids = cart_variant_ids | push: item.variant_id -%}
+          {%- endfor -%}
+          
+          {%- comment -%} Pull products from cart items' collections {%- endcomment -%}
+          {%- for item in cart.items -%}
+            {%- for col in item.product.collections -%}
+              {%- for p in col.products limit: 10 -%}
+                {%- if p.available and upsell_candidates.size < 10 -%}
+                  {%- assign dominated = false -%}
+                  {%- for vid in cart_variant_ids -%}
+                    {%- if vid == p.first_available_variant.id -%}
+                      {%- assign dominated = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- for existing in upsell_candidates -%}
+                    {%- if existing.id == p.id -%}
+                      {%- assign dominated = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- unless dominated -%}
+                    {%- assign upsell_candidates = upsell_candidates | push: p -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
             {%- endfor -%}
-          {%- endif -%}
-          {%- for p in source_products limit: 20 -%}
-            {%- if p.available -%}
-              {%- assign upsell_candidates = upsell_candidates | push: p -%}
-            {%- endif -%}
           {%- endfor -%}
 
           {%- assign valid_candidates = "" | split: ',' -%}
