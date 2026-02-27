@@ -172,16 +172,15 @@
           <div class="cart-express">
             <span class="cart-express__label">Express Checkout</span>
             <div class="cart-express__buttons">
-              <button class="cart-express__btn cart-express__btn--shopify" onclick="window.location='/checkout'">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.34 3.27a.75.75 0 0 0-.57-.15l-4.3.54a.75.75 0 0 0-.57.45L7.72 9.58l-1.5-.42a.75.75 0 0 0-.91.53l-.47 1.7a.75.75 0 0 0 .53.91l1.5.42-2.18 7.87a.75.75 0 0 0 1.44.4l2.18-7.87 6.09 1.69a.75.75 0 0 0 .91-.53l3.47-12.5a.75.75 0 0 0-.34-.67z"/></svg>
-                Shop Pay
+              <!-- Shopify generic express checkout gives PayPal, Apple Pay, Google Pay dynamically, but here we hardcode the visual buttons -->
+              <button class="cart-express__btn cart-express__btn--paypal" onclick="window.location='/checkout'">
+                <svg viewBox="0 0 48 32" width="40" height="26"><rect width="48" height="32" rx="4" fill="#FFC439"/><path d="M22.9 11.2c-.2-1.5-1.5-2.2-3.6-2.2H15c-.4 0-.7.3-.8.7l-2.6 16.4c-.1.3.1.6.5.6h3.4c.4 0 .7-.3.8-.7l.8-5c.1-.4.4-.7.8-.7h1.4c2.8 0 4.9-1.1 5.4-4.3.2-1.2.1-2.2-.2-3.1.2-.2.3-.5.3-.8 0-.4-.1-.7-.3-.9zM21 15.3c-.3 2-2 2-3.8 2h-1l1.1-6.8h1c1.3 0 2.4.2 2.6 1.4.1.8.1 1.9-.3 3.4z" fill="#003087"/><path d="M30 11.2c-.2-1.5-1.5-2.2-3.6-2.2h-4.3c-.4 0-.7.3-.8.7l-2.6 16.4c-.1.3.1.6.5.6h3.4c.4 0 .7-.3.8-.7l.8-5c.1-.4.4-.7.8-.7h1.4c2.8 0 4.9-1.1 5.4-4.3.2-1.2.1-2.2-.2-3.1.2-.2.3-.5.3-.8 0-.4-.1-.7-.3-.9zM28.1 15.3c-.3 2-2 2-3.8 2h-1l1.1-6.8h1c1.3 0 2.4.2 2.6 1.4.1.8.1 1.9-.3 3.4z" fill="#009CDE"/></svg>
               </button>
               <button class="cart-express__btn cart-express__btn--apple" onclick="window.location='/checkout'">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.72 10.13c-.23.17-.5.26-.79.26h-1.07l-1.01 3.58c-.09.32-.3.58-.59.74a1.22 1.22 0 0 1-.63.17H9.68c-.23 0-.44-.06-.63-.17a1.11 1.11 0 0 1-.59-.74L7.45 10.4H6.38a1.05 1.05 0 0 1-.79-.26 1 1 0 0 1-.33-.77c0-.3.11-.56.33-.77.22-.21.48-.32.79-.32h1.61c.23 0 .44.06.63.18.19.11.33.28.41.49l.14.5H15.85l.14-.5c.08-.21.22-.38.41-.49.19-.12.4-.18.63-.18h1.61c.31 0 .57.11.79.32.22.21.33.47.33.77 0 .3-.11.56-.33.77zM10.5 17.5a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0zm5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z"/></svg>
-                Pay
+                <svg viewBox="0 0 48 32" width="40" height="26"><rect width="48" height="32" rx="4" fill="#000000"/><path d="M21.1 19.8c0-1.8 1.5-2.7 3.3-2.8-1-1.4-2.5-1.6-3.1-1.6-1.3-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.7-.8-1.4 0-2.6.8-3.2 2-1.4 2.3-.3 5.7 1 7.6.6.9 1.4 2 2.3 1.9.9-.1 1.3-.6 2.4-.6 1.1 0 1.4.6 2.4.6 1 .1 1.7-.9 2.3-1.8.7-1.1 1-2.1 1.1-2.2-.1-.1-2.6-1-2.6-3.1zM23 13.9c.5-.6.8-1.4.7-2.3-.8 0-1.6.4-2.1 1-.5.5-.8 1.3-.7 2.2.8.2 1.6-.3 2.1-.9z" fill="#FFFFFF"/></svg>
               </button>
               <button class="cart-express__btn cart-express__btn--google" onclick="window.location='/checkout'">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M11.9 9.8v4.2h5.8c-.2 1.4-1.6 4-5.8 4-3.5 0-6.3-2.9-6.3-6.4s2.8-6.4 6.3-6.4c2 0 3.3.8 4.1 1.6l3.3-3.2C17.3 1.8 14.8.8 11.9.8 5.7.8.7 5.8.7 12s5 11.2 11.2 11.2c6.5 0 10.7-4.5 10.7-10.9 0-.8-.1-1.4-.2-2.5H11.9z"/></svg>
+                <svg viewBox="0 0 48 32" width="40" height="26"><rect width="48" height="32" rx="4" fill="#FFFFFF" stroke="#DADCE0"/><path d="M19 14.5v3.2h4.5c-.2 1.1-1.2 3.1-4.5 3.1-2.7 0-4.9-2.2-4.9-4.9s2.2-4.9 4.9-4.9c1.5 0 2.5.6 3.1 1.3l2.6-2.5C23.2 8.3 21.3 7.5 19 7.5 15.1 7.5 12 10.6 12 14.5s3.1 7 7 7c4.1 0 6.8-2.9 6.8-6.9 0-.6-.1-1-.2-1.8H19z" fill="#4285F4"/><path d="M30 19.8v1.7h-1.9v-1.7h-1.7v-1.9h1.7v-1.7H30v1.7h1.7v1.9H30z" fill="#34A853"/><path d="M26.4 17.9v-1.9h5.1V14h-5.1v-1.9h6.4v-1.6h-8.2V19.8z" fill="#FBBC05"/><path d="M35.6 19.8v-7.7h-1.8v7.7h1.8z" fill="#EA4335"/></svg>
               </button>
             </div>
           </div>
@@ -231,26 +230,27 @@
 <!-- Global Sticky Checkout Bar -->
 <div class="cart-sticky-bar" id="cart-sticky-bar">
   <div class="cart-sticky-bar__inner">
-    <div class="cart-sticky-bar__info">
+    <div class="cart-sticky-bar__left">
       <div class="cart-sticky-bar__total">Total: <strong>{{ cart.total_price | money }}</strong></div>
-        <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
-          <div class="cart-sticky-bar__secure">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            100% SECURE CHECKOUT
-          </div>
-          <div style="color: var(--color-primary); font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 4px;">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            LIFETIME WARRANTY
-          </div>
-        </div>
-        <div class="cdraw-payments" style="justify-content: flex-start; margin: 4px 0 0 0;">
-          <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
-          <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
-          <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
-          <span class="cdraw-payment-icon" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
-          <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
-          <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
-        </div>
+      <div class="cart-sticky-bar__secure">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        100% SECURE CHECKOUT
+      </div>
+    </div>
+    
+    <div class="cart-sticky-bar__center">
+      <div style="color: var(--color-primary); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 4px;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        LIFETIME WARRANTY
+      </div>
+      <div class="cdraw-payments" style="justify-content: center; margin: 4px 0 0 0;">
+        <span class="cdraw-payment-icon" title="Visa"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#1A1F71"/><text x="24" y="20" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="700" font-family="Arial">VISA</text></svg></span>
+        <span class="cdraw-payment-icon" title="Mastercard"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#252525"/><circle cx="19" cy="16" r="9" fill="#EB001B"/><circle cx="29" cy="16" r="9" fill="#F79E1B"/><path d="M24 9.5a9 9 0 0 1 0 13" fill="#FF5F00"/></svg></span>
+        <span class="cdraw-payment-icon" title="American Express"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#006FCF"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">AMEX</text></svg></span>
+        <span class="cdraw-payment-icon" title="Discover"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#FF6600"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="700" font-family="Arial">DISCOVER</text></svg></span>
+        <span class="cdraw-payment-icon" title="Apple Pay"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#000000"/><text x="24" y="19" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="500" font-family="Arial"> Pay</text></svg></span>
+        <span class="cdraw-payment-icon" title="PayPal"><svg viewBox="0 0 48 32"><rect width="48" height="32" rx="4" fill="#003087"/><text x="24" y="18" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="700" font-family="Arial">PayPal</text></svg></span>
+      </div>
     </div>
     <div class="cart-sticky-bar__actions">
       <a href="/checkout" class="cart-page__checkout-btn cart-sticky-bar__btn">
@@ -458,27 +458,28 @@
   .cart-sticky-bar.visible { transform: translateY(0); }
   .cart-sticky-bar__inner {
     max-width: var(--container-max); margin: 0 auto;
-    padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   }
-  .cart-sticky-bar__info { display: flex; flex-direction: column; gap: 4px; }
+  .cart-sticky-bar__left { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+  .cart-sticky-bar__center { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
   .cart-sticky-bar__total { font-size: 16px; color: var(--color-text); }
   .cart-sticky-bar__total strong { font-size: 18px; color: var(--color-primary); }
   .cart-sticky-bar__secure {
     display: flex; align-items: center; gap: 4px;
     color: var(--color-success, #2e7d32); font-size: 11px; font-weight: 700;
   }
-  .cart-sticky-bar__actions { width: 300px; }
+  .cart-sticky-bar__actions { width: 300px; flex-shrink: 0; }
   .cart-sticky-bar__btn { 
     padding: 18px 24px; font-size: 15px; margin: 0; width: 100%; 
     font-weight: 800; background: #000000; box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     border-radius: var(--radius-xl);
   }
 
-  @media (max-width: 500px) {
-    .cart-sticky-bar__inner { padding: 12px 16px; align-items: flex-end; }
-    .cart-sticky-bar__actions { width: auto; flex: 1; margin-left: 16px; }
+  @media (max-width: 768px) {
+    .cart-sticky-bar__center { display: none; }
+    .cart-sticky-bar__inner { padding: 12px 16px; align-items: flex-end; gap: 16px; }
+    .cart-sticky-bar__actions { width: auto; flex: 1; }
     .cart-sticky-bar__btn { padding: 16px 16px; font-size: 14px; }
-    .cart-sticky-bar__info { flex-shrink: 0; }
   }
 </style>
 
