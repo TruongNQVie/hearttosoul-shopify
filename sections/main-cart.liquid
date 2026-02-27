@@ -469,11 +469,25 @@
   /* Express & Trust */
   .cart-express { margin-top: 24px; text-align: center; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 24px; }
   .cart-express__label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-muted); margin-bottom: 16px; font-weight: 600; }
-  .additional-checkout-buttons { display: flex; gap: 8px; flex-wrap: nowrap; width: 100%; justify-content: space-between; }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 0; min-width: 0; }
-  .additional-checkout-buttons ul { display: flex; gap: 8px; width: 100%; margin: 0; padding: 0; flex-wrap: nowrap; }
-  .additional-checkout-buttons li { flex: 1 1 0; list-style: none; min-width: 0; }
-  .additional-checkout-buttons [role="button"], .additional-checkout-buttons button { border-radius: 50px !important; height: 44px !important; width: 100% !important; min-width: 0 !important; padding: 0 4px !important; }
+  
+  /* OVERRIDE SHOPIFY DYNAMIC CHECKOUT BUTTONS */
+  .additional-checkout-buttons { width: 100%; display: block; }
+  .additional-checkout-buttons .dynamic-checkout__content {
+    display: flex !important; flex-wrap: nowrap !important; gap: 8px !important; align-items: stretch !important; margin: 0 !important;
+  }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] {
+    flex: 1 1 0 !important; min-width: 0 !important; width: auto !important; margin-bottom: 0 !important;
+  }
+  .additional-checkout-buttons ul {
+    display: flex !important; flex-wrap: nowrap !important; gap: 8px !important; margin: 0 !important; padding: 0 !important; width: 100% !important;
+  }
+  .additional-checkout-buttons li {
+    flex: 1 1 0 !important; min-width: 0 !important; margin-top: 0 !important;
+  }
+  .additional-checkout-buttons [role="button"], 
+  .additional-checkout-buttons button { 
+    border-radius: 50px !important; height: 44px !important; width: 100% !important; min-width: 0 !important; padding: 0 4px !important;
+  }
   
   .cdraw-payments { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 24px 0 16px; }
   .cdraw-payment-icon { width: 36px; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
@@ -640,22 +654,22 @@
     if (stickyBar && itemsContainer) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          // Show sticky bar when the items container is scrolling out of view (or isn't fully visible anymore)
-          // Adjust threshold if needed, here we show it when the top of the items container is negative
-          if (entry.boundingClientRect.bottom < window.innerHeight) {
+          // Trigger sticky bar more aggressively when the items container starts leaving the viewport
+          if (entry.boundingClientRect.bottom < window.innerHeight + 100) {
              stickyBar.classList.add('visible');
           } else {
              stickyBar.classList.remove('visible');
           }
         });
-      }, { rootMargin: "0px", threshold: [0, 0.1, 0.2, 0.5, 1.0] });
+      }, { rootMargin: "0px", threshold: Array.from({length: 21}, (_, i) => i * 0.05) });
       
       observer.observe(itemsContainer);
       
       // Fallback scroll event just in case
       window.addEventListener('scroll', function() {
+        if (!stickyBar || !itemsContainer) return;
         const rect = itemsContainer.getBoundingClientRect();
-        if (rect.bottom < window.innerHeight) {
+        if (rect.bottom < window.innerHeight + 100) {
           stickyBar.classList.add('visible');
         } else {
           stickyBar.classList.remove('visible');
