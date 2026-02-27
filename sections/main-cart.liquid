@@ -107,29 +107,41 @@
           {%- endfor -%}
 
           {%- if valid_candidates.size > 0 -%}
-            {%- assign mod_index = cart.item_count | modulo: valid_candidates.size -%}
-            {%- assign candidate = valid_candidates[mod_index] -%}
             <div class="cdraw-upsell mt-12 mb-12">
               <div class="cdraw-upsell__header">GIVE EXTRA LOVE</div>
-              <div class="cdraw-upsell__body">
-                <img src="{{ candidate.featured_image | image_url: width: 100 }}" class="cdraw-upsell__img" alt="{{ candidate.title | escape }}">
-                <div class="cdraw-upsell__info">
-                  <div class="cdraw-upsell__text">
-                     <div class="cdraw-upsell__title">{{ candidate.title }}</div>
-                     <div class="cdraw-upsell__price">
-                       {{ candidate.price | money }}
-                       {%- if candidate.compare_at_price > candidate.price -%}
-                         <span style="text-decoration:line-through;color:#999;font-size:11px;font-weight:400;margin-left:4px;">{{ candidate.compare_at_price | money }}</span>
-                       {%- endif -%}
-                     </div>
+              
+              {%- assign max_to_show = 2 -%}
+              {%- assign shown_count = 0 -%}
+              
+              {%- for i in (0..valid_candidates.size) -%}
+                {%- if shown_count >= max_to_show -%}{%- break -%}{%- endif -%}
+                {%- assign mod_index = cart.item_count | plus: i | modulo: valid_candidates.size -%}
+                {%- assign candidate = valid_candidates[mod_index] -%}
+                
+                <div class="cdraw-upsell__body" {% if shown_count > 0 %}style="border-top: 1px solid rgba(0,0,0,0.05);"{% endif %}>
+                  <img src="{{ candidate.featured_image | image_url: width: 100 }}" class="cdraw-upsell__img" alt="{{ candidate.title | escape }}">
+                  <div class="cdraw-upsell__info">
+                    <div class="cdraw-upsell__text">
+                       <div class="cdraw-upsell__title">{{ candidate.title }}</div>
+                       <div class="cdraw-upsell__price">
+                         {{ candidate.price | money }}
+                         {%- if candidate.compare_at_price > candidate.price -%}
+                           <span style="text-decoration:line-through;color:#999;font-size:11px;font-weight:400;margin-left:4px;">{{ candidate.compare_at_price | money }}</span>
+                         {%- endif -%}
+                       </div>
+                    </div>
+                    {%- if candidate.available -%}
+                      <form action="/cart/add" method="post" style="margin:0;">
+                        <input type="hidden" name="id" value="{{ candidate.first_available_variant.id }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <button type="submit" class="cdraw-upsell__add">+ ADD</button>
+                      </form>
+                    {%- endif -%}
                   </div>
-                  <form action="/cart/add" method="post" style="margin:0;">
-                    <input type="hidden" name="id" value="{{ candidate.first_available_variant.id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="cdraw-upsell__add">+ ADD</button>
-                  </form>
                 </div>
-              </div>
+                
+                {%- assign shown_count = shown_count | plus: 1 -%}
+              {%- endfor -%}
             </div>
           {%- endif -%}
         </div>
