@@ -7,21 +7,21 @@
                     "type": "accordion",
                     "settings": {
                         "heading": "The Artisan's Journey",
-                        "content": "<p>Every piece at Heart to Soul begins with a profound respect for the emotion it will carry. Our artisans meticulously hand-select each preserved rose at its absolute peak, ensuring its velvety texture and vibrant color are captured forever.</p><p>The accompanying jewelry is forged using ethically sourced, high-quality metals and brilliant stones—because a love built to last should never harm the earth.</p><p>From the final hand-polish of the pendant to the precise assembly of our cinematic display vaults, every step is a labor of love, crafted to honor yours.</p>"
+                        "content": "<p>Every piece begins with a profound respect for the emotion it will carry.</p><p>Our artisans hand-select each preserved rose at its absolute peak—capturing its velvety texture and vibrant color forever.</p><p>The jewelry is forged from ethically sourced metals and brilliant stones, because a love built to last should never harm the earth.</p><p>From the final hand-polish to the precise assembly of our display vaults—every step is a labor of love, crafted to honor yours.</p>"
                     }
                 },
                 "acc_2": {
                     "type": "accordion",
                     "settings": {
                         "heading": "Materials & Care",
-                        "content": "<p><strong>The Jewelry:</strong> Crafted from premium 925 Sterling Silver, durable Stainless Steel, or hypoallergenic copper, and bathed in luxurious 14K Gold or Rhodium finishes. Designed to be kind to sensitive skin. To maintain its brilliance, gently wipe with a soft microfiber cloth.</p><p><strong>The Eternal Blooms:</strong> Our preserved flora and artisan soap roses require absolute zero maintenance. No water, no sunlight. Simply keep them resting peacefully in their sanctuary box, away from direct harsh sunlight or extreme humidity, and they will retain their beauty for years to come.</p>"
+                        "content": "<p><strong>The Jewelry</strong></p><p>925 Sterling Silver · Stainless Steel · Hypoallergenic Copper<br>Finished in luxurious 14K Gold or Rhodium. Skin-safe by design.</p><p><em>Care:</em> Gently wipe with a soft microfiber cloth to maintain brilliance.</p><p><strong>The Eternal Blooms</strong></p><p>Zero maintenance. No water, no sunlight needed.</p><p>Keep them in their sanctuary box, away from harsh sunlight or extreme humidity—they'll retain their beauty for years.</p>"
                     }
                 },
                 "acc_3": {
                     "type": "accordion",
                     "settings": {
                         "heading": "How It Works",
-                        "content": "<p>We believe gifting should be a cinematic experience, not just a transaction.</p><p>Your keepsake arrives impeccably packaged and completely ready to present. Depending on your chosen collection, the unboxing is designed as a sacred ritual: a smooth drawer gliding open, a dramatic double-door reveal, or a gentle rotation that presents the hidden jewelry beneath the eternal bloom.</p><p>Simply write your truth on the included message card, present the box, and prepare for an unforgettable emotional moment.</p>"
+                        "content": "<p>Gifting should be a cinematic experience—not just a transaction.</p><p>Your keepsake arrives impeccably packaged and completely ready to present.</p><p>Depending on your collection, the unboxing unfolds as a ritual: a smooth drawer gliding open, a dramatic double-door reveal, or a gentle rotation presenting the hidden jewelry beneath the bloom.</p><p>Write your truth on the included message card, present the box, and prepare for an unforgettable moment.</p>"
                     }
                 },
                 "acc_4": {
@@ -42,7 +42,7 @@
                     "type": "accordion",
                     "settings": {
                         "heading": "Shipping Info",
-                        "content": "<p><strong>The Journey of Your Keepsake</strong><br>We know how important this moment is. Your sacred gift is handled with the utmost care and shipped directly from our warehouse rapidly—typically within 6 hours of placing your order (excluding weekends and holidays).</p><p><strong>Delivery Estimates</strong><br>Exact shipping charges will be calculated and displayed clearly at checkout. We proudly ship worldwide to connect hearts across any distance:</p><ul><li>United States: 5–12 Business Days</li><li>UK &amp; EU: 5–12 Business Days</li><li>Australia &amp; New Zealand: 5–12 Business Days</li><li>South America, Asia &amp; Africa: 5–12 Business Days (estimate)</li></ul><p><strong>Our Promise of Communication</strong><br>If we are experiencing a high volume of orders during peak gifting seasons, shipments may be slightly delayed. While we strive for absolute excellence, exact transit times may occasionally vary due to factors outside our carriers' control. Should there be any significant delay in your keepsake's journey, our dedicated support team will contact you directly via email or telephone. Your peace of mind is our priority.</p>"
+                        "content": "<p><strong>Processing</strong></p><p>Your gift ships within 6 hours of ordering (excl. weekends & holidays), handled with the utmost care.</p><p><strong>Delivery Estimates</strong></p><ul><li>United States — 5–12 Business Days</li><li>UK &amp; EU — 5–12 Business Days</li><li>Australia &amp; NZ — 5–12 Business Days</li><li>Rest of World — 5–12 Business Days (est.)</li></ul><p>Exact shipping charges are calculated at checkout. We ship worldwide.</p><p><strong>Our Promise</strong></p><p>During peak gifting seasons, slight delays may occur. If there's any significant delay, our support team will contact you directly. Your peace of mind is our priority.</p>"
                     }
                 }
             },
@@ -78,7 +78,7 @@
             "type": "quality-warranty",
             "settings": {
                 "heading": "Quality Backed By Our Warranty",
-                "text": "<p>Experience the joy of gifting or wearing our personalized necklaces, meticulously crafted from sterling silver and offered in both 14K gold and silver finishes. Each piece, designed with care, symbolizes love and enduring elegance. Our jewelry is hypoallergenic, lead, and nickel-free, ensuring safety and comfort for every wearer. With a commitment to quality so profound, we back every piece with a lifetime warranty. Inspired by the desire to see your loved ones smile, our creations are made to turn moments into cherished memories.</p>"
+                "text": "<p>Every piece is meticulously crafted from sterling silver, available in both 14K gold and silver finishes. Designed with care to symbolize love and enduring elegance.</p><p>Our jewelry is hypoallergenic, lead-free, and nickel-free — ensuring safety and comfort for every wearer.</p><p>We back every piece with a <strong>lifetime warranty</strong>, because quality this profound deserves a promise to match. Our creations are made to turn moments into cherished memories.</p>"
             }
         },
         "makers-dedication": {

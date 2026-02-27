@@ -181,24 +181,30 @@
               <details class="product-accordion">
                 <summary>The Artisan's Journey</summary>
                 <div class="accordion-content">
-                  <p>Every piece at Heart to Soul begins with a profound respect for the emotion it will carry. Our artisans meticulously hand-select each preserved rose at its absolute peak, ensuring its velvety texture and vibrant color are captured forever.</p>
-                  <p>The accompanying jewelry is forged using ethically sourced, high-quality metals and brilliant stones—because a love built to last should never harm the earth.</p>
-                  <p>From the final hand-polish of the pendant to the precise assembly of our cinematic display vaults, every step is a labor of love, crafted to honor yours.</p>
+                  <p>Every piece begins with a profound respect for the emotion it will carry.</p>
+                  <p>Our artisans hand-select each preserved rose at its absolute peak—capturing its velvety texture and vibrant color forever.</p>
+                  <p>The jewelry is forged from ethically sourced metals and brilliant stones, because a love built to last should never harm the earth.</p>
+                  <p>From the final hand-polish to the precise assembly of our display vaults—every step is a labor of love, crafted to honor yours.</p>
                 </div>
               </details>
               <details class="product-accordion">
                 <summary>Materials &amp; Care</summary>
                 <div class="accordion-content">
-                  <p><strong>The Jewelry:</strong> Crafted from premium 925 Sterling Silver, durable Stainless Steel, or hypoallergenic copper, and bathed in luxurious 14K Gold or Rhodium finishes. Designed to be kind to sensitive skin. To maintain its brilliance, gently wipe with a soft microfiber cloth.</p>
-                  <p><strong>The Eternal Blooms:</strong> Our preserved flora and artisan soap roses require absolute zero maintenance. No water, no sunlight. Simply keep them resting peacefully in their sanctuary box, away from direct harsh sunlight or extreme humidity, and they will retain their beauty for years to come.</p>
+                  <p><strong>The Jewelry</strong></p>
+                  <p>925 Sterling Silver · Stainless Steel · Hypoallergenic Copper<br>Finished in luxurious 14K Gold or Rhodium. Skin-safe by design.</p>
+                  <p><em>Care:</em> Gently wipe with a soft microfiber cloth to maintain brilliance.</p>
+                  <p><strong>The Eternal Blooms</strong></p>
+                  <p>Zero maintenance. No water, no sunlight needed.</p>
+                  <p>Keep them in their sanctuary box, away from harsh sunlight or extreme humidity—they'll retain their beauty for years.</p>
                 </div>
               </details>
               <details class="product-accordion">
                 <summary>How It Works</summary>
                 <div class="accordion-content">
-                  <p>We believe gifting should be a cinematic experience, not just a transaction.</p>
-                  <p>Your keepsake arrives impeccably packaged and completely ready to present. Depending on your chosen collection, the unboxing is designed as a sacred ritual: a smooth drawer gliding open, a dramatic double-door reveal, or a gentle rotation that presents the hidden jewelry beneath the eternal bloom.</p>
-                  <p>Simply write your truth on the included message card, present the box, and prepare for an unforgettable emotional moment.</p>
+                  <p>Gifting should be a cinematic experience—not just a transaction.</p>
+                  <p>Your keepsake arrives impeccably packaged and completely ready to present.</p>
+                  <p>Depending on your collection, the unboxing unfolds as a ritual: a smooth drawer gliding open, a dramatic double-door reveal, or a gentle rotation presenting the hidden jewelry beneath the bloom.</p>
+                  <p>Write your truth on the included message card, present the box, and prepare for an unforgettable moment.</p>
                 </div>
               </details>
               <details class="product-accordion">
@@ -219,15 +225,18 @@
               <details class="product-accordion">
                 <summary>Shipping Info</summary>
                 <div class="accordion-content">
-                  <p><strong>The Journey of Your Keepsake</strong><br>We know how important this moment is. Your sacred gift is handled with the utmost care and shipped directly from our warehouse rapidly—typically within 6 hours of placing your order (excluding weekends and holidays).</p>
-                  <p><strong>Delivery Estimates</strong><br>Exact shipping charges will be calculated and displayed clearly at checkout. We proudly ship worldwide to connect hearts across any distance:</p>
+                  <p><strong>Processing</strong></p>
+                  <p>Your gift ships within 6 hours of ordering (excl. weekends & holidays), handled with the utmost care.</p>
+                  <p><strong>Delivery Estimates</strong></p>
                   <ul>
-                    <li style="margin-left: 20px; margin-bottom: 4px;">United States: 5–12 Business Days</li>
-                    <li style="margin-left: 20px; margin-bottom: 4px;">UK &amp; EU: 5–12 Business Days</li>
-                    <li style="margin-left: 20px; margin-bottom: 4px;">Australia &amp; New Zealand: 5–12 Business Days</li>
-                    <li style="margin-left: 20px;">South America, Asia &amp; Africa: 5–12 Business Days (estimate)</li>
+                    <li>United States — 5–12 Business Days</li>
+                    <li>UK &amp; EU — 5–12 Business Days</li>
+                    <li>Australia &amp; NZ — 5–12 Business Days</li>
+                    <li>Rest of World — 5–12 Business Days (est.)</li>
                   </ul>
-                  <p><strong>Our Promise of Communication</strong><br>If we are experiencing a high volume of orders during peak gifting seasons, shipments may be slightly delayed. While we strive for absolute excellence, exact transit times may occasionally vary due to factors outside our carriers' control. Should there be any significant delay in your keepsake's journey, our dedicated support team will contact you directly via email or telephone. Your peace of mind is our priority.</p>
+                  <p>Exact shipping charges are calculated at checkout. We ship worldwide.</p>
+                  <p><strong>Our Promise</strong></p>
+                  <p>During peak gifting seasons, slight delays may occur. If there's any significant delay, our support team will contact you directly. Your peace of mind is our priority.</p>
                 </div>
               </details>
             {%- endif -%}
@@ -786,8 +795,11 @@
   .product-accordion summary::-webkit-details-marker { display: none; }
   .product-accordion summary::after { content: "+"; font-size: 18px; color: var(--color-text-muted); font-weight: 300; }
   .product-accordion[open] summary::after { content: "−"; }
-  .accordion-content { padding: 0 0 14px; font-size: 13px; color: var(--color-text-muted); line-height: 1.7; }
-  .accordion-content p { margin-bottom: 4px; }
+  .accordion-content { padding: 4px 0 16px; font-size: 13px; color: var(--color-text-muted); line-height: 1.75; }
+  .accordion-content p { margin-bottom: 10px; }
+  .accordion-content p:last-child { margin-bottom: 0; }
+  .accordion-content ul { margin: 8px 0; padding-left: 20px; }
+  .accordion-content li { margin-bottom: 4px; }
 
   /* ===== UPSELL SECTION ===== */
   .product-upsell {
