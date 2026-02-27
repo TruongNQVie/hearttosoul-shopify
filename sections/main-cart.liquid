@@ -85,71 +85,66 @@
         {% endfor %}
 
         <!-- Give Extra Love Upsell (inside items column) -->
-        <div class="cart-page__promos" style="margin-top:24px;">
-          {%- assign upsell_candidates = "" | split: ',' -%}
+        <div class="cart-page__promos" style="margin-top:40px;">
           {%- assign upsell_collection = collections['all'] -%}
-          {%- assign debug_total = 0 -%}
-          {%- assign debug_available = 0 -%}
-          {%- assign debug_not_in_cart = 0 -%}
+          {%- assign upsell_shown = 0 -%}
+          {%- assign has_upsell = false -%}
+
+          {%- comment -%} First pass: check if we have any candidates {%- endcomment -%}
           {%- for p in upsell_collection.products limit: 20 -%}
-            {%- assign debug_total = debug_total | plus: 1 -%}
             {%- assign is_in_cart = false -%}
             {%- for item in cart.items -%}
               {%- if item.product_id == p.id -%}
                 {%- assign is_in_cart = true -%}
               {%- endif -%}
             {%- endfor -%}
-            {%- if p.available -%}
-              {%- assign debug_available = debug_available | plus: 1 -%}
-            {%- endif -%}
             {%- unless is_in_cart -%}
-              {%- assign debug_not_in_cart = debug_not_in_cart | plus: 1 -%}
               {%- if p.available -%}
-                {%- assign upsell_candidates = upsell_candidates | push: p -%}
+                {%- assign has_upsell = true -%}
               {%- endif -%}
             {%- endunless -%}
           {%- endfor -%}
-          <!-- DEBUG2: total={{ debug_total }}, available={{ debug_available }}, not_in_cart={{ debug_not_in_cart }}, candidates={{ upsell_candidates.size }}, cart_items={{ cart.item_count }} -->
 
-          {%- if upsell_candidates.size > 0 -%}
-            <div class="cart-upsell mt-12 mb-12">
+          {%- if has_upsell -%}
+            <div class="cart-upsell">
               <div class="cart-upsell__header">
                 <h3>GIVE EXTRA LOVE</h3>
                 <p>Perfect pairings for a complete gift experience</p>
               </div>
               
               <div class="cart-upsell__grid">
-                {%- assign max_to_show = 2 -%}
-                {%- assign shown_count = 0 -%}
-                
-                {%- for i in (0..upsell_candidates.size) -%}
-                  {%- if shown_count >= max_to_show -%}{%- break -%}{%- endif -%}
-                  {%- assign mod_index = cart.item_count | plus: i | modulo: upsell_candidates.size -%}
-                  {%- assign candidate = upsell_candidates[mod_index] -%}
-                  
-                  <div class="cart-upsell__item">
-                    <div class="cart-upsell__img-wrap">
-                      <img src="{{ candidate.featured_image | image_url: width: 150 }}" alt="{{ candidate.title | escape }}">
-                    </div>
-                    <div class="cart-upsell__info">
-                       <div class="cart-upsell__title">{{ candidate.title }}</div>
-                       <div class="cart-upsell__price">
-                         {{ candidate.price | money }}
-                         {%- if candidate.compare_at_price > candidate.price -%}
-                           <span style="text-decoration:line-through;opacity:0.6;font-size:12px;margin-left:6px;font-weight:400;">{{ candidate.compare_at_price | money }}</span>
-                         {%- endif -%}
-                       </div>
-                    </div>
-                    {%- if candidate.available -%}
-                      <form action="/cart/add" method="post" style="margin:0;">
-                        <input type="hidden" name="id" value="{{ candidate.first_available_variant.id }}">
-                        <input type="hidden" name="quantity" value="1">
-                        <button type="submit" class="cart-upsell__add">+ ADD TO BAG</button>
-                      </form>
+                {%- for p in upsell_collection.products limit: 20 -%}
+                  {%- if upsell_shown >= 2 -%}{%- break -%}{%- endif -%}
+                  {%- assign is_in_cart = false -%}
+                  {%- for item in cart.items -%}
+                    {%- if item.product_id == p.id -%}
+                      {%- assign is_in_cart = true -%}
                     {%- endif -%}
-                  </div>
-                  
-                  {%- assign shown_count = shown_count | plus: 1 -%}
+                  {%- endfor -%}
+                  {%- unless is_in_cart -%}
+                    {%- if p.available -%}
+                      <div class="cart-upsell__item">
+                        <a href="{{ p.url }}" class="cart-upsell__img-wrap">
+                          <img src="{{ p.featured_image | image_url: width: 300 }}" alt="{{ p.title | escape }}">
+                        </a>
+                        <div class="cart-upsell__info">
+                           <a href="{{ p.url }}" class="cart-upsell__title">{{ p.title }}</a>
+                           <div class="cart-upsell__price">
+                             {{ p.price | money }}
+                             {%- if p.compare_at_price > p.price -%}
+                               <span style="text-decoration:line-through;opacity:0.5;font-size:12px;margin-left:6px;font-weight:400;">{{ p.compare_at_price | money }}</span>
+                             {%- endif -%}
+                           </div>
+                        </div>
+                        <form action="/cart/add" method="post" style="margin:0;">
+                          <input type="hidden" name="id" value="{{ p.first_available_variant.id }}">
+                          <input type="hidden" name="quantity" value="1">
+                          <button type="submit" class="cart-upsell__add">+ ADD TO BAG</button>
+                        </form>
+                      </div>
+                      {%- assign upsell_shown = upsell_shown | plus: 1 -%}
+                    {%- endif -%}
+                  {%- endunless -%}
                 {%- endfor -%}
               </div>
             </div>
