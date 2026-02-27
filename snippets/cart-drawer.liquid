@@ -53,11 +53,11 @@
 
       <!-- Trust Badges -->
       <div class="cdraw-trust">
-        <div class="cdraw-trust__item" style="background:var(--color-primary);">
+        <div class="cdraw-trust__item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="cdraw-trust__icon"><path d="M21 2l-2 2H5L3 2v8c0 6 5 12 9 12s9-6 9-12V2z"/><polyline points="9 12 11 14 15 10"/></svg>
           <span class="cdraw-trust__text">100% Secure<br>Checkout</span>
         </div>
-        <div class="cdraw-trust__item" style="background:var(--color-primary);">
+        <div class="cdraw-trust__item">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="cdraw-trust__icon"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M2 10h1M2 14h1M21 10h1M21 14h1"/></svg>
           <span class="cdraw-trust__text">60-Day Money<br>Back Guarantee</span>
         </div>
@@ -79,20 +79,20 @@
 .cdraw-promo__price { font-size: 12px; font-weight: 700; color: var(--color-success); margin-top: 4px; }
 
 .cdraw-upsell { border: 1px solid var(--color-primary); border-radius: 8px; overflow: hidden; }
-.cdraw-upsell__header { background: var(--color-primary); color: white; padding: 6px 14px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.cdraw-upsell__header { background: var(--color-primary); color: white; padding: 6px 14px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 .cdraw-upsell__body { padding: 12px; display: flex; gap: 12px; background: white; }
 .cdraw-upsell__img { width: 64px; height: 64px; border-radius: 6px; border: 1px solid var(--color-border); object-fit: cover; flex-shrink: 0; }
 .cdraw-upsell__info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-.cdraw-upsell__title { font-size: 13px; font-weight: 600; line-height: 1.3; color: var(--color-text); margin-bottom: 4px; }
-.cdraw-upsell__price { font-size: 13px; font-weight: 700; color: var(--color-text); }
+.cdraw-upsell__title { font-size: 12px; font-weight: 600; line-height: 1.3; color: var(--color-text); margin-bottom: 2px; }
+.cdraw-upsell__price { font-size: 12px; font-weight: 700; color: var(--color-text); margin-bottom: 8px;}
 .cdraw-upsell__add { 
   background: var(--color-success); color: white; border: none; padding: 6px 12px; 
   border-radius: 4px; font-size: 11px; font-weight: 700; cursor: pointer; 
-  text-transform: uppercase; width: 100%; margin-top: 6px; transition: background 0.2s;
+  text-transform: uppercase; width: 100%; transition: background 0.2s;
 }
 .cdraw-upsell__add:hover { background: #2e7d32; }
 
-.cdraw-protect { display: flex; align-items: center; justify-content: space-between; padding: 12px; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.cdraw-protect { display: flex; align-items: center; justify-content: space-between; padding: 12px; background: white; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 .cdraw-protect__title { font-size: 11px; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px; }
 .cdraw-protect__desc { font-size: 11px; color: var(--color-text-muted); margin-top: 2px; }
 .cdraw-protect__price { font-weight: 700; color: var(--color-success); }
@@ -101,16 +101,22 @@
 .cdraw-protect.active .cdraw-protect__toggle { background: var(--color-success); }
 .cdraw-protect.active .cdraw-protect__toggle::after { left: 18px; }
 
-.cdraw-afterpay-msg { text-align: center; font-size: 11px; color: var(--color-text-muted); margin-top: 12px; }
-.afterpay-logo { font-weight: 800; color: #b2fce4; background: #000; padding: 1px 4px; border-radius: 2px; font-size: 10px; }
-.cdraw-payments { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
-.cdraw-payment-icon { width: 34px; height: 22px; border-radius: 3px; overflow: hidden; display: inline-flex; border: none; }
+.cdraw-afterpay-msg { text-align: center; font-size: 10px; color: var(--color-text-muted); margin-top: 12px; }
+.afterpay-logo { font-weight: 800; color: #b2fce4; background: #000; padding: 1px 4px; border-radius: 2px; font-size: 9px; }
+.cdraw-payments { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.cdraw-payment-icon { width: 30px; height: 20px; border-radius: 3px; overflow: hidden; display: inline-flex; border: none; }
 .cdraw-payment-icon svg { width: 100%; height: 100%; }
 
-.cdraw-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
-.cdraw-trust__item { color: white; padding: 12px 6px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.cdraw-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0; }
+.cdraw-trust__item { background: var(--color-primary); color: white; padding: 10px 6px; border-radius: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .cdraw-trust__icon { opacity: 0.9; }
-.cdraw-trust__text { font-size: 11px; font-weight: 600; line-height: 1.3; }
+.cdraw-trust__text { font-size: 11px; font-weight: 600; line-height: 1.2; }
+
+/* Tighter Footer Layout and Prominent Checkout */
+.cart-drawer__subtotal { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; font-size: 16px; font-weight: 700; color: #111; }
+.cart-drawer__total-price { font-size: 20px; font-weight: 800; }
+.cart-drawer__checkout-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: var(--color-primary); color: white; border-radius: 40px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 12px rgba(157,95,27,0.2); text-decoration: none; }
+.cart-drawer__checkout-btn:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
 </style>
 
 <script>
@@ -139,15 +145,21 @@
           <div style="font-size:48px;margin-bottom:16px">🛍️</div>
           <p style="font-size:18px;margin-bottom:8px;font-family:var(--font-heading)">Your cart is empty</p>
           <p style="color:var(--color-text-muted);font-size:14px">Discover something special for your loved ones.</p>
-          <button class="cart-drawer__continue-btn" style="margin-top:20px" onclick="closeCartDrawer()">CONTINUE SHOPPING</button>
+          <button onclick="closeCartDrawer()" style="margin-top:24px;background:var(--color-primary);color:white;border:none;padding:12px 24px;border-radius:40px;font-weight:700;font-size:14px;cursor:pointer">CONTINUE SHOPPING</button>
         </div>`;
     }
 
-    footer.style.display = '';
-    totalEl.textContent = formatMoney(cart.total_price);
-    checkoutTotalEl.textContent = formatMoney(cart.total_price);
+    footer.style.display = 'block';
+
+    const isProtectActive = document.querySelector('.cdraw-protect') && document.querySelector('.cdraw-protect').classList.contains('active');
+    const protectPrice = isProtectActive ? 420 : 0;
+    const computedTotal = cart.total_price + protectPrice;
+
+    totalEl.textContent = formatMoney(computedTotal);
+    checkoutTotalEl.textContent = formatMoney(computedTotal);
+    
     const afterpayAmt = document.getElementById('cdraw-afterpay-amt');
-    if (afterpayAmt) afterpayAmt.textContent = formatMoney(cart.total_price / 4);
+    if (afterpayAmt) afterpayAmt.textContent = formatMoney(computedTotal / 4);
     countEl.textContent = cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
 
     // Update header badges
@@ -187,20 +199,6 @@
         </div>`;
     }).join('');
 
-    const freeGiftHTML = `
-      <div class="cdraw-promo mb-12">
-        <div class="cdraw-promo__img-wrap">
-          <span class="cdraw-promo__badge">FREE ITEM</span>
-          <span style="font-size:32px;">🎁</span>
-        </div>
-        <div class="cdraw-promo__text">
-          <div class="cdraw-promo__title">LIMITED TIME OFFER 🔥 🔥</div>
-          <p class="cdraw-promo__desc">Buy now and get <strong>FREE GIFT WRAP</strong> with each item</p>
-          <p class="cdraw-promo__price">FREE <span style="color:var(--color-text-light); text-decoration:line-through; font-weight:400; margin-left:4px;">$10.00</span></p>
-        </div>
-      </div>
-    `;
-
     const upsellsHTML = `
       <div class="cdraw-upsell mt-12 mb-12">
         <div class="cdraw-upsell__header">GIVE EXTRA LOVE</div>
@@ -215,22 +213,9 @@
           </div>
         </div>
       </div>
-      <div class="cdraw-upsell mb-12">
-        <div class="cdraw-upsell__header">GIVE EXTRA LOVE</div>
-        <div class="cdraw-upsell__body">
-          <div class="cdraw-upsell__img" style="background:var(--color-bg-warm);display:flex;align-items:center;justify-content:center;font-size:24px;">💍</div>
-          <div class="cdraw-upsell__info">
-            <div>
-               <div class="cdraw-upsell__title">Eternal Rose Gift Box Upgrade</div>
-               <div class="cdraw-upsell__price">$14.95 <span style="text-decoration:line-through;color:#999;font-size:11px;font-weight:400;">$30.00</span></div>
-            </div>
-            <button class="cdraw-upsell__add" onclick="window.location='/collections/all'">ADD TO CART</button>
-          </div>
-        </div>
-      </div>
     `;
 
-    return freeGiftHTML + itemsHTML + upsellsHTML;
+    return itemsHTML + upsellsHTML;
   }
 
   // Render from current state
@@ -337,5 +322,14 @@
   // Pre-seed cart state on page load (via Liquid) to avoid flash
   cartState = {{ cart | json }};
   renderFromState();
+
+  // Handle Order Protection Toggle
+  const protectToggle = document.querySelector('.cdraw-protect input[type="checkbox"]');
+  if(protectToggle) {
+    protectToggle.addEventListener('change', function() {
+      // Re-render visually (adds $4.20)
+      renderFromState();
+    });
+  }
 })();
 </script>
