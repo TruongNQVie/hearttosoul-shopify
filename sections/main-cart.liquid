@@ -193,7 +193,6 @@
           <div class="cart-express">
             <span class="cart-express__label">Express Checkout</span>
             <div class="cart-express__buttons">
-            <div class="cart-express__buttons">
               {% if additional_checkout_buttons %}
                 <div class="additional-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
@@ -470,11 +469,11 @@
   /* Express & Trust */
   .cart-express { margin-top: 24px; text-align: center; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 24px; }
   .cart-express__label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-muted); margin-bottom: 16px; font-weight: 600; }
-  .additional-checkout-buttons { display: flex; gap: 8px; flex-wrap: wrap; width: 100%; }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 calc(50% - 4px); }
-  .additional-checkout-buttons ul { display: flex; gap: 8px; width: 100%; }
-  .additional-checkout-buttons li { flex: 1; list-style: none; }
-  .additional-checkout-buttons [role="button"], .additional-checkout-buttons button { border-radius: 50px !important; height: 44px !important; }
+  .additional-checkout-buttons { display: flex; gap: 8px; flex-wrap: nowrap; width: 100%; justify-content: space-between; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 0; min-width: 0; }
+  .additional-checkout-buttons ul { display: flex; gap: 8px; width: 100%; margin: 0; padding: 0; flex-wrap: nowrap; }
+  .additional-checkout-buttons li { flex: 1 1 0; list-style: none; min-width: 0; }
+  .additional-checkout-buttons [role="button"], .additional-checkout-buttons button { border-radius: 50px !important; height: 44px !important; width: 100% !important; min-width: 0 !important; padding: 0 4px !important; }
   
   .cdraw-payments { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 24px 0 16px; }
   .cdraw-payment-icon { width: 36px; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
@@ -636,20 +635,32 @@
   // Sticky checkout bar
   document.addEventListener('DOMContentLoaded', function() {
     const stickyBar = document.getElementById('cart-sticky-bar');
-    const mainCheckoutBtn = document.querySelector('.cart-page__checkout-container');
+    const itemsContainer = document.querySelector('.cart-page__items-container');
     
-    if (stickyBar && mainCheckoutBtn) {
+    if (stickyBar && itemsContainer) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (!entry.isIntersecting) {
-            stickyBar.classList.add('visible');
+          // Show sticky bar when the items container is scrolling out of view (or isn't fully visible anymore)
+          // Adjust threshold if needed, here we show it when the top of the items container is negative
+          if (entry.boundingClientRect.bottom < window.innerHeight) {
+             stickyBar.classList.add('visible');
           } else {
-            stickyBar.classList.remove('visible');
+             stickyBar.classList.remove('visible');
           }
         });
-      }, { rootMargin: "0px", threshold: 0 });
+      }, { rootMargin: "0px", threshold: [0, 0.1, 0.2, 0.5, 1.0] });
       
-      observer.observe(mainCheckoutBtn);
+      observer.observe(itemsContainer);
+      
+      // Fallback scroll event just in case
+      window.addEventListener('scroll', function() {
+        const rect = itemsContainer.getBoundingClientRect();
+        if (rect.bottom < window.innerHeight) {
+          stickyBar.classList.add('visible');
+        } else {
+          stickyBar.classList.remove('visible');
+        }
+      });
     }
   });
 </script>
