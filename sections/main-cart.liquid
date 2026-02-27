@@ -23,12 +23,13 @@
       </div>
     {%- else -%}
       <div class="cart-shipping-bar cart-shipping-bar--achieved">
-        <div class="cart-shipping-bar__icon">🎉</div>
-        <div class="cart-shipping-bar__text">
-          You've unlocked <strong>FREE Shipping!</strong>
-        </div>
-        <div class="cart-shipping-bar__track">
-          <div class="cart-shipping-bar__fill" style="width: 100%;"></div>
+        <div class="cart-shipping-bar__success-content">
+          <div class="cart-shipping__success-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <div class="cart-shipping-bar__success-text">
+            Congratulations! You've unlocked <strong>FREE Shipping</strong>
+          </div>
         </div>
       </div>
     {%- endif -%}
@@ -408,7 +409,29 @@
     height: 100%; background: var(--color-primary);
     border-radius: 3px; transition: width 0.4s ease;
   }
-  .cart-shipping-bar--achieved .cart-shipping-bar__fill { background: var(--color-success); }
+  
+  /* Achieved State Styling */
+  .cart-shipping-bar--achieved { 
+    background: linear-gradient(to right, rgba(46, 125, 50, 0.04), rgba(46, 125, 50, 0.08));
+    border: 1px solid rgba(46, 125, 50, 0.2);
+    justify-content: center; padding: 18px 20px;
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.6);
+  }
+  .cart-shipping-bar__success-content {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cart-shipping__success-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--color-success, #2e7d32);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+  }
+  .cart-shipping-bar__success-text {
+    font-size: 15px; color: #1b4d1e; font-weight: 500; letter-spacing: 0.3px;
+  }
+  .cart-shipping-bar__success-text strong {
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+  }
 
   /* Express Checkout */
   .cart-express { margin-top: 16px; text-align: center; }
