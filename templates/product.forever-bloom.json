@@ -7,28 +7,52 @@
                     "type": "accordion",
                     "settings": {
                         "heading": "The Artisan's Journey",
-                        "content": "<p>Forged by hands and bound by soul. Our master jewelers spent hours meticulously polishing the 14K gold-plated alloy, ensuring that every facet of the necklace catches the light of your shared memories. The eternal rose is hand-selected and preserved at the peak of its beauty to signify a love that blooms forever.</p>"
+                        "content": "<p>Every piece at Heart to Soul begins with a profound respect for the emotion it will carry. Our artisans meticulously hand-select each preserved rose at its absolute peak, ensuring its velvety texture and vibrant color are captured forever.</p><p>The accompanying jewelry is forged using ethically sourced, high-quality metals and brilliant stones—because a love built to last should never harm the earth.</p><p>From the final hand-polish of the pendant to the precise assembly of our cinematic display vaults, every step is a labor of love, crafted to honor yours.</p>"
                     }
                 },
                 "acc_2": {
                     "type": "accordion",
                     "settings": {
-                        "heading": "The Meaning",
-                        "content": "<p>The apple is a historical symbol of profound devotion and romance. Inside, the eternal rose represents purity and longevity, while the necklace rests close to the heart—a constant reminder of a sacred bond. This bundle is designed as a modern heirloom, perfect for partners, mothers, or grandmothers to celebrate multi-generational love.</p>"
+                        "heading": "Materials & Care",
+                        "content": "<p><strong>The Jewelry:</strong> Crafted from premium 925 Sterling Silver, durable Stainless Steel, or hypoallergenic copper, and bathed in luxurious 14K Gold or Rhodium finishes. Designed to be kind to sensitive skin. To maintain its brilliance, gently wipe with a soft microfiber cloth.</p><p><strong>The Eternal Blooms:</strong> Our preserved flora and artisan soap roses require absolute zero maintenance. No water, no sunlight. Simply keep them resting peacefully in their sanctuary box, away from direct harsh sunlight or extreme humidity, and they will retain their beauty for years to come.</p>"
                     }
                 },
                 "acc_3": {
                     "type": "accordion",
                     "settings": {
-                        "heading": "Materials & Care",
-                        "content": "<p>Includes a 14K gold/white gold plated clavicle chain (18\" adjustable) designed to resist tarnishing. The eternal rose is a premium scented soap flower that lasts indefinitely. Keep away from direct sunlight and moisture to preserve its ethereal beauty.</p>"
+                        "heading": "How It Works",
+                        "content": "<p>We believe gifting should be a cinematic experience, not just a transaction.</p><p>Your keepsake arrives impeccably packaged and completely ready to present. Depending on your chosen collection, the unboxing is designed as a sacred ritual: a smooth drawer gliding open, a dramatic double-door reveal, or a gentle rotation that presents the hidden jewelry beneath the eternal bloom.</p><p>Simply write your truth on the included message card, present the box, and prepare for an unforgettable emotional moment.</p>"
+                    }
+                },
+                "acc_4": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "Are The Pieces Waterproof?",
+                        "content": "<p>Our jewelry is highly durable and designed to anchor your everyday life.</p><p>While an occasional splash of water won't break the bond, we highly recommend removing your pieces before showering, swimming, or intense workouts.</p><p>Protecting them from prolonged exposure to moisture, perfumes, and lotions ensures the metallic finish and sparkling stones remain exactly as radiant as the day you gifted them.</p>"
+                    }
+                },
+                "acc_5": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "Need Help Choosing The Right Size?",
+                        "content": "<p>Take the guesswork out of gifting. We've designed our collections to be effortlessly universal.</p><p>Almost all of our necklaces feature a versatile \"clavicle chain\" design (typically 18 inches / 45cm) paired with a built-in 2-inch (5cm) extension loop. This allows the pendant to rest perfectly at her collarbone or be adjusted slightly lower, ensuring a flawless and comfortable fit for any silhouette.</p>"
+                    }
+                },
+                "acc_6": {
+                    "type": "accordion",
+                    "settings": {
+                        "heading": "Shipping Info",
+                        "content": "<p><strong>The Journey of Your Keepsake</strong><br>We know how important this moment is. Your sacred gift is handled with the utmost care and shipped directly from our warehouse rapidly—typically within 6 hours of placing your order (excluding weekends and holidays).</p><p><strong>Delivery Estimates</strong><br>Exact shipping charges will be calculated and displayed clearly at checkout. We proudly ship worldwide to connect hearts across any distance:</p><ul><li>United States: 5–12 Business Days</li><li>UK &amp; EU: 5–12 Business Days</li><li>Australia &amp; New Zealand: 5–12 Business Days</li><li>South America, Asia &amp; Africa: 5–12 Business Days (estimate)</li></ul><p><strong>Our Promise of Communication</strong><br>If we are experiencing a high volume of orders during peak gifting seasons, shipments may be slightly delayed. While we strive for absolute excellence, exact transit times may occasionally vary due to factors outside our carriers' control. Should there be any significant delay in your keepsake's journey, our dedicated support team will contact you directly via email or telephone. Your peace of mind is our priority.</p>"
                     }
                 }
             },
             "block_order": [
                 "acc_1",
                 "acc_2",
-                "acc_3"
+                "acc_3",
+                "acc_4",
+                "acc_5",
+                "acc_6"
             ],
             "settings": {}
         },

@@ -289,7 +289,7 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap');
+  /* Typography — uses design system variables from base.css */
 
   /* ===== Cart Page: Quiet Luxury ===== */
   .cart-page {
@@ -306,12 +306,12 @@
     border-bottom: 1px solid rgba(29,29,29,0.08);
   }
   .cart-page__header h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-heading);
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400; color: #1D1D1D; margin: 0; line-height: 1.2;
+    font-weight: 400; color: var(--color-text); margin: 0; line-height: 1.2;
   }
   .cart-page__count {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px; font-weight: 500; color: rgba(29,29,29,0.55);
     text-transform: uppercase; letter-spacing: 1px;
   }
@@ -345,20 +345,20 @@
 
   .cart-page__item-details { flex: 1; min-width: 0; display: flex; flex-direction: column; padding-top: 4px; }
   .cart-page__item-title { 
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 600; color: #1D1D1D;
+    font-family: var(--font-heading);
+    font-size: 20px; font-weight: 600; color: var(--color-text);
     margin-bottom: 8px; line-height: 1.3; text-decoration: none;
     display: inline-block; transition: color 0.3s ease;
   }
-  .cart-page__item-title:hover { color: #7F1B17; }
+  .cart-page__item-title:hover { color: var(--color-sale); }
   .cart-page__item-variant {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px; color: rgba(29,29,29,0.55); margin-bottom: 12px; letter-spacing: 0.5px;
   }
   
   .cart-page__item-price { font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .cart-price-sale { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #7F1B17; font-size: 16px; }
-  .cart-price-compare { font-family: 'Montserrat', sans-serif; font-weight: 500; text-decoration: line-through; color: #B4B4B4; font-size: 0.85em; }
+  .cart-price-sale { font-family: var(--font-body); font-weight: 700; color: var(--color-sale); font-size: 16px; }
+  .cart-price-compare { font-family: var(--font-body); font-weight: 500; text-decoration: line-through; color: #B4B4B4; font-size: 0.85em; }
   
   .cart-page__item-qty {
     display: flex; align-items: center; border: 1px solid rgba(29,29,29,0.1); 
@@ -371,26 +371,26 @@
     background: transparent; border: none; font-size: 18px;
     cursor: pointer; color: rgba(29,29,29,0.4); transition: all 0.2s;
   }
-  .cart-qty-btn:hover { color: #1D1D1D; background: rgba(29,29,29,0.04); }
+  .cart-qty-btn:hover { color: var(--color-text); background: rgba(29,29,29,0.04); }
   .cart-qty-num {
     display: flex; align-items: center; justify-content: center;
     min-width: 40px; height: 100%; text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px; font-weight: 600; color: #1D1D1D;
+    font-family: var(--font-body);
+    font-size: 15px; font-weight: 600; color: var(--color-text);
     border-left: 1px solid rgba(29,29,29,0.1);
     border-right: 1px solid rgba(29,29,29,0.1);
   }
   
   .cart-page__item-total { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; min-width: 100px; padding-top: 4px; }
-  .cart-item-line-price { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 600; color: #1D1D1D; letter-spacing: 0.5px; }
+  .cart-item-line-price { font-family: var(--font-body); font-size: 18px; font-weight: 600; color: var(--color-text); letter-spacing: 0.5px; }
   .cart-page__remove {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
     color: rgba(29,29,29,0.5); transition: all 0.3s ease; text-decoration: none;
     display: flex; align-items: center; gap: 6px; padding: 4px 0; border-bottom: 1px solid transparent;
   }
   .cart-remove-text { text-transform: uppercase; }
-  .cart-page__remove:hover { color: #7F1B17; border-bottom-color: #7F1B17; }
+  .cart-page__remove:hover { color: var(--color-sale); border-bottom-color: var(--color-sale); }
 
   /* ===== Love Note Module ===== */
   .cart-love-note {
@@ -401,23 +401,23 @@
     display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
   }
   .cart-love-note__header h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 500; color: #1D1D1D; margin: 0;
+    font-family: var(--font-heading);
+    font-size: 18px; font-weight: 500; color: var(--color-text); margin: 0;
   }
   .cart-love-note__header h4 span {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 11px; font-weight: 400; color: rgba(29,29,29,0.4);
   }
   .cart-love-note__input {
     width: 100%; padding: 16px; border: 1px dashed #776B63; border-radius: 12px;
-    background: transparent; font-family: 'Montserrat', sans-serif;
-    font-size: 13px; color: #1D1D1D; line-height: 1.6; resize: vertical;
+    background: transparent; font-family: var(--font-body);
+    font-size: 13px; color: var(--color-text); line-height: 1.6; resize: vertical;
     transition: border-color 0.3s;
   }
   .cart-love-note__input::placeholder { color: rgba(29,29,29,0.3); font-style: italic; }
-  .cart-love-note__input:focus { outline: none; border-color: #8B7355; border-style: solid; }
+  .cart-love-note__input:focus { outline: none; border-color: var(--color-accent-warm); border-style: solid; }
   .cart-love-note__counter {
-    text-align: right; font-family: 'Montserrat', sans-serif;
+    text-align: right; font-family: var(--font-body);
     font-size: 11px; color: rgba(29,29,29,0.3); margin-top: 6px;
   }
 
@@ -430,7 +430,7 @@
     background: transparent;
   }
   .cart-gift-wrap:hover { border-color: rgba(29,29,29,0.15); }
-  .cart-gift-wrap.active { border-color: #8B7355; background: rgba(139,115,85,0.04); }
+  .cart-gift-wrap.active { border-color: var(--color-accent-warm); background: rgba(139,115,85,0.04); }
   .cart-gift-wrap__check {
     width: 22px; height: 22px; border-radius: 6px;
     border: 1.5px solid rgba(29,29,29,0.2);
@@ -438,20 +438,20 @@
     flex-shrink: 0; transition: all 0.2s; color: transparent;
   }
   .cart-gift-wrap.active .cart-gift-wrap__check {
-    background: #8B7355; border-color: #8B7355; color: #F9F8F3;
+    background: #8B7355; border-color: var(--color-accent-warm); color: #F9F8F3;
   }
   .cart-gift-wrap__text { flex: 1; }
   .cart-gift-wrap__title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px; font-weight: 600; color: #1D1D1D; display: block;
+    font-family: var(--font-body);
+    font-size: 13px; font-weight: 600; color: var(--color-text); display: block;
   }
   .cart-gift-wrap__desc {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 11px; color: rgba(29,29,29,0.45); display: block; margin-top: 2px;
   }
   .cart-gift-wrap__badge {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px; font-weight: 600; color: #8B7355;
+    font-family: var(--font-body);
+    font-size: 11px; font-weight: 600; color: var(--color-accent-warm);
     text-transform: uppercase; letter-spacing: 0.05em;
   }
 
@@ -462,10 +462,10 @@
   }
   .cart-upsell__header { text-align: left; margin-bottom: 20px; }
   .cart-upsell__header h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 500; color: #1D1D1D; margin-bottom: 4px;
+    font-family: var(--font-heading);
+    font-size: 22px; font-weight: 500; color: var(--color-text); margin-bottom: 4px;
   }
-  .cart-upsell__header p { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.5); }
+  .cart-upsell__header p { font-family: var(--font-body); font-size: 13px; color: rgba(29,29,29,0.5); }
   
   .cart-upsell__carousel {
     display: flex; gap: 16px; overflow-x: auto;
@@ -497,20 +497,20 @@
   
   .cart-upsell__info { padding: 12px; flex: 1; text-align: center; }
   .cart-upsell__title { 
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 600; line-height: 1.4; color: #1D1D1D; 
+    font-family: var(--font-body);
+    font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--color-text); 
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: none; 
     margin-bottom: 6px;
   }
-  .cart-upsell__title:hover { color: #7F1B17; }
+  .cart-upsell__title:hover { color: var(--color-sale); }
   .cart-upsell__price { display: flex; align-items: baseline; gap: 6px; justify-content: center; }
-  .cart-upsell__price-current { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #7F1B17; }
-  .cart-upsell__price-compare { font-family: 'Montserrat', sans-serif; font-size: 11px; color: #B4B4B4; text-decoration: line-through; }
+  .cart-upsell__price-current { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--color-sale); }
+  .cart-upsell__price-compare { font-family: var(--font-body); font-size: 11px; color: #B4B4B4; text-decoration: line-through; }
   
   .cart-upsell__add { 
-    width: 100%; background: transparent; color: #1D1D1D;
+    width: 100%; background: transparent; color: var(--color-text);
     border: none; border-top: 1px solid rgba(29,29,29,0.06);
-    padding: 10px; font-family: 'Montserrat', sans-serif;
+    padding: 10px; font-family: var(--font-body);
     font-size: 11px; font-weight: 600; cursor: pointer; 
     text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s;
   }
@@ -525,9 +525,9 @@
   }
   @media (max-width: 768px) { .cart-page__summary-card { padding: 28px 20px; } }
   .cart-page__summary-card h3 { 
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-heading);
     font-size: 22px; font-weight: 500; 
-    margin-bottom: 24px; color: #1D1D1D; 
+    margin-bottom: 24px; color: var(--color-text); 
   }
 
   /* Order Protection */
@@ -538,11 +538,11 @@
   }
   .cdraw-protect:hover { border-color: rgba(29,29,29,0.12); }
   .cdraw-protect__title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 600; color: #1D1D1D; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+    font-family: var(--font-body);
+    font-size: 12px; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
   }
-  .cdraw-protect__desc { font-family: 'Montserrat', sans-serif; font-size: 12px; color: rgba(29,29,29,0.5); line-height: 1.4; }
-  .cdraw-protect__price { font-weight: 600; color: #1D1D1D; }
+  .cdraw-protect__desc { font-family: var(--font-body); font-size: 12px; color: rgba(29,29,29,0.5); line-height: 1.4; }
+  .cdraw-protect__price { font-weight: 600; color: var(--color-text); }
   .cdraw-protect__toggle {
     position: relative; width: 40px; height: 22px;
     background: rgba(29,29,29,0.1); border-radius: 20px;
@@ -560,19 +560,19 @@
 
   /* Summary Rows */
   .cart-page__summary-row {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14px; color: rgba(29,29,29,0.6);
   }
-  .cart-page__summary-row strong { color: #1D1D1D; font-weight: 500; }
-  .cart-shipping-free { font-family: 'Montserrat', sans-serif; font-weight: 600; color: #8B7355; font-size: 14px; letter-spacing: 0.5px; }
+  .cart-page__summary-row strong { color: var(--color-text); font-weight: 500; }
+  .cart-shipping-free { font-family: var(--font-body); font-weight: 600; color: var(--color-accent-warm); font-size: 14px; letter-spacing: 0.5px; }
   .cart-page__summary-divider { height: 1px; background: rgba(29,29,29,0.06); margin: 20px 0; }
   .cart-page__summary-total {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 400; color: #1D1D1D; align-items: center;
+    font-family: var(--font-heading);
+    font-size: 20px; font-weight: 400; color: var(--color-text); align-items: center;
   }
   .cart-page__summary-total strong {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px; font-weight: 500; color: #1D1D1D;
+    font-family: var(--font-heading);
+    font-size: 26px; font-weight: 500; color: var(--color-text);
   }
 
   /* ===== Checkout Button ===== */
@@ -580,7 +580,7 @@
     display: flex; width: 100%; padding: 16px 24px; margin-top: 28px;
     background: #480003; color: #F9F8F3 !important;
     justify-content: center; align-items: center; gap: 12px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
     transition: all 0.3s ease; text-decoration: none;
     border: none; border-radius: 50px; position: relative; overflow: hidden;
@@ -593,7 +593,7 @@
   /* Express & Trust */
   .cart-express { margin-top: 24px; text-align: center; border-top: 1px solid rgba(29,29,29,0.06); padding-top: 24px; }
   .cart-express__label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
     color: rgba(29,29,29,0.4); margin-bottom: 16px; font-weight: 600;
   }
@@ -629,18 +629,18 @@
   }
   .cdraw-trust__item svg { width: 20px; height: 20px; color: rgba(29,29,29,0.35); stroke-width: 1.5; }
   .cdraw-trust__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: 0.5px; text-transform: uppercase;
   }
 
   .cart-page__continue-wrap { text-align: center; margin-top: 24px; }
   .cart-page__continue {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     font-size: 12px; color: rgba(29,29,29,0.5); letter-spacing: 1px; text-transform: uppercase;
     font-weight: 500; text-decoration: none; transition: all 0.3s; border-bottom: 1px solid transparent; padding-bottom: 2px;
   }
-  .cart-page__continue:hover { color: #7F1B17; border-bottom-color: rgba(29,29,29,0.1); }
+  .cart-page__continue:hover { color: var(--color-sale); border-bottom-color: rgba(29,29,29,0.1); }
   .cart-page__continue svg { transition: transform 0.3s ease; }
   .cart-page__continue:hover svg { transform: translateX(-4px); }
 
@@ -651,11 +651,11 @@
     background: #F9F8F3; border: 1px solid rgba(29,29,29,0.06);
   }
   .cart-shipping-bar__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     display: flex; align-items: center; gap: 10px;
     font-size: 13px; color: rgba(29,29,29,0.6); letter-spacing: 0.3px;
   }
-  .cart-shipping-bar__text strong { color: #1D1D1D; font-weight: 600; }
+  .cart-shipping-bar__text strong { color: var(--color-text); font-weight: 600; }
   .cart-shipping-bar__track {
     width: 100%; height: 3px;
     background: rgba(29,29,29,0.06); border-radius: 2px; overflow: hidden;
@@ -671,16 +671,16 @@
     border: 1px solid rgba(29,29,29,0.06);
     flex-direction: row; align-items: center; gap: 10px;
   }
-  .cart-shipping-bar--achieved span { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.6); }
-  .cart-shipping-bar--achieved strong { color: #1D1D1D; }
+  .cart-shipping-bar--achieved span { font-family: var(--font-body); font-size: 13px; color: rgba(29,29,29,0.6); }
+  .cart-shipping-bar--achieved strong { color: var(--color-text); }
 
   /* Empty Cart */
   .cart-page__empty {
     text-align: center; padding: 80px 24px;
     background: transparent; border-radius: 16px;
   }
-  .cart-empty-heading { font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 8px; color: #1D1D1D; }
-  .cart-empty-text { font-family: 'Montserrat', sans-serif; color: rgba(29,29,29,0.5); margin-bottom: 24px; font-size: 14px; }
+  .cart-empty-heading { font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px; color: var(--color-text); }
+  .cart-empty-text { font-family: var(--font-body); color: rgba(29,29,29,0.5); margin-bottom: 24px; font-size: 14px; }
 
   /* ===== Sticky Checkout Bar ===== */
   .cart-sticky-bar {
@@ -698,17 +698,17 @@
     padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
   }
   .cart-sticky-bar__left { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-  .cart-sticky-bar__total { font-family: 'Montserrat', sans-serif; font-size: 13px; color: rgba(29,29,29,0.5); }
-  .cart-sticky-bar__total strong { font-size: 20px; color: #1D1D1D; font-weight: 700; margin-left: 4px; }
+  .cart-sticky-bar__total { font-family: var(--font-body); font-size: 13px; color: rgba(29,29,29,0.5); }
+  .cart-sticky-bar__total strong { font-size: 20px; color: var(--color-text); font-weight: 700; margin-left: 4px; }
   .cart-sticky-bar__warranty {
     display: flex; align-items: center; gap: 4px;
-    font-family: 'Montserrat', sans-serif;
-    color: #8B7355; font-size: 10px; font-weight: 700;
+    font-family: var(--font-body);
+    color: var(--color-accent-warm); font-size: 10px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
   .cart-sticky-bar__secure {
     display: flex; align-items: center; gap: 6px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     color: #388E3C; font-size: 10px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.5px;
     margin-bottom: 6px;
@@ -753,18 +753,18 @@
   .cart-warranty__img:hover img { transform: scale(1.05); }
   .cart-warranty__body { max-width: 520px; margin: 0 auto; }
   .cart-warranty__label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-    color: #8B7355; text-transform: uppercase;
+    color: var(--color-accent-warm); text-transform: uppercase;
     display: block; margin-bottom: 10px;
   }
   .cart-warranty__heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px; font-weight: 600; color: #1D1D1D;
+    font-family: var(--font-heading);
+    font-size: 24px; font-weight: 600; color: var(--color-text);
     line-height: 1.2; margin-bottom: 12px;
   }
   .cart-warranty__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px; line-height: 1.8; color: rgba(29,29,29,0.55);
     margin-bottom: 20px;
   }
@@ -773,11 +773,11 @@
   }
   .cart-warranty__feature {
     display: flex; align-items: center; gap: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 600; color: #1D1D1D;
+    font-family: var(--font-body);
+    font-size: 12px; font-weight: 600; color: var(--color-text);
   }
   .cart-warranty__feature svg {
-    color: #8B7355; flex-shrink: 0;
+    color: var(--color-accent-warm); flex-shrink: 0;
   }
 </style>
 
@@ -813,20 +813,20 @@
   }
   .cart-remove-popup__close:hover { color:#7F1B17; }
   .cart-remove-popup__img { width:100px; height:100px; border-radius:12px; object-fit:cover; margin:0 auto 16px; display:block; border:1px solid rgba(29,29,29,0.06); }
-  .cart-remove-popup__title { font-family:'Cormorant Garamond', serif; font-size:22px; font-weight:500; margin-bottom:8px; color:#1D1D1D; }
-  .cart-remove-popup__text { font-family:'Montserrat', sans-serif; font-size:13px; color:rgba(29,29,29,0.5); line-height:1.5; margin-bottom:12px; }
-  .cart-remove-popup__product-name { font-family:'Montserrat', sans-serif; font-size:12px; font-weight:600; color:#8B7355; margin-bottom:24px; }
+  .cart-remove-popup__title { font-family:var(--font-heading); font-size:22px; font-weight:500; margin-bottom:8px; color:#1D1D1D; }
+  .cart-remove-popup__text { font-family:var(--font-body); font-size:13px; color:rgba(29,29,29,0.5); line-height:1.5; margin-bottom:12px; }
+  .cart-remove-popup__product-name { font-family:var(--font-body); font-size:12px; font-weight:600; color:#8B7355; margin-bottom:24px; }
   .cart-remove-popup__actions { display:flex; flex-direction:column; gap:12px; }
   .cart-remove-popup__keep {
     padding:14px 24px; border-radius:50px; border:none;
-    background:#480003; color:#F9F8F3; font-family:'Montserrat', sans-serif;
+    background:#480003; color:#F9F8F3; font-family:var(--font-body);
     font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px;
     cursor:pointer; transition:all 0.2s;
   }
   .cart-remove-popup__keep:hover { background:#7F1B17; }
   .cart-remove-popup__remove {
     padding:12px 24px; border-radius:50px; border:1.5px solid rgba(29,29,29,0.1);
-    background:transparent; color:rgba(29,29,29,0.4); font-family:'Montserrat', sans-serif;
+    background:transparent; color:rgba(29,29,29,0.4); font-family:var(--font-body);
     font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px;
     cursor:pointer; transition:all 0.2s;
   }

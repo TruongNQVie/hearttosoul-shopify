@@ -56,25 +56,25 @@
   .our-promise .container { position: relative; z-index: 1; }
 
   .our-promise__label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #8B7355;
+    color: var(--color-accent-warm);
     font-weight: 600;
     display: block;
     margin-bottom: 10px;
   }
   .promise-heading {
-    font-family: 'Cormorant Garamond', serif !important;
-    color: #1D1D1D !important;
+    font-family: var(--font-heading) !important;
+    color: var(--color-text) !important;
     font-weight: 500;
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     margin-bottom: 8px;
   }
   .promise-subtitle {
-    font-family: 'Montserrat', sans-serif !important;
-    color: rgba(29,29,29,0.6) !important;
+    font-family: var(--font-body) !important;
+    color: var(--color-text-muted) !important;
     font-size: 13px;
     font-weight: 400;
   }
@@ -100,12 +100,12 @@
     height: 56px;
     border-radius: 50%;
     background: transparent;
-    border: 1.5px solid #8B7355;
+    border: 1.5px solid var(--color-accent-warm);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 16px;
-    color: #8B7355;
+    color: var(--color-accent-warm);
     transition: all 0.35s ease;
   }
   .our-promise__card:hover .our-promise__icon {
@@ -115,16 +115,16 @@
   }
   .our-promise__icon svg { width: 24px; height: 24px; }
   .our-promise__title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 8px;
-    color: #1D1D1D;
+    color: var(--color-text);
   }
   .our-promise__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
-    color: rgba(29, 29, 29, 0.55);
+    color: var(--color-text-muted);
     line-height: 1.6;
   }
 

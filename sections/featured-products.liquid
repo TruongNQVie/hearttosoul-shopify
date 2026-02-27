@@ -54,13 +54,13 @@
     padding: 0 20px;
   }
   .fp-heading {
-    font-family: 'Cormorant Garamond', serif !important;
-    color: #1D1D1D !important;
+    font-family: var(--font-heading) !important;
+    color: var(--color-text) !important;
     font-weight: 500;
   }
   .fp-subtitle {
-    font-family: 'Montserrat', sans-serif !important;
-    color: rgba(29,29,29,0.55) !important;
+    font-family: var(--font-body) !important;
+    color: var(--color-text-muted) !important;
     font-size: 14px;
   }
 
@@ -95,15 +95,15 @@
     filter: drop-shadow(0 2px 4px rgba(255,140,0,0.35));
   }
   .product-card__title {
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     line-height: 1.45 !important;
     margin-bottom: 8px !important;
-    color: #1D1D1D !important;
+    color: var(--color-text) !important;
   }
   .product-card:hover .product-card__title {
-    color: #7F1B17 !important;
+    color: var(--color-sale) !important;
   }
 
   /* Price colors */
@@ -112,8 +112,8 @@
     font-weight: 700 !important;
   }
   .product-card .price-current {
-    font-family: 'Montserrat', sans-serif !important;
-    color: #7F1B17 !important; /* Đỏ Anh Đào Sậm */
+    font-family: var(--font-body) !important;
+    color: var(--color-sale) !important; /* Đỏ Anh Đào Sậm */
     font-weight: 700 !important;
     font-size: 18px !important;
   }
@@ -127,7 +127,7 @@
     color: #E6CDA9 !important;
     font-weight: 500 !important;
     margin-top: 6px !important;
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 12px !important;
   }
 
@@ -136,7 +136,7 @@
     background: #480003 !important;
     color: #F9F8F3 !important;
     border: none !important;
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: var(--font-body) !important;
     font-weight: 600 !important;
     letter-spacing: 0.04em !important;
     transition: background 0.3s ease, transform 0.1s ease !important;
@@ -174,10 +174,10 @@
   }
 
   .featured-products__view-all {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 600;
-    color: #1D1D1D;
+    color: var(--color-text);
     letter-spacing: 0.04em;
     text-decoration: none;
     display: inline-flex;
@@ -186,7 +186,7 @@
     transition: color 0.3s ease;
   }
   .featured-products__view-all:hover {
-    color: #7F1B17;
+    color: var(--color-sale);
   }
 </style>
 

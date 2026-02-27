@@ -37,6 +37,11 @@
     --color-badge-sale: #9D5F1B;
     /* Sale badges match primary */
 
+    --color-accent-warm: #8B7355;
+    /* Caramel — for labels, icons, accents */
+    --color-sale: #7F1B17;
+    /* Cherry Red — for sale prices & hover */
+
     --color-error: #D32F2F;
     --color-success: #388E3C;
 

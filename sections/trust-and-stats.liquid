@@ -69,8 +69,7 @@
 </section>
 
 <style>
-  /* Google Font import for Cormorant Garamond + Montserrat */
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap');
+  /* Typography — uses design system variables from base.css */
 
   .trust-and-stats {
     background: #E9DECE;
@@ -107,15 +106,15 @@
 
   /* Typography */
   .trust-heading {
-    font-family: 'Cormorant Garamond', serif !important;
-    color: #1D1D1D !important;
+    font-family: var(--font-heading) !important;
+    color: var(--color-text) !important;
     font-weight: 500;
     font-size: clamp(2rem, 4vw, 2.8rem);
     margin-bottom: 8px;
   }
   .trust-subtitle {
-    font-family: 'Montserrat', sans-serif !important;
-    color: #1D1D1D !important;
+    font-family: var(--font-body) !important;
+    color: var(--color-text) !important;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.02em;
@@ -143,12 +142,12 @@
     height: 64px;
     border-radius: 50%;
     background: transparent;
-    border: 1.5px solid #8B7355;
+    border: 1.5px solid var(--color-accent-warm);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    color: #8B7355;
+    color: var(--color-accent-warm);
     transition: all 0.35s ease;
   }
   .trust-badge-card:hover .trust-badge-card__icon {
@@ -158,17 +157,17 @@
   }
   .trust-badge-card__icon svg { width: 26px; height: 26px; }
   .trust-badge-card__title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 6px;
-    color: #1D1D1D;
+    color: var(--color-text);
     letter-spacing: 0.01em;
   }
   .trust-badge-card__text {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
-    color: rgba(29, 29, 29, 0.5);
+    color: var(--color-text-muted);
     line-height: 1.5;
   }
 
@@ -180,10 +179,10 @@
     text-align: center;
   }
   .trust-and-stats__note {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 12px;
     letter-spacing: 0.05em;
-    color: rgba(29, 29, 29, 0.55);
+    color: var(--color-text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +190,7 @@
     margin: 0;
     font-weight: 500;
   }
-  .trust-and-stats__note svg { color: #8B7355; }
+  .trust-and-stats__note svg { color: var(--color-accent-warm); }
 
   .stats-grid {
     display: grid;
@@ -206,10 +205,10 @@
     padding: 20px 0;
   }
   .stat-item__number {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 600;
-    color: #1D1D1D;
+    color: var(--color-text);
     line-height: 1;
     margin-bottom: 12px;
     font-style: italic;
@@ -219,11 +218,11 @@
     display: inline-block;
   }
   .stat-item__label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(29, 29, 29, 0.5);
+    color: var(--color-text-muted);
     font-weight: 600;
   }
 
