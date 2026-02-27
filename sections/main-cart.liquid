@@ -176,19 +176,12 @@
           <div class="cart-express">
             <span class="cart-express__label">Express Checkout</span>
             <div class="cart-express__buttons">
-              <!-- Hardcoded visual buttons to mimic dynamic checkout -->
-              <button class="cart-express__btn cart-express__btn--shopify" onclick="window.location='/checkout'">
-                <span style="color:#fff; font-size: 22px; font-weight: 800; letter-spacing: -1px; text-transform: lowercase;">shop</span>
-              </button>
-              <button class="cart-express__btn cart-express__btn--paypal" onclick="window.location='/checkout'">
-                <strong style="color:#003087; font-style: italic; font-weight: 800; font-size: 20px; margin-right: 1px;">Pay</strong><strong style="color:#009CDE; font-style: italic; font-weight: 800; font-size: 20px;">Pal</strong>
-              </button>
-              <button class="cart-express__btn cart-express__btn--apple" onclick="window.location='/checkout'">
-                <div style="display:flex;align-items:center;gap:4px;">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                  <span style="font-size: 19px; font-weight: 500; color: #fff;">Pay</span>
+            <div class="cart-express__buttons">
+              {% if additional_checkout_buttons %}
+                <div class="additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
                 </div>
-              </button>
+              {% endif %}
             </div>
           </div>
 
@@ -438,17 +431,30 @@
     margin-bottom: 12px; font-weight: 500;
   }
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
-  .cart-express__btn {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 0;
-    height: 48px; border-radius: 50px !important;
-    font-size: 13px; font-weight: 600;
-    border: none; cursor: pointer; transition: all 0.2s;
-    color: #ffffff;
+  /* Express Checkout (Dynamic) */
+  .additional-checkout-buttons {
+    display: flex; gap: 10px; flex-wrap: wrap; width: 100%;
   }
-  .cart-express__btn:hover { opacity: 0.88; transform: translateY(-1px); }
-  .cart-express__btn--shopify { background: #5A31F4; color: #fff; }
-  .cart-express__btn--paypal { background: #FFC439; color: #003087; }
-  .cart-express__btn--apple { background: #000000; color: #fff; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] {
+    flex: 1 1 calc(33.333% - 7px); min-width: 80px;
+  }
+  .additional-checkout-buttons ul {
+    display: flex; gap: 10px; width: 100%; justify-content: space-between;
+  }
+  .additional-checkout-buttons li {
+    flex: 1; list-style: none;
+  }
+  .additional-checkout-buttons [role="button"],
+  .additional-checkout-buttons button {
+    border-radius: 50px !important; overflow: hidden; height: 48px !important;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .additional-checkout-buttons [role="button"]:hover,
+  .additional-checkout-buttons button:hover {
+    transform: translateY(-2px); opacity: 0.9;
+  }
+  /* Remove default margins applied by Shopify */
+  .additional-checkout-buttons .dynamic-checkout__content { margin: 0; }
 
   /* Gift Message */
   .cart-gift-message {
