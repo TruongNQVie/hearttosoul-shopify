@@ -98,9 +98,10 @@
 </style>
 
 <script>
-  const FIRST_SHOW_DELAY = 5000;
-  const ROTATE_INTERVAL = 15000;
-  const VISIBLE_DURATION = 6000;
+  const FIRST_SHOW_DELAY = 10000;   // 10s — let user settle in before first popup
+  const MIN_INTERVAL = 30000;       // 30s minimum between popups
+  const MAX_INTERVAL = 45000;       // 45s maximum between popups
+  const VISIBLE_DURATION = 5000;    // 5s — enough to read, not annoying
 
   const names = ["Oliver", "Emma", "Liam", "Ava", "Noah", "Isabella", "William", "Sophia", "James", "Mia", "Benjamin", "Charlotte", "Lucas", "Amelia", "Henry", "Evelyn"];
   const locations = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "Austin", "San Jose", "Seattle", "Denver"];
@@ -147,7 +148,15 @@
   document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       showSalesPopup();
-      setInterval(showSalesPopup, ROTATE_INTERVAL);
+      // Randomized interval for natural feel
+      function scheduleNext() {
+        const jitter = MIN_INTERVAL + Math.random() * (MAX_INTERVAL - MIN_INTERVAL);
+        setTimeout(() => {
+          showSalesPopup();
+          scheduleNext();
+        }, jitter);
+      }
+      scheduleNext();
     }, FIRST_SHOW_DELAY);
   });
 </script>

@@ -338,21 +338,6 @@
               </div>
             </div>
 
-            <!-- Gift Wrap Toggle -->
-            <div class="gift-wrap-option">
-              <label class="gift-wrap-label">
-                <input type="checkbox" class="gift-wrap-checkbox" id="gift-wrap-check">
-                <span class="gift-wrap-visual">
-                  <span class="gift-wrap-icon">🎁</span>
-                  <span class="gift-wrap-text">
-                    <strong>Premium Gift Wrap</strong>
-                    <small>Luxury box, ribbon & handwritten card</small>
-                  </span>
-                  <span class="gift-wrap-price">+$5</span>
-                </span>
-              </label>
-            </div>
-
             {%- form 'product', product, class: 'product-form' -%}
               <input type="hidden" name="id" id="product-variant-id" value="{{ product.selected_or_first_available_variant.id }}">
               <input type="hidden" name="quantity" id="product-qty-hidden" value="1">
@@ -674,30 +659,6 @@
   .product-gift-hint { text-align: center; margin-top: 8px; font-size: 13px; font-weight: 600; }
   .product-gift-hint a { color: var(--color-primary); text-decoration: none; }
   .product-gift-hint a:hover { text-decoration: underline; }
-
-  /* Gift Wrap Toggle */
-  .gift-wrap-option { margin: 16px 0 12px; }
-  .gift-wrap-label { cursor: pointer; display: block; }
-  .gift-wrap-checkbox { position: absolute; opacity: 0; pointer-events: none; }
-  .gift-wrap-visual {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 16px; border-radius: var(--radius-lg);
-    border: 2px dashed var(--color-border); background: var(--color-bg-warm);
-    transition: all 0.25s ease;
-  }
-  .gift-wrap-checkbox:checked + .gift-wrap-visual {
-    border-color: var(--color-primary); border-style: solid;
-    background: rgba(157, 95, 27, 0.06);
-    box-shadow: 0 0 0 3px rgba(157, 95, 27, 0.1);
-  }
-  .gift-wrap-icon { font-size: 24px; }
-  .gift-wrap-text { flex: 1; }
-  .gift-wrap-text strong { display: block; font-size: 14px; color: var(--color-text); }
-  .gift-wrap-text small { font-size: 12px; color: var(--color-text-light); }
-  .gift-wrap-price {
-    font-size: 14px; font-weight: 700; color: var(--color-primary);
-    white-space: nowrap;
-  }
 
 
   /* Trust badges - horizontal */
