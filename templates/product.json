@@ -11,6 +11,22 @@
         "subtitle": "Real reactions. Real love. Real moments."
       }
     },
+    "gift-memory": {
+      "type": "gift-unique-memory",
+      "settings": {
+        "layout": "text_first",
+        "heading": "Gift a unique memory.",
+        "text": "<p>Tired of giving the same boring, generic gifts? It’s hard to find something that holds <em>real</em> meaning.</p><p>Surprise them with a handcrafted piece that perfectly captures exactly how you feel. A memory they can literally wear close to their heart, forever.</p>",
+        "button_label": "SHOP NOW"
+      }
+    },
+    "quality-warranty": {
+      "type": "quality-warranty",
+      "settings": {
+        "heading": "Quality Backed By Our Warranty",
+        "text": "<p>Experience the joy of gifting or wearing our personalized necklaces, meticulously crafted from sterling silver and offered in both 14K gold and silver finishes. Each piece, designed with care, symbolizes love and enduring elegance. Our jewelry is hypoallergenic, lead, and nickel-free, ensuring safety and comfort for every wearer. With a commitment to quality so profound, we back every piece with a lifetime warranty. Inspired by the desire to see your loved ones smile, our creations are made to turn moments into cherished memories.</p>"
+      }
+    },
     "happy-customers": {
       "type": "happy-customers",
       "settings": {
@@ -53,6 +69,8 @@
   "order": [
     "main",
     "ugc-videos",
+    "gift-memory",
+    "quality-warranty",
     "happy-customers",
     "product-recommendations",
     "our-story",

@@ -1,0 +1,187 @@
+<section class="quality-warranty-section section-padding">
+  <div class="quality-warranty-container">
+    <div class="quality-warranty-grid">
+      
+      <!-- Media Column: Overlapping Images -->
+      <div class="quality-warranty-media">
+        <div class="qw-images-wrapper">
+          <div class="qw-img qw-img--1">
+            <img src="{{ 'quality-warranty-1.jpg' | asset_url }}" alt="Jewelry Craftsmanship" loading="lazy">
+          </div>
+          <div class="qw-img qw-img--2">
+            <img src="{{ 'quality-warranty-2.jpg' | asset_url }}" alt="Jewelry Details" loading="lazy">
+          </div>
+          <div class="qw-img qw-img--3">
+            <img src="{{ 'quality-warranty-3.jpg' | asset_url }}" alt="Wearing Jewelry" loading="lazy">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Content Column -->
+      <div class="quality-warranty-content">
+        <div class="qw-content-inner">
+          <h2 class="qw-heading">{{ section.settings.heading }}</h2>
+          <div class="qw-text">
+            {{ section.settings.text }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .quality-warranty-section {
+    background-color: var(--color-bg); /* Match global warm ivory */
+    padding: 60px 0;
+  }
+  @media (min-width: 900px) {
+    .quality-warranty-section { padding: 90px 0; }
+  }
+
+  .quality-warranty-container {
+    max-width: var(--container-max, 1200px);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .quality-warranty-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .quality-warranty-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+  }
+
+  /* Overlapping Image Layout */
+  .quality-warranty-media {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .qw-images-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1.1;
+    margin: 0 auto;
+  }
+  @media (min-width: 900px) {
+    .qw-images-wrapper { margin: 0; }
+  }
+
+  .qw-img {
+    position: absolute;
+    border: 3px solid var(--color-primary); /* The distinct red/amber border from reference */
+    background: var(--color-white);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+  .qw-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .qw-images-wrapper:hover .qw-img img {
+    transform: scale(1.03);
+  }
+
+  /* Image 1: Top Left (Necklace) */
+  .qw-img--1 {
+    width: 55%;
+    aspect-ratio: 1;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  
+  /* Image 2: Middle Right (Bracelet) */
+  .qw-img--2 {
+    width: 60%;
+    aspect-ratio: 1.1;
+    top: 20%;
+    right: 0;
+    z-index: 1;
+  }
+
+  /* Image 3: Bottom Left (Mens Bracelet) */
+  .qw-img--3 {
+    width: 58%;
+    aspect-ratio: 1;
+    bottom: 0;
+    left: 10%;
+    z-index: 3;
+  }
+
+  /* Content Styling */
+  .quality-warranty-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .qw-content-inner {
+    max-width: 480px;
+  }
+  @media (max-width: 899px) {
+    .qw-content-inner { margin: 0 auto; text-align: center; }
+  }
+
+  .qw-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--color-primary); /* Deep red/amber */
+    font-weight: 400;
+    margin-bottom: 24px;
+    line-height: 1.25;
+  }
+
+  .qw-text {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+  .qw-text p {
+    margin-bottom: 16px;
+  }
+  .qw-text p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Quality & Warranty",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Quality Backed By Our Warranty"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Body Text",
+      "default": "<p>Experience the joy of gifting or wearing our personalized necklaces, meticulously crafted from sterling silver and offered in both 14K gold and silver finishes. Each piece, designed with care, symbolizes love and enduring elegance. Our jewelry is hypoallergenic, lead, and nickel-free, ensuring safety and comfort for every wearer. With a commitment to quality so profound, we back every piece with a lifetime warranty. Inspired by the desire to see your loved ones smile, our creations are made to turn moments into cherished memories.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quality & Warranty",
+      "category": "Product Info"
+    }
+  ]
+}
+{% endschema %}
