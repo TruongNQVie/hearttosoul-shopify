@@ -80,7 +80,8 @@
 
   .qw-img {
     position: absolute;
-    border: 3px solid var(--color-primary); /* The distinct red/amber border from reference */
+    border: 2px solid var(--color-primary); /* Thinner border */
+    border-radius: var(--radius-sm); /* Rounded corners */
     background: var(--color-white);
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -139,16 +140,16 @@
 
   .qw-heading {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-size: clamp(2.2rem, 4vw, 3.2rem); /* Slightly larger */
     color: var(--color-primary); /* Deep red/amber */
     font-weight: 400;
     margin-bottom: 24px;
-    line-height: 1.25;
+    line-height: 1.2;
   }
 
   .qw-text {
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 14px; /* Matches reference image body text size */
     line-height: 1.8;
     color: var(--color-text);
   }
