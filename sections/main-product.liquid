@@ -80,9 +80,6 @@
             🎉 You save: <strong id="dynamic-savings">{{ savings | money }}</strong>
           </div>
 
-          <!-- Installments -->
-          <p class="product-installment">Or 4 interest-free payments of <strong>{{ product.price | divided_by: 4 | money }}</strong> with <strong>Klarna</strong> · <strong>Afterpay</strong></p>
-
           <!-- Short Description -->
           <div class="product-short-desc">
             <p>Finding a gift that says "I love you" shouldn't feel ordinary. Give her an unforgettable unboxing experience that speaks exactly what's in your heart.</p>
@@ -606,7 +603,6 @@
     font-size: 13px; font-weight: 600; padding: 8px 14px;
     border-radius: 8px; margin-bottom: 12px;
   }
-  .product-installment { font-size: 13px; color: var(--color-text-muted); margin-bottom: 16px; }
 
   /* Short desc */
   .product-short-desc { color: var(--color-text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
@@ -853,6 +849,9 @@
     z-index: 999; transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+  }
+  @media (min-width: 900px) {
+    .product-sticky-bar { display: none !important; }
   }
   .product-sticky-bar.visible { transform: translateY(0); }
   .sticky-bar__inner { max-width: 1400px; margin: 0 auto; padding: 12px 24px; }
