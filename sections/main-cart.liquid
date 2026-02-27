@@ -87,49 +87,22 @@
         <!-- Give Extra Love Upsell (inside items column) -->
         <div class="cart-page__promos" style="margin-top:24px;">
           {%- assign upsell_candidates = "" | split: ',' -%}
-          {%- assign cart_variant_ids = "" | split: ',' -%}
+          {%- assign cart_product_ids = "" | split: ',' -%}
           {%- for item in cart.items -%}
-            {%- assign cart_variant_ids = cart_variant_ids | push: item.variant_id -%}
+            {%- assign cart_product_ids = cart_product_ids | push: item.product_id -%}
           {%- endfor -%}
-          
-          {%- comment -%} Pull products from cart items' collections {%- endcomment -%}
-          {%- for item in cart.items -%}
-            {%- for col in item.product.collections -%}
-              {%- for p in col.products limit: 10 -%}
-                {%- if p.available and upsell_candidates.size < 10 -%}
-                  {%- assign dominated = false -%}
-                  {%- for vid in cart_variant_ids -%}
-                    {%- if vid == p.first_available_variant.id -%}
-                      {%- assign dominated = true -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- for existing in upsell_candidates -%}
-                    {%- if existing.id == p.id -%}
-                      {%- assign dominated = true -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- unless dominated -%}
-                    {%- assign upsell_candidates = upsell_candidates | push: p -%}
-                  {%- endunless -%}
+
+          {%- paginate collections.all.products by 20 -%}
+            {%- for p in collections.all.products -%}
+              {%- unless cart_product_ids contains p.id -%}
+                {%- if p.available and upsell_candidates.size < 6 -%}
+                  {%- assign upsell_candidates = upsell_candidates | push: p -%}
                 {%- endif -%}
-              {%- endfor -%}
+              {%- endunless -%}
             {%- endfor -%}
-          {%- endfor -%}
+          {%- endpaginate -%}
 
-          {%- assign valid_candidates = "" | split: ',' -%}
-          {%- for c in upsell_candidates -%}
-            {%- assign in_cart = false -%}
-            {%- for item in cart.items -%}
-              {%- if item.variant_id == c.first_available_variant.id -%}
-                {%- assign in_cart = true -%}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if in_cart == false -%}
-              {%- assign valid_candidates = valid_candidates | push: c -%}
-            {%- endif -%}
-          {%- endfor -%}
-
-          {%- if valid_candidates.size > 0 -%}
+          {%- if upsell_candidates.size > 0 -%}
             <div class="cart-upsell mt-12 mb-12">
               <div class="cart-upsell__header">
                 <h3>GIVE EXTRA LOVE</h3>
@@ -140,10 +113,10 @@
                 {%- assign max_to_show = 2 -%}
                 {%- assign shown_count = 0 -%}
                 
-                {%- for i in (0..valid_candidates.size) -%}
+                {%- for i in (0..upsell_candidates.size) -%}
                   {%- if shown_count >= max_to_show -%}{%- break -%}{%- endif -%}
-                  {%- assign mod_index = cart.item_count | plus: i | modulo: valid_candidates.size -%}
-                  {%- assign candidate = valid_candidates[mod_index] -%}
+                  {%- assign mod_index = cart.item_count | plus: i | modulo: upsell_candidates.size -%}
+                  {%- assign candidate = upsell_candidates[mod_index] -%}
                   
                   <div class="cart-upsell__item">
                     <div class="cart-upsell__img-wrap">
