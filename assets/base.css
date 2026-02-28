@@ -1014,6 +1014,54 @@ p {
     .product-card__mobile-atb:active {
         background: #7F1B17;
     }
+
+    /* Hide hover quick-add on mobile (fixed ATB exists) */
+    .product-card__quick-add {
+        display: none !important;
+    }
+
+    /* Compact product card */
+    .product-card__info {
+        padding: 10px 12px 12px;
+    }
+
+    .product-card__rating {
+        margin-bottom: 4px;
+    }
+
+    .product-card__stars {
+        font-size: 13px;
+    }
+
+    .product-card__rating-text {
+        font-size: 11px;
+    }
+
+    .product-card__title {
+        font-size: 13px;
+        margin-bottom: 4px;
+        min-height: auto;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+
+    .product-card__price-wrapper {
+        margin-bottom: 2px;
+    }
+
+    .product-card__price .price-current {
+        font-size: 16px;
+    }
+
+    .product-card__price .price-compare {
+        font-size: 12px;
+    }
+
+    .product-card__shipping {
+        font-size: 10px;
+        padding: 4px 8px;
+        margin-top: 4px;
+    }
 }
 
 /* ===== Trust Badges ===== */
