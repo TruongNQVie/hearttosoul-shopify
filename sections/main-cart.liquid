@@ -299,7 +299,7 @@
     padding-bottom: 110px; /* Offset for sticky bar on mobile */
   }
   @media (min-width: 750px) {
-    .cart-page { padding: 48px 40px; padding-bottom: 48px; /* Reset on desktop if no sticky bar, or match default */ }
+    .cart-page { padding: 48px 40px; padding-bottom: 110px; /* Enforce sticky bar offset on desktop as well */ }
   }
   @media (max-width: 749px) {
     .cart-page { padding: 24px 16px; padding-bottom: 120px; /* Stronger offset for mobile sticky bar */ }
@@ -760,9 +760,6 @@
     .cart-sticky-bar__inner { padding: 12px 16px; gap: 12px; }
     .cart-sticky-bar__btn { padding: 14px 24px; font-size: 12px; }
     .cart-sticky-bar__center { display: none; }
-  }
-  @media (min-width: 992px) {
-    .cart-sticky-bar { display: none !important; }
   }
 
   /* ===== Cart Warranty (Spacious) ===== */
