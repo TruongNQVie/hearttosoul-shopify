@@ -982,8 +982,8 @@ p {
 
 .product-card__shipping {
     font-size: 12px;
-    color: #90162F;
-    /* Darker primary for contrast */
+    color: var(--color-primary);
+    /* Matches the Add to Bag button exactly */
     display: flex;
     align-items: center;
     gap: 6px;
