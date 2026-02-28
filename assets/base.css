@@ -1,53 +1,58 @@
-/* ===== Heart to Soul — Design System (Based on Research Report) ===== */
-/* Color Palette: Rose Gold Romance × Earthy Neutrals × Coquette */
-/* Typography: Serif (Playfair Display) + Sans-Serif (Inter) */
+/* ===== Heart to Soul — Design System (Modern Coquette × Ethereal Romance) ===== */
+/* Color Palette: Hồng Ngọc Trai × Tím Than × Cherry Red × Vàng Bơ */
+/* Typography: Serif (Playfair Display) + Sans-Serif (Outfit) */
 /* Grid: 8pt spacing system */
 
 :root {
-    /* ── Color Palette (Sacred Love) ── */
-    --color-bg: #F9F8F3;
-    /* Brand Base (Ivory) */
-    --color-bg-warm: #E9DECE;
-    /* Sand accent */
-    --color-bg-surface: #F9F8F3;
-    /* Surface (Ivory — matches base) */
+    /* ── Color Palette (Modern Coquette) ── */
+    --color-bg: #FDF2F4;
+    /* Brand Base (Hồng Ngọc Trai) */
+    --color-bg-warm: #F5EEF1;
+    /* Light Pink accent */
+    --color-bg-surface: #FDF2F4;
+    /* Surface (matches base) */
 
-    --color-primary: #9D5F1B;
-    /* Primary Action (Amber/Rust) */
-    --color-primary-light: #B47834;
-    /* Lighter Amber for hovers */
-    --color-primary-dark: #7A4610;
-    /* Darker Amber */
+    --color-primary: #E11D48;
+    /* Primary Action (Cherry Red) */
+    --color-primary-light: #F43F5E;
+    /* Lighter Cherry for hovers */
+    --color-primary-dark: #BE123C;
+    /* Darker Cherry */
 
     --color-accent: #D7C2EE;
     /* Brand Accent (Poetic Violet) for badges/secondary */
     --color-accent-gold: #E6D17B;
     /* Keeping gold for stars */
 
-    --color-text: #291602;
-    /* Text Primary (Deep Espresso) */
-    --color-text-muted: #6C3C0C;
-    /* Text Secondary (Wood) */
-    --color-text-light: #8A5A2A;
+    --color-text: #2D1B2E;
+    /* Text Primary (Tím Than Đậm) */
+    --color-text-muted: #4A3B4C;
+    /* Text Secondary (Xanh Tím Khói) */
+    --color-text-light: #6B5A6D;
     /* Tertiary Text */
 
-    --color-border: rgba(108, 60, 12, 0.15);
-    /* Subtly tinted border */
+    --color-border: rgba(45, 27, 46, 0.12);
+    /* Subtly tinted plum border */
     --color-white: #FFFFFF;
-    --color-badge-sale: #9D5F1B;
+    --color-badge-sale: #E11D48;
     /* Sale badges match primary */
 
-    --color-accent-warm: #8B7355;
-    /* Caramel — for labels, icons, accents */
-    --color-sale: #7F1B17;
+    --color-accent-warm: #6B5A6D;
+    /* Plum muted — for labels, icons, accents */
+    --color-sale: #E11D48;
     /* Cherry Red — for sale prices & hover */
+
+    --color-compare: #B8AEBA;
+    /* Compare price (Xám Tím) */
+    --color-sale-tag-bg: #FEF08A;
+    /* Sale tag background (Vàng Bơ) */
 
     --color-error: #D32F2F;
     --color-success: #388E3C;
 
     /* ── Typography ── */
     --font-heading: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --font-body: 'Outfit', sans-serif;
 
     /* ── Layout ── */
     --container-max: 1440px;
@@ -226,9 +231,8 @@ p {
 .btn-primary:hover {
     background: var(--color-primary-dark);
     color: var(--color-white);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(157, 95, 27, 0.3);
-    /* Amber shadow */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(225, 29, 72, 0.3);
 }
 
 .btn-secondary {
@@ -764,12 +768,12 @@ p {
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: var(--color-white);
     border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 10px 30px rgba(200, 180, 190, 0.2);
 }
 
 .product-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(200, 180, 190, 0.3);
 }
 
 .product-card__media {
@@ -830,15 +834,15 @@ p {
 }
 
 .badge-sale {
-    background: linear-gradient(135deg, rgba(190, 52, 78, 0.9), rgba(190, 52, 78, 1));
-    color: var(--color-white);
+    background: var(--color-sale-tag-bg);
+    color: var(--color-text);
     font-size: 11px;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 10px rgba(190, 52, 78, 0.3);
+    box-shadow: 0 4px 10px rgba(45, 27, 46, 0.08);
 }
 
 /* Quick Add Button */
@@ -998,21 +1002,23 @@ p {
         width: 100%;
         margin-top: 8px;
         padding: 10px 0;
-        background: #480003;
-        color: #F9F8F3;
+        background: var(--color-primary);
+        color: var(--color-white);
         border: none;
         border-radius: 50px;
         font-family: var(--font-body);
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.5px;
         cursor: pointer;
         transition: background 0.2s;
+        box-shadow: 0 4px 15px rgba(225, 29, 72, 0.25);
     }
 
     .product-card__mobile-atb:hover,
     .product-card__mobile-atb:active {
-        background: #7F1B17;
+        background: var(--color-primary-dark);
+        box-shadow: 0 6px 20px rgba(225, 29, 72, 0.35);
     }
 
     /* Hide hover quick-add on mobile (fixed ATB exists) */
@@ -1023,7 +1029,7 @@ p {
     /* Compact product card */
     .product-card {
         border-radius: 12px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 8px 20px rgba(200, 180, 190, 0.15);
     }
 
     .product-card__media {
