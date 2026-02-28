@@ -294,12 +294,17 @@
 
   /* ===== Cart Page: Quiet Luxury ===== */
   .cart-page {
-    max-width: var(--container-max);
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 16px 60px; /* Reduced mobile padding */
-    background: var(--color-bg);
+    padding: 32px 24px;
+    padding-bottom: 110px; /* Offset for sticky bar on mobile */
   }
-  @media (min-width: 750px) { .cart-page { padding: 40px 40px 80px; } }
+  @media (min-width: 750px) {
+    .cart-page { padding: 48px 40px; padding-bottom: 48px; /* Reset on desktop if no sticky bar, or match default */ }
+  }
+  @media (max-width: 749px) {
+    .cart-page { padding: 24px 16px; padding-bottom: 120px; /* Stronger offset for mobile sticky bar */ }
+  }
   
   .cart-page__header { 
     display: flex; align-items: baseline; gap: 12px; 
