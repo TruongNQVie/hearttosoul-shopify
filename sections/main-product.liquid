@@ -1025,9 +1025,18 @@
     .product-gallery__thumb { width: 56px; height: 56px; flex-shrink: 0; }
     .product-gallery__zoom-container:hover img { transform: none; }
 
-    /* Social proof — allow wrapping */
-    .product-social-proof { flex-wrap: wrap; padding: 8px 12px; border-radius: 12px; }
-    .proof-text { white-space: normal !important; overflow: visible; font-size: 12px; }
+    /* Social proof — compact for mobile */
+    .product-social-proof {
+      flex-wrap: nowrap; padding: 5px 10px; border-radius: 50px;
+      gap: 6px; margin-bottom: 12px; font-size: 11px;
+      justify-content: center;
+    }
+    .proof-avatars { display: flex; flex-shrink: 0; }
+    .proof-avatar { width: 20px; height: 20px; font-size: 9px; margin-right: -6px; border-width: 1.5px; }
+    .proof-text {
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-size: 11px; margin-left: 4px;
+    }
 
     /* Title */
     .product-title { font-size: 1.4rem !important; word-wrap: break-word; }
@@ -1039,9 +1048,14 @@
     .product-features { padding: 14px 14px; }
     .product-feature { font-size: 13px; gap: 10px; }
 
-    /* Trust badges — compact */
+    /* Trust badges — compact & centered */
     .trust-item { font-size: 11px; gap: 4px; }
     .trust-item svg { width: 16px; height: 16px; }
+    .product-trust { justify-content: center; }
+
+    /* Shipping / countdown — centered */
+    .product-shipping-card { justify-content: center; font-size: 12px; }
+    .product-countdown { justify-content: center; font-size: 12px; }
 
     /* Purchase area — becomes sticky at bottom on mobile */
     .product-purchase {
