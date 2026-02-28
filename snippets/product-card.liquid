@@ -82,5 +82,12 @@
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
       Free US Shipping
     </p>
+
+    {%- unless product.available == false -%}
+      <button type="button" class="product-card__mobile-atb" onclick="if(typeof addCartItem==='function'){addCartItem({{ product.selected_or_first_available_variant.id }});openCartDrawer();}else{window.location='/cart/add?id={{ product.selected_or_first_available_variant.id }}&quantity=1';}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+        Add to Bag
+      </button>
+    {%- endunless -%}
   </div>
 </div>
