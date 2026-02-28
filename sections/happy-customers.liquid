@@ -64,7 +64,7 @@
 </section>
 
 <!-- Reviews Modal — ALL 17 reviews -->
-<div class="reviews-modal" id="reviewsModal" style="opacity: 0; visibility: hidden;">
+<div class="reviews-modal" id="reviewsModal">
   <div class="reviews-modal__overlay" id="reviewsModalOverlay"></div>
   <div class="reviews-modal__content">
     <button class="reviews-modal__close" id="closeReviewsModal">
@@ -327,8 +327,8 @@
     transition: opacity 0.3s, visibility 0.3s;
   }
   .reviews-modal.is-open {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .reviews-modal__overlay {
     position: absolute;
