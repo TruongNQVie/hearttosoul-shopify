@@ -1057,9 +1057,19 @@
       box-shadow: 0 -4px 20px rgba(0,0,0,0.06) !important;
       flex-direction: column;
     }
-    /* Hide warranty & payment logos in mobile sticky */
-    .product-purchase .purchase-trust-center { display: none; }
-    .product-purchase .purchase-payments-center { display: none; }
+    /* Compact trust badges in mobile sticky */
+    .product-purchase .purchase-trust-center {
+      font-size: 9px; gap: 3px; margin-bottom: 2px; letter-spacing: 0.3px;
+    }
+    .product-purchase .purchase-trust-center svg { width: 10px; height: 10px; }
+    .product-purchase .purchase-payments-center {
+      margin-bottom: 6px; gap: 3px;
+    }
+    .product-purchase .purchase-payments-center .cdraw-payment-icon {
+      width: 30px; height: 19px;
+    }
+    .product-purchase .secure-checkout-text { font-size: 8px; margin-right: 4px; }
+    .product-purchase .secure-checkout-text svg { width: 9px; height: 9px; }
     .product-purchase #copy-success-msg { display: none !important; }
     .purchase-action-row { height: 46px; margin-bottom: 0; }
     .purchase-qty-wrapper { flex: 0 0 90px; }
