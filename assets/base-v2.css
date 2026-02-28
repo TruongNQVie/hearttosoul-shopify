@@ -628,8 +628,8 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 100px 20px 60px;
-    /* Top padding to avoid header overlap */
+    padding: 20px 20px 36px;
+    /* Reduced padding to push text up and button down on mobile */
     z-index: 3;
     pointer-events: none;
     /* Let touches pass through empty space to the slider */
@@ -661,8 +661,8 @@ p {
 .hero-slide__btn-group {
     text-align: center;
     pointer-events: auto;
-    margin-bottom: 24px;
-    /* Space from the slide dots */
+    margin-bottom: 4px;
+    /* Reduced space from dots on mobile */
 }
 
 @media (min-width: 750px) {
@@ -682,7 +682,8 @@ p {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+    /* Tighter layout */
     font-weight: 500;
 }
 
@@ -691,8 +692,10 @@ p {
     font-size: clamp(1.8rem, 5vw, 3.5rem);
     font-weight: 600;
     color: var(--color-white);
-    line-height: 1.15;
-    margin-bottom: 12px;
+    line-height: 1.1;
+    /* Reduced line-height */
+    margin-bottom: 6px;
+    /* Tighter layout */
     max-width: 600px;
 }
 
@@ -700,8 +703,10 @@ p {
     font-size: 15px;
     color: rgba(255, 255, 255, 0.8);
     max-width: 450px;
-    margin-bottom: 24px;
-    line-height: 1.6;
+    margin-bottom: 16px;
+    /* Tighter layout */
+    line-height: 1.35;
+    /* Reduced line-height */
 }
 
 .hero-slide__btn {
@@ -736,12 +741,20 @@ p {
 /* Slider Nav Dots */
 .hero-slider__dots {
     position: absolute;
-    bottom: 24px;
+    bottom: 12px;
+    /* Hug bottom edge on mobile */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 12px;
     z-index: 10;
+}
+
+@media (min-width: 750px) {
+    .hero-slider__dots {
+        bottom: 24px;
+        /* Restore desktop spacing */
+    }
 }
 
 .hero-slider__dot {
