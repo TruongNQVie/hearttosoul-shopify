@@ -685,7 +685,7 @@ p {
     margin-bottom: 6px;
     /* Tighter layout */
     font-weight: 500;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     /* Improved readability */
 }
 
@@ -699,7 +699,7 @@ p {
     margin-bottom: 6px;
     /* Tighter layout */
     max-width: 600px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.4);
     /* Soft distinct shadow */
 }
 
@@ -711,7 +711,7 @@ p {
     /* Tighter layout */
     line-height: 1.35;
     /* Reduced line-height */
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     /* Improved readability */
 }
 
