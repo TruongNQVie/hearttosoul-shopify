@@ -146,13 +146,14 @@
               <div class="cdraw-protect__title">Protect Your Keepsake</div>
               <div class="cdraw-protect__desc">Comprehensive coverage for love's journey — <span class="cdraw-protect__price">$4.20</span></div>
             </div>
-            <input type="checkbox" style="display:none;" onchange="this.parentElement.classList.toggle('active', this.checked)">
+            <input type="checkbox" id="order-protection-checkbox" style="display:none;" onchange="this.parentElement.classList.toggle('active', this.checked); updateCartTotals();">
             <div class="cdraw-protect__toggle"></div>
           </label>
+          <input type="hidden" form="cart" name="attributes[Order Protection]" value="Yes, $4.20" id="order-protection-attribute" disabled>
 
           <div class="cart-page__summary-row">
             <span>{{ 'cart.general.subtotal' | t }}</span>
-            <strong>{{ cart.total_price | money }}</strong>
+            <strong id="cart-subtotal" data-base-total="{{ cart.total_price }}">{{ cart.total_price | money }}</strong>
           </div>
           <div class="cart-page__summary-row cart-page__summary-shipping">
             <span>Shipping</span>
@@ -161,7 +162,7 @@
           <div class="cart-page__summary-divider"></div>
           <div class="cart-page__summary-row cart-page__summary-total">
             <span>Total</span>
-            <strong>{{ cart.total_price | money }}</strong>
+            <strong id="cart-final-total" data-base-total="{{ cart.total_price }}">{{ cart.total_price | money }}</strong>
           </div>
 
           <!-- Checkout -->
@@ -615,17 +616,12 @@
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   
   /* Express Checkout (Dynamic) */
-  .additional-checkout-buttons { display: flex; flex-direction: column; gap: 10px; width: 100%; align-items: center; }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] { width: 100%; max-width: 300px; display: flex; justify-content: center; }
-  @media (min-width: 750px) {
-    .additional-checkout-buttons { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-    .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 0 1 auto; min-width: 150px; }
-  }
-  .additional-checkout-buttons ul { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-  @media (min-width: 750px) { .additional-checkout-buttons ul { flex-direction: row; justify-content: center; } }
-  .additional-checkout-buttons li { flex: 1; list-style: none; width: 100%; display: flex; justify-content: center; }
+  .additional-checkout-buttons { display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 auto; min-width: 0; }
+  .additional-checkout-buttons ul { display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; margin: 0; padding: 0; }
+  .additional-checkout-buttons li { flex: 1 1 auto; list-style: none; min-width: 0; display: flex; }
   .additional-checkout-buttons [role="button"],
-  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 48px !important; width: 100% !important; max-width: 300px; transition: transform 0.2s, opacity 0.2s; }
+  .additional-checkout-buttons button { border-radius: 8px !important; overflow: hidden; height: 44px !important; width: 100% !important; transition: transform 0.2s, opacity 0.2s; padding: 0; }
   .additional-checkout-buttons [role="button"]:hover,
   .additional-checkout-buttons button:hover { transform: translateY(-2px); opacity: 0.9; }
   .additional-checkout-buttons .dynamic-checkout__content { margin: 0; width: 100%; }
@@ -923,6 +919,36 @@
       });
     }
   });
+
+  // Dynamic Order Protection Total Formatting
+  function formatMoneyStr(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  function updateCartTotals() {
+    const isProtected = document.getElementById('order-protection-checkbox').checked;
+    const protectAttr = document.getElementById('order-protection-attribute');
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const totalEl = document.getElementById('cart-final-total');
+    
+    // Enable/Disable the cart attribute for checkout
+    if (protectAttr) protectAttr.disabled = !isProtected;
+    
+    if (subtotalEl && totalEl) {
+      const baseTotal = parseInt(subtotalEl.getAttribute('data-base-total'), 10) || 0;
+      const protectFee = isProtected ? 420 : 0; // $4.20 in cents
+      const newTotal = baseTotal + protectFee;
+      
+      subtotalEl.textContent = formatMoneyStr(newTotal);
+      totalEl.textContent = formatMoneyStr(newTotal);
+
+      // Also update sticky total if available
+      const stickyTotal = document.querySelector('.cart-sticky-bar__btn strong');
+      if (stickyTotal) {
+         stickyTotal.innerHTML = `Total &bullet; ${formatMoneyStr(newTotal)}`;
+      }
+    }
+  }
 </script>
 
 {% schema %}
