@@ -6,19 +6,19 @@
         "slide-1": {
           "type": "slide",
           "settings": {
-            "subheading": "OFFER ENDS SOON",
-            "heading": "For a limited time only!",
-            "text": "Unique gifts crafted to capture your most sacred memories.",
-            "button_label": "Shop Now",
+            "subheading": "NOT ANOTHER BASIC GIFT",
+            "heading": "Make them cry (happy tears).",
+            "text": "Skip the generic presents. Give them a piece that actually means something.",
+            "button_label": "Shop Meaningful Gifts",
             "button_link": ""
           }
         },
         "slide-2": {
           "type": "slide",
           "settings": {
-            "subheading": "A LABOR OF LOVE",
-            "heading": "The Artisan's Masterpiece.",
-            "text": "Meticulously crafted with sustainable materials.",
+            "subheading": "AESTHETIC & ETHICAL",
+            "heading": "Handcrafted to outlast trends.",
+            "text": "Stunning quality. Sustainable materials. Pieces they’ll actually want to wear every day.",
             "button_label": "Read Our Story",
             "button_link": ""
           }
@@ -26,10 +26,10 @@
         "slide-3": {
           "type": "slide",
           "settings": {
-            "subheading": "FAMILY HEIRLOOMS",
-            "heading": "Celebrate multi-generational love.",
-            "text": "From thoughtful gifts for partners to sacred bonds with parents.",
-            "button_label": "Explore Gifting",
+            "subheading": "SAY IT WITHOUT SPEAKING",
+            "heading": "Words fail. This won't.",
+            "text": "When a text message isn't enough, say 'I love you' with a modern heirloom.",
+            "button_label": "Explore The Collection",
             "button_link": ""
           }
         }
