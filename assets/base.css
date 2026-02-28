@@ -464,6 +464,23 @@ p {
     height: 20px;
 }
 
+@media (max-width: 749px) {
+    .header__icons {
+        gap: 2px;
+        margin-right: 2px;
+    }
+
+    .header__icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
 .cart-count-badge {
     position: absolute;
     top: 2px;
