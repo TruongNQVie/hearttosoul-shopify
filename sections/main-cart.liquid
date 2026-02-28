@@ -616,12 +616,14 @@
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   
   /* Express Checkout (Dynamic) */
-  .additional-checkout-buttons { display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 auto; min-width: 0; }
-  .additional-checkout-buttons ul { display: flex; flex-direction: row; gap: 8px; width: 100%; justify-content: center; margin: 0; padding: 0; }
-  .additional-checkout-buttons li { flex: 1 1 auto; list-style: none; min-width: 0; display: flex; }
+  .additional-checkout-buttons { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; width: 100%; justify-content: space-between; align-items: stretch; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1; min-width: 0; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] ul,
+  .additional-checkout-buttons ul { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 6px; width: 100%; justify-content: space-between; margin: 0; padding: 0; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] li,
+  .additional-checkout-buttons li { flex: 1; list-style: none; min-width: 0; display: flex; }
   .additional-checkout-buttons [role="button"],
-  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 44px !important; width: 100% !important; transition: transform 0.2s, opacity 0.2s; padding: 0; }
+  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 44px !important; width: 100% !important; min-width: 0 !important; max-width: none !important; padding: 0 4px !important; transition: transform 0.2s, opacity 0.2s; }
   .additional-checkout-buttons [role="button"]:hover,
   .additional-checkout-buttons button:hover { transform: translateY(-2px); opacity: 0.9; }
   .additional-checkout-buttons .dynamic-checkout__content { margin: 0; width: 100%; }
