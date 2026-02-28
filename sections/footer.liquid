@@ -40,6 +40,7 @@
         <div class="footer__brand-rating">
           4.8 <span class="footer__stars">★★★★★</span>
         </div>
+        <p class="footer__brand-mantra">Where love finds its voice.</p>
       </div>
 
       <!-- Column 2: Links -->
@@ -216,9 +217,68 @@
   .footer__payment-icon svg,
   .footer__payment-icon img { max-height: 18px; width: auto; }
 
+  /* Brand mantra */
+  .footer__brand-mantra {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+
   @media (max-width: 749px) {
-    .footer__brand-col { grid-column: 1 / -1; }
-    .footer__bottom { justify-content: center; text-align: center; }
+    /* Earthy warm background */
+    .footer {
+      background: rgba(119, 107, 99, 0.08);
+    }
+
+    /* Center everything */
+    .footer__newsletter { padding: 30px 16px 40px; }
+    .footer__newsletter-heading { font-size: 1.4rem; }
+
+    .footer__top-row { justify-content: center; margin-bottom: 16px; }
+    .footer__top-row > div:first-child { display: none; }
+    .footer__socials { gap: 20px; }
+
+    /* Single column, centered */
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+      text-align: center;
+    }
+
+    /* Brand column */
+    .footer__brand-col {
+      grid-column: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    .footer__brand-logo { justify-content: center; }
+    .footer__brand-rating { justify-content: center; }
+    .footer__brand-mantra { text-align: center; }
+
+    /* Link columns — stacked, centered */
+    .footer__grid > div:nth-child(2),
+    .footer__grid > div:nth-child(3) {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .footer__links { align-items: center; gap: 10px; }
+
+    /* Address — centered */
+    .footer__address-col {
+      text-align: center;
+      padding-top: 16px;
+    }
+    .footer__address { text-align: center; font-size: 13px; }
+    .footer__contact { text-align: center; }
+    .footer__contact a { word-break: normal; }
+
+    /* Bottom */
+    .footer__bottom { justify-content: center; text-align: center; flex-direction: column; gap: 12px; }
     .footer__payment-methods { justify-content: center; }
   }
 </style>
