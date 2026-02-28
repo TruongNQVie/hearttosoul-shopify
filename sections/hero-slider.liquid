@@ -26,17 +26,21 @@
 
         <div class="hero-slide__content">
           <div class="hero-slide__content-inner">
-            {%- if block.settings.subheading != blank -%}
-              <p class="hero-slide__subheading">{{ block.settings.subheading }}</p>
-            {%- endif -%}
-            {%- if block.settings.heading != blank -%}
-              <h2 class="hero-slide__heading">{{ block.settings.heading }}</h2>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="hero-slide__text">{{ block.settings.text }}</p>
-            {%- endif -%}
+            <div class="hero-slide__text-group">
+              {%- if block.settings.subheading != blank -%}
+                <p class="hero-slide__subheading">{{ block.settings.subheading }}</p>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h2 class="hero-slide__heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="hero-slide__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
             {%- if block.settings.button_label != blank -%}
-              <a href="{{ block.settings.button_link | default: '#' }}" class="hero-slide__btn">{{ block.settings.button_label }}</a>
+              <div class="hero-slide__btn-group">
+                <a href="{{ block.settings.button_link | default: '#' }}" class="hero-slide__btn">{{ block.settings.button_label }}</a>
+              </div>
             {%- endif -%}
           </div>
         </div>
