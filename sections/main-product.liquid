@@ -1006,21 +1006,74 @@
 
   /* ===== MOBILE ===== */
   @media (max-width: 900px) {
-    .product-gallery { flex-direction: column-reverse; }
-    .product-gallery__thumbs { flex-direction: row; width: 100%; max-height: none; overflow-x: auto; }
+    /* Container */
+    .product-container { padding: 0 16px; overflow: hidden; }
+
+    /* Gallery: horizontal thumbs below image */
+    .product-gallery { flex-direction: column-reverse; gap: 8px; }
+    .product-gallery__main { margin-left: 0 !important; }
+    .product-gallery__thumbs {
+      position: relative !important;
+      flex-direction: row; width: 100% !important; max-height: none;
+      overflow-x: auto; overflow-y: hidden;
+      gap: 6px; padding-right: 0;
+    }
     .product-gallery__thumb { width: 56px; height: 56px; flex-shrink: 0; }
-    .sticky-bar__inner { padding: 10px 16px 4px; }
+    .product-gallery__zoom-container:hover img { transform: none; }
+
+    /* Social proof — allow wrapping */
+    .product-social-proof { flex-wrap: wrap; padding: 8px 12px; border-radius: 12px; }
+    .proof-text { white-space: normal !important; overflow: visible; font-size: 12px; }
+
+    /* Title */
+    .product-title { font-size: 1.4rem !important; word-wrap: break-word; }
+
+    /* Variant options — smaller for mobile */
+    .variant-option { width: 80px; height: 80px; border-radius: 10px; }
+
+    /* Features box */
+    .product-features { padding: 14px 14px; }
+    .product-feature { font-size: 13px; gap: 10px; }
+
+    /* Trust badges — compact */
+    .trust-item { font-size: 11px; gap: 4px; }
+    .trust-item svg { width: 16px; height: 16px; }
+
+    /* Hide inline purchase area on mobile (use sticky bar instead) */
+    .product-purchase { display: none !important; }
+
+    /* Sticky bar — ALWAYS visible on mobile, minimal layout */
+    .product-sticky-bar { transform: translateY(0) !important; }
+    .sticky-bar__inner { padding: 8px 12px; }
+    .sticky-bar__main-row { gap: 8px; }
     .sticky-bar__content { flex-direction: column; gap: 6px; }
     .sticky-bar__info { display: none; }
+    .sticky-warranty { display: none; }
     .sticky-bar__center { display: none; }
     .sticky-bar__actions { width: 100%; display: flex; gap: 8px; }
+    .sticky-bar__qty { height: 44px; }
+    .sticky-bar__buy {
+      flex: 1; height: 48px; padding: 0 16px;
+      justify-content: center; font-size: 14px; letter-spacing: 0;
+    }
     .sticky-hint-btn { height: 44px; padding: 0 12px; font-size: 0; gap: 0; min-width: 44px; }
     .sticky-hint-btn svg { width: 20px; height: 20px; }
     .sticky-hint-btn span { display: none; }
-    .sticky-bar__qty { height: 44px; }
-    .sticky-bar__buy { flex: 1; height: 48px; padding: 0 16px; justify-content: center; font-size: 14px; letter-spacing: 0; }
     .sticky-bar__trust-row { padding-bottom: 2px; gap: 6px; }
     .sticky-bar__payment-icons .cdraw-payment-icon { width: 32px; height: 20px; }
+
+    /* Upsell section — compact */
+    .product-upsell { padding: 12px; }
+    .upsell-header { flex-wrap: wrap; gap: 8px; }
+    .upsell-item { padding: 8px; gap: 10px; }
+    .upsell-img { width: 56px; height: 56px; }
+    .upsell-name { font-size: 13px; }
+
+    /* Story section */
+    .product-story { padding: 40px 16px 60px; }
+
+    /* Add bottom padding so content isn't hidden behind sticky bar */
+    .main-product { padding-bottom: 70px; }
   }
 
   /* ===== UI Enhancements ===== */
@@ -1032,7 +1085,7 @@
   .product-purchase { 
     position: sticky; bottom: 0; background: var(--color-bg); z-index: 10;
     padding: 15px 0 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 20px;
-    box-shadow: 0 -15px 30px var(--color-bg); /* Increased shadow for better fade effect */
+    box-shadow: 0 -15px 30px var(--color-bg);
   }
 
   .scroll-prompt {
