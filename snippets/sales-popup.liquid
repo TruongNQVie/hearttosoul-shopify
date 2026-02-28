@@ -151,9 +151,10 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
+    const isMobile = window.innerWidth <= 749;
+
+    function startPopupCycle() {
       showSalesPopup();
-      // Randomized interval for natural feel
       function scheduleNext() {
         const jitter = MIN_INTERVAL + Math.random() * (MAX_INTERVAL - MIN_INTERVAL);
         setTimeout(() => {
@@ -162,6 +163,30 @@
         }, jitter);
       }
       scheduleNext();
-    }, FIRST_SHOW_DELAY);
+    }
+
+    if (isMobile) {
+      // Mobile: wait at least 20s AND user must have scrolled 35%
+      let timeReady = false;
+      let scrollReady = false;
+      let started = false;
+
+      setTimeout(() => {
+        timeReady = true;
+        if (scrollReady && !started) { started = true; startPopupCycle(); }
+      }, 20000);
+
+      window.addEventListener('scroll', function checkScroll() {
+        const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        if (scrollPercent >= 35) {
+          scrollReady = true;
+          window.removeEventListener('scroll', checkScroll);
+          if (timeReady && !started) { started = true; startPopupCycle(); }
+        }
+      });
+    } else {
+      // Desktop: original 10s delay
+      setTimeout(startPopupCycle, FIRST_SHOW_DELAY);
+    }
   });
 </script>
