@@ -615,15 +615,20 @@
   .cart-express__buttons { display: flex; gap: 10px; justify-content: center; }
   
   /* Express Checkout (Dynamic) */
-  .additional-checkout-buttons { display: flex; gap: 10px; flex-wrap: wrap; width: 100%; }
-  .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 1 1 calc(33.333% - 7px); min-width: 80px; }
-  .additional-checkout-buttons ul { display: flex; gap: 10px; width: 100%; justify-content: space-between; }
-  .additional-checkout-buttons li { flex: 1; list-style: none; }
+  .additional-checkout-buttons { display: flex; flex-direction: column; gap: 10px; width: 100%; align-items: center; }
+  .additional-checkout-buttons [data-shopify-buttoncontainer] { width: 100%; max-width: 300px; display: flex; justify-content: center; }
+  @media (min-width: 750px) {
+    .additional-checkout-buttons { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .additional-checkout-buttons [data-shopify-buttoncontainer] { flex: 0 1 auto; min-width: 150px; }
+  }
+  .additional-checkout-buttons ul { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+  @media (min-width: 750px) { .additional-checkout-buttons ul { flex-direction: row; justify-content: center; } }
+  .additional-checkout-buttons li { flex: 1; list-style: none; width: 100%; display: flex; justify-content: center; }
   .additional-checkout-buttons [role="button"],
-  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 48px !important; transition: transform 0.2s, opacity 0.2s; }
+  .additional-checkout-buttons button { border-radius: 50px !important; overflow: hidden; height: 48px !important; width: 100% !important; max-width: 300px; transition: transform 0.2s, opacity 0.2s; }
   .additional-checkout-buttons [role="button"]:hover,
   .additional-checkout-buttons button:hover { transform: translateY(-2px); opacity: 0.9; }
-  .additional-checkout-buttons .dynamic-checkout__content { margin: 0; }
+  .additional-checkout-buttons .dynamic-checkout__content { margin: 0; width: 100%; }
 
   /* Monochrome Payment Icons */
   .cdraw-payments {
@@ -758,9 +763,16 @@
   }
   .cart-warranty__strip {
     display: flex; gap: 10px; margin-bottom: 24px;
+    overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px;
+    scrollbar-width: none;
   }
+  .cart-warranty__strip::-webkit-scrollbar { display: none; }
   .cart-warranty__img {
-    flex: 1; aspect-ratio: 4/3; border-radius: 10px; overflow: hidden;
+    flex: 0 0 85%; scroll-snap-align: center; aspect-ratio: 4/3; border-radius: 10px; overflow: hidden;
+  }
+  @media (min-width: 750px) {
+    .cart-warranty__strip { overflow-x: visible; }
+    .cart-warranty__img { flex: 1; }
   }
   .cart-warranty__img img {
     width: 100%; height: 100%; object-fit: cover;
