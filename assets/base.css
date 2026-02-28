@@ -768,7 +768,11 @@ p {
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: var(--color-white);
     border-radius: 16px;
+    overflow: hidden;
+    /* Clips inner content to fix sharp bottom corners leaking out */
     box-shadow: 0 10px 30px rgba(200, 180, 190, 0.2);
+    /* Adding subtle border to prevent background bleed / rendering artifacts on some screens */
+    border: 1px solid rgba(225, 29, 72, 0.04);
 }
 
 .product-card:hover {
