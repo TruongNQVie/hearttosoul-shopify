@@ -38,7 +38,7 @@
       {%- unless page_title contains 'Heart to Soul' %} &ndash; Heart to Soul{% endunless -%}
     </title>
 
-    {{ 'base.css' | asset_url | append: '&nocache=2026022805' | stylesheet_tag }}
+    {{ 'base-v2.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
 
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
