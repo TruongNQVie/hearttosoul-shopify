@@ -766,9 +766,8 @@ p {
     flex-direction: column;
     height: 100%;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: var(--color-white);
+    background: transparent;
     border-radius: 12px;
-    overflow: hidden;
     /* Soft shadow to match cart upsell */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: none;
@@ -910,6 +909,8 @@ p {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    background: var(--color-white);
+    border-radius: 0 0 12px 12px;
 }
 
 .product-card__rating {
