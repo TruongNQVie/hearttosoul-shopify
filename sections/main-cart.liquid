@@ -375,9 +375,9 @@
   .cart-price-compare { font-family: var(--font-body); font-weight: 500; text-decoration: line-through; color: #B4B4B4; font-size: 0.85em; }
   
   .cart-page__item-qty {
-    display: flex; align-items: center; border: 1px solid rgba(29,29,29,0.1); 
+    display: flex; align-items: center; border: 1px solid rgba(45,27,46,0.04); 
     border-radius: 50px; width: fit-content; height: 36px; overflow: hidden;
-    background: #F9F8F3;
+    background: #F5EEF1;
   }
   @media (min-width: 750px) { .cart-page__item-qty { height: 40px; } }
   .cart-page__item-qty a { text-decoration: none; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -760,6 +760,9 @@
     .cart-sticky-bar__inner { padding: 12px 16px; gap: 12px; }
     .cart-sticky-bar__btn { padding: 14px 24px; font-size: 12px; }
     .cart-sticky-bar__center { display: none; }
+  }
+  @media (min-width: 992px) {
+    .cart-sticky-bar { display: none !important; }
   }
 
   /* ===== Cart Warranty (Spacious) ===== */
