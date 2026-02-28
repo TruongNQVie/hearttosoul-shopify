@@ -897,7 +897,7 @@ p {
 
 /* Info Section */
 .product-card__info {
-    padding: 16px 20px 20px;
+    padding: 12px 14px 14px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
