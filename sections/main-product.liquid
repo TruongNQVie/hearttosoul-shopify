@@ -112,8 +112,18 @@
                   <p class="variant-label">{{ option.name }}: <strong class="variant-selected-value" style="color:var(--color-primary);">{{ option.selected_value }}</strong></p>
                   <div class="variant-options-row">
                     {%- for value in option.values -%}
-                      <button type="button" class="variant-pill {% if value == option.selected_value %}active{% endif %}" data-option-value="{{ value }}">
-                        {{ value }}
+                      {%- assign pill_image = nil -%}
+                      {%- for variant in product.variants -%}
+                        {%- if variant.options[forloop.parentloop.parentloop.index0] == value and variant.image -%}
+                          {%- assign pill_image = variant.image -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                      <button type="button" class="variant-pill {% if pill_image %}has-thumb{% endif %} {% if value == option.selected_value %}active{% endif %}" data-option-value="{{ value }}">
+                        {%- if pill_image -%}
+                          <img class="variant-pill__thumb" src="{{ pill_image | image_url: width: 80 }}" alt="{{ value }}" loading="lazy">
+                        {%- endif -%}
+                        <span>{{ value }}</span>
                       </button>
                     {%- endfor -%}
                   </div>
@@ -665,6 +675,14 @@
     color: var(--color-primary);
     font-weight: 600;
     box-shadow: 0 0 0 1px var(--color-primary);
+  }
+  .variant-pill.has-thumb { padding-left: 6px; gap: 8px; }
+  .variant-pill__thumb {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.06);
   }
 
   /* Shipping timer card */
