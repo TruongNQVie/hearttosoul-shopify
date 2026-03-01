@@ -105,21 +105,20 @@
           </div>
 
           <!-- Variant selector -->
-          {%- if product.variants.size > 1 -%}
-            <div class="product-variants">
-              <p class="variant-label">Select Color: <strong id="variant-name" style="color:var(--color-primary);">{{ product.selected_or_first_available_variant.title }}</strong></p>
-              <div class="variant-options">
-                {%- for variant in product.variants -%}
-                  <label class="variant-option {% if variant == product.selected_or_first_available_variant %}active{% endif %}" data-variant-id="{{ variant.id }}" data-variant-title="{{ variant.title }}" data-variant-price="{{ variant.price | money }}" {% if variant.image %}data-variant-image="{{ variant.image | image_url: width: 900 }}"{% endif %}>
-                    <input type="radio" name="variant" value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}checked{% endif %}>
-                    {%- if variant.image -%}
-                      <img src="{{ variant.image | image_url: width: 160 }}" alt="{{ variant.title }}">
-                    {%- else -%}
-                      <span>{{ variant.title }}</span>
-                    {%- endif -%}
-                  </label>
-                {%- endfor -%}
-              </div>
+          {%- if product.has_only_default_variant == false -%}
+            <div class="product-variants" id="product-variants">
+              {%- for option in product.options_with_values -%}
+                <div class="variant-group" data-option-index="{{ forloop.index0 }}">
+                  <p class="variant-label">{{ option.name }}: <strong class="variant-selected-value" style="color:var(--color-primary);">{{ option.selected_value }}</strong></p>
+                  <div class="variant-options-row">
+                    {%- for value in option.values -%}
+                      <button type="button" class="variant-pill {% if value == option.selected_value %}active{% endif %}" data-option-value="{{ value }}">
+                        {{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
             </div>
           {%- endif -%}
 
@@ -638,21 +637,35 @@
   .product-feature:last-child { margin-bottom: 0; }
   .feature-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 
-  /* Variants - 2x larger */
+  /* Variants */
   .product-variants { margin-bottom: 20px; }
-  .variant-label { font-size: 14px; margin-bottom: 10px; }
-  .variant-options { display: flex; gap: 12px; flex-wrap: wrap; }
-  .variant-option {
-    border: 2px solid var(--color-border); border-radius: 12px;
-    overflow: hidden; cursor: pointer;
-    width: 136px; height: 136px;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
+  .variant-group { margin-bottom: 16px; }
+  .variant-group:last-child { margin-bottom: 0; }
+  .variant-label { font-size: 14px; margin-bottom: 8px; font-weight: 400; }
+  .variant-options-row {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
   }
-  .variant-option:hover { border-color: rgba(190,52,78,0.4); }
-  .variant-option.active { border-color: var(--color-primary); box-shadow: 0 0 0 1px var(--color-primary); }
-  .variant-option img { width: 100%; height: 100%; object-fit: cover; }
-  .variant-option input { display: none; }
+  .variant-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 18px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 50px;
+    background: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 13px; font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .variant-pill:hover { border-color: rgba(190,52,78,0.4); }
+  .variant-pill.active {
+    border-color: var(--color-primary);
+    background: rgba(190,52,78,0.06);
+    color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: 0 0 0 1px var(--color-primary);
+  }
 
   /* Shipping timer card */
   .product-shipping-card {
@@ -1045,8 +1058,8 @@
     /* Title */
     .product-title { font-size: 1.4rem !important; word-wrap: break-word; }
 
-    /* Variant options — smaller for mobile */
-    .variant-option { width: 80px; height: 80px; border-radius: 10px; }
+    /* Variant pills — slightly smaller on mobile */
+    .variant-pill { padding: 6px 14px; font-size: 12px; }
 
     /* Features box */
     .product-features { padding: 14px 14px; }
@@ -1190,19 +1203,66 @@
     });
   });
 
-  // ===== Variant selector → update variant info =====
-  document.querySelectorAll('.variant-option').forEach(option => {
-    option.addEventListener('click', function() {
-      document.querySelectorAll('.variant-option').forEach(o => o.classList.remove('active'));
-      this.classList.add('active');
-      const radio = this.querySelector('input');
-      if (radio) radio.checked = true;
-      document.getElementById('product-variant-id').value = this.dataset.variantId;
-      const nameEl = document.getElementById('variant-name');
-      if (nameEl) nameEl.textContent = this.dataset.variantTitle;
-      if (this.dataset.variantImage) {
-        document.getElementById('product-main-image').src = this.dataset.variantImage;
+  // ===== Variant selector (option-based) → find matching variant =====
+  const allVariants = {{ product.variants | json }};
+  const variantGroups = document.querySelectorAll('.variant-group');
+  const variantIdInput = document.getElementById('product-variant-id');
+
+  function getSelectedOptions() {
+    const selected = [];
+    variantGroups.forEach(group => {
+      const activeBtn = group.querySelector('.variant-pill.active');
+      if (activeBtn) selected.push(activeBtn.dataset.optionValue);
+    });
+    return selected;
+  }
+
+  function findMatchingVariant(selectedOpts) {
+    return allVariants.find(v => {
+      return selectedOpts.every((val, i) => v.options[i] === val);
+    });
+  }
+
+  function updateVariantUI(variant) {
+    if (!variant) return;
+    // Update hidden input
+    if (variantIdInput) variantIdInput.value = variant.id;
+    // Update price
+    const priceEl = document.querySelector('.price-current');
+    if (priceEl) priceEl.textContent = (variant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    const compareEl = document.querySelector('.price-compare');
+    if (compareEl) {
+      if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+        compareEl.textContent = (variant.compare_at_price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        compareEl.style.display = '';
+      } else {
+        compareEl.style.display = 'none';
       }
+    }
+    // Update main image
+    if (variant.featured_image) {
+      const mainImg = document.getElementById('product-main-image');
+      if (mainImg) mainImg.src = variant.featured_image.src;
+    }
+    // Update sticky bar price
+    const stickyPrice = document.querySelector('.sticky-price');
+    if (stickyPrice) stickyPrice.textContent = (variant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  }
+
+  variantGroups.forEach(group => {
+    group.querySelectorAll('.variant-pill').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Update active state within this group
+        group.querySelectorAll('.variant-pill').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        // Update the label
+        const label = group.querySelector('.variant-selected-value');
+        if (label) label.textContent = this.dataset.optionValue;
+        // Find and apply matching variant
+        const selectedOpts = getSelectedOptions();
+        const matchedVariant = findMatchingVariant(selectedOpts);
+        updateVariantUI(matchedVariant);
+      });
     });
   });
 
